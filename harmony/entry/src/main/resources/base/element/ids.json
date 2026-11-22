@@ -1,0 +1,56 @@
+{
+  "integer": [
+    {
+      "name": "tag",
+      "value": 1
+    },
+    {
+      "name": "index",
+      "value": 2
+    },
+    {
+      "name": "fragment_tag",
+      "value": 3
+    },
+    {
+      "name": "copy",
+      "value": 4
+    },
+    {
+      "name": "join_blacklist",
+      "value": 5
+    },
+    {
+      "name": "vote_up",
+      "value": 6
+    },
+    {
+      "name": "vote_down",
+      "value": 7
+    },
+    {
+      "name": "check_vote_status",
+      "value": 8
+    },
+    {
+      "name": "edit_comment",
+      "value": 9
+    },
+    {
+      "name": "fab_translation_y",
+      "value": 10
+    },
+    {
+      "name": "fab_translation_y_animator",
+      "value": 11
+    },
+    {
+      "name": "navigation_bar_padding_applied",
+      "value": 12
+    },
+    {
+      "name": "navigation_bar_padding_origin_bottom",
+      "value": 13
+    }
+  ]
+}

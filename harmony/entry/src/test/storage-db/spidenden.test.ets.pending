@@ -1,0 +1,135 @@
+/*
+ * SpiderDen / GalleryProvider2 纯逻辑单测（不需要设备、不需要网络、不需要 GL）
+ *
+ * 为什么这几条值得逐条断言：它们决定「下载目录里的文件能不能被正确找到」——
+ *   文件名格式错一个字符 → 重启应用后已下载的图全部"消失"（用户视角是丢数据）；
+ *   扩展名嗅探错 → 拷贝会产出错误后缀，画廊按白名单过滤时读不到；
+ *   白名单大小写敏感 → Android 上 `.JPG` 的旧目录迁移过来后整页空白。
+ * 这三类错误都不会让编译失败，只在真机上看图时暴露，所以必须由断言兜住。
+ */
+
+import { SpiderDen, StartWithFilenameFilter, SUPPORT_IMAGE_EXTENSIONS, MODE_READ, MODE_DOWNLOAD } from '../../main/ets/hippo/ehviewer/spider/SpiderDen';
+import { GalleryProvider2 } from '../../main/ets/hippo/ehviewer/gallery/GalleryProvider2';
+import { UniFile } from '../../main/ets/hippo/unifile/UniFile';
+
+let pass = 0;
+const fails: string[] = [];
+
+function eq(name: string, got: unknown, want: unknown): void {
+  const g = JSON.stringify(got);
+  const w = JSON.stringify(want);
+  if (g === w) {
+    pass++;
+  } else {
+    fails.push(`${name}\n    got  ${g}\n    want ${w}`);
+  }
+}
+
+function ok(name: string, cond: boolean): void {
+  if (cond) {
+    pass++;
+  } else {
+    fails.push(name);
+  }
+}
+
+function bytes(values: number[]): ArrayBuffer {
+  const buf: ArrayBuffer = new ArrayBuffer(values.length);
+  const view: Uint8Array = new Uint8Array(buf);
+  for (let i = 0; i < values.length; i++) {
+    view[i] = values[i];
+  }
+  return buf;
+}
+
+// ================================================================ 1) 文件名格式（%08d + index+1）
+
+{
+  // 上游 String.format(Locale.US, "%08d%s", index + 1, extension)
+  eq('第 0 页 → 00000001', SpiderDen.generateImageFilename(0, '.jpg'), '00000001.jpg');
+  eq('第 6 页 → 00000007', SpiderDen.generateImageFilename(6, '.jpg'), '00000007.jpg');
+  eq('第 7 页 → 00000008', SpiderDen.generateImageFilename(7, '.png'), '00000008.png');
+  eq('第 8 页 → 00000009', SpiderDen.generateImageFilename(8, '.gif'), '00000009.gif');
+  eq('第 9 页进位 → 00000010', SpiderDen.generateImageFilename(9, '.webp'), '00000010.webp');
+  eq('第 99 页 → 00000100', SpiderDen.generateImageFilename(99, '.jpg'), '00000100.jpg');
+  // 超过 8 位不截断（上游 %08d 是最小宽度，不是最大宽度）
+  eq('9 位不截断', SpiderDen.generateImageFilename(99999999, '.jpg'), '100000000.jpg');
+  // 空扩展名（部分下载器先写再改名）
+  eq('空扩展名', SpiderDen.generateImageFilename(0, ''), '00000001');
+}
+
+// ================================================================ 2) 扩展名嗅探（替代 BitmapFactory 的 outMimeType）
+
+{
+  // JPEG: FF D8 FF
+  eq('JPEG', SpiderDen.sniffImageExtension(bytes([0xff, 0xd8, 0xff, 0xe0, 0x00, 0x10, 0x4a, 0x46, 0x49, 0x46, 0x00, 0x01])), '.jpg');
+  // PNG: 89 50 4E 47 0D 0A 1A 0A
+  eq('PNG', SpiderDen.sniffImageExtension(bytes([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0x00, 0x00, 0x00, 0x0d])), '.png');
+  // GIF: "GIF8"
+  eq('GIF', SpiderDen.sniffImageExtension(bytes([0x47, 0x49, 0x46, 0x38, 0x39, 0x61, 0x01, 0x00, 0x01, 0x00, 0x00, 0x00])), '.gif');
+  // WEBP: "RIFF"...."WEBP"
+  eq('WEBP', SpiderDen.sniffImageExtension(bytes([0x52, 0x49, 0x46, 0x46, 0x24, 0x00, 0x00, 0x00, 0x57, 0x45, 0x42, 0x50])), '.webp');
+  // RIFF 但不是 WEBP（例如 WAV）→ 不认
+  eq('RIFF/WAVE 不是图片', SpiderDen.sniffImageExtension(bytes([0x52, 0x49, 0x46, 0x46, 0x24, 0x00, 0x00, 0x00, 0x57, 0x41, 0x56, 0x45])), null);
+  // 未知内容
+  eq('未知内容', SpiderDen.sniffImageExtension(bytes([0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b])), null);
+  // 短读（只有 2 字节）不能越界崩溃
+  eq('2 字节不崩溃', SpiderDen.sniffImageExtension(bytes([0xff, 0xd8])), null);
+  eq('空 buffer 不崩溃', SpiderDen.sniffImageExtension(new ArrayBuffer(0)), null);
+  // 3 字节正好是 JPEG 最短特征
+  eq('3 字节 JPEG', SpiderDen.sniffImageExtension(bytes([0xff, 0xd8, 0xff])), '.jpg');
+}
+
+// ================================================================ 3) 扩展名白名单单点化
+
+{
+  eq('白名单 5 个（与上游一致）', SUPPORT_IMAGE_EXTENSIONS.length, 5);
+  eq('白名单内容', SUPPORT_IMAGE_EXTENSIONS, ['.jpg', '.jpeg', '.png', '.gif', '.webp']);
+  // 关键：SpiderDen 的导出必须直接引用 GalleryProvider2 的那一份（不是副本）——
+  // 若有人重新写字面量，这条会失败，从而挡住「两处漂移」
+  ok('SpiderDen 与 GalleryProvider2 共用同一份列表',
+    SpiderDen !== null && SUPPORT_IMAGE_EXTENSIONS === GalleryProvider2.SUPPORT_IMAGE_EXTENSIONS);
+
+  ok('isSupportedImageName 小写 .jpg', GalleryProvider2.isSupportedImageName('00000001.jpg'));
+  ok('isSupportedImageName 大写 .JPG（旧 Android 目录常见）', GalleryProvider2.isSupportedImageName('00000001.JPG'));
+  ok('isSupportedImageName 混合 .WebP', GalleryProvider2.isSupportedImageName('00000001.WebP'));
+  ok('isSupportedImageName 拒绝 .bmp（上游白名单不含）', !GalleryProvider2.isSupportedImageName('00000001.bmp'));
+  ok('isSupportedImageName 拒绝后缀伪装（.jpg.txt）', !GalleryProvider2.isSupportedImageName('00000001.jpg.txt'));
+}
+
+// ================================================================ 4) 目录项前缀过滤（findDownloadDirname 的第 2 步）
+
+{
+  // 上游签名 accept(UniFile dir, String filename)；dir 在实现里不参与判定，这里给一个不落盘的实例
+  const anyDirMaybe: UniFile | null = UniFile.fromFile('/nonexistent/probe');
+  if (anyDirMaybe === null) {
+    fails.push('UniFile.fromFile 返回 null，无法构造 dir 参数');
+  }
+  const anyDir: UniFile = anyDirMaybe !== null ? anyDirMaybe : (null as unknown as UniFile);
+  const filter: StartWithFilenameFilter = new StartWithFilenameFilter('12345-');
+  ok('命中正确前缀', filter.accept(anyDir, '12345-[作者] 标题'));
+  ok('不命中别的 gid', !filter.accept(anyDir, '123456-[作者] 标题'));
+  ok('不命中纯 gid（无短横线）', !filter.accept(anyDir, '12345'));
+  const empty: StartWithFilenameFilter = new StartWithFilenameFilter('');
+  ok('空前缀命中所��', empty.accept(anyDir, 'anything'));
+}
+
+// ================================================================ 5) 模式常量（SpiderQueen 落地后从这里 re-export）
+
+{
+  eq('MODE_READ', MODE_READ, 0);
+  eq('MODE_DOWNLOAD', MODE_DOWNLOAD, 1);
+  ok('两个模式不相等', MODE_READ !== MODE_DOWNLOAD);
+}
+
+// ================================================================ 汇总
+
+if (fails.length > 0) {
+  console.log(`\n${fails.length} 个断言失败：`);
+  for (const f of fails) {
+    console.log(`  ✗ ${f}`);
+  }
+  console.log(`\n通过 ${pass}，失败 ${fails.length}`);
+  process.exit(1);
+}
+console.log(`全部通过：${pass} 个断言`);

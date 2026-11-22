@@ -1,0 +1,61 @@
+# HarmonyOS / DevEco Studio / Hvigor build artifacts
+build/
+.hvigor/
+oh_modules/
+node_modules/
+node_modules_broken_*/
+*.hap
+*.app
+*.hsp
+*.har
+*.hap.sig
+*.har.sig
+*.hsp.sig
+harmony/.idea/
+harmony/.clangd/
+harmony/*/preview/
+harmony/entry/.cxx/
+*.cxx/
+local.properties
+.gradle/
+logs/
+*.log
+
+# Signing materials & private credentials (never commit)
+harmony/signing/
+*.p12
+*.cer
+*.p7b
+*.csr
+*.jks
+*.keystore
+keystore-password.txt
+.git-credentials
+*token*.txt
+
+# Unit test transpiled / build outputs & generated probe
+**/src/test/**/out/
+**/src/test/**/gen/
+harmony/entry/src/main/ets/__probe__/
+
+# Local upstream cache / workspace reports / scratch
+/upstream/
+upstream.zip
+.upstream-res/
+.runner_system_id
+.coverage-baseline.json
+artifacts/
+coverage-report.md
+inventory.csv
+scripts/_audit*.ps1
+tools/
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.tmp
+*.bak
+.vscode/
+.idea/

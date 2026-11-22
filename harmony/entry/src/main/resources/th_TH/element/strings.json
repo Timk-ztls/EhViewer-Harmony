@@ -1,0 +1,3408 @@
+{
+  "string": [
+    {
+      "name": "blacklist_id",
+      "value": "ID ผู้ใช้"
+    },
+    {
+      "name": "blacklist",
+      "value": "รายชื่อดำ"
+    },
+    {
+      "name": "join_in_blacklist",
+      "value": "เพิ่มเข้าในรายชื่อดำ"
+    },
+    {
+      "name": "add_blacklist",
+      "value": "เพิ่มผู้ใช้ที่ต้องการบล็อก"
+    },
+    {
+      "name": "blacklist_tip",
+      "value": "ระบบบล็อกนี้จะบล็อกความคิดเห็นต่อจากระบบบล็อกความคิดเห็นของเว็บไซต์ EHentai\n\nบล็อกผู้แสดงความคิดเห็น: แยกความคิดเห็นที่ผู้ใช้คนนั้นอัพโหลดออกไป ซึ่งจะทำให้การโหลดรายการแกลเลอรี่ใช้เวลามากขึ้น"
+    },
+    {
+      "name": "blacklist_text",
+      "value": "บล็อกผู้ใช้"
+    },
+    {
+      "name": "delete_blacklist",
+      "value": "ยกเลิกการบล็อกผู้ใช้ \"%s\" หรือไม่?"
+    },
+    {
+      "name": "blacklist_reason_text",
+      "value": "เหตุผลในการบล็อก"
+    },
+    {
+      "name": "settings_eh_blacklist",
+      "value": "รายชื่อดำความคิดเห็น"
+    },
+    {
+      "name": "settings_eh_blacklist_summary",
+      "value": "บล็อกความคิดเห็นของผู้อื่นตามชื่อบัญชี"
+    },
+    {
+      "name": "settings_advanced_dns_over_http_title",
+      "value": "DNS ปลอดภัย (DoH)"
+    },
+    {
+      "name": "settings_advanced_dns_over_http_summary",
+      "value": "แก้ปัญหาการปนเปื้อน DNS ในบางพื้นที่"
+    },
+    {
+      "name": "settings_advanced_domain_fronting_title",
+      "value": "โดเมนฟรอนติ้ง"
+    },
+    {
+      "name": "settings_advanced_domain_fronting_summary",
+      "value": "หลีกเลี่ยงการบล็อก SNI"
+    },
+    {
+      "name": "settings_advanced_url_replace_title",
+      "value": "ปลอมแปลง URL, ต้องปิด SNI"
+    },
+    {
+      "name": "settings_advanced_url_replace_summary",
+      "value": "ปลอมแปลง URL (ต้องรีสตาร์ท, เปิดใช้งานแล้วฟังก์ชันบัญชีจะไม่ทำงาน)"
+    },
+    {
+      "name": "settings_about_donate_guide",
+      "value": "คู่มือการสนับสนุน"
+    },
+    {
+      "name": "share_favorites_dialog_title",
+      "value": "แชร์รายการโปรด"
+    },
+    {
+      "name": "share_favorites_dialog_message",
+      "value": "แชร์รายการโปรด %s หรือไม่?"
+    },
+    {
+      "name": "add_favorites_dialog_message",
+      "value": "เพิ่มรายการโปรด %s หรือไม่?"
+    },
+    {
+      "name": "settings_advanced_built_ex_hosts_title",
+      "value": "hosts.txt ของ exhentai ที่มีอยู่แล้ว"
+    },
+    {
+      "name": "settings_advanced_built_ex_hosts_summary",
+      "value": "การแมปโฮสต์ไปยัง IP ที่แอปให้มา\nสามารถถูกแทนที่ด้วย hosts.txt ที่ปรับแต่งเอง"
+    },
+    {
+      "name": "network_remind",
+      "value": "ตรวจพบว่าเปิดใช้งาน VPN แล้ว โปรดระวังความปลอดภัยเครือข่ายของคุณ"
+    },
+    {
+      "name": "no_blicklist",
+      "value": "นี่คือรายชื่อดำ"
+    },
+    {
+      "name": "app_name",
+      "value": "EhViewer"
+    },
+    {
+      "name": "theme_light",
+      "value": "ธีมสีสว่าง"
+    },
+    {
+      "name": "theme_dark",
+      "value": "ธีมสีมืด"
+    },
+    {
+      "name": "theme_black",
+      "value": "ธีมสีดำ"
+    },
+    {
+      "name": "homepage",
+      "value": "หน้าหลัก"
+    },
+    {
+      "name": "subscription",
+      "value": "การสมัครสมาชิก"
+    },
+    {
+      "name": "whats_hot",
+      "value": "เรื่องที่กำลังมาแรงมากๆ"
+    },
+    {
+      "name": "top_lists",
+      "value": "รายการยอดนิยม"
+    },
+    {
+      "name": "favourite",
+      "value": "รายการโปรด"
+    },
+    {
+      "name": "history",
+      "value": "ประวัติเข้าชม"
+    },
+    {
+      "name": "downloads",
+      "value": "ดาวน์โหลด"
+    },
+    {
+      "name": "news",
+      "value": "ข่าวสาร"
+    },
+    {
+      "name": "settings",
+      "value": "การตั้งค่า"
+    },
+    {
+      "name": "username",
+      "value": "ชื่อผู้ใช้"
+    },
+    {
+      "name": "password",
+      "value": "รหัสผ่าน"
+    },
+    {
+      "name": "recaptcha",
+      "value": "Recaptcha (ไม่จำเป็น)"
+    },
+    {
+      "name": "recaptcha_none",
+      "value": "แตะตรงนี้"
+    },
+    {
+      "name": "recaptcha_loading",
+      "value": "กำลังโหลด…"
+    },
+    {
+      "name": "recaptcha_failure",
+      "value": "ล้มเหลว"
+    },
+    {
+      "name": "sign_in",
+      "value": "ลงชื่อเข้าใช้"
+    },
+    {
+      "name": "register",
+      "value": "ลงทะเบียน"
+    },
+    {
+      "name": "sign_in_via_webview",
+      "value": "ลงชื่อเข้าใช้ผ่านมุมมองเว็บไซต์"
+    },
+    {
+      "name": "sign_in_via_cookies",
+      "value": "ลงชื่อเข้าใช้ผ่านคุกกี้"
+    },
+    {
+      "name": "display_name_dialog_title",
+      "value": "กรอกชื่อเล่นที่จะแสดง"
+    },
+    {
+      "name": "display_name",
+      "value": "ชื่อเล่นที่จะแสดง"
+    },
+    {
+      "name": "display_name_is_empty",
+      "value": "ชื่อที่จะแสดงนั้นห้ามเว้นว่างไว้"
+    },
+    {
+      "name": "sign_in_first",
+      "value": "โปรดลงชื่อเข้าใช้ก่อนเป็นอันดับแรก"
+    },
+    {
+      "name": "default_display_name",
+      "value": "เจ้าฮิปโปโปเตมัสตัวน้อย"
+    },
+    {
+      "name": "cookie_explain",
+      "value": "คุกกี้คือชิ้นส่วนข้อมูลเล็กๆที่ถูกจัดเก็บอยู่ในเว็บเบราเซอร์ ถ้าไม่รู้มันคืออะไรก็เปิด Google หาสิ \n\nกรุณากรอกข้อมูลคุกกี้เพื่อลงชื่อเข้าใช้ระบบ"
+    },
+    {
+      "name": "text_is_empty",
+      "value": "ข้อความห้ามเว้นว่างไว้"
+    },
+    {
+      "name": "waring",
+      "value": "คำเตือน"
+    },
+    {
+      "name": "wrong_cookie_warning",
+      "value": "ดูเหมือนว่าคุกกี้ที่คุณกรอกมานั้นมันผิด คุณลองตรวจสอบใหม่ดูอีกรอบ"
+    },
+    {
+      "name": "i_will_check_it",
+      "value": "ฉันจะตรวจสอบเอง"
+    },
+    {
+      "name": "i_dont_think_so",
+      "value": "ฉันว่าไม่ดีกว่า"
+    },
+    {
+      "name": "found_cookies",
+      "value": "พบคุกกี้แล้ว!"
+    },
+    {
+      "name": "invalid_download_location",
+      "value": "ดูเหมือนที่อยู่ในการดาวน์โหลดนั้นไม่พร้อมใช้งาน โปรดตั้งค่าในเมนูการตั้งค่า"
+    },
+    {
+      "name": "cellular_network_warning",
+      "value": "มีการเชื่อมต่อเครือข่ายมือถืออยู่"
+    },
+    {
+      "name": "clipboard_gallery_url_snack_message",
+      "value": "มีลิงค์ของเว็บแกลเลอรี่อยู่ในคลิปบอร์ด"
+    },
+    {
+      "name": "clipboard_gallery_url_snack_action",
+      "value": "ดู"
+    },
+    {
+      "name": "image_save_success",
+      "value": "บันทึกรูปภาพสำเร็จแล้ว"
+    },
+    {
+      "name": "error_bad_status_code",
+      "value": "รหัสข้อผิดพลาด: %d"
+    },
+    {
+      "name": "error_timeout",
+      "value": "หมดเวลา"
+    },
+    {
+      "name": "error_unknown_host",
+      "value": "ไม่รู้จักโฮสต์"
+    },
+    {
+      "name": "error_redirection",
+      "value": "มีการเปลี่ยนทางเยอะเกินไป"
+    },
+    {
+      "name": "error_socket",
+      "value": "เน็ตเวิร์คเกิดข้อผิดพลาด"
+    },
+    {
+      "name": "error_unknown",
+      "value": "มันแปลกๆนะ"
+    },
+    {
+      "name": "error_cant_find_activity",
+      "value": "หาแอปพลิเคชั่นไม่เจอ"
+    },
+    {
+      "name": "error_cannot_parse_the_url",
+      "value": "ไม่สามารถวิเคราะห์ URL"
+    },
+    {
+      "name": "error_not_folder_path",
+      "value": "ไม่พบโฟลเดอร์ปลายทาง"
+    },
+    {
+      "name": "error_no_provider",
+      "value": "ไม่มีผู้ให้บริการ"
+    },
+    {
+      "name": "error_decoding_failed",
+      "value": "การถอดรหัสล้มเหลว"
+    },
+    {
+      "name": "error_not_found",
+      "value": "ไม่พบ"
+    },
+    {
+      "name": "error_empty",
+      "value": "ว่างเปล่า"
+    },
+    {
+      "name": "error_invalid_archive",
+      "value": "การจัดเก็บไม่ถูกต้อง"
+    },
+    {
+      "name": "error_reading_failed",
+      "value": "การอ่านล้มเหลว"
+    },
+    {
+      "name": "error_out_of_range",
+      "value": "ไม่อยู่ในขอบเขต"
+    },
+    {
+      "name": "error_write_failed",
+      "value": "การเขียนล้มเหลว"
+    },
+    {
+      "name": "error_parse_error",
+      "value": "การวิเคราะห์ผิดพลาด"
+    },
+    {
+      "name": "error_509",
+      "value": "509"
+    },
+    {
+      "name": "error_invalid_url",
+      "value": "URL ไม่ถูกต้อง"
+    },
+    {
+      "name": "error_get_ptoken_error",
+      "value": "การรับ pToken มีปัญหา"
+    },
+    {
+      "name": "error_cant_create_temp_file",
+      "value": "ไม่สามารถสร้างไฟล์ชั่วคราวได้"
+    },
+    {
+      "name": "error_cant_save_image",
+      "value": "ไม่สามารถบันทึกรูปภาพได้"
+    },
+    {
+      "name": "error_save_image_existed",
+      "value": "รูปภาพมีอยู่แล้ว"
+    },
+    {
+      "name": "error_invalid_number",
+      "value": "จำนวนไม่ถูกต้อง"
+    },
+    {
+      "name": "error_please_login_first",
+      "value": "โปรดลงชื่อเข้าใช้ก่อน"
+    },
+    {
+      "name": "error_empty_html",
+      "value": "หน้าเว็บว่างเปล่า"
+    },
+    {
+      "name": "error_cant_get_image",
+      "value": "ไม่สามารถรับรูปภาพได้"
+    },
+    {
+      "name": "error_igneous_wrong",
+      "value": "igneous ผิดพลาด\nตรวจสอบสิทธิ์และเข้าสู่ระบบอีกครั้ง"
+    },
+    {
+      "name": "gallery_gl_fallback_title",
+      "value": "ไม่สามารถใช้ตัวเรนเดอร์ OpenGL ได้"
+    },
+    {
+      "name": "gallery_gl_fallback_message",
+      "value": "อุปกรณ์นี้ไม่สามารถเริ่มต้น EGL ได้ในขณะนี้ โปรดย้อนกลับและลองใหม่อีกครั้งภายหลัง"
+    },
+    {
+      "name": "gallery_gl_fallback_action_close",
+      "value": "ย้อนกลับ"
+    },
+    {
+      "name": "gallery_gl_fallback_toast",
+      "value": "การเรนเดอร์ GL ล้มเหลว จึงสลับไปยังหน้าสำรองที่ปลอดภัย"
+    },
+    {
+      "name": "kokomade_tip",
+      "value": "การตั้งค่า->Eh->เว็บไซต์แกลเลอรี่->e-hentai"
+    },
+    {
+      "name": "app_waring",
+      "value": "เนื้อหาภายในแอปพลิเคชั่นนี้มาจากอินเทอร์เน็ตทั้งหมด อาจมีเนื้อหาบางอย่างที่มีผลต่อร่างกายหรือจิตใจของคุณ คุณจะต้องยอมรับความเสี่ยงที่ดังกล่าว และดำเนินการต่อไป"
+    },
+    {
+      "name": "error_username_cannot_empty",
+      "value": "ชื่อผู้ใช้ห้ามเว้นว่างไว้"
+    },
+    {
+      "name": "error_password_cannot_empty",
+      "value": "รหัสผ่านห้ามเว้นว่างไว้"
+    },
+    {
+      "name": "guest_mode",
+      "value": "โหมดผู้มาเยือน"
+    },
+    {
+      "name": "sign_in_failed",
+      "value": "การลงชื่อเข้าใช้ล้มเหลว"
+    },
+    {
+      "name": "sign_in_failed_tip",
+      "value": "หากปัญหานี้ยังคงอยู่ ลอง \"ลงชื่อเข้าใช้ผ่านมุมมองเว็บไซต์\" หรือ \"ลงชื่อเข้าใช้ผ่านคุกกี้\""
+    },
+    {
+      "name": "sign_in_failed_plain",
+      "value": "บางทีนี้เป็นข้อผิดพลาดเนื่องจากเว็บไซต์มีการอัพเดตหรือมีบางอย่างเกิดขึ้น คุณจะต้องลองวิธีลงชื่อเข้าใช้ผ่านมุมมองเว็บไซต์ หรือวิธีแบบคุกกี๊ หรือกดปุ่มข้ามไปก่อน แต่คุณอาจจะเจอ \"แพนด้าผู้เดียวดาย\" ได้หลังจากข้ามการลงชื่อเข้าใช้ อันดับแรกลอง \"ลงชื่อเข้าใช้ผ่านคุกกี้\" ถ้าคุณเคยเข้าสู่ระบบแล้วในเวอร์ชั่น 0.6.x"
+    },
+    {
+      "name": "press_twice_exit",
+      "value": "กดสองครั้งเพื่อออก"
+    },
+    {
+      "name": "content_layout_restore_tip",
+      "value": "แตะเพื่อลองอีกครั้ง"
+    },
+    {
+      "name": "write_rationale",
+      "value": "EhViewer จะขอสิทธิ์การเขียนข้อมูลพื้นที่จัดเก็บภายนอก (WRITE_EXTERNAL_STORAGE) เพื่อการดาวน์โหลดแกลเลอรี่ คุณจะอนุญาตหรือไม่?"
+    },
+    {
+      "name": "you_rejected_me",
+      "value": "เอื้อออออ เจ็บจัง"
+    },
+    {
+      "name": "analytics_explain",
+      "value": "จะว่าอะไรไหมถ้านักพัฒนาจะขออนุญาตรวบรวมข้อมูลอุปกรณ์และประวัติการใช้งานแอปนี้ของคุณ? มันจะช่วยนักพัฒนาอย่างมากเลยนะ<br><br>บริการวิเคราะห์ข้อมูลที่เราใช้นั้นเป็นบริการของ Google Analytics สำหรับ Firebase ในส่วนของนโยบายความเป็นส่วนตัวเราใช้ตามที่อยู่ในลิงค์ <a href=\"https://www.google.com/policies/privacy/\">https://www.google.com/policies/privacy/</a><br><br>ถ้าคุณยินยอมการส่งข้อมูลวิเคราะห์นี้ ทั้งข้อมูลอุปกรณ์และประวัติการใช้งานแอปนี้ของคุณจะถูกจัดเก็บ รวมไปถึงแต่ไม่จำกัดเพียงแค่เวอร์ชั่น API ของ Android, แบบจำลองอุปกรณ์, ภาษาของผู้ใช้, เวอร์ชั่นของแอปพลิเคชั่น, เวลาในการใช้งาน, และจำนวนฟังก์ชั่นที่ใช้ นักพัฒนาขอให้คำมั่นสัญญาว่าเราจะไม่เก็บข้อมูลส่วนตัวของผู้ใช้ไม่ว่าจะเบอร์มือถือ, อีเมล, และหมายเลข IMEI<br><br>ข้อมูลของคุณจะไม่ถูกจัดเก็บจนกว่าจะกดปุ่ม 'ยินยอม' ให้จัดเก็บเพื่อนำมาวิเคราะห์ข้อมูล<br><br>การจัดเก็บข้อมูลจะถูกวิเคราะห์โดยบริการ Google Analytics สำหรับ Firebase รายงานการวิเคราะห์ข้อมูลจะสามารถดูได้เพียงนักพัฒนาของแอปนี้เพียงคนเดียวเท่านั้น"
+    },
+    {
+      "name": "get_it",
+      "value": "เข้าใจแล้ว ไม่ต้องแสดงอีก"
+    },
+    {
+      "name": "accept",
+      "value": "ยินยอม"
+    },
+    {
+      "name": "reject",
+      "value": "ไม่ยินยอม"
+    },
+    {
+      "name": "help_route",
+      "value": "การตั้งค่า->เกี่ยวกับ->ช่วยเหลือ"
+    },
+    {
+      "name": "select_scene",
+      "value": "เว็บแกลเลอรี่ไหนที่คุณอยากเข้าชม?"
+    },
+    {
+      "name": "select_scene_explain",
+      "value": "e-hentai: เขตแดนที่ทุกๆคนสามารถเข้าถึงได้\nexhentai: เขตแดนอันแสนศักศิทธิ์สำหรับคนที่ลงชื่อเข้าใช้ระบบแล้วเท่านั้นที่จะเข้าไปได้"
+    },
+    {
+      "name": "no_select",
+      "value": "โปรดเลือกหนึ่งเว็บไซต์"
+    },
+    {
+      "name": "new_version",
+      "value": "เวอร์ชั่นใหม่"
+    },
+    {
+      "name": "update",
+      "value": "อัพเดต"
+    },
+    {
+      "name": "update_fail",
+      "value": "ตรวจสอบการอัพเดตล้มเหลว"
+    },
+    {
+      "name": "update_to",
+      "value": "อัพเดตเป็น"
+    },
+    {
+      "name": "update_plain",
+      "value": "เวอร์ชั่น: %1$s\nขนาดไฟล์: %2$s\n\n%3$s"
+    },
+    {
+      "name": "update_fail_info",
+      "value": "คลิกใช่เพื่อไปยังหน้าแรกของ Github"
+    },
+    {
+      "name": "update_to_date",
+      "value": "คุณกำลังใช้เวอร์ชั่นล่าสุดของ EhViewer."
+    },
+    {
+      "name": "update_ignore",
+      "value": "ข้ามไป"
+    },
+    {
+      "name": "no_updates_available",
+      "value": "มันเป็นเวอร์ชั่นล่าสุด"
+    },
+    {
+      "name": "gallery_list_search_bar_hint_exhentai",
+      "value": "ค้นหาใน ExHentai"
+    },
+    {
+      "name": "gallery_list_search_bar_hint_e_hentai",
+      "value": "ค้นหาใน E-Hentai"
+    },
+    {
+      "name": "gallery_list_search_bar_open_gallery",
+      "value": "เปิดแกลเลอรี่"
+    },
+    {
+      "name": "gallery_list_empty_hit",
+      "value": "โลกนั้นนะมันกว้างงงงงใหญ่ไพรศาล และแพนด้านั่งโดดเดี่ยวเดียวดายในโลกกลมๆ"
+    },
+    {
+      "name": "gallery_list_empty_hit_subscription",
+      "value": "สมัครสมาชิกแท็กในการตั้งค่า->EH->แท็กของฉัน"
+    },
+    {
+      "name": "gallery_list_no_preview_tag",
+      "value": "ไม่มีแท็กตัวอย่าง"
+    },
+    {
+      "name": "gallery_list_action_url_missed",
+      "value": "ไม่พบหน้าถัดไป"
+    },
+    {
+      "name": "gallery_list_no_more_data",
+      "value": "ไม่มีข้อมูลเพิ่มเติมสำหรับรายการปัจจุบัน"
+    },
+    {
+      "name": "gallery_list_date_jump_1d",
+      "value": "เมื่อวาน"
+    },
+    {
+      "name": "gallery_list_date_jump_3d",
+      "value": "สามวันที่แล้ว"
+    },
+    {
+      "name": "gallery_list_date_jump_1w",
+      "value": "หนึ่งสัปดาห์ที่แล้ว"
+    },
+    {
+      "name": "gallery_list_date_jump_2w",
+      "value": "สองสัปดาห์ที่แล้ว"
+    },
+    {
+      "name": "gallery_list_date_jump_1m",
+      "value": "หนึ่งเดือนที่แล้ว"
+    },
+    {
+      "name": "gallery_list_date_jump_6m",
+      "value": "หกเดือนที่แล้ว"
+    },
+    {
+      "name": "gallery_list_date_jump_1y",
+      "value": "หนึ่งปีที่แล้ว"
+    },
+    {
+      "name": "gallery_list_date_jump_2y",
+      "value": "สองปีที่แล้ว"
+    },
+    {
+      "name": "gallery_list_select_jump_date",
+      "value": "ใช้ตัวเลือกวันที่"
+    },
+    {
+      "name": "gallery_list_select_jump_node",
+      "value": "ใช้ตัวเลือกโหนด"
+    },
+    {
+      "name": "gallery_list_jump_now",
+      "value": "ข้ามไปตอนนี้"
+    },
+    {
+      "name": "gallery_list_time_jump_dialog_title",
+      "value": "ตัวเลือกการข้าม"
+    },
+    {
+      "name": "gallery_list_time_jump_dialog_found_message",
+      "value": "พบ %s ผลลัพธ์"
+    },
+    {
+      "name": "gallery_tag_copy",
+      "value": "คัดลอกแท็กแล้ว"
+    },
+    {
+      "name": "search",
+      "value": "ค้นหา"
+    },
+    {
+      "name": "keyword_search",
+      "value": "คีย์เวิร์ดในการค้นหา"
+    },
+    {
+      "name": "image_search",
+      "value": "ค้นหาด้วยรูป"
+    },
+    {
+      "name": "search_normal",
+      "value": "ค้นหาแบบธรรมดา"
+    },
+    {
+      "name": "search_advance",
+      "value": "ตัวเลือกขั้นสูง"
+    },
+    {
+      "name": "search_image",
+      "value": "ค้นหาด้วยรูปภาพ"
+    },
+    {
+      "name": "search_normal_search",
+      "value": "ค้นหาแบบธรรมดา"
+    },
+    {
+      "name": "search_subscription_search",
+      "value": "ค้นหาการสมัครสมาชิก"
+    },
+    {
+      "name": "search_specify_uploader",
+      "value": "ระบุผู้อัพโหลด"
+    },
+    {
+      "name": "search_specify_tag",
+      "value": "ระบุป้ายกำกับ"
+    },
+    {
+      "name": "search_enable_advance",
+      "value": "เปิดโหมดค้นหาขั้นสูง"
+    },
+    {
+      "name": "search_tip",
+      "value": "ค้นหาแบบธรรมดา: ค้นหาแบบง๊ายง่าย\n\nระบุผู้อัพโหลด: ค้นหาแกลเลอรี่ที่อัพโหลดโดยระบุชื่อผู้ใช้ของคนอัพโหลด โดยตัวเลือกอื่นๆจะถูกข้ามไป\n\nระบุป้ายกำกับ: ค้นหาแกลเลอรี่ที่ถูกใส่ป้ายกำกับหรือแท็กไว้ในแต่ละแกลเลอรี่ ระบุได้เพียงหนึ่งป้ายกำกับ ตัวเลือกอื่นๆจะถูกข้ามไป"
+    },
+    {
+      "name": "search_sname",
+      "value": "ค้นหาแกลเลอรี่"
+    },
+    {
+      "name": "search_stags",
+      "value": "ค้นหาแท็กของแกลเลอรี่"
+    },
+    {
+      "name": "search_sdesc",
+      "value": "ค้นหาคำอธิบายของแกลเลอรี่"
+    },
+    {
+      "name": "search_storr",
+      "value": "ค้นหาชื่อไฟล์ Torrent"
+    },
+    {
+      "name": "search_sto",
+      "value": "แสดงผลเฉพาะแกลเลอรี่ที่มีไฟล์ Torrents"
+    },
+    {
+      "name": "search_sdt1",
+      "value": "ค้นหาแท็กที่ไม่โด่งดัง"
+    },
+    {
+      "name": "search_sdt2",
+      "value": "ค้นหาแท็กที่ถูกโหวตไม่เห็นด้วย"
+    },
+    {
+      "name": "search_sh",
+      "value": "แสดงแกลเลอรี่ที่ถูกลบออก"
+    },
+    {
+      "name": "search_sr",
+      "value": "เรตติ้งขั้นต่ำ:"
+    },
+    {
+      "name": "search_sp",
+      "value": "หน้า:"
+    },
+    {
+      "name": "search_sp_to",
+      "value": "ถึง"
+    },
+    {
+      "name": "search_sp_suffix",
+      "value": ""
+    },
+    {
+      "name": "search_sf",
+      "value": "ปิดตัวกรองเริ่มต้นสำหรับ:"
+    },
+    {
+      "name": "search_sfl",
+      "value": "ภาษา"
+    },
+    {
+      "name": "search_sfu",
+      "value": "ผู้อัพโหลด"
+    },
+    {
+      "name": "search_sft",
+      "value": "แท็ก"
+    },
+    {
+      "name": "select_image",
+      "value": "เลือกรูปภาพ"
+    },
+    {
+      "name": "search_uss",
+      "value": "ใช้สแกนหาความเหมือน"
+    },
+    {
+      "name": "search_osc",
+      "value": "ค้นหาเฉพาะหน้าปก"
+    },
+    {
+      "name": "search_se",
+      "value": "แสดงเรื่องที่โดนลบ"
+    },
+    {
+      "name": "select_image_first",
+      "value": "โปรดเลือกรูปภาพก่อน"
+    },
+    {
+      "name": "add_to_favourites",
+      "value": "เพิ่มเข้าในรายการโปรด"
+    },
+    {
+      "name": "remove_from_favourites",
+      "value": "ลบออกจากรายการโปรด"
+    },
+    {
+      "name": "stop_downloading",
+      "value": "หยุดการดาวน์โหลด"
+    },
+    {
+      "name": "delete_downloads",
+      "value": "ลบการดาวน์โหลด"
+    },
+    {
+      "name": "quick_search",
+      "value": "ค้นหาอย่างด่วน"
+    },
+    {
+      "name": "quick_search_tip",
+      "value": "แตะ \"+\" เพื่อเพิ่มการค้นหาอย่างด่วน"
+    },
+    {
+      "name": "add_quick_search_dialog_title",
+      "value": "เพิ่มค้นหาอย่างด่วน"
+    },
+    {
+      "name": "name_is_empty",
+      "value": "ชื่อห้ามเว้นว่างไว้"
+    },
+    {
+      "name": "delete",
+      "value": "ลบ"
+    },
+    {
+      "name": "delete_quick_search_title",
+      "value": "ลบตัวค้นหาอย่างด่วน"
+    },
+    {
+      "name": "delete_quick_search_message",
+      "value": "ลบ \"%s\" หรือไม่?"
+    },
+    {
+      "name": "no_quick_search",
+      "value": "การค้นหาอย่างด่วนจะแสดงอยู่ตรงนี้"
+    },
+    {
+      "name": "add_quick_search_tip",
+      "value": "รายการของแกลเลอรี่ต่างๆจะถูกบันทึกเป็นการค้นหาอย่างด่วน ต้องทำการค้นหาก่อนเพื่อบันทึกลงในรายการของแผงการค้นหา"
+    },
+    {
+      "name": "readme",
+      "value": "อ่านก่อนสักนิด"
+    },
+    {
+      "name": "image_search_not_quick_search",
+      "value": "ไม่สามารถเพิ่มรูปในการค้นหาให้เป็นการค้นหาอย่างด่วนได้"
+    },
+    {
+      "name": "duplicate_quick_search",
+      "value": "มีตัวค้นหาอย่างด่วนอยู่แล้วในชื่อ \"%s\"."
+    },
+    {
+      "name": "duplicate_name",
+      "value": "ชื่อนี้มีการใช้งานอยู่แล้ว"
+    },
+    {
+      "name": "subscription_tip",
+      "value": "คลิก \"+\" เพื่อเพิ่มการสมัครสมาชิก"
+    },
+    {
+      "name": "go_to_hint",
+      "value": "หน้า %1$d, มีทั้งหมด %2$d หน้า"
+    },
+    {
+      "name": "star_2",
+      "value": "2 ดาว"
+    },
+    {
+      "name": "star_3",
+      "value": "3 ดาว"
+    },
+    {
+      "name": "star_4",
+      "value": "4 ดาว"
+    },
+    {
+      "name": "star_5",
+      "value": "5 ดาว"
+    },
+    {
+      "name": "error_cannot_find_gallery",
+      "value": "ไม่สามารถค้นหาแกลเลอรี่ได้"
+    },
+    {
+      "name": "download",
+      "value": "ดาวน์โหลด"
+    },
+    {
+      "name": "read",
+      "value": "อ่าน"
+    },
+    {
+      "name": "more_information",
+      "value": "ข้อมูลเพิ่มเติม"
+    },
+    {
+      "name": "favored_times",
+      "value": "♥ %d"
+    },
+    {
+      "name": "rating_text",
+      "value": "%1$s (%2$.2f, %3$d)"
+    },
+    {
+      "name": "favorites",
+      "value": "รายการโปรด"
+    },
+    {
+      "name": "torrent_count",
+      "value": "Torrent (%d)"
+    },
+    {
+      "name": "share",
+      "value": "แชร์"
+    },
+    {
+      "name": "rate",
+      "value": "คะแนน"
+    },
+    {
+      "name": "similar_gallery",
+      "value": "เหมือน"
+    },
+    {
+      "name": "search_cover",
+      "value": "ค้นหาปก"
+    },
+    {
+      "name": "no_tags",
+      "value": "ไม่มีแท็ก"
+    },
+    {
+      "name": "no_comments",
+      "value": "ไม่มีความคิดเห็น"
+    },
+    {
+      "name": "no_more_comments",
+      "value": "ไม่มีความเห็นเพิ่มเติมแล้ว"
+    },
+    {
+      "name": "more_comment",
+      "value": "ความคิดเห็นเพิ่มเติม"
+    },
+    {
+      "name": "click_more_comments",
+      "value": "คลิกเพื่อโหลดความคิดเห็นเพิ่มเติม"
+    },
+    {
+      "name": "last_edited",
+      "value": "แก้ไขล่าสุด: %s"
+    },
+    {
+      "name": "no_previews",
+      "value": "ไม่มีรูปตัวอย่าง"
+    },
+    {
+      "name": "no_more_previews",
+      "value": "ไม่มีรูปตัวอย่างเพิ่มเติมอีกแล้ว"
+    },
+    {
+      "name": "more_previews",
+      "value": "มีรูปตัวอย่าง"
+    },
+    {
+      "name": "refresh",
+      "value": "รีเฟรช"
+    },
+    {
+      "name": "open_in_other_app",
+      "value": "เปิดด้วยแอปอื่น"
+    },
+    {
+      "name": "rate_successfully",
+      "value": "ให้คะแนนเรียบร้อยแล้ว"
+    },
+    {
+      "name": "rate_failed",
+      "value": "การให้คะแนนล้มเหลว"
+    },
+    {
+      "name": "no_torrents",
+      "value": "ไม่มีไฟล์ torrents"
+    },
+    {
+      "name": "torrents",
+      "value": "Torrents"
+    },
+    {
+      "name": "favorited",
+      "value": "เพิ่มในรายการโปรดแล้ว"
+    },
+    {
+      "name": "not_favorited",
+      "value": "ยังไม่เพิ่มรายการโปรด"
+    },
+    {
+      "name": "add_favorites_dialog_title",
+      "value": "เพิ่มเข้ารายการโปรด"
+    },
+    {
+      "name": "remember_favorite_collection",
+      "value": "จดจำรายการโปรดที่เลือก"
+    },
+    {
+      "name": "add_to_favorite_success",
+      "value": "เพิ่มเข้าในรายการโปรดแล้ว"
+    },
+    {
+      "name": "remove_from_favorite_success",
+      "value": "ลบออกจากรายการโปรดแล้ว"
+    },
+    {
+      "name": "add_to_favorite_failure",
+      "value": "เกิดความล้มเหลวในการเพิ่มเข้าในรายการโปรด"
+    },
+    {
+      "name": "remove_from_favorite_failure",
+      "value": "เกิดข้อล้มเหลวในการลบออกจากรายการโปรด"
+    },
+    {
+      "name": "rating10",
+      "value": "นี้มันผลงานมาสเตอร์พีคชัดๆ!"
+    },
+    {
+      "name": "rating9",
+      "value": "อะเมซิ่งมากๆ!"
+    },
+    {
+      "name": "rating8",
+      "value": "เยี่ยม!"
+    },
+    {
+      "name": "rating7",
+      "value": "ดี!"
+    },
+    {
+      "name": "rating6",
+      "value": "ก็โอเคนะ"
+    },
+    {
+      "name": "rating5",
+      "value": "ก็ไม่แย่นะ"
+    },
+    {
+      "name": "rating4",
+      "value": "แย่"
+    },
+    {
+      "name": "rating3",
+      "value": "แย่มาก/กลัวแล้ว"
+    },
+    {
+      "name": "rating2",
+      "value": "โอ๊ยยย~"
+    },
+    {
+      "name": "rating1",
+      "value": "ไม่ไหวแล้วนะ!"
+    },
+    {
+      "name": "rating0",
+      "value": "พังพินาศสุดๆไปเลย!"
+    },
+    {
+      "name": "gallery_info",
+      "value": "ข้อมูลแกลเลอรี่"
+    },
+    {
+      "name": "copied_to_clipboard",
+      "value": "คัดลอกลงคลิปบอร์ดแล้ว"
+    },
+    {
+      "name": "header_key",
+      "value": "คีย์"
+    },
+    {
+      "name": "header_value",
+      "value": "ข้อมูล"
+    },
+    {
+      "name": "key_gid",
+      "value": "Gid"
+    },
+    {
+      "name": "key_token",
+      "value": "โทเคน"
+    },
+    {
+      "name": "key_url",
+      "value": "URL"
+    },
+    {
+      "name": "key_title",
+      "value": "ชื่อเรื่อง"
+    },
+    {
+      "name": "key_title_jpn",
+      "value": "ชื่อเรื่องญี่ปุ่น"
+    },
+    {
+      "name": "key_thumb",
+      "value": "ภาพตัวอย่าง"
+    },
+    {
+      "name": "key_category",
+      "value": "หมวดหมู่"
+    },
+    {
+      "name": "key_uploader",
+      "value": "ผู้อัพโหลด"
+    },
+    {
+      "name": "key_posted",
+      "value": "โพสต์เมื่อ"
+    },
+    {
+      "name": "key_parent",
+      "value": "Parent"
+    },
+    {
+      "name": "key_visible",
+      "value": "แสดง"
+    },
+    {
+      "name": "key_language",
+      "value": "ภาษา"
+    },
+    {
+      "name": "key_pages",
+      "value": "หน้า"
+    },
+    {
+      "name": "key_size",
+      "value": "ขนาดไฟล์"
+    },
+    {
+      "name": "key_favorite_count",
+      "value": "จำนวนรายการโปรด"
+    },
+    {
+      "name": "key_favorited",
+      "value": "เพิ่มรายการโปรด"
+    },
+    {
+      "name": "key_rating_count",
+      "value": "คนให้คะแนน"
+    },
+    {
+      "name": "key_rating",
+      "value": "คะแนน"
+    },
+    {
+      "name": "key_torrents",
+      "value": "ไฟล์ Torrents"
+    },
+    {
+      "name": "key_torrent_url",
+      "value": "Torrent URL"
+    },
+    {
+      "name": "gallery_comments",
+      "value": "การแสดงความคิดเห็นในแกลเลอรี่"
+    },
+    {
+      "name": "no_one_comments_gallery",
+      "value": "ไม่มีความคิดเห็น"
+    },
+    {
+      "name": "comment_successfully",
+      "value": "แสดงความคิดเห็นเสร็จเรียบร้อยแล้ว"
+    },
+    {
+      "name": "comment_failed",
+      "value": "การแสดงความคิดเห็นล้มเหลว"
+    },
+    {
+      "name": "copy_comment_text",
+      "value": "คัดลอกข้อความของความคิดเห็น"
+    },
+    {
+      "name": "vote_up",
+      "value": "ถูกใจ"
+    },
+    {
+      "name": "cancel_vote_up",
+      "value": "ยกเลิกโหวตถูกใจ"
+    },
+    {
+      "name": "vote_down",
+      "value": "ไม่ถูกใจ"
+    },
+    {
+      "name": "cancel_vote_down",
+      "value": "ยกเลิกโหวตไม่ถูกใจ"
+    },
+    {
+      "name": "vote_up_successfully",
+      "value": "โหวดถูกใจแล้ว"
+    },
+    {
+      "name": "cancel_vote_up_successfully",
+      "value": "ยกเลิกโหวตถูกใจแล้ว"
+    },
+    {
+      "name": "vote_down_successfully",
+      "value": "โหวดไม่ถูกใจเสร็จแล้ว"
+    },
+    {
+      "name": "cancel_vote_down_successfully",
+      "value": "ยกเลิกโหวดไม่ถูกใจแล้ว"
+    },
+    {
+      "name": "vote_failed",
+      "value": "การโหวตล้มเหลว"
+    },
+    {
+      "name": "check_vote_status",
+      "value": "ดูรายละเอียดการโหวต"
+    },
+    {
+      "name": "edit_comment",
+      "value": "แก้ไขความคิดเห็น"
+    },
+    {
+      "name": "edit_comment_successfully",
+      "value": "แก้ไขความคิดเห็นแล้ว"
+    },
+    {
+      "name": "edit_comment_failed",
+      "value": "แก้ไขความคิดเห็นล้มเหลว"
+    },
+    {
+      "name": "gallery_previews",
+      "value": "ตัวอย่างแกลเลอรี่"
+    },
+    {
+      "name": "go_to",
+      "value": "ไปที่"
+    },
+    {
+      "name": "tag_filter",
+      "value": "กรองแท็ก"
+    },
+    {
+      "name": "tag_selector_search_hint",
+      "value": "ค้นหาแท็ก…"
+    },
+    {
+      "name": "tag_selector_selected_count",
+      "value": "เลือกแล้ว: %d"
+    },
+    {
+      "name": "tag_selector_selected_section_title",
+      "value": "แท็กที่เลือก"
+    },
+    {
+      "name": "tag_selector_empty_selected",
+      "value": "ยังไม่ได้เลือกแท็ก"
+    },
+    {
+      "name": "tag_selector_other_group",
+      "value": "อื่นๆ"
+    },
+    {
+      "name": "scene_download_title",
+      "value": "%s แกลเลอรี่- %s"
+    },
+    {
+      "name": "no_download_info",
+      "value": "รายการดาวน์โหลดจะอยู่ตรงนี้"
+    },
+    {
+      "name": "download_state_none",
+      "value": "Idle"
+    },
+    {
+      "name": "download_state_wait",
+      "value": "กำลังรอ"
+    },
+    {
+      "name": "download_state_downloading",
+      "value": "กำลังดาวน์โหลด"
+    },
+    {
+      "name": "download_state_downloaded",
+      "value": "ดาวน์โหลดแล้ว"
+    },
+    {
+      "name": "download_state_failed",
+      "value": "ล้มเหลว"
+    },
+    {
+      "name": "download_state_failed_2",
+      "value": "%d ที่ไม่เสร็จ"
+    },
+    {
+      "name": "download_state_finish",
+      "value": "เสร็จ"
+    },
+    {
+      "name": "download_sort_list",
+      "value": "เรียงลำดับ"
+    },
+    {
+      "name": "download_filter_by_status",
+      "value": "กรองตามสถานะ"
+    },
+    {
+      "name": "download_status_all",
+      "value": "ทั้งหมด"
+    },
+    {
+      "name": "download_status_not_started",
+      "value": "ยังไม่เริ่ม"
+    },
+    {
+      "name": "default_sort",
+      "value": "ค่าเริ่มต้น"
+    },
+    {
+      "name": "sort_by_gallery_id_asc",
+      "value": "ตาม Id จากน้อยไปมาก"
+    },
+    {
+      "name": "sort_by_gallery_id_desc",
+      "value": "ตาม Id จากมากไปน้อย"
+    },
+    {
+      "name": "sort_by_create_time_asc",
+      "value": "ตามเวลาสร้าง จากน้อยไปมาก"
+    },
+    {
+      "name": "sort_by_create_time_desc",
+      "value": "ตามเวลาสร้าง จากมากไปน้อย"
+    },
+    {
+      "name": "sort_by_rating_asc",
+      "value": "ตามคะแนน จากน้อยไปมาก"
+    },
+    {
+      "name": "sort_by_rating_desc",
+      "value": "ตามคะแนน จากมากไปน้อย"
+    },
+    {
+      "name": "sort_by_name_asc",
+      "value": "ตามชื่อ จากน้อยไปมาก"
+    },
+    {
+      "name": "sort_by_name_desc",
+      "value": "ตามชื่อ จากมากไปน้อย"
+    },
+    {
+      "name": "sort_by_file_size_asc",
+      "value": "ตามขนาดไฟล์ จากน้อยไปมาก"
+    },
+    {
+      "name": "sort_by_file_size_desc",
+      "value": "ตามขนาดไฟล์ จากมากไปน้อย"
+    },
+    {
+      "name": "sort_download_list",
+      "value": "เรียงลำดับรายการ"
+    },
+    {
+      "name": "stat_509_alert_title",
+      "value": "คำเตือน 509"
+    },
+    {
+      "name": "stat_509_alert_text",
+      "value": "การลิมิตของรูปภาพต่อวันถึงลิมิตแล้ว กรุณาหยุดโหลดและพักผ่อนบ้างนะ"
+    },
+    {
+      "name": "stat_download_done_title",
+      "value": "ดาวน์โหลดเสร็จสิ้น"
+    },
+    {
+      "name": "stat_download_done_text_succeeded",
+      "value": "%d ที่เสร็จ"
+    },
+    {
+      "name": "stat_download_done_text_failed",
+      "value": "%d ที่ล้มเหลว"
+    },
+    {
+      "name": "stat_download_done_text_mix",
+      "value": "%1$d ที่เสร็จ, %2$d ที่ล้มเหลว"
+    },
+    {
+      "name": "stat_download_done_line_succeeded",
+      "value": "เสร็จแล้ว: %s"
+    },
+    {
+      "name": "stat_download_done_line_failed",
+      "value": "ล้มเหลว: %s"
+    },
+    {
+      "name": "download_remove_dialog_title",
+      "value": "ลบรายการดาวน์โหลด"
+    },
+    {
+      "name": "download_remove_dialog_message",
+      "value": "ต้องการลบ %s ออกจากรายการดาวน์โหลดไหม?"
+    },
+    {
+      "name": "download_remove_dialog_message_2",
+      "value": "ต้องการลบ %d รายการจากรายการดาวน์โหลดไหม?"
+    },
+    {
+      "name": "download_remove_dialog_check_text",
+      "value": "ลบไฟล์ภาพด้วย"
+    },
+    {
+      "name": "stat_download_action_stop_all",
+      "value": "หยุดทั้งหมด"
+    },
+    {
+      "name": "drawer_download_label_title",
+      "value": "ป้ายชื่อ"
+    },
+    {
+      "name": "default_download_label_name",
+      "value": "ค่าเริ่มต้น"
+    },
+    {
+      "name": "download_move_dialog_title",
+      "value": "ย้าย"
+    },
+    {
+      "name": "download_labels",
+      "value": "ป้ายชื่อดาวน์โหลด"
+    },
+    {
+      "name": "download_start_all",
+      "value": "เริ่มทั้งหมด"
+    },
+    {
+      "name": "download_stop_all",
+      "value": "หยุดทั้งหมด"
+    },
+    {
+      "name": "download_reset_reading_progress",
+      "value": "รีเซ็ตตำแหน่งที่อ่าน"
+    },
+    {
+      "name": "reset_reading_progress_message",
+      "value": "รีเซ็ตตำแหน่งที่อ่านค้างไว้ทั้งหมดในแกลเลอรี่ที่โหลดไว้ทั้งหมดหรือไม่?"
+    },
+    {
+      "name": "reset_reading_progress_processing",
+      "value": "กำลังรีเซ็ตตำแหน่งที่อ่าน..."
+    },
+    {
+      "name": "reset_reading_progress_done",
+      "value": "รีเซ็ตตำแหน่งที่อ่านแล้ว"
+    },
+    {
+      "name": "download_service_label",
+      "value": "บริการดาวน์โหลดของ EhViewer"
+    },
+    {
+      "name": "archiver_download_service_label",
+      "value": "ดาวน์โหลดไฟล์เก็บถาวร EhViewer"
+    },
+    {
+      "name": "archiver_download_pause",
+      "value": "หยุดชั่วคราว"
+    },
+    {
+      "name": "archiver_download_resume",
+      "value": "ทำต่อ"
+    },
+    {
+      "name": "archiver_download_paused",
+      "value": "หยุดชั่วคราวแล้ว"
+    },
+    {
+      "name": "archiver_download_restart_no_range",
+      "value": "เซิร์ฟเวอร์ไม่รองรับการดาวน์โหลดต่อ จะเริ่มดาวน์โหลดใหม่"
+    },
+    {
+      "name": "download_speed_text",
+      "value": "%s"
+    },
+    {
+      "name": "download_speed_text_2",
+      "value": "%1$s, เหลือ %2$s"
+    },
+    {
+      "name": "remember_download_label",
+      "value": "จดจำป้ายชื่อดาวน์โหลด"
+    },
+    {
+      "name": "default_download_label",
+      "value": "ป้ายชื่อดาวน์โหลดเริ่มต้น"
+    },
+    {
+      "name": "added_to_download_list",
+      "value": "เพิ่มเข้าในรายการดาวน์โหลดแล้ว"
+    },
+    {
+      "name": "download_searching",
+      "value": "กำลังค้นหา กรุณารอสักครู่"
+    },
+    {
+      "name": "download_searching_failed",
+      "value": "การค้นหาล้มเหลว"
+    },
+    {
+      "name": "download_search_gallery",
+      "value": "ค้นหาแกลเลอรี่"
+    },
+    {
+      "name": "download_search_hint",
+      "value": "กรอกคำค้นหา"
+    },
+    {
+      "name": "no_download_label",
+      "value": "ชื่อป้ายดาวน์โหลดจะอยู่ตรงนี้"
+    },
+    {
+      "name": "add",
+      "value": "เพิ่ม"
+    },
+    {
+      "name": "new_label_title",
+      "value": "ป้ายชื่ออันใหม่"
+    },
+    {
+      "name": "label_text_is_empty",
+      "value": "ข้อความป้ายชื่อว่างอยู่"
+    },
+    {
+      "name": "label_text_is_invalid",
+      "value": "ชื่อ \"ค่าเริ่มต้น\" นั้นไม่ถูกต้อง"
+    },
+    {
+      "name": "label_text_exist",
+      "value": "มีป้ายชื่อนี้อยู่แล้ว"
+    },
+    {
+      "name": "rename_label_title",
+      "value": "เปลี่ยนชื่อ"
+    },
+    {
+      "name": "delete_label_title",
+      "value": "ลบป้ายชื่อ"
+    },
+    {
+      "name": "delete_label_message",
+      "value": "จะลบป้ายชื่อ \"%s\" หรือไม่?"
+    },
+    {
+      "name": "no_history",
+      "value": "ประวัติการเข้าชมแกลเลอรี่จะอยู่ตรงนี้"
+    },
+    {
+      "name": "clear_all",
+      "value": "ลบทั้งหมด"
+    },
+    {
+      "name": "clear_all_history",
+      "value": "จะลบประวัติทั้งหมดเลยหรือไม่?"
+    },
+    {
+      "name": "filter",
+      "value": "บล็อกแกลเลอรี่"
+    },
+    {
+      "name": "no_filter",
+      "value": "ตัวบล็อกจะแสดงอยู่ตรงนี้"
+    },
+    {
+      "name": "filter_title",
+      "value": "ชื่อเรื่อง"
+    },
+    {
+      "name": "filter_uploader",
+      "value": "ผู้อัพโหลด"
+    },
+    {
+      "name": "filter_tag",
+      "value": "แท็ก"
+    },
+    {
+      "name": "filter_tag_namespace",
+      "value": "ชื่อของแท็ก"
+    },
+    {
+      "name": "delete_filter",
+      "value": "ลบตัวบล็อก \"%s\" หรือไม่?"
+    },
+    {
+      "name": "tip",
+      "value": "คำแนะนำ"
+    },
+    {
+      "name": "add_filter",
+      "value": "เพิ่มตัวบล็อก"
+    },
+    {
+      "name": "show_definition",
+      "value": "แสดงความหมาย"
+    },
+    {
+      "name": "filter_text",
+      "value": "ข้อความตัวบล็อก"
+    },
+    {
+      "name": "filter_tip",
+      "value": "ระบบบล็อกนี้จะกรองผลลัพธ์ของระบบบล็อกของเว็บไซต์ EHentai\n\nบล็อกชื่อเรื่อง: แยกแกลเลอรี่ที่มีชื่อเรื่องประกอบด้วยคำนั้น\n\nบล็อกผู้อัพโหลด: แยกแกลเลอรี่ที่ถูกอัพโหลดโดยผู้อัพโหลดนั้น\n\nบล็อกแท็ก: แยกแกลเลอรี่ที่มีแท็กนั้น ซึ่งจะใช้เวลามากขึ้นในการรับรายการแกลเลอรี่\n\nบล็อกเนมสเปซแท็ก: แยกแกลเลอรี่ที่มีเนมสเปซแท็กนั้น ซึ่งจะใช้เวลามากขึ้นในการรับรายการแกลเลอรี่"
+    },
+    {
+      "name": "filter_the_uploader",
+      "value": "บล็อกผู้อัพโหลด \"%s\" หรือไม่?"
+    },
+    {
+      "name": "filter_the_tag",
+      "value": "บล็อกแท็ก \"%s\" หรือไม่?"
+    },
+    {
+      "name": "filter_added",
+      "value": "เพิ่มตัวบล็อกแล้ว"
+    },
+    {
+      "name": "copy_tag",
+      "value": "คัดลอก"
+    },
+    {
+      "name": "set_pattern_protection",
+      "value": "ตั้้งการป้องกันแบบรูปแบบ"
+    },
+    {
+      "name": "set_pattern_protection_tip",
+      "value": "ลากรูปแบบเพื่อตั้งค่าการป้องกันแบบรูปแบบ\nเว้นว้างไว้เพื่อลบการป้องกันแบบรูปแบบ"
+    },
+    {
+      "name": "set",
+      "value": "กำหนด"
+    },
+    {
+      "name": "enable_fingerprint",
+      "value": "อนุญาตใช้สแกนลายนิ้วมือเพื่อปลดล็อกเช่นกัน"
+    },
+    {
+      "name": "u_config",
+      "value": "การตั้งค่า EHentai"
+    },
+    {
+      "name": "apply",
+      "value": "ยืนยัน"
+    },
+    {
+      "name": "apply_tip",
+      "value": "แตะเครื่องหมายถูกเพื่อบันทึกการตั้งค่าแล้ว"
+    },
+    {
+      "name": "hosts",
+      "value": "ปรับแต่ง hosts.txt เอง"
+    },
+    {
+      "name": "hosts_tip",
+      "value": "hosts.txt"
+    },
+    {
+      "name": "hosts_host",
+      "value": "โฮสต์"
+    },
+    {
+      "name": "hosts_ip",
+      "value": "ไอพี"
+    },
+    {
+      "name": "add_host",
+      "value": "เพิ่มโฮสต์"
+    },
+    {
+      "name": "add_host_add",
+      "value": "เพิ่ม"
+    },
+    {
+      "name": "edit_host",
+      "value": "แก้ไขโฮสต์"
+    },
+    {
+      "name": "edit_host_confirm",
+      "value": "ยืนยัน"
+    },
+    {
+      "name": "edit_host_delete",
+      "value": "ลบ"
+    },
+    {
+      "name": "invalid_host",
+      "value": "โฮสต์ไม่ถูกต้อง"
+    },
+    {
+      "name": "invalid_ip",
+      "value": "ไอพีไม่ถูกต้อง"
+    },
+    {
+      "name": "page_menu_title",
+      "value": "หน้า %d"
+    },
+    {
+      "name": "page_menu_refresh",
+      "value": "รีเฟรช"
+    },
+    {
+      "name": "page_menu_share",
+      "value": "แชร์"
+    },
+    {
+      "name": "page_menu_save",
+      "value": "บันทึก"
+    },
+    {
+      "name": "page_menu_save_to",
+      "value": "บันทึกลงที่…"
+    },
+    {
+      "name": "page_menu_add_bookmark",
+      "value": "เพิ่มบุคมาร์ก"
+    },
+    {
+      "name": "gallery_menu_title",
+      "value": "เมนู"
+    },
+    {
+      "name": "share_image",
+      "value": "แชร์รูปภาพ"
+    },
+    {
+      "name": "image_saved",
+      "value": "ภาพถูกบันทึกไปที่ %s"
+    },
+    {
+      "name": "settings_eh",
+      "value": "EH"
+    },
+    {
+      "name": "settings_eh_sign_out",
+      "value": "ออกจากระบบ"
+    },
+    {
+      "name": "settings_eh_sign_out_summary",
+      "value": "เริ่มแอปพลิเคชั่นใหม่เพื่อลงชื่อเข้าสู่ระบบ"
+    },
+    {
+      "name": "settings_eh_sign_out_warning",
+      "value": "คุณแน่ใจแล้วนะที่จะลงชื่อออกจากระบบ?"
+    },
+    {
+      "name": "settings_eh_sign_out_yes",
+      "value": "ใช่"
+    },
+    {
+      "name": "settings_eh_sign_out_tip",
+      "value": "คุณได้ลงชื่อออกจากระบบแล้ว เริ่มแอปพลิเคชั่นใหม่เพื่อลงชื่อเข้าสู่ระบบอีกครั้ง"
+    },
+    {
+      "name": "settings_eh_identity_cookies",
+      "value": "คุกกี๊ยืนยันตัวตน"
+    },
+    {
+      "name": "settings_eh_identity_cookies_summary",
+      "value": "คุกกี๊สามารถใช้ในการลงชื่อเข้าสู่ระบบได้"
+    },
+    {
+      "name": "settings_eh_identity_cookies_signed",
+      "value": "คุกกี๊ยืนยันตัวตนสามารถใช้ลงชื่อเข้าสู่ระบบสำหรับบัญชีนี้เท่านั้น<br><b>เก็บ รักษา ให้ ปลอดภัย</b><br><br>%s"
+    },
+    {
+      "name": "settings_eh_identity_cookies_tourist",
+      "value": "ยังไม่ลงชื่อเข้าสู่ระบบ"
+    },
+    {
+      "name": "settings_eh_identity_cookies_copy",
+      "value": "คัดลอก"
+    },
+    {
+      "name": "settings_eh_sign_out_restart",
+      "value": "กำลังรีสตาร์ทอัตโนมัติให้คุณ กรุณารอสักครู่"
+    },
+    {
+      "name": "settings_u_config",
+      "value": "การตั้งค่า EHentai"
+    },
+    {
+      "name": "settings_u_config_summary",
+      "value": "การตั้งค่าบนเว็บไซต์ EHentai"
+    },
+    {
+      "name": "settings_my_tags",
+      "value": "แท็กของฉัน"
+    },
+    {
+      "name": "settings_my_tags_summary",
+      "value": "แท็กของฉันบนเว็บไซต์ EHentai"
+    },
+    {
+      "name": "settings_eh_theme",
+      "value": "ธีม"
+    },
+    {
+      "name": "settings_eh_theme_light",
+      "value": "สว่าง"
+    },
+    {
+      "name": "settings_eh_theme_dark",
+      "value": "มืด"
+    },
+    {
+      "name": "settings_eh_theme_black",
+      "value": "ดำ"
+    },
+    {
+      "name": "settings_eh_theme_auto_switch",
+      "value": "ติดตามโหมดมืดของระบบ"
+    },
+    {
+      "name": "settings_eh_apply_nav_bar_theme_color",
+      "value": "ใช้สีของธีมบนแถบนำทางด้วย"
+    },
+    {
+      "name": "settings_eh_gallery_site",
+      "value": "เว็บไซต์หลักของแกลเลอรี่"
+    },
+    {
+      "name": "settings_eh_launch_page",
+      "value": "หน้าเริ่มต้น"
+    },
+    {
+      "name": "settings_eh_list_mode",
+      "value": "มุมองแบบรายการ"
+    },
+    {
+      "name": "settings_eh_list_mode_detail",
+      "value": "แสดงรายละเอียด"
+    },
+    {
+      "name": "settings_eh_list_mode_thumb",
+      "value": "ภาพตัวอย่าง"
+    },
+    {
+      "name": "settings_eh_detail_size",
+      "value": "ขนาดของรายละเอียด"
+    },
+    {
+      "name": "settings_eh_detail_size_long",
+      "value": "อย่างยาว"
+    },
+    {
+      "name": "settings_eh_detail_size_short",
+      "value": "อย่างสั้น"
+    },
+    {
+      "name": "settings_eh_thumb_size",
+      "value": "ขนาดภาพตัวอย่าง"
+    },
+    {
+      "name": "settings_eh_thumb_size_large",
+      "value": "ใหญ่"
+    },
+    {
+      "name": "settings_eh_thumb_size_middle",
+      "value": "กลาง"
+    },
+    {
+      "name": "settings_eh_thumb_size_small",
+      "value": "เล็ก"
+    },
+    {
+      "name": "settings_eh_thumb_resolution",
+      "value": "ความละเอียดภาพตัวอย่าง"
+    },
+    {
+      "name": "settings_eh_thumb_resolution_summary",
+      "value": "ค่าตอนนี้เป็น %s. การตั้งความละเอียดที่แน่นอนอาจจะส่งผลต่อการโหลดตัวอย่างที่อาจจะไม่สำเร็จด้วย"
+    },
+    {
+      "name": "settings_eh_thumb_resolution_auto",
+      "value": "อัตโนมัติ"
+    },
+    {
+      "name": "settings_eh_fix_thumb_url",
+      "value": "แก้ลิงค์ภาพตัวอย่าง"
+    },
+    {
+      "name": "settings_eh_default_categories",
+      "value": "หมวดหมู่บนหน้าแรก"
+    },
+    {
+      "name": "settings_eh_default_categories_summary",
+      "value": "หมวดหมู่จะแสดงเป็นค่าเริ่มต้นบนหน้าแรก"
+    },
+    {
+      "name": "settings_eh_excluded_languages",
+      "value": "ภาษาที่ยกเว้น"
+    },
+    {
+      "name": "settings_eh_excluded_languages_summary",
+      "value": "ซ่อนแกลเลอรี่ที่มีภาษาต่างๆจากรายการแกลเลอรี่และการค้นหา"
+    },
+    {
+      "name": "settings_eh_excluded_tag_namespaces",
+      "value": "แท็กเนมสเปซที่ยกเว้น"
+    },
+    {
+      "name": "settings_eh_excluded_tag_namespaces_summary",
+      "value": "แยกเนมสเปซที่ตั้งไว้ออกจากที่ค้นหาแท็กที่เป็นค่าเริ่มต้น"
+    },
+    {
+      "name": "settings_eh_show_jpn_title",
+      "value": "แสดงชื่อเรื่องญี่ปุ่น"
+    },
+    {
+      "name": "settings_eh_show_gallery_comment",
+      "value": "แสดงความคิดเห็นแกลเลอรี่"
+    },
+    {
+      "name": "settings_eh_show_eh_event",
+      "value": "แสดงกิจกรรม EH"
+    },
+    {
+      "name": "settings_eh_show_eh_limits",
+      "value": "แสดงขีดจำกัด EH"
+    },
+    {
+      "name": "settings_eh_show_jpn_title_summary",
+      "value": "ต้องเปิดใช้งานชื่อเรื่องญี่ปุ่นในการตั้งค่าบนเว็บไซต์ EHentai"
+    },
+    {
+      "name": "settings_eh_show_gallery_pages",
+      "value": "แสดงจำนวนหน้าของแกลเลอรี่"
+    },
+    {
+      "name": "settings_eh_show_gallery_pages_summary",
+      "value": "แสดงจำนวนหน้าที่มีอยู่ในแต่ละแกลเลอรี่"
+    },
+    {
+      "name": "settings_eh_show_tag_translations",
+      "value": "แสดงแท็กการแปลภาษา"
+    },
+    {
+      "name": "settings_eh_show_tag_translations_summary",
+      "value": "แสดงแท็กการแปลภาษาแทนที่ข้อความต้นฉบับ (อาจใช้เวลามากขึ้นเพื่อดาวน์โหลดไฟล์ข้อมูล)"
+    },
+    {
+      "name": "settings_eh_tag_translations_source",
+      "value": "Placeholder"
+    },
+    {
+      "name": "settings_eh_tag_translations_source_url",
+      "value": "https://placeholder"
+    },
+    {
+      "name": "settings_eh_cellular_network_warning",
+      "value": "เตือนการใช้เครือข่ายมือถือ"
+    },
+    {
+      "name": "settings_eh_filter",
+      "value": "บล็อกแกลเลอรี่"
+    },
+    {
+      "name": "settings_eh_filter_summary",
+      "value": "บล็อกแกลเลอรี่ตามชื่อเรื่อง ผู้อัพโหลด และแท็ก"
+    },
+    {
+      "name": "settings_read",
+      "value": "การอ่าน"
+    },
+    {
+      "name": "settings_read_screen_rotation",
+      "value": "ทิศทางของหน้าจอ"
+    },
+    {
+      "name": "settings_read_screen_rotation_default",
+      "value": "ค่าเริ่มต้น"
+    },
+    {
+      "name": "settings_read_screen_rotation_portrait",
+      "value": "แนวตั้ง"
+    },
+    {
+      "name": "settings_read_screen_rotation_landscape",
+      "value": "แนวนอน"
+    },
+    {
+      "name": "settings_read_refresh_rate",
+      "value": "อัตรารีเฟรช"
+    },
+    {
+      "name": "settings_read_refresh_rate_default",
+      "value": "ค่าเริ่มต้น"
+    },
+    {
+      "name": "settings_read_refresh_rate_60",
+      "value": "60 Hz"
+    },
+    {
+      "name": "settings_read_refresh_rate_90",
+      "value": "90 Hz"
+    },
+    {
+      "name": "settings_read_refresh_rate_120",
+      "value": "120 Hz"
+    },
+    {
+      "name": "settings_read_refresh_rate_max",
+      "value": "สูงสุดของหน้าจอ"
+    },
+    {
+      "name": "settings_read_reading_direction",
+      "value": "ทิศทางการเปิดหน้าอ่าน"
+    },
+    {
+      "name": "settings_read_reading_direction_left_to_right",
+      "value": "ซ้าย -> ขวา"
+    },
+    {
+      "name": "settings_read_reading_direction_right_to_Left",
+      "value": "ขวา -> ซ้าย"
+    },
+    {
+      "name": "settings_read_reading_direction_top_to_bottom",
+      "value": "บน -> ล่าง"
+    },
+    {
+      "name": "settings_read_page_scaling",
+      "value": "ขนาดของหน้า"
+    },
+    {
+      "name": "settings_read_page_scaling_actual_size",
+      "value": "เท่าขนาด"
+    },
+    {
+      "name": "settings_read_page_scaling_fit_to_width",
+      "value": "พอดีกับขนาดแนวกว้าง"
+    },
+    {
+      "name": "settings_read_page_scaling_fit_to_height",
+      "value": "พอดีกับขนาดแนวสูง"
+    },
+    {
+      "name": "settings_read_page_scaling_fit_to_screen",
+      "value": "พอดีกับขนาดหน้าจอ"
+    },
+    {
+      "name": "settings_read_page_scaling_fixed_scale",
+      "value": "ขนาดตายตัว"
+    },
+    {
+      "name": "settings_read_start_position",
+      "value": "ตำแหน่งเริ่มต้น"
+    },
+    {
+      "name": "settings_read_start_position_top_left",
+      "value": "บนซ้าย"
+    },
+    {
+      "name": "settings_read_start_position_top_right",
+      "value": "บนขวา"
+    },
+    {
+      "name": "settings_read_start_position_bottom_left",
+      "value": "ล่างซ้าย"
+    },
+    {
+      "name": "settings_read_start_position_bottom_right",
+      "value": "ล่างขวา"
+    },
+    {
+      "name": "settings_read_start_position_center",
+      "value": "ตรงกลาง"
+    },
+    {
+      "name": "settings_read_keep_screen_on",
+      "value": "เปิดหน้าจอค้างไว้"
+    },
+    {
+      "name": "settings_read_show_clock",
+      "value": "แสดงเวลา"
+    },
+    {
+      "name": "settings_read_show_progress",
+      "value": "แสดงความคืบหน้า"
+    },
+    {
+      "name": "settings_read_show_battery",
+      "value": "แสดงแบตเตอรี่"
+    },
+    {
+      "name": "settings_read_show_page_interval",
+      "value": "แสดงความห่างของหน้าเมื่อเปลี่ยน"
+    },
+    {
+      "name": "settings_read_volume_page",
+      "value": "ใช้ปุ่มปรับเสียงเพื่อเปลี่ยนหน้า"
+    },
+    {
+      "name": "settings_read_reading_fullscreen",
+      "value": "อ่านเต็มจอ"
+    },
+    {
+      "name": "settings_read_custom_screen_lightness",
+      "value": "ปรับความสว่างของหน้าจอ"
+    },
+    {
+      "name": "settings_read_screen_lightness",
+      "value": "แสงหน้าจอ"
+    },
+    {
+      "name": "settings_download",
+      "value": "การดาวน์โหลด"
+    },
+    {
+      "name": "settings_download_download_location",
+      "value": "ตำแหน่งแหล่งดาวน์โหลด"
+    },
+    {
+      "name": "settings_download_invalid_download_location",
+      "value": "ตำแหน่งแหล่งดาวน์โหลดไม่ถูกต้อง"
+    },
+    {
+      "name": "settings_download_cant_get_download_location",
+      "value": "ไม่สามารถเข้าถึงแหล่งดาวน์โหลดได้"
+    },
+    {
+      "name": "settings_download_pick_dir_kk",
+      "value": "บน Android เวอร์ชั่น 4.4 (หรือ KitKat) เป็นต้นไป แอพจะไม่สามารถเขียนข้อมูลใดๆก็ตามบนพื้นที่จัดเก็บภายนอกอย่างการ์ด SD ได้ เว้นแต่ว่าคุณจะรูทระบบและเพิ่มแพชต์เข้าไป แต่ <การ์ด SD>/Android/data/com.hippo.ehviewer นั้นเป็นข้อยกเว้น สามารถให้เขียนได้สำหรับแอพนี้"
+    },
+    {
+      "name": "settings_download_pick_dir_l",
+      "value": "บน Android เวอร์ชั่น 5.0 (หรือ Lolipop) เป็นต้นไป ได้ใช้ API ตัวใหม่เพื่อเขียนข้อมูลบนพื้นที่จัดเก็บภายนอกอย่างการ์ด SD ได้ แตะที่ \"เอกสาร\" ถ้าคุณอยากตั้งให้การ์ด SD เป็นแหล่งดาวน์โหลด"
+    },
+    {
+      "name": "settings_download_document",
+      "value": "เอกสาร"
+    },
+    {
+      "name": "settings_download_continue",
+      "value": "ดำเนินการต่อ"
+    },
+    {
+      "name": "settings_download_media_scan",
+      "value": "การอนุญาตให้สแกนสื่อ"
+    },
+    {
+      "name": "settings_download_media_scan_summary_on",
+      "value": "โปรดซ่อนแอปแกลเลอรี่หรือแอปดูรูปในเครื่องของคุณจากคนอื่นด้วย"
+    },
+    {
+      "name": "settings_download_media_scan_summary_off",
+      "value": "แอปแกลเลอรี่ส่วนใหญ่จะข้ามการสแกนรูปภาพในแหล่งดาวน์โหลด"
+    },
+    {
+      "name": "settings_download_multi_thread_download",
+      "value": "ดาวน์โหลดแบบหลายเธด"
+    },
+    {
+      "name": "settings_download_multi_thread_download_summary",
+      "value": "โหลดถึง %s ภาพ"
+    },
+    {
+      "name": "settings_download_preload_image",
+      "value": "โหลดภาพล่วงหน้า"
+    },
+    {
+      "name": "settings_download_preload_image_summary",
+      "value": "โหลดภาพล่วงหน้าไป %s ภาพ"
+    },
+    {
+      "name": "settings_download_image_resolution",
+      "value": "ความละเอียดของภาพ"
+    },
+    {
+      "name": "settings_download_image_resolution_summary",
+      "value": "ค่าตอนนี้เป็น %s. ความละเอียดตั้งแต่ 1280x ขึ้นไปอาจจะไม่ทำงาน"
+    },
+    {
+      "name": "settings_download_image_resolution_auto",
+      "value": "อัตโนมัติ"
+    },
+    {
+      "name": "settings_download_download_origin_image",
+      "value": "ดาวน์โหลดรูปภาพต้นฉบับ"
+    },
+    {
+      "name": "settings_download_download_list_pagination",
+      "value": "รายการแบบแบ่งหน้า"
+    },
+    {
+      "name": "settings_download_download_list_pagination_summary",
+      "value": "ฟังก์ชันแบ่งหน้าจะมีผลเฉพาะเมื่อความยาวรายการมากกว่า 500"
+    },
+    {
+      "name": "settings_download_download_origin_image_summary",
+      "value": "อันตรายนะ! คุณอาจจะเจอรหัสข้อผิดพลาด 509 ได้"
+    },
+    {
+      "name": "settings_download_download_order_by_asc",
+      "value": "ลำดับการดาวน์โหลดจากน้อยไปมาก"
+    },
+    {
+      "name": "settings_download_download_order_by_asc_summary",
+      "value": "ดาวน์โหลดตามลำดับเมื่อดาวน์โหลดแกลเลอรี่ทั้งหมด"
+    },
+    {
+      "name": "settings_download_sync_while_reading",
+      "value": "ดาวน์โหลดพร้อมกันขณะอ่าน"
+    },
+    {
+      "name": "settings_download_sync_while_reading_summary",
+      "value": "เมื่อเรียกดูแกลเลอรี่ที่ยังไม่ได้ดาวน์โหลด จะบันทึกภาพที่ดูโดยอัตโนมัติไปยังไดเรกทอรีดาวน์โหลด"
+    },
+    {
+      "name": "settings_download_restore_download_items",
+      "value": "คืนรายการดาวน์โหลด"
+    },
+    {
+      "name": "settings_download_restore_download_items_summary",
+      "value": "คืนรายการดาวน์โหลดทั้งหมดในแหล่งดาวน์โหลด"
+    },
+    {
+      "name": "settings_download_restoring",
+      "value": "กำลังคืนค่า"
+    },
+    {
+      "name": "settings_download_restore_not_found",
+      "value": "ไม่พบรายการดาวน์โหลดที่จะคืนค่า"
+    },
+    {
+      "name": "settings_download_restore_failed",
+      "value": "การคืนค่าล้มเหลว"
+    },
+    {
+      "name": "settings_download_restore_successfully",
+      "value": "การคืนค่า %d รายการสำเร็จแล้ว"
+    },
+    {
+      "name": "settings_download_clean_redundancy",
+      "value": "ลบการดาวน์โหลดที่ไม่จำเป็น"
+    },
+    {
+      "name": "settings_download_clean_redundancy_summary",
+      "value": "ลบรูปภาพแกลเลอรี่ที่ไม่ได้อยู่ในรายการดาวน์โหลด แต่อยู่ในแหล่งดาวน์โหลด"
+    },
+    {
+      "name": "settings_download_clean_redundancy_no_redundancy",
+      "value": "ไม่มีสิ่งที่ไม่จำเป็น"
+    },
+    {
+      "name": "settings_download_clean_redundancy_done",
+      "value": "การลบสิ่งที่ไม่จำเป็นเสร็จสิ้น ลบไปแล้วทั้งหมด %d ชิ้น"
+    },
+    {
+      "name": "settings_advanced",
+      "value": "ขั้นสูง"
+    },
+    {
+      "name": "settings_advanced_save_parse_error_body",
+      "value": "บันทึกเนื้อหาลง HTML เมื่อการวิเคราะห์ผิดพลาด"
+    },
+    {
+      "name": "settings_advanced_save_parse_error_body_summary",
+      "value": "เนื้อหาแบบ HTML อาจจะเป็นข้อมูลความเป็นส่วนตัวที่มีความอ่อนไหวได้"
+    },
+    {
+      "name": "settings_advanced_save_crash_log",
+      "value": "บันทึกข้อผิดพลาดเมื่อเกิด crash"
+    },
+    {
+      "name": "settings_advanced_save_crash_log_summary",
+      "value": "การบันทึกข้อผิดพลาดจาก crash จะช่วยให้ผู้พัฒนาหาและแก้ไขบัคต่างๆได้ง่าย"
+    },
+    {
+      "name": "settings_advanced_dump_logcat",
+      "value": "สร้าง Logcat"
+    },
+    {
+      "name": "settings_advanced_dump_logcat_summary",
+      "value": "บันทึก Logcat ไปที่พื้นที่จัดเก็บภายนอก"
+    },
+    {
+      "name": "settings_advanced_dump_logcat_failed",
+      "value": "การสร้าง Logcat เกิดข้อผิดพลาด"
+    },
+    {
+      "name": "settings_advanced_dump_logcat_to",
+      "value": "Logcat ถูกสร้างอยู่ที่ %s"
+    },
+    {
+      "name": "settings_advanced_clear_download_path_cache",
+      "value": "ลบไฟล์ขยะในแหล่งดาวน์โหลด"
+    },
+    {
+      "name": "settings_advanced_clear_download_path_cache_summary",
+      "value": "แกลเลอรี่ที่ดาวน์โหลดอยู่อาจเกิดข้อผิดพลาด และอาจจะต้องดาวน์โหลดใหม่อีกครั้ง การลบไฟล์ขยะในแหล่งดาวน์โหลดจะช่วยแก้ปัญหานี้ได้"
+    },
+    {
+      "name": "settings_advanced_clear_download_path_cache_message",
+      "value": "ต้องการลบไฟล์ขยะในแหล่งดาวน์โหลดหรือไม่?"
+    },
+    {
+      "name": "settings_advanced_clear_memory_cache",
+      "value": "ลบไฟล์ขยะในหน่วยความจำ"
+    },
+    {
+      "name": "settings_advanced_clear_memory_cache_summary",
+      "value": "ลบภาพตัวอย่าง และข้อมูลแกลเลอรี่ที่มีการเก็บข้อมูลไว้"
+    },
+    {
+      "name": "settings_advanced_read_cache_size",
+      "value": "ขนาดในการเก็บไฟล์ชั่วคราวเพื่ออ่าน"
+    },
+    {
+      "name": "settings_advanced_app_language_title",
+      "value": "ภาษาของแอป"
+    },
+    {
+      "name": "settings_advanced_proxy",
+      "value": "พร็อกซี่"
+    },
+    {
+      "name": "settings_advanced_proxy_summary_1",
+      "value": "%1$s %2$s:%3$d"
+    },
+    {
+      "name": "settings_advanced_proxy_summary_2",
+      "value": "%1$s"
+    },
+    {
+      "name": "settings_advanced_built_in_hosts_title",
+      "value": "ใช้ hosts.txt ของตัวแอป"
+    },
+    {
+      "name": "settings_advanced_built_in_hosts_summary",
+      "value": "ใช้ host-to-IP mapping แบบภายในที่จัดทำโดยตัวแอปเอง\nมันอาจจะเกิดการทับซ้อนกันจากการปรับแต่งไฟล์ hosts.txt เอง"
+    },
+    {
+      "name": "settings_advanced_custom_hosts_title",
+      "value": "ปรับแต่งไฟล์ hosts.txt เอง"
+    },
+    {
+      "name": "settings_advanced_custom_hosts_summary",
+      "value": "ทำแผนผัง hostnames ถึง ที่อยู่ของ IP\nมันอาจจะเกิดการทับซ้อนกันกับการใช้ hosts.txt ของตัวแอป"
+    },
+    {
+      "name": "settings_privacy_pattern_protection_title",
+      "value": "การป้องกันแบบรูปแบบ"
+    },
+    {
+      "name": "settings_privacy_pattern_protection_not_set",
+      "value": "ยังไม่ได้ตั้งค่าการป้องกันแบบรูปแบบ"
+    },
+    {
+      "name": "settings_privacy_pattern_protection_set",
+      "value": "การป้องกันแบบรูปแบบถูกตั้งค่าเรียบร้อยแล้ว"
+    },
+    {
+      "name": "settings_advanced_export_data",
+      "value": "สำเนาข้อมูล"
+    },
+    {
+      "name": "settings_advanced_export_data_summary",
+      "value": "บันทึกข้อมูลต่างๆเช่นรายการดาวน์โหลด และค้นหาอย่างด่วนลงพื้นที่จัดเก็บภายนอก"
+    },
+    {
+      "name": "settings_advanced_export_data_to",
+      "value": "ได้สำเนาข้อมูลแล้วจัดเก็บที่ %s"
+    },
+    {
+      "name": "settings_advanced_export_data_failed",
+      "value": "การสำเนาข้อมูลล้มเหลว"
+    },
+    {
+      "name": "settings_advanced_import_data",
+      "value": "นำเข้าข้อมูล"
+    },
+    {
+      "name": "settings_advanced_import_data_summary",
+      "value": "ดึงข้อมูลต่างๆจากไฟล์สำเนาที่ทำมาก่อนหน้านี้"
+    },
+    {
+      "name": "settings_advanced_import_data_successfully",
+      "value": "การนำเข้าข้อมูลสำเร็จ"
+    },
+    {
+      "name": "settings_advanced_wifi_sender",
+      "value": "การย้ายข้อมูลผ่าน WiFi"
+    },
+    {
+      "name": "settings_advanced_wifi_sander_summary",
+      "value": "การย้ายข้อมูลผ่าน Wi-Fi Hotspot"
+    },
+    {
+      "name": "settings_advanced_wifi_client",
+      "value": "การรับข้อมูลการย้ายผ่าน WiFi"
+    },
+    {
+      "name": "settings_advanced_wifi_client_summary",
+      "value": "รับข้อมูลการย้ายจาก Wi-Fi Hotspot"
+    },
+    {
+      "name": "settings_about",
+      "value": "เกี่ยวกับ"
+    },
+    {
+      "name": "settings_about_declaration",
+      "value": "EhViewer"
+    },
+    {
+      "name": "settings_about_declaration_summary",
+      "value": "EhViewer ไม่มีความแตกต่างจากตัวเว็บ E-Hentai.org แต่อย่างใด"
+    },
+    {
+      "name": "settings_about_author",
+      "value": "นักพัฒนา"
+    },
+    {
+      "name": "settings_about_author_summary",
+      "value": "SXJ_LonelyDog <xiaojieonly$foxmail.com>"
+    },
+    {
+      "name": "settings_about_telegram",
+      "value": "Telegram"
+    },
+    {
+      "name": "settings_about_website",
+      "value": "เว็บไซต์"
+    },
+    {
+      "name": "settings_about_source",
+      "value": "ซอร์สโค้ด"
+    },
+    {
+      "name": "settings_about_changelog",
+      "value": "บันทึกการเปลี่ยนแปลง"
+    },
+    {
+      "name": "settings_about_help",
+      "value": "ช่วยเหลือ"
+    },
+    {
+      "name": "settings_about_license",
+      "value": "ใบอนุญาต"
+    },
+    {
+      "name": "settings_about_license_summary",
+      "value": "EhViewer ต้องขอขอบคุณโครงการโอเพ่นซอร์สหลายๆโครงการเป็นอย่างสูง"
+    },
+    {
+      "name": "settings_about_donate",
+      "value": "บริจาค"
+    },
+    {
+      "name": "settings_about_donate_message",
+      "value": "เงินบริจาคของคุณจะไม่ได้บริการพิเศษ แต่จะทำให้แอปพัฒนาไปได้ไกลมากขึ้น"
+    },
+    {
+      "name": "settings_about_donate_alipay",
+      "value": "Alipay"
+    },
+    {
+      "name": "settings_about_donate_paypal",
+      "value": "PayPal"
+    },
+    {
+      "name": "settings_about_donate_open",
+      "value": "เปิดลิงค์"
+    },
+    {
+      "name": "settings_about_donate_copy",
+      "value": "คัดลอก"
+    },
+    {
+      "name": "settings_save_image_aliPay",
+      "value": "บันทึกรหัส QR Alipay"
+    },
+    {
+      "name": "settings_save_image_weChat",
+      "value": "บันทึกรหัส QR WeChat"
+    },
+    {
+      "name": "settings_about_donate_copied",
+      "value": "คัดลอกแล้ว"
+    },
+    {
+      "name": "settings_privacy_enable_analytics",
+      "value": "เปิดการวิเคราะห์ข้อมูล"
+    },
+    {
+      "name": "settings_privacy_about_analytics",
+      "value": "เกี่ยวกับการวิเคราะห์ข้อมูล"
+    },
+    {
+      "name": "settings_about_version",
+      "value": "เวอร์ชั่นแอป"
+    },
+    {
+      "name": "settings_about_check_for_updates",
+      "value": "ตรวจสอบการอัพเดต"
+    },
+    {
+      "name": "settings_close_automatic_updates",
+      "value": "ปิดการอัพเดตอัตโนมัติ"
+    },
+    {
+      "name": "settings_about_beta_update_channel",
+      "value": "ใช้เวอร์ชั่นทดสอบ (Beta)"
+    },
+    {
+      "name": "settings_about_beta_update_channel_summary",
+      "value": "ในเวอร์ชั่นทดสอบอาจมีบัคที่ยังไม่ได้แก้ไข"
+    },
+    {
+      "name": "proxy_enable",
+      "value": "เปิดใช้งาน"
+    },
+    {
+      "name": "proxy_enabled",
+      "value": "เปิดใช้งานแล้ว"
+    },
+    {
+      "name": "proxy_disabled",
+      "value": "ปิดใช้งานแล้ว"
+    },
+    {
+      "name": "proxy_direct",
+      "value": "โดยตรง"
+    },
+    {
+      "name": "proxy_system",
+      "value": "พร็อกซี่ของระบบ"
+    },
+    {
+      "name": "proxy_host_or_ip",
+      "value": "โฮสต์ หรือ ไอพี"
+    },
+    {
+      "name": "proxy_port",
+      "value": "พอร์ต"
+    },
+    {
+      "name": "proxy_domain_not_supported",
+      "value": "ไม่รองรับโดเมนนี้"
+    },
+    {
+      "name": "proxy_invalid_port",
+      "value": "เลขพอร์ตไม่ถูกต้อง"
+    },
+    {
+      "name": "cant_get_data_dir",
+      "value": "ไม่สามารถรับข้อมูลได้"
+    },
+    {
+      "name": "cant_find_any_data",
+      "value": "ค้นหาไฟล์ต่างๆไม่เจอ"
+    },
+    {
+      "name": "cant_read_the_file",
+      "value": "ไม่สามารถอ่านไฟล์ได้"
+    },
+    {
+      "name": "app_language_system",
+      "value": "ภาษาของระบบ (ค่าเริ่มต้น)"
+    },
+    {
+      "name": "excluded_languages",
+      "value": "ภาษาที่ยกเว้น"
+    },
+    {
+      "name": "select_all",
+      "value": "ทั้งหมด"
+    },
+    {
+      "name": "deselect_all",
+      "value": "ไม่ทั้งหมด"
+    },
+    {
+      "name": "invert_selection",
+      "value": "เลือกตรงกันข้าม"
+    },
+    {
+      "name": "language",
+      "value": "ภาษา"
+    },
+    {
+      "name": "original",
+      "value": "ต้นฉบับ"
+    },
+    {
+      "name": "translated",
+      "value": "แปล"
+    },
+    {
+      "name": "rewrite",
+      "value": "ถูกทำใหม่"
+    },
+    {
+      "name": "language_japanese",
+      "value": "ภาษาญี่ปุ่น"
+    },
+    {
+      "name": "language_english",
+      "value": "ภาษาอังกฤษ"
+    },
+    {
+      "name": "language_chinese",
+      "value": "ภาษาจีน"
+    },
+    {
+      "name": "language_dutch",
+      "value": "ภาษาดัตซ์"
+    },
+    {
+      "name": "language_french",
+      "value": "ภาษาฝรั่งเศส"
+    },
+    {
+      "name": "language_german",
+      "value": "ภาษาเยอรมัน"
+    },
+    {
+      "name": "language_hungarian",
+      "value": "ภาษาฮังการี"
+    },
+    {
+      "name": "language_italian",
+      "value": "ภาษาอิตาเลี่ยน"
+    },
+    {
+      "name": "language_korean",
+      "value": "ภาษาเกาหลี"
+    },
+    {
+      "name": "language_polish",
+      "value": "ภาษาโปแลนด์"
+    },
+    {
+      "name": "language_portuguese",
+      "value": "ภาษาโปรตุเกส"
+    },
+    {
+      "name": "language_russian",
+      "value": "ภาษารัสเซีย"
+    },
+    {
+      "name": "language_spanish",
+      "value": "ภาษาสเปน"
+    },
+    {
+      "name": "language_thai",
+      "value": "ภาษาไทย"
+    },
+    {
+      "name": "language_vietnamese",
+      "value": "ภาษาเวียดนาม"
+    },
+    {
+      "name": "language_na",
+      "value": "N/A"
+    },
+    {
+      "name": "language_other",
+      "value": "อื่นๆ"
+    },
+    {
+      "name": "please_wait",
+      "value": "รอสักครู่"
+    },
+    {
+      "name": "license",
+      "value": "ใบอนุญาต"
+    },
+    {
+      "name": "dir_picker",
+      "value": "เลือกโฟลเดอร์"
+    },
+    {
+      "name": "directory_not_writable",
+      "value": "โฟลเดอร์นี้เขียนไฟล์ไม่ได้"
+    },
+    {
+      "name": "cloud_favorites",
+      "value": "รายการโปรดบนเว็บ"
+    },
+    {
+      "name": "local_favorites",
+      "value": "รายการโปรดบนเครื่อง"
+    },
+    {
+      "name": "favorites_search_bar_hint",
+      "value": "ค้นหา %s"
+    },
+    {
+      "name": "favorites_title",
+      "value": "%s"
+    },
+    {
+      "name": "favorites_title_2",
+      "value": "%1$s - %2$s"
+    },
+    {
+      "name": "delete_favorites_dialog_title",
+      "value": "ลบออกจากรายการโปรด"
+    },
+    {
+      "name": "delete_favorites_dialog_message",
+      "value": "ต้องการลบ %d รายการออกจากรายการโปรดหรือไม่?"
+    },
+    {
+      "name": "move_favorites_dialog_title",
+      "value": "ย้ายรายการโปรด"
+    },
+    {
+      "name": "default_favorites_collection",
+      "value": "ค่าเริ่มต้นของที่เก็บรายการโปรด"
+    },
+    {
+      "name": "let_me_select",
+      "value": "ขอให้ฉันเลือกนะ"
+    },
+    {
+      "name": "favorites_info",
+      "value": "ข้อมูลรายการโปรด"
+    },
+    {
+      "name": "collections",
+      "value": "คอลเลคชั่น"
+    },
+    {
+      "name": "count",
+      "value": "จำนวน"
+    },
+    {
+      "name": "need_sign_in",
+      "value": "จำเป็นต้องลงชื่อเข้าใช้ก่อน"
+    },
+    {
+      "name": "error_something_wrong_happened",
+      "value": "มีสิ่งผิดปกติบางอย่างเกิดขึ้น"
+    },
+    {
+      "name": "guide_quick_search_title",
+      "value": "ค้นหาอย่างด่วน"
+    },
+    {
+      "name": "guide_quick_search_text",
+      "value": "ปัดซ้ายเพื่อเปิดแผงควบคุมการค้นหาอย่างด่วน"
+    },
+    {
+      "name": "guide_collections_title",
+      "value": "คอลเลคชั่น"
+    },
+    {
+      "name": "guide_collections_text",
+      "value": "ปัดซ้ายเพื่อเลือกคอลเลคชั่น"
+    },
+    {
+      "name": "guide_download_labels_title",
+      "value": "ป้ายชื่อดาวน์โหลด"
+    },
+    {
+      "name": "guide_download_labels_text",
+      "value": "ปัดซ้ายเพื่อเปิดแผงควบคุมป้ายชื่อดาวน์โหลด"
+    },
+    {
+      "name": "guide_download_thumb_title",
+      "value": "รายละเอียดแกลเลอรี่"
+    },
+    {
+      "name": "guide_download_thumb_text",
+      "value": "แตะที่ภาพตัวอย่างเพื่อดูรายละเอียดของแกลเลอรี่"
+    },
+    {
+      "name": "guide_gallery_left",
+      "value": "เปลี่ยนหน้า"
+    },
+    {
+      "name": "guide_gallery_right",
+      "value": "เปลี่ยนหน้า"
+    },
+    {
+      "name": "guide_gallery_menu",
+      "value": "เมนู"
+    },
+    {
+      "name": "guide_gallery_progress",
+      "value": "ความคืบหน้า"
+    },
+    {
+      "name": "guide_gallery_long_click",
+      "value": "แตะค้างไว้เพื่อเปิดหน้าเมนู"
+    },
+    {
+      "name": "from_the_future",
+      "value": "จากอนาคต"
+    },
+    {
+      "name": "just_now",
+      "value": "เดี๋ยวนี้"
+    },
+    {
+      "name": "yesterday",
+      "value": "เมื่อวาน"
+    },
+    {
+      "name": "some_days_ago",
+      "value": "%d วันที่ผ่านมา"
+    },
+    {
+      "name": "dialog_archive_title",
+      "value": "H@H Downloader"
+    },
+    {
+      "name": "no_archives",
+      "value": "ยังไม่มีไฟล์บีบอัด"
+    },
+    {
+      "name": "download_archive_started",
+      "value": "เริ่มการดาวน์โหลดบีบอัด"
+    },
+    {
+      "name": "download_archive_failure",
+      "value": "การดาวน์โหลดไฟล์บีบอัดล้มเหลว"
+    },
+    {
+      "name": "h_h",
+      "value": "H@H"
+    },
+    {
+      "name": "download_h_h_failure_no_hath",
+      "value": "ต้องการ H@H client เพื่อโหลดไฟล์บีบอัด"
+    },
+    {
+      "name": "settings_privacy",
+      "value": "ความเป็นส่วนตัว"
+    },
+    {
+      "name": "settings_privacy_secure",
+      "value": "ป้องกันการบันทึกภาพหน้าจอ"
+    },
+    {
+      "name": "settings_privacy_secure_summary",
+      "value": "ป้องกันเนื้อหาต่างๆของตัวแอปจากการถูกบันทึกหน้าจอ หรือถูกแสดงในหน้ารายการ \"แอพล่าสุด\" ตอนสลับหรือระหว่างสลับไปแอปอื่น."
+    },
+    {
+      "name": "download_service",
+      "value": "บริการดาวน์โหลด"
+    },
+    {
+      "name": "favorite_name",
+      "value": "รายการโปรด"
+    },
+    {
+      "name": "gallery_toplists",
+      "value": "แกลเลอรี อันดับ"
+    },
+    {
+      "name": "uploader_toplists",
+      "value": "ตัวโหลด อันดับ"
+    },
+    {
+      "name": "tagging_toplists",
+      "value": "แท็ก อันดับ"
+    },
+    {
+      "name": "hentai_home_toplists",
+      "value": "Hentai@Home อันดับ"
+    },
+    {
+      "name": "ehtracker_toplists",
+      "value": "EHแทร็กเกอร์ อันดับ"
+    },
+    {
+      "name": "cleanup_toplists",
+      "value": "ล้างข้อมูล อันดับ"
+    },
+    {
+      "name": "rating_reviewing_toplists",
+      "value": "การจัด อันดับ&กำลังตรวจสอบ อันดับ"
+    },
+    {
+      "name": "top_list",
+      "value": "อันดับ"
+    },
+    {
+      "name": "settings_eh_list_show_read_progress",
+      "value": "แสดงความคืบหน้าการอ่าน"
+    },
+    {
+      "name": "settings_eh_list_show_read_progress_summary",
+      "value": "แสดงความคืบหน้าการอ่านสำหรับแต่ละแกลเลอรี่ในโหมดรายการแบบละเอียด"
+    },
+    {
+      "name": "cookie_login_import_in_clipboard",
+      "value": "นำเข้าจากคลิปบอร์ด"
+    },
+    {
+      "name": "no_cookie_in_clipboard",
+      "value": "ไม่พบข้อมูลที่ถูกต้องจากคลิปบอร์ด"
+    },
+    {
+      "name": "gallery_update_dialog_title",
+      "value": "วิธีการอัพเดต"
+    },
+    {
+      "name": "gallery_update_dialog_message",
+      "value": "เขียนทับแกลเลอรี่เก่า: จะเก็บเฉพาะเวอร์ชั่นที่ดาวน์โหลดไว้ เวอร์ชั่นเก่าจะถูกลบ\nดาวน์โหลดเป็นแกลเลอรี่ใหม่: แกลเลอรี่ที่ดาวน์โหลดจะอยู่เป็นแกลเลอรี่ใหม่ และทั้งแกลเลอรี่ใหม่และเก่าจะถูกบันทึกไว้"
+    },
+    {
+      "name": "gallery_update_download_as_new",
+      "value": "ดาวน์โหลดเป็นใหม่"
+    },
+    {
+      "name": "gallery_update_override_old",
+      "value": "เขียนทับเก่า"
+    },
+    {
+      "name": "loading_db_file",
+      "value": "กำลังโหลดข้อมูล …"
+    },
+    {
+      "name": "settings_eh_history_size",
+      "value": "จำนวนบันทึกประวัติ"
+    },
+    {
+      "name": "history_info_unlimited",
+      "value": "ไม่จำกัด"
+    },
+    {
+      "name": "archiver",
+      "value": "Archiver"
+    },
+    {
+      "name": "archiver_dialog_current_funds",
+      "value": "เงินทุนปัจจุบัน:"
+    },
+    {
+      "name": "archiver_dialog_cost",
+      "value": "ค่าใช้จ่ายในการดาวน์โหลด:  %s"
+    },
+    {
+      "name": "archiver_dialog_download_original",
+      "value": "ดาวน์โหลดไฟล์บีบอัดต้นฉบับ"
+    },
+    {
+      "name": "archiver_dialog_download_resample",
+      "value": "ดาวน์โหลดไฟล์บีบอัดที่ปรับขนาดแล้ว"
+    },
+    {
+      "name": "archiver_dialog_size",
+      "value": "ขนาดโดยประมาณ:  %s"
+    },
+    {
+      "name": "dialog_archiver_title",
+      "value": "Archiver Downloader"
+    },
+    {
+      "name": "download_receiver_label",
+      "value": "EhViewer Download Receiver"
+    },
+    {
+      "name": "decompressed_successfully",
+      "value": "ขยายไฟล์สำเร็จแล้ว!"
+    },
+    {
+      "name": "decompression_failed",
+      "value": "การขยายไฟล์ล้มเหลว!"
+    },
+    {
+      "name": "download_label_archiver",
+      "value": "Archiver"
+    },
+    {
+      "name": "cookie_in_clipboard_incorrect",
+      "value": "รูปแบบ Cookie ไม่ถูกต้อง"
+    },
+    {
+      "name": "settings_download_timeout",
+      "value": "หมดเวลาการดาวน์โหลด"
+    },
+    {
+      "name": "download_timeout_unlimited",
+      "value": "ไม่จำกัด"
+    },
+    {
+      "name": "settings_download_timeout_summary",
+      "value": "%s(วินาที), เวลาสูงสุดที่อนุญาตให้ดาวน์โหลดรูปภาพหนึ่งรูป"
+    },
+    {
+      "name": "have_new_version",
+      "value": "คลิกเพื่อดูเวอร์ชั่นแกลเลอรี่ใหม่"
+    },
+    {
+      "name": "appwidget_text",
+      "value": "ตัวอย่าง"
+    },
+    {
+      "name": "add_widget",
+      "value": "เพิ่มวิดเจ็ต"
+    },
+    {
+      "name": "app_widget_description",
+      "value": "นี่คือคำอธิบายวิดเจ็ตแอป"
+    },
+    {
+      "name": "archiver_downloading",
+      "value": "กำลังดาวน์โหลด Arc %s"
+    },
+    {
+      "name": "order",
+      "value": "ลำดับ"
+    },
+    {
+      "name": "sort_by_pub_time",
+      "value": "เวลาที่เผยแพร่"
+    },
+    {
+      "name": "sort_by_fav_time",
+      "value": "เวลาที่เพิ่มในรายการโปรด"
+    },
+    {
+      "name": "subscription_watched",
+      "value": "ดูแล้ว"
+    },
+    {
+      "name": "subscription_hidden",
+      "value": "ซ่อน"
+    },
+    {
+      "name": "delete_subscription_title",
+      "value": "ลบแท็ก"
+    },
+    {
+      "name": "can_not_use_this_tag",
+      "value": "แท็กไม่สามารถใช้งานได้"
+    },
+    {
+      "name": "add_tag_dialog_title",
+      "value": "เพิ่มแท็ก"
+    },
+    {
+      "name": "tag_title",
+      "value": "แท็ก"
+    },
+    {
+      "name": "empty_subscription",
+      "value": "การสมัครสมาชิกว่างเปล่า"
+    },
+    {
+      "name": "subscription_success",
+      "value": "%s สำเร็จ"
+    },
+    {
+      "name": "settings_eh_show_gallery_rating",
+      "value": "แสดงคะแนนแกลเลอรี่"
+    },
+    {
+      "name": "import_local_archive",
+      "value": "นำเข้าไฟล์บีบอัดท้องถิ่น"
+    },
+    {
+      "name": "import_archive_title",
+      "value": "เลือกไฟล์บีบอัด"
+    },
+    {
+      "name": "import_archive_failed",
+      "value": "การนำเข้าไฟล์บีบอัดล้มเหลว"
+    },
+    {
+      "name": "archive_permission_lost",
+      "value": "สิทธิ์ในการเข้าถึงไฟล์บีบอัดสูญหายแล้ว กรุณานำเข้าไฟล์บีบอัดอีกครั้ง"
+    },
+    {
+      "name": "import_archive_processing",
+      "value": "กำลังประมวลผลไฟล์บีบอัด…"
+    },
+    {
+      "name": "import_archive_invalid_format",
+      "value": "รูปแบบไฟล์บีบอัดไม่รองรับ"
+    },
+    {
+      "name": "import_archive_already_imported",
+      "value": "ไฟล์บีบอัดถูกนำเข้าแล้ว"
+    },
+    {
+      "name": "import_archive_success",
+      "value": "นำเข้าไฟล์บีบอัดสำเร็จแล้ว"
+    },
+    {
+      "name": "archive_not_accessible",
+      "value": "ไม่สามารถเข้าถึงไฟล์บีบอัดได้"
+    },
+    {
+      "name": "imported_archive_info_title",
+      "value": "ข้อมูลการนำเข้าท้องถิ่น"
+    },
+    {
+      "name": "imported_archive_info_message",
+      "value": "นี่คือรายการที่นำเข้าจากที่เก็บข้อมูลท้องถิ่น"
+    },
+    {
+      "name": "imported_archive_category",
+      "value": "การนำเข้าท้องถิ่น"
+    },
+    {
+      "name": "import_local_album",
+      "value": "นำเข้าอัลบั้มท้องถิ่น"
+    },
+    {
+      "name": "import_album_title",
+      "value": "เลือกโฟลเดอร์รูปภาพ"
+    },
+    {
+      "name": "import_album_processing",
+      "value": "กำลังนำเข้าอัลบั้ม…"
+    },
+    {
+      "name": "import_album_failed",
+      "value": "การนำเข้าอัลบั้มล้มเหลว"
+    },
+    {
+      "name": "import_album_no_images",
+      "value": "โฟลเดอร์ที่เลือกไม่มีรูปภาพที่รองรับ"
+    },
+    {
+      "name": "import_album_already_imported",
+      "value": "อัลบั้มถูกนำเข้าแล้ว"
+    },
+    {
+      "name": "import_album_success",
+      "value": "นำเข้ารูปภาพ %d ภาพสำเร็จแล้ว"
+    },
+    {
+      "name": "all_time_top_list",
+      "value": "รายการอันดับตลอดกาล"
+    },
+    {
+      "name": "past_year_top_list",
+      "value": "รายการอันดับปีที่แล้ว"
+    },
+    {
+      "name": "past_month_top_list",
+      "value": "รายการอันดับเดือนที่แล้ว"
+    },
+    {
+      "name": "yesterday_top_list",
+      "value": "รายการอันดับเมื่อวาน"
+    },
+    {
+      "name": "change_background_title",
+      "value": "คุณแน่ใจหรือไม่ว่าต้องการเปลี่ยนพื้นหลัง?"
+    },
+    {
+      "name": "change_background_message",
+      "value": "การแก้ไขพื้นหลังจำกัดเฉพาะซอฟต์แวร์นี้เท่านั้น และไม่สามารถซิงค์ไปยัง E-hentai หรือซอฟต์แวร์ที่คล้ายกันได้"
+    },
+    {
+      "name": "change_avatar_title",
+      "value": "คุณแน่ใจหรือไม่ว่าต้องการเปลี่ยนอวตาร?"
+    },
+    {
+      "name": "change_avatar_message",
+      "value": "การแก้ไขอวตารจำกัดเฉพาะซอฟต์แวร์นี้เท่านั้น และไม่สามารถซิงค์ไปยัง E-hentai หรือซอฟต์แวร์ที่คล้ายกันได้"
+    },
+    {
+      "name": "take_a_photograph",
+      "value": "ถ่ายภาพ"
+    },
+    {
+      "name": "choose_from_the_album",
+      "value": "เลือกจากอัลบั้ม"
+    },
+    {
+      "name": "request_camera_permission",
+      "value": "EhViewer จะขอสิทธิ์เข้าถึงกล้องของอุปกรณ์เพื่อถ่ายภาพ คุณต้องการอนุญาตหรือไม่?"
+    },
+    {
+      "name": "request_storage_permission",
+      "value": "EhViewer จะขอสิทธิ์เข้าถึงอัลบั้มภาพของอุปกรณ์เพื่อรับภาพ คุณต้องการอนุญาตหรือไม่?"
+    },
+    {
+      "name": "download_torrent_name",
+      "value": "torrent: %s"
+    },
+    {
+      "name": "download_torrent_state",
+      "value": "สถานะ:"
+    },
+    {
+      "name": "download_torrent_path",
+      "value": "เส้นทาง: %s"
+    },
+    {
+      "name": "download_search",
+      "value": "ค้นหาในรายการดาวน์โหลด"
+    },
+    {
+      "name": "sure",
+      "value": "ตกลง"
+    },
+    {
+      "name": "try_again",
+      "value": "ลองอีกครั้ง"
+    },
+    {
+      "name": "open_directory",
+      "value": "เปิดโฟลเดอร์"
+    },
+    {
+      "name": "downloading",
+      "value": "กำลังดาวน์โหลด…… กรุณาลองอีกครั้งภายหลัง"
+    },
+    {
+      "name": "torrent_exist",
+      "value": "ไฟล์มีอยู่แล้ว: %s"
+    },
+    {
+      "name": "wifi_server_name",
+      "value": "WiFiServer"
+    },
+    {
+      "name": "wifi_server",
+      "value": "WiFiServer"
+    },
+    {
+      "name": "wifi_client",
+      "value": "WiFiClient"
+    },
+    {
+      "name": "wifi_send_bookmark",
+      "value": "ย้ายบุคมาร์ก"
+    },
+    {
+      "name": "wifi_send_favorite",
+      "value": "ย้ายรายการโปรด"
+    },
+    {
+      "name": "wifi_send_download",
+      "value": "ย้ายข้อมูลดาวน์โหลด"
+    },
+    {
+      "name": "wifi_send_download_location",
+      "value": "ย้ายโฟลเดอร์ดาวน์โหลด"
+    },
+    {
+      "name": "wifi_download_dir_empty",
+      "value": "ไม่พบโฟลเดอร์แกลเลอรีที่ย้ายได้"
+    },
+    {
+      "name": "wifi_download_dir_no_location",
+      "value": "ยังไม่ได้ตั้งค่าโฟลเดอร์ดาวน์โหลดบนอุปกรณ์นี้"
+    },
+    {
+      "name": "wifi_download_dir_migrating",
+      "value": "กำลังย้าย %1$s (%2$d/%3$d ไฟล์)"
+    },
+    {
+      "name": "wifi_download_dir_manifest_received",
+      "value": "%1$s (%2$d/%3$d): ข้าม %4$d, รอส่ง %5$d"
+    },
+    {
+      "name": "wifi_download_dir_file_done",
+      "value": "รับไฟล์แล้ว: %s"
+    },
+    {
+      "name": "wifi_download_dir_files_progress",
+      "value": "รับไฟล์แล้ว %d ไฟล์"
+    },
+    {
+      "name": "wifi_download_dir_file_failed",
+      "value": "ตรวจสอบ checksum ไฟล์ล้มเหลว จึงถูกทิ้ง"
+    },
+    {
+      "name": "wifi_send_done",
+      "value": "ย้ายข้อมูลเสร็จแล้ว"
+    },
+    {
+      "name": "wifi_send_start",
+      "value": "เริ่มย้าย%s"
+    },
+    {
+      "name": "wifi_send_stop",
+      "value": "หยุดย้าย%s"
+    },
+    {
+      "name": "wifi_sending",
+      "value": "กำลังย้ายข้อมูล กรุณารอสักครู่หรือออกแล้วลองอีกครั้ง"
+    },
+    {
+      "name": "wifi_send_text",
+      "value": "ส่งข้อมูล"
+    },
+    {
+      "name": "wifi_server_illustrate",
+      "value": "โปรดตรวจสอบให้แน่ใจว่าโทรศัพท์มือถือที่จะรับข้อมูลเชื่อมต่อกับฮอตสปอตท้องถิ่นแล้ว และอย่าตัดการเชื่อมต่อหรือกลับไปหน้าหลักก่อนการย้ายจะเสร็จสมบูรณ์!"
+    },
+    {
+      "name": "wifi_server_connect",
+      "value": "เชื่อมต่อ"
+    },
+    {
+      "name": "wifi_server_connect_unable",
+      "value": "การเชื่อมต่อไม่มีอยู่"
+    },
+    {
+      "name": "wifi_server_connection_succeeded",
+      "value": "อุปกรณ์เชื่อมต่อสำเร็จแล้ว หลังจากรับข้อมูลแล้ว กรุณารีสตาร์ทแอปเพื่อให้ข้อมูลมีผล"
+    },
+    {
+      "name": "wifi_server_disconnect",
+      "value": "อุปกรณ์ตัดการเชื่อมต่อ"
+    },
+    {
+      "name": "wifi_server_connection_fail",
+      "value": "สร้างการสื่อสารล้มเหลว"
+    },
+    {
+      "name": "wifi_server_send_success",
+      "value": "ส่งข้อความสำเร็จ: %s"
+    },
+    {
+      "name": "wifi_server_send_fail",
+      "value": "ส่งข้อความล้มเหลว: %s"
+    },
+    {
+      "name": "wifi_server_receive_message",
+      "value": "ได้รับข้อความ: %s"
+    },
+    {
+      "name": "wifi_server_receive_message_unknown",
+      "value": "ประเภทข้อมูลไม่ทราบ"
+    },
+    {
+      "name": "wifi_server_opened",
+      "value": "ฮอตสปอตเปิดแล้ว SSID: %1$s \n%2$s"
+    },
+    {
+      "name": "wifi_server_closed",
+      "value": "ฮอตสปอตปิดแล้ว"
+    },
+    {
+      "name": "wifi_server_password",
+      "value": "รหัสผ่าน: %s"
+    },
+    {
+      "name": "wifi_server_no_permission",
+      "value": "สิทธิ์ไม่เพียงพอ กรุณาอนุญาตสิทธิ์"
+    },
+    {
+      "name": "refresh_limits",
+      "value": "รีเฟรชการใช้งานขีดจำกัด"
+    },
+    {
+      "name": "from_gallery_visits",
+      "value": "%s จากการเข้าชมแกลเลอรี่"
+    },
+    {
+      "name": "from_torrent_completions",
+      "value": "%s จากการเสร็จสิ้น torrent"
+    },
+    {
+      "name": "from_archive_download",
+      "value": "%s จากการดาวน์โหลดไฟล์บีบอัด"
+    },
+    {
+      "name": "from_hentai_home",
+      "value": "%s จาก Hentai@Home"
+    },
+    {
+      "name": "current_moderation_power",
+      "value": "พลังการดูแลปัจจุบัน %s"
+    },
+    {
+      "name": "reset_cost",
+      "value": "ค่าใช้จ่าย %s เพื่อรีเซ็ต"
+    },
+    {
+      "name": "ip_base_limits",
+      "value": "ขีดจำกัดตาม IP"
+    },
+    {
+      "name": "limit_unneed_reset",
+      "value": "ปัจจุบันไม่จำเป็นต้องรีเซ็ตโควต้า กรุณาลองอีกครั้งหลังจากรีเฟรช~"
+    },
+    {
+      "name": "pagination_count",
+      "value": "จำนวน"
+    },
+    {
+      "name": "pagination_page_and_item",
+      "value": "r/p"
+    },
+    {
+      "name": "spen_previous_page",
+      "value": "หน้าก่อนหน้า"
+    },
+    {
+      "name": "spen_next_page",
+      "value": "หน้าถัดไป"
+    },
+    {
+      "name": "category_all",
+      "value": "ทั้งหมด"
+    },
+    {
+      "name": "tag_selector_more",
+      "value": "▼ เพิ่มเติม"
+    },
+    {
+      "name": "tag_selector_collapse",
+      "value": "▲ ยุบ"
+    },
+    {
+      "name": "tag_selector_end",
+      "value": "--- สิ้นสุด ---"
+    },
+    {
+      "name": "error_rar_unsupported",
+      "value": "ไม่รองรับไฟล์บีบอัดรูปแบบ RAR (โปรดใช้ ZIP หรือ 7z)"
+    },
+    {
+      "name": "shortcut_start_all_triggered",
+      "value": "สั่งเริ่มดาวน์โหลดทั้งหมดแล้ว"
+    },
+    {
+      "name": "shortcut_stop_all_triggered",
+      "value": "สั่งหยุดดาวน์โหลดทั้งหมดแล้ว"
+    },
+    {
+      "name": "disable_pattern_protection",
+      "value": "Disable pattern protection"
+    },
+    {
+      "name": "pattern_protection_disabled",
+      "value": "Pattern protection disabled"
+    },
+    {
+      "name": "archiver_download_cancel",
+      "value": "Cancel archive download"
+    },
+    {
+      "name": "archiver_download_cancel_confirm",
+      "value": "Cancel this archive download and delete partial files?"
+    },
+    {
+      "name": "archiver_download_canceled",
+      "value": "Archive download canceled"
+    },
+    {
+      "name": "reset_limit_confirm_title",
+      "value": "Reset image limits"
+    },
+    {
+      "name": "reset_limit_confirm_message",
+      "value": "Spend %s to reset your image limits?"
+    },
+    {
+      "name": "reset_limit_success",
+      "value": "Image limits reset"
+    },
+    {
+      "name": "reset_limit_failed",
+      "value": "Failed to reset image limits"
+    }
+  ]
+}

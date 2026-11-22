@@ -1,0 +1,15 @@
+{
+  "strarray": [
+    {
+      "name": "ThemeOverlay_Ehviewer_FullscreenContainer",
+      "value": [
+        {
+          "value": "fullscreenBackgroundColor|#FF01579B"
+        },
+        {
+          "value": "fullscreenTextColor|#FF00B0FF"
+        }
+      ]
+    }
+  ]
+}

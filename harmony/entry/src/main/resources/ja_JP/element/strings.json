@@ -1,0 +1,3460 @@
+{
+  "string": [
+    {
+      "name": "blacklist_id",
+      "value": "ユーザー ID"
+    },
+    {
+      "name": "blacklist",
+      "value": "ブラックリスト"
+    },
+    {
+      "name": "join_in_blacklist",
+      "value": "ブラックリストに参加する"
+    },
+    {
+      "name": "add_blacklist",
+      "value": "ブロックされたユーザーを追加する"
+    },
+    {
+      "name": "blacklist_tip",
+      "value": "このブロックシステムは、E-Hentai ウェブサイトのコメントシステムに基づいてコメントをブロックし続けます。\n\nレビューアーのブロック項目: このレビューアーによってアップロードされたコメントを除外します。これにより、ギャラリーリストの読み込みに時間がかかる場合があります。"
+    },
+    {
+      "name": "blacklist_text",
+      "value": "ユーザーをブロックする"
+    },
+    {
+      "name": "delete_blacklist",
+      "value": "ユーザー「%s」のブロックを解除しますか？"
+    },
+    {
+      "name": "blacklist_reason_text",
+      "value": "ブロックの理由"
+    },
+    {
+      "name": "settings_eh_blacklist",
+      "value": "コメントブラックリスト"
+    },
+    {
+      "name": "settings_eh_blacklist_summary",
+      "value": "アカウント名に従って他の人のコメントをブロックする"
+    },
+    {
+      "name": "settings_advanced_dns_over_http_title",
+      "value": "セキュア DNS (DoH)"
+    },
+    {
+      "name": "settings_advanced_dns_over_http_summary",
+      "value": "一部の地域での DNS 汚染を修正します"
+    },
+    {
+      "name": "settings_advanced_domain_fronting_title",
+      "value": "ドメインフロンティング"
+    },
+    {
+      "name": "settings_advanced_domain_fronting_summary",
+      "value": "SNI ブロックをバイパスします"
+    },
+    {
+      "name": "settings_advanced_url_replace_title",
+      "value": "URL マスカレード、SNI を OFF にする必要があります"
+    },
+    {
+      "name": "settings_advanced_url_replace_summary",
+      "value": "URL の偽装 (再起動が必要です。開くとアカウント機能が無効になります)"
+    },
+    {
+      "name": "settings_about_donate_guide",
+      "value": "サポートガイド"
+    },
+    {
+      "name": "share_favorites_dialog_title",
+      "value": "お気に入りを共有"
+    },
+    {
+      "name": "share_favorites_dialog_message",
+      "value": "お気に入り「%s」を共有しますか？"
+    },
+    {
+      "name": "add_favorites_dialog_message",
+      "value": "お気に入り「%s」を追加しますか？"
+    },
+    {
+      "name": "settings_advanced_built_ex_hosts_title",
+      "value": "組み込みの例外の hosts.txt"
+    },
+    {
+      "name": "settings_advanced_built_ex_hosts_summary",
+      "value": "アプリによって提供されるホストから、IP へのマッピングは\nカスタムの hosts.txt によって上書きできます"
+    },
+    {
+      "name": "network_remind",
+      "value": "VPN が有効になっていることが検出されました。ネットワークセキュリティに注意してください"
+    },
+    {
+      "name": "no_blicklist",
+      "value": "これはブラックリストです"
+    },
+    {
+      "name": "app_name",
+      "value": "EhViewer"
+    },
+    {
+      "name": "theme_light",
+      "value": "ライトテーマ"
+    },
+    {
+      "name": "theme_dark",
+      "value": "ダークテーマ"
+    },
+    {
+      "name": "theme_black",
+      "value": "ブラックテーマ"
+    },
+    {
+      "name": "homepage",
+      "value": "ホームページ"
+    },
+    {
+      "name": "subscription",
+      "value": "タグの購読"
+    },
+    {
+      "name": "whats_hot",
+      "value": "人気"
+    },
+    {
+      "name": "top_lists",
+      "value": "トップリスト"
+    },
+    {
+      "name": "favourite",
+      "value": "お気に入り"
+    },
+    {
+      "name": "history",
+      "value": "閲覧履歴"
+    },
+    {
+      "name": "downloads",
+      "value": "ダウンロード"
+    },
+    {
+      "name": "news",
+      "value": "ニュース"
+    },
+    {
+      "name": "settings",
+      "value": "設定"
+    },
+    {
+      "name": "username",
+      "value": "ユーザー名"
+    },
+    {
+      "name": "password",
+      "value": "パスワード"
+    },
+    {
+      "name": "recaptcha",
+      "value": "認証コード (任意)"
+    },
+    {
+      "name": "recaptcha_none",
+      "value": "ここをタップ"
+    },
+    {
+      "name": "recaptcha_loading",
+      "value": "読み込み中…"
+    },
+    {
+      "name": "recaptcha_failure",
+      "value": "失敗"
+    },
+    {
+      "name": "sign_in",
+      "value": "ログイン"
+    },
+    {
+      "name": "register",
+      "value": "登録"
+    },
+    {
+      "name": "sign_in_via_webview",
+      "value": "ウェブでログイン"
+    },
+    {
+      "name": "sign_in_via_cookies",
+      "value": "Cookie でログイン"
+    },
+    {
+      "name": "display_name_dialog_title",
+      "value": "ニックネームを入力"
+    },
+    {
+      "name": "display_name",
+      "value": "ニックネーム"
+    },
+    {
+      "name": "display_name_is_empty",
+      "value": "ニックネームを入力してください"
+    },
+    {
+      "name": "sign_in_first",
+      "value": "ログインしてください"
+    },
+    {
+      "name": "default_display_name",
+      "value": "Little Hippo"
+    },
+    {
+      "name": "cookie_explain",
+      "value": "Cookie はブラウザに保存した特殊なデータです。よくわからない場合は Google で検索してください。\n\nCookie を入力してログインしてください。"
+    },
+    {
+      "name": "text_is_empty",
+      "value": "テキストを入力してください"
+    },
+    {
+      "name": "waring",
+      "value": "警告"
+    },
+    {
+      "name": "wrong_cookie_warning",
+      "value": "入力した Cookie は正しくないようです。確認してください。"
+    },
+    {
+      "name": "i_will_check_it",
+      "value": "はい"
+    },
+    {
+      "name": "i_dont_think_so",
+      "value": "再試行"
+    },
+    {
+      "name": "found_cookies",
+      "value": "Cookie が見つかりました"
+    },
+    {
+      "name": "invalid_download_location",
+      "value": "ダウンロードパスは現在利用できません。ダウンロードパスを設定してください。"
+    },
+    {
+      "name": "cellular_network_warning",
+      "value": "モバイルネットワークに接続中です"
+    },
+    {
+      "name": "clipboard_gallery_url_snack_message",
+      "value": "クリップボードからギャラリーURLが検出されました。"
+    },
+    {
+      "name": "clipboard_gallery_url_snack_action",
+      "value": "移動"
+    },
+    {
+      "name": "image_save_success",
+      "value": "画像の保存が成功しました"
+    },
+    {
+      "name": "error_bad_status_code",
+      "value": "無効なステータスコード: %d"
+    },
+    {
+      "name": "error_timeout",
+      "value": "タイムアウト"
+    },
+    {
+      "name": "error_unknown_host",
+      "value": "不明なホスト"
+    },
+    {
+      "name": "error_redirection",
+      "value": "リダイレクトが多すぎます"
+    },
+    {
+      "name": "error_socket",
+      "value": "ネットワークエラー"
+    },
+    {
+      "name": "error_unknown",
+      "value": "不明なエラー"
+    },
+    {
+      "name": "error_cant_find_activity",
+      "value": "アクティビティが見つかりません"
+    },
+    {
+      "name": "error_cannot_parse_the_url",
+      "value": "リンクを解析できません"
+    },
+    {
+      "name": "error_not_folder_path",
+      "value": "フォルダが見つかりません"
+    },
+    {
+      "name": "error_no_provider",
+      "value": "プロバイダーが見つかりません"
+    },
+    {
+      "name": "error_decoding_failed",
+      "value": "デコードに失敗しました"
+    },
+    {
+      "name": "error_not_found",
+      "value": "見つかりませんでした"
+    },
+    {
+      "name": "error_empty",
+      "value": "空"
+    },
+    {
+      "name": "error_invalid_archive",
+      "value": "無効なアーカイブファイルです"
+    },
+    {
+      "name": "error_reading_failed",
+      "value": "読み込めませんでした"
+    },
+    {
+      "name": "error_out_of_range",
+      "value": "範囲外です"
+    },
+    {
+      "name": "error_write_failed",
+      "value": "書き込めませんでした。"
+    },
+    {
+      "name": "error_parse_error",
+      "value": "ファイル解析に失敗しました。"
+    },
+    {
+      "name": "error_509",
+      "value": "509 エラー"
+    },
+    {
+      "name": "error_invalid_url",
+      "value": "無効なリンクです。"
+    },
+    {
+      "name": "error_get_ptoken_error",
+      "value": "pToken の取得に失敗しました"
+    },
+    {
+      "name": "error_cant_create_temp_file",
+      "value": "一時ファイルを作成できませんでした"
+    },
+    {
+      "name": "error_cant_save_image",
+      "value": "画像を保存できませんでした"
+    },
+    {
+      "name": "error_save_image_existed",
+      "value": "画像は既に存在しています"
+    },
+    {
+      "name": "error_invalid_number",
+      "value": "無効な数字です"
+    },
+    {
+      "name": "error_please_login_first",
+      "value": "ログインをしてください"
+    },
+    {
+      "name": "error_empty_html",
+      "value": "空のページ"
+    },
+    {
+      "name": "error_cant_get_image",
+      "value": "画像を取得できませんでした"
+    },
+    {
+      "name": "error_igneous_wrong",
+      "value": "igneousが間違っています\n権限を確認して再ログインしてください"
+    },
+    {
+      "name": "gallery_gl_fallback_title",
+      "value": "OpenGLレンダラーを利用できません"
+    },
+    {
+      "name": "gallery_gl_fallback_message",
+      "value": "このデバイスでは現在EGLを初期化できません。戻ってしばらくしてから再試行してください。"
+    },
+    {
+      "name": "gallery_gl_fallback_action_close",
+      "value": "戻る"
+    },
+    {
+      "name": "gallery_gl_fallback_toast",
+      "value": "GLレンダリングに失敗したため、安全な代替ページに切り替えました"
+    },
+    {
+      "name": "kokomade_tip",
+      "value": "設定 -> Eh -> ギャラリーサイト -> E-Hentai"
+    },
+    {
+      "name": "app_waring",
+      "value": "このアプリの内容はインターネットから取得したものです。その内容の一部は使用者のお体や心理に傷つける恐れがあります。それでも続行しますか？"
+    },
+    {
+      "name": "error_username_cannot_empty",
+      "value": "ユーザー名を入力してください。"
+    },
+    {
+      "name": "error_password_cannot_empty",
+      "value": "パスワードを入力してください。"
+    },
+    {
+      "name": "guest_mode",
+      "value": "ゲストモード"
+    },
+    {
+      "name": "sign_in_failed",
+      "value": "ログインに失敗しました。"
+    },
+    {
+      "name": "sign_in_failed_tip",
+      "value": "この問題が解決しない場合は「WebView でログイン」か「Cookie でログイン」をお試しください"
+    },
+    {
+      "name": "sign_in_failed_plain",
+      "value": "このエラーの原因は、ウェブサイトがメンテンス中か、または不明なエラーが発生したことである可能性があります。ログインボタンの下でウェブでログインするか、 Cookie を入力してログインするか、またはログインをスキップしてみてください。ログインをスキップすると「Sad Panda」エラーが発生することがあります。0.6.x バージョンでログインした場合、Cookie でログインすることをおすすめします。"
+    },
+    {
+      "name": "press_twice_exit",
+      "value": "もう一度押して終了します。"
+    },
+    {
+      "name": "content_layout_restore_tip",
+      "value": "タップをしてもう一度試す"
+    },
+    {
+      "name": "write_rationale",
+      "value": "EhViewer はギャラリーをダウンロードするために WRITE_EXTERNAL_STORAGE のアクセス権限の許可が必要です。"
+    },
+    {
+      "name": "you_rejected_me",
+      "value": "痛い"
+    },
+    {
+      "name": "analytics_explain",
+      "value": "ご使用のデバイスの情報やこのアプリの利用情報を収集するように同意しますか？収集情報はアプリ向上のために使用されます。<br><br>データ分析サービスは Google Analytics for Firebase によって提供されます。 <a href=\"https://www.google.com/policies/privacy/\">https://www.google.com/policies/privacy/</a>にプライバシーポリシーをご覧ください。<br><br>アプリ利用情報収集に参加すると、Android API バージョン、デバイスモデル、言語、地域、アプリバージョンや、セッション時間などの情報は収集されます。開発者は、電話番号、電子メールアドレス、IMEI 情報などを記録しないことを保証します。<br><br>同意しない限り、データは収集されません。<br><br>送信されたデータは Google Analytics for Firebase で分析され、分析レポートにはこのアプリ開発者しかアクセスできません。"
+    },
+    {
+      "name": "get_it",
+      "value": "了解"
+    },
+    {
+      "name": "accept",
+      "value": "同意"
+    },
+    {
+      "name": "reject",
+      "value": "拒否"
+    },
+    {
+      "name": "help_route",
+      "value": "設定->このアプリについて->ヘルプ"
+    },
+    {
+      "name": "select_scene",
+      "value": "ギャラリーサイトを選択してください"
+    },
+    {
+      "name": "select_scene_explain",
+      "value": "E-Hentai: 誰でも閲覧可能です\nExHentai: ログインしないとアクセスできません"
+    },
+    {
+      "name": "no_select",
+      "value": "サイトを選択してください"
+    },
+    {
+      "name": "new_version",
+      "value": "新しいバージョン"
+    },
+    {
+      "name": "update",
+      "value": "更新"
+    },
+    {
+      "name": "update_fail",
+      "value": "更新の確認に失敗しました"
+    },
+    {
+      "name": "update_to",
+      "value": "更新日時"
+    },
+    {
+      "name": "no_updates_available",
+      "value": "最新のバージョンです"
+    },
+    {
+      "name": "update_plain",
+      "value": "バージョン: %1$s\nサイズ: %2$s\n\n%3$s"
+    },
+    {
+      "name": "update_fail_info",
+      "value": "「はい」をタップで GitHub のページに移動します"
+    },
+    {
+      "name": "update_to_date",
+      "value": "EhViewer は既に最新のバージョンです。"
+    },
+    {
+      "name": "update_ignore",
+      "value": "無視"
+    },
+    {
+      "name": "gallery_list_search_bar_hint_exhentai",
+      "value": "ExHentai を検索"
+    },
+    {
+      "name": "gallery_list_search_bar_hint_e_hentai",
+      "value": "E-Hentai を検索"
+    },
+    {
+      "name": "gallery_list_search_bar_open_gallery",
+      "value": "ギャラリーを開く"
+    },
+    {
+      "name": "gallery_list_empty_hit",
+      "value": "何も見つかりませんでした。"
+    },
+    {
+      "name": "gallery_list_empty_hit_subscription",
+      "value": "リストは空です。設定->EH->マイタグにてタグを購読することができます。"
+    },
+    {
+      "name": "gallery_list_no_preview_tag",
+      "value": "プレビュータグなし"
+    },
+    {
+      "name": "gallery_list_action_url_missed",
+      "value": "次のページが見つかりません"
+    },
+    {
+      "name": "gallery_list_no_more_data",
+      "value": "現在のリストにはこれ以上のデータはありません"
+    },
+    {
+      "name": "gallery_list_date_jump_1d",
+      "value": "昨日"
+    },
+    {
+      "name": "gallery_list_date_jump_3d",
+      "value": "3 日前"
+    },
+    {
+      "name": "gallery_list_date_jump_1w",
+      "value": "1 週間前"
+    },
+    {
+      "name": "gallery_list_date_jump_2w",
+      "value": "2 週間前"
+    },
+    {
+      "name": "gallery_list_date_jump_1m",
+      "value": "1 ヶ月前"
+    },
+    {
+      "name": "gallery_list_date_jump_6m",
+      "value": "6 ヶ月前"
+    },
+    {
+      "name": "gallery_list_date_jump_1y",
+      "value": "1 年前"
+    },
+    {
+      "name": "gallery_list_date_jump_2y",
+      "value": "2 年前"
+    },
+    {
+      "name": "gallery_list_select_jump_date",
+      "value": "日付セレクターを使用する"
+    },
+    {
+      "name": "gallery_list_select_jump_node",
+      "value": "ノードセレクターを使用する"
+    },
+    {
+      "name": "gallery_list_jump_now",
+      "value": "今すぐ移動"
+    },
+    {
+      "name": "gallery_list_time_jump_dialog_title",
+      "value": "移動の選択"
+    },
+    {
+      "name": "gallery_list_time_jump_dialog_found_message",
+      "value": "%s 件の結果が見つかりました"
+    },
+    {
+      "name": "gallery_tag_copy",
+      "value": "タグをコピーしました"
+    },
+    {
+      "name": "search",
+      "value": "検索"
+    },
+    {
+      "name": "keyword_search",
+      "value": "キーワードで検索"
+    },
+    {
+      "name": "image_search",
+      "value": "画像で検索"
+    },
+    {
+      "name": "search_normal",
+      "value": "検索"
+    },
+    {
+      "name": "search_advance",
+      "value": "その他のオプション"
+    },
+    {
+      "name": "search_image",
+      "value": "画像検索"
+    },
+    {
+      "name": "search_normal_search",
+      "value": "一般検索"
+    },
+    {
+      "name": "search_subscription_search",
+      "value": "購読検索"
+    },
+    {
+      "name": "search_specify_uploader",
+      "value": "アップローダーを検索"
+    },
+    {
+      "name": "search_specify_tag",
+      "value": "タグを検索"
+    },
+    {
+      "name": "search_enable_advance",
+      "value": "その他のオプションを有効化する"
+    },
+    {
+      "name": "search_tip",
+      "value": "通常の検索: 通常通りに検索します。\n\n購読を検索: 購読しているタグで検索します。\n\nアップローダを検索: このアップローダーがアップロードしたギャラリーをリストします。他のオプションは無視されます。\n\nタグを検索: 指定したタグを含むギャラリーをリストします。他のオプションは無視されます。"
+    },
+    {
+      "name": "search_sname",
+      "value": "ギャラリーを検索"
+    },
+    {
+      "name": "search_stags",
+      "value": "ギャラリータグを検索"
+    },
+    {
+      "name": "search_sdesc",
+      "value": "ギャラリー説明を検索"
+    },
+    {
+      "name": "search_storr",
+      "value": "Torrent ファイル名を検索"
+    },
+    {
+      "name": "search_sto",
+      "value": "Torrent のあるギャラリーのみを表示"
+    },
+    {
+      "name": "search_sdt1",
+      "value": "低希望のタグを検索"
+    },
+    {
+      "name": "search_sdt2",
+      "value": "低評価のタグを検索"
+    },
+    {
+      "name": "search_sh",
+      "value": "削除済みのギャラリーを表示"
+    },
+    {
+      "name": "search_sr",
+      "value": "評価の下限:"
+    },
+    {
+      "name": "search_sp",
+      "value": "ページ:"
+    },
+    {
+      "name": "search_sp_to",
+      "value": "から"
+    },
+    {
+      "name": "search_sp_suffix",
+      "value": ""
+    },
+    {
+      "name": "search_sf",
+      "value": "デフォルトのフィルターから下記のものを例外とする:"
+    },
+    {
+      "name": "search_sfl",
+      "value": "言語"
+    },
+    {
+      "name": "search_sfu",
+      "value": "アップローダー"
+    },
+    {
+      "name": "search_sft",
+      "value": "タグ"
+    },
+    {
+      "name": "select_image",
+      "value": "画像を選択"
+    },
+    {
+      "name": "search_uss",
+      "value": "類似検索を有効化する"
+    },
+    {
+      "name": "search_osc",
+      "value": "カバーのみを検索する"
+    },
+    {
+      "name": "search_se",
+      "value": "削除済みのギャラリーを表示する"
+    },
+    {
+      "name": "select_image_first",
+      "value": "画像を選択してください"
+    },
+    {
+      "name": "add_to_favourites",
+      "value": "お気に入りに追加"
+    },
+    {
+      "name": "remove_from_favourites",
+      "value": "お気に入りから削除"
+    },
+    {
+      "name": "stop_downloading",
+      "value": "ダウンロードを停止"
+    },
+    {
+      "name": "delete_downloads",
+      "value": "ダウンロードを削除"
+    },
+    {
+      "name": "quick_search",
+      "value": "クイック検索"
+    },
+    {
+      "name": "quick_search_tip",
+      "value": "「+」をタップしてクイック検索を追加します"
+    },
+    {
+      "name": "add_quick_search_dialog_title",
+      "value": "クイック検索を追加"
+    },
+    {
+      "name": "name_is_empty",
+      "value": "タイトルが空です"
+    },
+    {
+      "name": "delete",
+      "value": "削除"
+    },
+    {
+      "name": "delete_quick_search_title",
+      "value": "クイック検索を削除する"
+    },
+    {
+      "name": "delete_quick_search_message",
+      "value": "「%s」を削除しますか？"
+    },
+    {
+      "name": "no_quick_search",
+      "value": "クイック検索はここに表示されます"
+    },
+    {
+      "name": "add_quick_search_tip",
+      "value": "ギャラリー検索結果の設定などはクイック検索として保存されます。検索の設定などを保存するには、まず検索を実行してください。"
+    },
+    {
+      "name": "readme",
+      "value": "説明"
+    },
+    {
+      "name": "image_search_not_quick_search",
+      "value": "画像検索をクイック検索として追加できませんでした。"
+    },
+    {
+      "name": "duplicate_quick_search",
+      "value": "「%s」というクイック検索は既に存在しています。"
+    },
+    {
+      "name": "duplicate_name",
+      "value": "この名前は既に使用されています。"
+    },
+    {
+      "name": "subscription_tip",
+      "value": "「+」をタップで購読を追加します"
+    },
+    {
+      "name": "go_to_hint",
+      "value": "ページ %1$d、合計 %2$d ページ"
+    },
+    {
+      "name": "star_2",
+      "value": "2 つ星"
+    },
+    {
+      "name": "star_3",
+      "value": "3 つ星"
+    },
+    {
+      "name": "star_4",
+      "value": "4 つ星"
+    },
+    {
+      "name": "star_5",
+      "value": "5 つ星"
+    },
+    {
+      "name": "error_cannot_find_gallery",
+      "value": "ギャラリーが見つかりませんでした"
+    },
+    {
+      "name": "download",
+      "value": "ダウンロード"
+    },
+    {
+      "name": "read",
+      "value": "閲覧"
+    },
+    {
+      "name": "more_information",
+      "value": "詳細情報を見る"
+    },
+    {
+      "name": "favored_times",
+      "value": "♥ %d"
+    },
+    {
+      "name": "rating_text",
+      "value": "%1$s (%2$.2f - %3$d)"
+    },
+    {
+      "name": "favorites",
+      "value": "お気に入り"
+    },
+    {
+      "name": "torrent_count",
+      "value": "Torrent (%d)"
+    },
+    {
+      "name": "share",
+      "value": "共有"
+    },
+    {
+      "name": "rate",
+      "value": "評価"
+    },
+    {
+      "name": "similar_gallery",
+      "value": "類似のギャラリー"
+    },
+    {
+      "name": "search_cover",
+      "value": "カバーを検索"
+    },
+    {
+      "name": "no_tags",
+      "value": "タグなし"
+    },
+    {
+      "name": "no_comments",
+      "value": "コメントなし"
+    },
+    {
+      "name": "no_more_comments",
+      "value": "コメントはこれ以上ありません"
+    },
+    {
+      "name": "more_comment",
+      "value": "他のコメントを見る"
+    },
+    {
+      "name": "no_previews",
+      "value": "プレビューなし"
+    },
+    {
+      "name": "no_more_previews",
+      "value": "プレビューはこれ以上ありません"
+    },
+    {
+      "name": "more_previews",
+      "value": "他のプレビューを見る"
+    },
+    {
+      "name": "refresh",
+      "value": "更新"
+    },
+    {
+      "name": "open_in_other_app",
+      "value": "他のアプリで開く"
+    },
+    {
+      "name": "rate_successfully",
+      "value": "評価しました"
+    },
+    {
+      "name": "rate_failed",
+      "value": "評価できませんでした"
+    },
+    {
+      "name": "no_torrents",
+      "value": "Torrent なし"
+    },
+    {
+      "name": "torrents",
+      "value": "Torrent"
+    },
+    {
+      "name": "favorited",
+      "value": "追加済み"
+    },
+    {
+      "name": "not_favorited",
+      "value": "未追加"
+    },
+    {
+      "name": "add_favorites_dialog_title",
+      "value": "お気に入りに追加"
+    },
+    {
+      "name": "remember_favorite_collection",
+      "value": "お気に入りを記憶"
+    },
+    {
+      "name": "add_to_favorite_success",
+      "value": "お気に入りに追加しました。"
+    },
+    {
+      "name": "remove_from_favorite_success",
+      "value": "お気に入りから削除しました。"
+    },
+    {
+      "name": "add_to_favorite_failure",
+      "value": "お気に入りに追加失敗しました。"
+    },
+    {
+      "name": "remove_from_favorite_failure",
+      "value": "お気に入りからの削除に失敗しました。"
+    },
+    {
+      "name": "filter_the_uploader",
+      "value": "アップローダ「%s」をブロックしますか？"
+    },
+    {
+      "name": "filter_the_tag",
+      "value": "タグ「%s」をブロックしますか？"
+    },
+    {
+      "name": "filter_added",
+      "value": "ブロックアイテムを追加しました。"
+    },
+    {
+      "name": "copy_tag",
+      "value": "コピー"
+    },
+    {
+      "name": "rating10",
+      "value": "良すぎてたまらない"
+    },
+    {
+      "name": "rating9",
+      "value": "ベリーグッド"
+    },
+    {
+      "name": "rating8",
+      "value": "とてもいい"
+    },
+    {
+      "name": "rating7",
+      "value": "いい"
+    },
+    {
+      "name": "rating6",
+      "value": "まあまあ"
+    },
+    {
+      "name": "rating5",
+      "value": "普通"
+    },
+    {
+      "name": "rating4",
+      "value": "悪い"
+    },
+    {
+      "name": "rating3",
+      "value": "とても悪い"
+    },
+    {
+      "name": "rating2",
+      "value": "目の障害になる"
+    },
+    {
+      "name": "rating1",
+      "value": "悪くて呼吸できない"
+    },
+    {
+      "name": "rating0",
+      "value": "…"
+    },
+    {
+      "name": "rating_none",
+      "value": "(´_ゝ`)"
+    },
+    {
+      "name": "gallery_info",
+      "value": "ギャラリー詳細"
+    },
+    {
+      "name": "copied_to_clipboard",
+      "value": "クリップボードにコピーされました。"
+    },
+    {
+      "name": "header_key",
+      "value": "キー"
+    },
+    {
+      "name": "header_value",
+      "value": "値"
+    },
+    {
+      "name": "key_gid",
+      "value": "GID"
+    },
+    {
+      "name": "key_token",
+      "value": "トークン"
+    },
+    {
+      "name": "key_url",
+      "value": "リンク"
+    },
+    {
+      "name": "key_title",
+      "value": "タイトル"
+    },
+    {
+      "name": "key_title_jpn",
+      "value": "日本語のタイトル"
+    },
+    {
+      "name": "key_thumb",
+      "value": "サムネイル"
+    },
+    {
+      "name": "key_category",
+      "value": "カテゴリー"
+    },
+    {
+      "name": "key_uploader",
+      "value": "アップローダー"
+    },
+    {
+      "name": "key_posted",
+      "value": "アップロード日時"
+    },
+    {
+      "name": "key_parent",
+      "value": "親ギャラリー"
+    },
+    {
+      "name": "key_visible",
+      "value": "可視性"
+    },
+    {
+      "name": "key_language",
+      "value": "言語"
+    },
+    {
+      "name": "key_pages",
+      "value": "ページ数"
+    },
+    {
+      "name": "key_size",
+      "value": "サイズ"
+    },
+    {
+      "name": "key_favorite_count",
+      "value": "お気に入り数"
+    },
+    {
+      "name": "key_favorited",
+      "value": "お気に入り追加済み"
+    },
+    {
+      "name": "key_rating_count",
+      "value": "評価回数"
+    },
+    {
+      "name": "key_rating",
+      "value": "評価"
+    },
+    {
+      "name": "key_torrents",
+      "value": "Torrent 数"
+    },
+    {
+      "name": "key_torrent_url",
+      "value": "Torrent"
+    },
+    {
+      "name": "gallery_comments",
+      "value": "ギャラリーコメント"
+    },
+    {
+      "name": "no_one_comments_gallery",
+      "value": "コメントはまだありません。"
+    },
+    {
+      "name": "comment_successfully",
+      "value": "コメントを送信しました。"
+    },
+    {
+      "name": "comment_failed",
+      "value": "コメントに失敗しました。"
+    },
+    {
+      "name": "copy_comment_text",
+      "value": "コメントをコピー"
+    },
+    {
+      "name": "edit_comment",
+      "value": "コメントを編集"
+    },
+    {
+      "name": "edit_comment_successfully",
+      "value": "コメントが編集されました"
+    },
+    {
+      "name": "edit_comment_failed",
+      "value": "コメントの編集に失敗しました"
+    },
+    {
+      "name": "vote_up",
+      "value": "いいね！"
+    },
+    {
+      "name": "cancel_vote_up",
+      "value": "いいね！を消す"
+    },
+    {
+      "name": "vote_down",
+      "value": "反対"
+    },
+    {
+      "name": "cancel_vote_down",
+      "value": "反対を消す"
+    },
+    {
+      "name": "vote_up_successfully",
+      "value": "いいね！しました。"
+    },
+    {
+      "name": "cancel_vote_up_successfully",
+      "value": "いいね！を取り消しました。"
+    },
+    {
+      "name": "vote_down_successfully",
+      "value": "反対しました。"
+    },
+    {
+      "name": "cancel_vote_down_successfully",
+      "value": "反対を消しました。"
+    },
+    {
+      "name": "vote_failed",
+      "value": "評価に失敗しました"
+    },
+    {
+      "name": "check_vote_status",
+      "value": "評価詳細を表示"
+    },
+    {
+      "name": "click_more_comments",
+      "value": "タップしてさらにコメントを読み込む"
+    },
+    {
+      "name": "last_edited",
+      "value": "最終更新: %s"
+    },
+    {
+      "name": "gallery_previews",
+      "value": "ギャラリーのプレビュー"
+    },
+    {
+      "name": "go_to",
+      "value": "ページに移動"
+    },
+    {
+      "name": "tag_filter",
+      "value": "タグをフィルター"
+    },
+    {
+      "name": "tag_selector_search_hint",
+      "value": "タグを検索…"
+    },
+    {
+      "name": "tag_selector_selected_count",
+      "value": "選択中: %d"
+    },
+    {
+      "name": "tag_selector_selected_section_title",
+      "value": "選択中のタグ"
+    },
+    {
+      "name": "tag_selector_empty_selected",
+      "value": "タグが選択されていません"
+    },
+    {
+      "name": "tag_selector_other_group",
+      "value": "その他"
+    },
+    {
+      "name": "scene_download_title",
+      "value": "%sギャラリー - %s"
+    },
+    {
+      "name": "no_download_info",
+      "value": "ダウンロードタスクはここに表示されます"
+    },
+    {
+      "name": "download_state_none",
+      "value": "一時停止中"
+    },
+    {
+      "name": "download_state_wait",
+      "value": "待機中"
+    },
+    {
+      "name": "download_state_downloading",
+      "value": "ダウンロード中"
+    },
+    {
+      "name": "download_state_downloaded",
+      "value": "ダウンロード済み"
+    },
+    {
+      "name": "download_state_failed",
+      "value": "ダウンロードエラー"
+    },
+    {
+      "name": "download_state_failed_2",
+      "value": "%d 未完成"
+    },
+    {
+      "name": "download_state_finish",
+      "value": "ダウンロード完了"
+    },
+    {
+      "name": "stat_509_alert_title",
+      "value": "509 エラー"
+    },
+    {
+      "name": "stat_509_alert_text",
+      "value": "ダウンロード制限に達しました。しばらくしてからもう一度やり直してください。"
+    },
+    {
+      "name": "stat_download_done_title",
+      "value": "ダウンロード完了"
+    },
+    {
+      "name": "stat_download_done_text_succeeded",
+      "value": "%d 件のダウンロード完了済み"
+    },
+    {
+      "name": "stat_download_done_text_failed",
+      "value": "%d 件のダウンロードにし失敗しました"
+    },
+    {
+      "name": "stat_download_done_text_mix",
+      "value": "%1$d 件のダウンロード完了済み、%2$d 件が失敗"
+    },
+    {
+      "name": "stat_download_done_line_succeeded",
+      "value": "ダウンロード完了: %s"
+    },
+    {
+      "name": "stat_download_done_line_failed",
+      "value": "ダウンロード失敗: %s"
+    },
+    {
+      "name": "download_remove_dialog_title",
+      "value": "ダウンロードを削除"
+    },
+    {
+      "name": "download_remove_dialog_message",
+      "value": "ダウンロードリストから「%s」を削除しますか？"
+    },
+    {
+      "name": "download_remove_dialog_message_2",
+      "value": "ダウンロードリストから %d 件のタスクを削除しますか？"
+    },
+    {
+      "name": "download_remove_dialog_check_text",
+      "value": "画像ファイルを削除"
+    },
+    {
+      "name": "stat_download_action_stop_all",
+      "value": "すべて停止"
+    },
+    {
+      "name": "drawer_download_label_title",
+      "value": "ラベル"
+    },
+    {
+      "name": "default_download_label_name",
+      "value": "デフォルト"
+    },
+    {
+      "name": "download_move_dialog_title",
+      "value": "移動"
+    },
+    {
+      "name": "download_labels",
+      "value": "ダウンロードラベル"
+    },
+    {
+      "name": "download_sort_list",
+      "value": "並べ替え"
+    },
+    {
+      "name": "download_filter_by_status",
+      "value": "ステータスでフィルター"
+    },
+    {
+      "name": "download_status_all",
+      "value": "すべて"
+    },
+    {
+      "name": "download_status_not_started",
+      "value": "なし"
+    },
+    {
+      "name": "default_sort",
+      "value": "デフォルト"
+    },
+    {
+      "name": "sort_by_gallery_id_asc",
+      "value": "ID の昇順"
+    },
+    {
+      "name": "sort_by_gallery_id_desc",
+      "value": "ID の降順"
+    },
+    {
+      "name": "sort_by_create_time_asc",
+      "value": "作成時間の昇順"
+    },
+    {
+      "name": "sort_by_create_time_desc",
+      "value": "作成時間の降順"
+    },
+    {
+      "name": "sort_by_rating_asc",
+      "value": "評価の昇順"
+    },
+    {
+      "name": "sort_by_rating_desc",
+      "value": "評価の降順"
+    },
+    {
+      "name": "sort_by_name_asc",
+      "value": "名前の昇順"
+    },
+    {
+      "name": "sort_by_name_desc",
+      "value": "名前の降順"
+    },
+    {
+      "name": "sort_by_file_size_asc",
+      "value": "ファイルサイズの昇順"
+    },
+    {
+      "name": "sort_by_file_size_desc",
+      "value": "ファイルサイズの降順"
+    },
+    {
+      "name": "sort_download_list",
+      "value": "リストを並べ替え"
+    },
+    {
+      "name": "download_start_all",
+      "value": "すべて開始"
+    },
+    {
+      "name": "download_stop_all",
+      "value": "すべて停止"
+    },
+    {
+      "name": "download_reset_reading_progress",
+      "value": "閲覧進捗をリセット"
+    },
+    {
+      "name": "download_search_gallery",
+      "value": "ギャラリーを検索"
+    },
+    {
+      "name": "download_search_hint",
+      "value": "検索キーを入力"
+    },
+    {
+      "name": "reset_reading_progress_message",
+      "value": "すべてのダウンロード済みのギャラリーの閲覧進捗をリセットしますか？"
+    },
+    {
+      "name": "reset_reading_progress_processing",
+      "value": "閲覧進捗をリセットしています..."
+    },
+    {
+      "name": "reset_reading_progress_done",
+      "value": "閲覧進捗をリセットしました"
+    },
+    {
+      "name": "download_service_label",
+      "value": "EhViewer ダウンロードサービス"
+    },
+    {
+      "name": "archiver_download_service_label",
+      "value": "EhViewer アーカイブのダウンロード"
+    },
+    {
+      "name": "archiver_download_pause",
+      "value": "一時停止"
+    },
+    {
+      "name": "archiver_download_resume",
+      "value": "再開"
+    },
+    {
+      "name": "archiver_download_paused",
+      "value": "一時停止中"
+    },
+    {
+      "name": "archiver_download_restart_no_range",
+      "value": "サーバーはレジュームに対応していないため、ダウンロードをやり直します"
+    },
+    {
+      "name": "download_speed_text",
+      "value": "%s"
+    },
+    {
+      "name": "download_speed_text_2",
+      "value": "%1$s、残り %2$s"
+    },
+    {
+      "name": "remember_download_label",
+      "value": "ダウンロードラベルを記憶する"
+    },
+    {
+      "name": "default_download_label",
+      "value": "デフォルトのダウンロードラベル"
+    },
+    {
+      "name": "added_to_download_list",
+      "value": "ダウンロードリストに追加しました"
+    },
+    {
+      "name": "download_searching",
+      "value": "検索中です"
+    },
+    {
+      "name": "download_searching_failed",
+      "value": "検索に失敗しました"
+    },
+    {
+      "name": "no_download_label",
+      "value": "ダウンロードラベルはここに表示されます"
+    },
+    {
+      "name": "add",
+      "value": "追加"
+    },
+    {
+      "name": "new_label_title",
+      "value": "ラベルを作成"
+    },
+    {
+      "name": "label_text_is_empty",
+      "value": "ラベルテキストを入力してください"
+    },
+    {
+      "name": "label_text_is_invalid",
+      "value": "「デフォルト」は無効なラベルです"
+    },
+    {
+      "name": "label_text_exist",
+      "value": "ラベルは既に存在しています"
+    },
+    {
+      "name": "rename_label_title",
+      "value": "ラベルの名前を変更"
+    },
+    {
+      "name": "delete_label_title",
+      "value": "ラベルを削除"
+    },
+    {
+      "name": "delete_label_message",
+      "value": "「%s」を削除しますか？"
+    },
+    {
+      "name": "no_history",
+      "value": "閲覧履歴はここに表示されます"
+    },
+    {
+      "name": "clear_all",
+      "value": "すべて削除"
+    },
+    {
+      "name": "clear_all_history",
+      "value": "閲覧履歴をすべて削除しますか？"
+    },
+    {
+      "name": "filter",
+      "value": "ギャラリーをブロック"
+    },
+    {
+      "name": "no_filter",
+      "value": "フィルターはここに表示されます"
+    },
+    {
+      "name": "filter_title",
+      "value": "タイトル"
+    },
+    {
+      "name": "filter_uploader",
+      "value": "アップローダー"
+    },
+    {
+      "name": "filter_tag",
+      "value": "タグ"
+    },
+    {
+      "name": "filter_tag_namespace",
+      "value": "タグの名前空間"
+    },
+    {
+      "name": "delete_filter",
+      "value": "ブロックアイテム「%s」を削除しますか？"
+    },
+    {
+      "name": "tip",
+      "value": "ヒント"
+    },
+    {
+      "name": "add_filter",
+      "value": "ブロックアイテムを追加"
+    },
+    {
+      "name": "show_definition",
+      "value": "ヘルプを表示"
+    },
+    {
+      "name": "filter_text",
+      "value": "ブロックテキスト"
+    },
+    {
+      "name": "filter_tip",
+      "value": "ブロックアイテムに対応するものはE-Hentaiのギャラリーリストから除外します。\n\nタイトルをブロック: ブロックテキストを含むギャラリーを除外します。\n\nアップローダブロック: そのアップローダのギャラリーを除外します。\n\nタグをブロック: そのタグを含むギャラリーを除外します。ギャラリーリストをロードするのにもっと時間がかかる事があります。\n\nタグ名前空間をブロック: そのタグ名前空間を含むギャラリーを除外します。ギャラリーリストをロードするのにもっと時間がかかる事があります。"
+    },
+    {
+      "name": "set_pattern_protection",
+      "value": "パターン保護を設定"
+    },
+    {
+      "name": "set_pattern_protection_tip",
+      "value": "パターンを描いてパターン保護を設定します。\n空白のまま続行してパターン保護をクリアします。"
+    },
+    {
+      "name": "set",
+      "value": "設定"
+    },
+    {
+      "name": "enable_fingerprint",
+      "value": "指紋でロックを解除"
+    },
+    {
+      "name": "u_config",
+      "value": "E-Hentaiの設定"
+    },
+    {
+      "name": "apply",
+      "value": "適用"
+    },
+    {
+      "name": "apply_tip",
+      "value": "右上隅のチェックマークをタップして設定を保存します。"
+    },
+    {
+      "name": "my_tags",
+      "value": "マイタグ"
+    },
+    {
+      "name": "hosts",
+      "value": "カスタム hosts.txt"
+    },
+    {
+      "name": "hosts_tip",
+      "value": "hosts.txt"
+    },
+    {
+      "name": "hosts_host",
+      "value": "ホスト"
+    },
+    {
+      "name": "hosts_ip",
+      "value": "IP"
+    },
+    {
+      "name": "add_host",
+      "value": "ホストを追加"
+    },
+    {
+      "name": "add_host_add",
+      "value": "追加"
+    },
+    {
+      "name": "edit_host",
+      "value": "ホストを編集"
+    },
+    {
+      "name": "edit_host_confirm",
+      "value": "適用"
+    },
+    {
+      "name": "edit_host_delete",
+      "value": "削除"
+    },
+    {
+      "name": "invalid_host",
+      "value": "無効なホストです"
+    },
+    {
+      "name": "invalid_ip",
+      "value": "無効な IP です"
+    },
+    {
+      "name": "preset",
+      "value": "プリセット"
+    },
+    {
+      "name": "default_directory",
+      "value": "デフォルトのディレクトリ"
+    },
+    {
+      "name": "application_file_directory",
+      "value": "アプリファイルのディレクトリ %d (アプリをアンインストールすると削除されます)"
+    },
+    {
+      "name": "page_menu_title",
+      "value": "ページ%d"
+    },
+    {
+      "name": "page_menu_refresh",
+      "value": "@string/refresh"
+    },
+    {
+      "name": "page_menu_share",
+      "value": "@string/share"
+    },
+    {
+      "name": "page_menu_save",
+      "value": "保存"
+    },
+    {
+      "name": "page_menu_save_to",
+      "value": "名前を付けて保存"
+    },
+    {
+      "name": "page_menu_add_bookmark",
+      "value": "ブックマークに追加"
+    },
+    {
+      "name": "gallery_menu_title",
+      "value": "メニュー"
+    },
+    {
+      "name": "share_image",
+      "value": "画像を共有"
+    },
+    {
+      "name": "image_saved",
+      "value": "画像は「%s」に保存されました"
+    },
+    {
+      "name": "settings_eh",
+      "value": "EH"
+    },
+    {
+      "name": "settings_eh_sign_out",
+      "value": "ログアウト"
+    },
+    {
+      "name": "settings_eh_sign_out_summary",
+      "value": "ログアウト後にアプリを再起動して、もう一度ログインしてください。"
+    },
+    {
+      "name": "settings_eh_sign_out_warning",
+      "value": "本当にログアウトしますか？"
+    },
+    {
+      "name": "settings_eh_sign_out_yes",
+      "value": "ログアウトします"
+    },
+    {
+      "name": "settings_eh_sign_out_tip",
+      "value": "ログアウトしました。アプリを再起動することで再度ログインします。"
+    },
+    {
+      "name": "settings_eh_identity_cookies",
+      "value": "アカウントのCookie"
+    },
+    {
+      "name": "settings_eh_identity_cookies_summary",
+      "value": "ログイン用のCookieです"
+    },
+    {
+      "name": "settings_eh_identity_cookies_signed",
+      "value": "下記の情報を持つ誰でもこのアカウントにログインできますので<br><b>絶対に他人に渡さないように！</b><br><br>%s"
+    },
+    {
+      "name": "settings_eh_identity_cookies_tourist",
+      "value": "まだログインしていません"
+    },
+    {
+      "name": "settings_eh_identity_cookies_copy",
+      "value": "コピー"
+    },
+    {
+      "name": "settings_u_config",
+      "value": "E-Hentai の設定"
+    },
+    {
+      "name": "settings_u_config_summary",
+      "value": "E-Hentai サイト上の設定をします"
+    },
+    {
+      "name": "settings_my_tags",
+      "value": "マイタグ"
+    },
+    {
+      "name": "settings_my_tags_summary",
+      "value": "E-Hentai のウェブサイトでタグを管理します"
+    },
+    {
+      "name": "settings_eh_theme",
+      "value": "テーマ"
+    },
+    {
+      "name": "settings_eh_theme_light",
+      "value": "ライト"
+    },
+    {
+      "name": "settings_eh_theme_dark",
+      "value": "ダーク"
+    },
+    {
+      "name": "settings_eh_theme_black",
+      "value": "ブラック"
+    },
+    {
+      "name": "settings_eh_apply_nav_bar_theme_color",
+      "value": "テーマカラーをナビゲーションバーに適用する"
+    },
+    {
+      "name": "settings_eh_gallery_site",
+      "value": "ギャラリーサイト"
+    },
+    {
+      "name": "settings_eh_launch_page",
+      "value": "アプリのデフォルト画面"
+    },
+    {
+      "name": "settings_eh_list_mode",
+      "value": "リスト表示モード"
+    },
+    {
+      "name": "settings_eh_list_mode_detail",
+      "value": "詳細情報"
+    },
+    {
+      "name": "settings_eh_list_mode_thumb",
+      "value": "サムネイル"
+    },
+    {
+      "name": "settings_eh_detail_size",
+      "value": "詳細情報のサイズ"
+    },
+    {
+      "name": "settings_eh_detail_size_long",
+      "value": "長くする"
+    },
+    {
+      "name": "settings_eh_detail_size_short",
+      "value": "短くする"
+    },
+    {
+      "name": "settings_eh_thumb_size",
+      "value": "サムネイルのサイズ"
+    },
+    {
+      "name": "settings_eh_thumb_size_large",
+      "value": "大"
+    },
+    {
+      "name": "settings_eh_thumb_size_middle",
+      "value": "中"
+    },
+    {
+      "name": "settings_eh_thumb_size_small",
+      "value": "小"
+    },
+    {
+      "name": "settings_eh_thumb_resolution",
+      "value": "サムネイルの解像度"
+    },
+    {
+      "name": "settings_eh_thumb_resolution_summary",
+      "value": "%s。解像度を正しく設定しないと、サムネイルを取得できない場合があります"
+    },
+    {
+      "name": "settings_eh_thumb_resolution_auto",
+      "value": "自動"
+    },
+    {
+      "name": "settings_eh_fix_thumb_url",
+      "value": "サムネイルリンクを修正する"
+    },
+    {
+      "name": "settings_eh_default_categories",
+      "value": "ホームページに表示されるカテゴリ"
+    },
+    {
+      "name": "settings_eh_default_categories_summary",
+      "value": "ホームページに表示されるデフォルトのカテゴリです"
+    },
+    {
+      "name": "settings_eh_excluded_languages",
+      "value": "言語を除外する"
+    },
+    {
+      "name": "settings_eh_excluded_languages_summary",
+      "value": "指定した言語のギャラリーをホームページと検索から隠します"
+    },
+    {
+      "name": "settings_eh_excluded_tag_namespaces",
+      "value": "タグセットを除外"
+    },
+    {
+      "name": "settings_eh_excluded_tag_namespaces_summary",
+      "value": "指定したタグセットをデフォルト検索から除外します"
+    },
+    {
+      "name": "settings_eh_show_jpn_title",
+      "value": "日本語タイトルを表示する"
+    },
+    {
+      "name": "settings_eh_show_gallery_comment",
+      "value": "ギャラリーコメントを表示する"
+    },
+    {
+      "name": "settings_eh_show_eh_event",
+      "value": "EH のイベントを表示する"
+    },
+    {
+      "name": "settings_eh_show_eh_limits",
+      "value": "EH のリミットを表示する"
+    },
+    {
+      "name": "settings_eh_show_jpn_title_summary",
+      "value": "E-Hentai ウェブサイトの設定で日本語タイトルを有効化する必要があります"
+    },
+    {
+      "name": "settings_eh_show_gallery_pages",
+      "value": "ギャラリーページ数を表示する"
+    },
+    {
+      "name": "settings_eh_show_gallery_pages_summary",
+      "value": "リストにギャラリーのページの数量を表示します"
+    },
+    {
+      "name": "settings_eh_show_tag_translations",
+      "value": "中国語のタグ翻訳を表示する"
+    },
+    {
+      "name": "settings_eh_show_tag_translations_summary",
+      "value": "原文ではなく中国語のタグ翻訳を表示します(データファイルのダウンロードに時間がかかります)"
+    },
+    {
+      "name": "settings_eh_tag_translations_source",
+      "value": "プレースホルダー"
+    },
+    {
+      "name": "settings_eh_tag_translations_source_url",
+      "value": "https://placeholder"
+    },
+    {
+      "name": "settings_eh_filter",
+      "value": "ギャラリーをブロックする"
+    },
+    {
+      "name": "settings_eh_filter_summary",
+      "value": "タイトル、アップローダー、タグで望ましくないギャラリーを除外します"
+    },
+    {
+      "name": "settings_eh_cellular_network_warning",
+      "value": "モバイルネットワークの警告"
+    },
+    {
+      "name": "settings_read",
+      "value": "閲覧"
+    },
+    {
+      "name": "settings_read_screen_rotation",
+      "value": "画面の向き"
+    },
+    {
+      "name": "settings_read_screen_rotation_default",
+      "value": "システムのデフォルト"
+    },
+    {
+      "name": "settings_read_screen_rotation_portrait",
+      "value": "縦画面"
+    },
+    {
+      "name": "settings_read_screen_rotation_landscape",
+      "value": "横画面"
+    },
+    {
+      "name": "settings_read_screen_rotation_sensor",
+      "value": "自動回転"
+    },
+    {
+      "name": "settings_read_refresh_rate",
+      "value": "リフレッシュレート"
+    },
+    {
+      "name": "settings_read_refresh_rate_default",
+      "value": "システムのデフォルト"
+    },
+    {
+      "name": "settings_read_refresh_rate_60",
+      "value": "60 Hz"
+    },
+    {
+      "name": "settings_read_refresh_rate_90",
+      "value": "90 Hz"
+    },
+    {
+      "name": "settings_read_refresh_rate_120",
+      "value": "120 Hz"
+    },
+    {
+      "name": "settings_read_refresh_rate_max",
+      "value": "画面の最高"
+    },
+    {
+      "name": "settings_read_reading_direction",
+      "value": "閲覧方向"
+    },
+    {
+      "name": "settings_read_reading_direction_left_to_right",
+      "value": "左から右へ"
+    },
+    {
+      "name": "settings_read_reading_direction_right_to_Left",
+      "value": "右から左へ"
+    },
+    {
+      "name": "settings_read_reading_direction_top_to_bottom",
+      "value": "上から下へ"
+    },
+    {
+      "name": "settings_read_page_scaling",
+      "value": "ページの拡大"
+    },
+    {
+      "name": "settings_read_page_scaling_actual_size",
+      "value": "元のサイズ"
+    },
+    {
+      "name": "settings_read_page_scaling_fit_to_width",
+      "value": "幅に合わせる"
+    },
+    {
+      "name": "settings_read_page_scaling_fit_to_height",
+      "value": "長さに合わせる"
+    },
+    {
+      "name": "settings_read_page_scaling_fit_to_screen",
+      "value": "画面に合わせる"
+    },
+    {
+      "name": "settings_read_page_scaling_fixed_scale",
+      "value": "固定した大きさ"
+    },
+    {
+      "name": "settings_read_start_position",
+      "value": "ページを開く位置"
+    },
+    {
+      "name": "settings_read_start_position_top_left",
+      "value": "左上隅"
+    },
+    {
+      "name": "settings_read_start_position_top_right",
+      "value": "右上隅"
+    },
+    {
+      "name": "settings_read_start_position_bottom_left",
+      "value": "左下隅"
+    },
+    {
+      "name": "settings_read_start_position_bottom_right",
+      "value": "右下隅"
+    },
+    {
+      "name": "settings_read_auto_transfer_time",
+      "value": "自動送り"
+    },
+    {
+      "name": "settings_read_start_position_center",
+      "value": "中心"
+    },
+    {
+      "name": "settings_read_keep_screen_on",
+      "value": "画面を常に ON にする"
+    },
+    {
+      "name": "settings_read_show_clock",
+      "value": "時計を表示する"
+    },
+    {
+      "name": "settings_read_show_progress",
+      "value": "進捗を表示する"
+    },
+    {
+      "name": "settings_read_show_battery",
+      "value": "バッテリー残量を表示する"
+    },
+    {
+      "name": "settings_read_show_page_interval",
+      "value": "ページ間の余白を表示する"
+    },
+    {
+      "name": "settings_read_volume_page",
+      "value": "音量ボタンでページをめくる"
+    },
+    {
+      "name": "settings_read_reverse_volume_page",
+      "value": "音量ボタンの変換方向を逆にする"
+    },
+    {
+      "name": "settings_read_reading_fullscreen",
+      "value": "フルスクリーン"
+    },
+    {
+      "name": "settings_read_custom_screen_lightness",
+      "value": "画面の明るさを設定する"
+    },
+    {
+      "name": "settings_read_screen_lightness",
+      "value": "画面の明るさ"
+    },
+    {
+      "name": "settings_download",
+      "value": "ダウンロード"
+    },
+    {
+      "name": "settings_download_download_location",
+      "value": "ダウンロードパス"
+    },
+    {
+      "name": "settings_download_invalid_download_location",
+      "value": "無効なダウンロードパス"
+    },
+    {
+      "name": "settings_download_cant_get_download_location",
+      "value": "ダウンロードパスを取得できません"
+    },
+    {
+      "name": "settings_download_pick_dir_kk",
+      "value": "デバイスを root 化してパッチを適用しないと、Android 4.4 以降では外部ストレージへ書き込めません。しかし「/Android/data/com.hippo.ehviewer」は例外で書き込み可能です。"
+    },
+    {
+      "name": "settings_download_pick_dir_l",
+      "value": "Lollipop は外部ストレージに書き込むための新しい API を提供しました。ダウンロードパスを外部ストレージに設定するには、「ドキュメント」をタップしてください。"
+    },
+    {
+      "name": "settings_download_document",
+      "value": "ドキュメント"
+    },
+    {
+      "name": "settings_download_continue",
+      "value": "続行"
+    },
+    {
+      "name": "settings_download_media_scan",
+      "value": "メディアスキャンを許可する"
+    },
+    {
+      "name": "settings_download_media_scan_summary_on",
+      "value": "ギャラリーアプリを他人に見せないでください"
+    },
+    {
+      "name": "settings_download_media_scan_summary_off",
+      "value": "ほとんどのギャラリーアプリはダウンロードパスの内容を表示しません"
+    },
+    {
+      "name": "settings_download_multi_thread_download",
+      "value": "ダウンロードスレッド数"
+    },
+    {
+      "name": "settings_download_multi_thread_download_summary",
+      "value": "同時に最大 %s 枚の画像をダウンロードします"
+    },
+    {
+      "name": "settings_download_preload_image",
+      "value": "画像をプリロード"
+    },
+    {
+      "name": "settings_download_preload_image_summary",
+      "value": "%s 枚の画像をプリロードします"
+    },
+    {
+      "name": "settings_download_image_resolution",
+      "value": "画像の解像度"
+    },
+    {
+      "name": "settings_download_image_resolution_summary",
+      "value": "現在は「%s」です。1280x を超える解像度は不安定になります"
+    },
+    {
+      "name": "settings_download_image_resolution_auto",
+      "value": "自動"
+    },
+    {
+      "name": "settings_download_download_origin_image",
+      "value": "オリジナル画像をダウンロードする"
+    },
+    {
+      "name": "settings_download_download_list_pagination",
+      "value": "ページ送りの一覧"
+    },
+    {
+      "name": "settings_download_download_list_pagination_summary",
+      "value": "ページング機能は 500 を超える場合でのみ有効です"
+    },
+    {
+      "name": "settings_download_download_origin_image_summary",
+      "value": "有効にすると、ダウンロード制限にもっとはやく達する恐れがあります"
+    },
+    {
+      "name": "settings_download_download_order_by_asc",
+      "value": "昇順でのダウンロードする"
+    },
+    {
+      "name": "settings_download_download_order_by_asc_summary",
+      "value": "すべてのギャラリーをダウンロードする場合は、順番にダウンロードをします"
+    },
+    {
+      "name": "settings_download_sync_while_reading",
+      "value": "閲覧中に同期ダウンロード"
+    },
+    {
+      "name": "settings_download_sync_while_reading_summary",
+      "value": "未ダウンロードのギャラリーを閲覧する際、閲覧した画像を自動的にダウンロード先に保存します"
+    },
+    {
+      "name": "settings_download_restore_download_items",
+      "value": "ダウンロードタスクを復元する"
+    },
+    {
+      "name": "settings_download_restore_download_items_summary",
+      "value": "ダウンロードディレクトリのダウンロードタスクを復元します"
+    },
+    {
+      "name": "settings_download_restoring",
+      "value": "復元中"
+    },
+    {
+      "name": "settings_download_restore_not_found",
+      "value": "復元可能なダウンロードが見つかりません"
+    },
+    {
+      "name": "settings_download_restore_failed",
+      "value": "復元できませんでした"
+    },
+    {
+      "name": "settings_download_restore_successfully",
+      "value": "%d 件のタスクが復元されました"
+    },
+    {
+      "name": "settings_download_clean_redundancy",
+      "value": "ダウンロードフォルダの不要なファイルを整理"
+    },
+    {
+      "name": "settings_download_clean_redundancy_summary",
+      "value": "ダウンロードディレクトリからダウンロードタスクにない画像ファイルを削除します"
+    },
+    {
+      "name": "settings_download_clean_redundancy_no_redundancy",
+      "value": "不要なファイルが見つかりませんでした"
+    },
+    {
+      "name": "settings_download_clean_redundancy_done",
+      "value": "%d 件のファイルを削除しました"
+    },
+    {
+      "name": "settings_advanced",
+      "value": "その他の設定"
+    },
+    {
+      "name": "settings_advanced_save_parse_error_body",
+      "value": "解析に失敗時に HTML ファイルを保存する"
+    },
+    {
+      "name": "settings_advanced_save_parse_error_body_summary",
+      "value": "HTML ファイルに個人情報がある可能性があります"
+    },
+    {
+      "name": "settings_advanced_save_crash_log",
+      "value": "クラッシュレポートを保存する"
+    },
+    {
+      "name": "settings_advanced_save_crash_log_summary",
+      "value": "クラッシュレポートはバグの修正に役立ちます"
+    },
+    {
+      "name": "settings_advanced_dump_logcat",
+      "value": "ログをエクスポート"
+    },
+    {
+      "name": "settings_advanced_dump_logcat_summary",
+      "value": "ログを内部ストレージに保存します"
+    },
+    {
+      "name": "settings_advanced_dump_logcat_failed",
+      "value": "ログをエクスポートできませんでした"
+    },
+    {
+      "name": "settings_advanced_dump_logcat_to",
+      "value": "ログを「%s」にエクスポートしました"
+    },
+    {
+      "name": "settings_advanced_clear_download_path_cache",
+      "value": "ギャラリーのダウンロードパスを消去する"
+    },
+    {
+      "name": "settings_advanced_clear_download_path_cache_summary",
+      "value": "ギャラリーのダウンロードパスは無効のようです。もう一度ダウンロードする必要があると表示されている場合は、ダウンロードパスのキャッシュを消去してみてください。"
+    },
+    {
+      "name": "settings_advanced_clear_download_path_cache_message",
+      "value": "ギャラリーのダウンロードパスのキャッシュを消去しますか？"
+    },
+    {
+      "name": "settings_advanced_clear_memory_cache",
+      "value": "メモリキャッシュを消去する"
+    },
+    {
+      "name": "settings_advanced_clear_memory_cache_summary",
+      "value": "サムネイルとギャラリー情報のメモリキャッシュをクリアします"
+    },
+    {
+      "name": "settings_advanced_read_cache_size",
+      "value": "閲覧キャッシュのサイズ"
+    },
+    {
+      "name": "settings_advanced_app_language_title",
+      "value": "アプリの言語 (Language)"
+    },
+    {
+      "name": "settings_advanced_proxy",
+      "value": "プロキシ"
+    },
+    {
+      "name": "settings_advanced_proxy_summary_1",
+      "value": "%1$s %2$s:%3$d"
+    },
+    {
+      "name": "settings_advanced_proxy_summary_2",
+      "value": "%1$s"
+    },
+    {
+      "name": "settings_advanced_built_in_hosts_title",
+      "value": "デフォルトの hosts.txt"
+    },
+    {
+      "name": "settings_advanced_built_in_hosts_summary",
+      "value": "ホストをデフォルトの IP にマッピングします\nカスタムの hosts.txt に上書きされます"
+    },
+    {
+      "name": "settings_advanced_custom_hosts_title",
+      "value": "カスタムの hosts.txt"
+    },
+    {
+      "name": "settings_advanced_custom_hosts_summary",
+      "value": "ホスト名を IP にマッピング\nデフォルトのhosts.txtを上書きできます"
+    },
+    {
+      "name": "settings_privacy_pattern_protection_title",
+      "value": "パターン保護"
+    },
+    {
+      "name": "settings_privacy_pattern_protection_not_set",
+      "value": "パターン保護は設定されていません"
+    },
+    {
+      "name": "settings_privacy_pattern_protection_set",
+      "value": "パターン保護は設定されています"
+    },
+    {
+      "name": "settings_advanced_export_data",
+      "value": "データをエクスポート"
+    },
+    {
+      "name": "settings_advanced_export_data_summary",
+      "value": "ダウンロードリストやクイック検索などのデータを内部ストレージにエクスポートします"
+    },
+    {
+      "name": "settings_advanced_export_data_to",
+      "value": "データを「%s」にエクスポート"
+    },
+    {
+      "name": "settings_advanced_export_data_failed",
+      "value": "データをエクスポートできませんでした"
+    },
+    {
+      "name": "settings_advanced_import_data",
+      "value": "データをインポート"
+    },
+    {
+      "name": "settings_advanced_import_data_summary",
+      "value": "内部ストレージからインポートします"
+    },
+    {
+      "name": "settings_advanced_import_data_successfully",
+      "value": "データをインポートしました"
+    },
+    {
+      "name": "settings_advanced_wifi_sender",
+      "value": "Wi-Fi で移行をするデータを送信"
+    },
+    {
+      "name": "settings_advanced_wifi_sander_summary",
+      "value": "Wi-Fi ホットスポット経由で移行をするデータを送信します"
+    },
+    {
+      "name": "settings_advanced_wifi_client",
+      "value": "Wi-Fi で移行をするデータを受信"
+    },
+    {
+      "name": "settings_advanced_wifi_client_summary",
+      "value": "Wi-Fi ホットスポット経由で移行をするデータを受信します"
+    },
+    {
+      "name": "settings_about",
+      "value": "このアプリについて"
+    },
+    {
+      "name": "settings_about_declaration",
+      "value": "EhViewer"
+    },
+    {
+      "name": "settings_about_declaration_summary",
+      "value": "EhViewer は E-Hentai.org と一切の関係がございません。"
+    },
+    {
+      "name": "settings_about_author",
+      "value": "開発者"
+    },
+    {
+      "name": "settings_about_author_summary",
+      "value": "SXJ_LonelyDog <xiaojieonly$foxmail.com>"
+    },
+    {
+      "name": "settings_about_telegram",
+      "value": "Telegram"
+    },
+    {
+      "name": "settings_about_latest_release",
+      "value": "最新バージョン"
+    },
+    {
+      "name": "settings_about_website",
+      "value": "サイト"
+    },
+    {
+      "name": "settings_about_source",
+      "value": "ソース"
+    },
+    {
+      "name": "settings_about_changelog",
+      "value": "更新履歴"
+    },
+    {
+      "name": "settings_about_help",
+      "value": "ヘルプ"
+    },
+    {
+      "name": "settings_about_issue_help",
+      "value": "問題解決のヘルプ"
+    },
+    {
+      "name": "settings_about_license",
+      "value": "オープンソースライセンス"
+    },
+    {
+      "name": "settings_about_license_summary",
+      "value": "いろんなオープンソースプロジェクトなしで、EhViewerが生まれることはありません"
+    },
+    {
+      "name": "settings_about_donate",
+      "value": "寄付"
+    },
+    {
+      "name": "settings_about_donate_message",
+      "value": "寄付していただいても追加の機能を解禁したりはありませんが、このアプリの開発を支援できます"
+    },
+    {
+      "name": "settings_about_donate_alipay",
+      "value": "AliPay"
+    },
+    {
+      "name": "settings_about_donate_paypal",
+      "value": "PayPal"
+    },
+    {
+      "name": "settings_about_donate_open",
+      "value": "開く"
+    },
+    {
+      "name": "settings_about_donate_copy",
+      "value": "コピー"
+    },
+    {
+      "name": "settings_save_image_aliPay",
+      "value": "AliPay の QR コードを保存"
+    },
+    {
+      "name": "settings_save_image_weChat",
+      "value": "WeChat の QR コードを保存"
+    },
+    {
+      "name": "settings_about_donate_copied",
+      "value": "コピーしました"
+    },
+    {
+      "name": "settings_privacy_enable_analytics",
+      "value": "データ統計に参加"
+    },
+    {
+      "name": "settings_privacy_about_analytics",
+      "value": "データ統計について"
+    },
+    {
+      "name": "settings_about_version",
+      "value": "バージョン"
+    },
+    {
+      "name": "settings_about_check_for_updates",
+      "value": "更新を確認する"
+    },
+    {
+      "name": "settings_close_automatic_updates",
+      "value": "自動更新を OFF にする"
+    },
+    {
+      "name": "settings_about_beta_update_channel",
+      "value": "ベータ版を使用する"
+    },
+    {
+      "name": "settings_about_beta_update_channel_summary",
+      "value": "ベータ版では予期せぬエラーが発生する可能性があります"
+    },
+    {
+      "name": "proxy_enable",
+      "value": "有効化する"
+    },
+    {
+      "name": "proxy_enabled",
+      "value": "有効"
+    },
+    {
+      "name": "proxy_disabled",
+      "value": "無効"
+    },
+    {
+      "name": "proxy_direct",
+      "value": "ダイレクト"
+    },
+    {
+      "name": "proxy_system",
+      "value": "システムプロキシ"
+    },
+    {
+      "name": "proxy_host_or_ip",
+      "value": "ホスト名または IP"
+    },
+    {
+      "name": "proxy_port",
+      "value": "ポート"
+    },
+    {
+      "name": "proxy_domain_not_supported",
+      "value": "ドメインには対応していません"
+    },
+    {
+      "name": "proxy_invalid_port",
+      "value": "入力したポートは無効です"
+    },
+    {
+      "name": "cant_get_data_dir",
+      "value": "データフォルダを取得できませんでした"
+    },
+    {
+      "name": "cant_find_any_data",
+      "value": "データが見つかりません"
+    },
+    {
+      "name": "cant_read_the_file",
+      "value": "ファイルを読み取れませんでした"
+    },
+    {
+      "name": "app_language_system",
+      "value": "システム言語 (デフォルト)"
+    },
+    {
+      "name": "excluded_languages",
+      "value": "言語を除外"
+    },
+    {
+      "name": "select_all",
+      "value": "すべて選択"
+    },
+    {
+      "name": "deselect_all",
+      "value": "すべてキャンセル"
+    },
+    {
+      "name": "invert_selection",
+      "value": "選択を反転"
+    },
+    {
+      "name": "language",
+      "value": "言語"
+    },
+    {
+      "name": "original",
+      "value": "オリジナル"
+    },
+    {
+      "name": "translated",
+      "value": "翻訳"
+    },
+    {
+      "name": "rewrite",
+      "value": "書き換え"
+    },
+    {
+      "name": "language_japanese",
+      "value": "日本語"
+    },
+    {
+      "name": "language_english",
+      "value": "英語"
+    },
+    {
+      "name": "language_chinese",
+      "value": "中国語"
+    },
+    {
+      "name": "language_dutch",
+      "value": "オランダ語"
+    },
+    {
+      "name": "language_french",
+      "value": "フランス語"
+    },
+    {
+      "name": "language_german",
+      "value": "ドイツ語"
+    },
+    {
+      "name": "language_hungarian",
+      "value": "ハンガリー語"
+    },
+    {
+      "name": "language_italian",
+      "value": "イタリア語"
+    },
+    {
+      "name": "language_korean",
+      "value": "韓国語"
+    },
+    {
+      "name": "language_polish",
+      "value": "ポーランド語"
+    },
+    {
+      "name": "language_portuguese",
+      "value": "ポルトガル語"
+    },
+    {
+      "name": "language_russian",
+      "value": "ロシア語"
+    },
+    {
+      "name": "language_spanish",
+      "value": "スペイン語"
+    },
+    {
+      "name": "language_thai",
+      "value": "タイ語"
+    },
+    {
+      "name": "language_vietnamese",
+      "value": "ベトナム語"
+    },
+    {
+      "name": "language_na",
+      "value": "N/A"
+    },
+    {
+      "name": "language_other",
+      "value": "その他"
+    },
+    {
+      "name": "please_wait",
+      "value": "お待ちください"
+    },
+    {
+      "name": "license",
+      "value": "オープンソースライセンス"
+    },
+    {
+      "name": "dir_picker",
+      "value": "フォルダを選択"
+    },
+    {
+      "name": "directory_not_writable",
+      "value": "このフォルダは書き込めません"
+    },
+    {
+      "name": "cloud_favorites",
+      "value": "クラウドのお気に入り"
+    },
+    {
+      "name": "local_favorites",
+      "value": "ローカルのお気に入り"
+    },
+    {
+      "name": "favorites_search_bar_hint",
+      "value": "%sを検索"
+    },
+    {
+      "name": "favorites_title",
+      "value": "%s"
+    },
+    {
+      "name": "favorites_title_2",
+      "value": "%1$s - %2$s"
+    },
+    {
+      "name": "delete_favorites_dialog_title",
+      "value": "お気に入りから削除"
+    },
+    {
+      "name": "delete_favorites_dialog_message",
+      "value": "%d 件の項目をお気に入りリストから削除します？"
+    },
+    {
+      "name": "move_favorites_dialog_title",
+      "value": "お気に入りを移動"
+    },
+    {
+      "name": "default_favorites_collection",
+      "value": "デフォルトのお気に入りリスト"
+    },
+    {
+      "name": "let_me_select",
+      "value": "手動で選択"
+    },
+    {
+      "name": "favorites_info",
+      "value": "お気に入りの情報"
+    },
+    {
+      "name": "collections",
+      "value": "お気に入りコレクション"
+    },
+    {
+      "name": "count",
+      "value": "数量"
+    },
+    {
+      "name": "need_sign_in",
+      "value": "ログインが必要"
+    },
+    {
+      "name": "error_something_wrong_happened",
+      "value": "エラーが発生しました"
+    },
+    {
+      "name": "guide_quick_search_title",
+      "value": "クイック検索"
+    },
+    {
+      "name": "guide_quick_search_text",
+      "value": "右からスワイプすると、クイック検索パネルが開きます"
+    },
+    {
+      "name": "guide_collections_title",
+      "value": "お気に入りリスト"
+    },
+    {
+      "name": "guide_collections_text",
+      "value": "右からスワイプすると、お気に入りリストを選べます"
+    },
+    {
+      "name": "guide_download_labels_title",
+      "value": "ダウンロードラベル"
+    },
+    {
+      "name": "guide_download_labels_text",
+      "value": "右からスワイプすると、ダウンロードラベルパネルが開きます"
+    },
+    {
+      "name": "guide_download_thumb_title",
+      "value": "ギャラリーの詳細"
+    },
+    {
+      "name": "guide_download_thumb_text",
+      "value": "サムネイルをタップすると、ギャラリー詳細を表示します"
+    },
+    {
+      "name": "guide_gallery_left",
+      "value": "ページをめくる"
+    },
+    {
+      "name": "guide_gallery_right",
+      "value": "ページをめくる"
+    },
+    {
+      "name": "guide_gallery_menu",
+      "value": "メニュー"
+    },
+    {
+      "name": "guide_gallery_progress",
+      "value": "プログレスバー"
+    },
+    {
+      "name": "guide_gallery_long_click",
+      "value": "メニューを呼び出すには、長押ししてください"
+    },
+    {
+      "name": "from_the_future",
+      "value": "未来から"
+    },
+    {
+      "name": "just_now",
+      "value": "ただ今"
+    },
+    {
+      "name": "yesterday",
+      "value": "昨日"
+    },
+    {
+      "name": "some_days_ago",
+      "value": "%d 日前"
+    },
+    {
+      "name": "dialog_archive_title",
+      "value": "H@H からダウンロード"
+    },
+    {
+      "name": "no_archives",
+      "value": "アーカイブパッケージなし"
+    },
+    {
+      "name": "download_archive_started",
+      "value": "アーカイブパッケージのダウンロードを開始しました"
+    },
+    {
+      "name": "download_archive_failure",
+      "value": "アーカイブパッケージをダウンロードできませんでした"
+    },
+    {
+      "name": "h_h",
+      "value": "H@H"
+    },
+    {
+      "name": "download_h_h_failure_no_hath",
+      "value": "アーカイブパッケージのダウンロードにはH@Hクライアントが必要です"
+    },
+    {
+      "name": "settings_privacy",
+      "value": "プライバシー"
+    },
+    {
+      "name": "settings_privacy_secure",
+      "value": "スクリーンキャプチャを防ぐ"
+    },
+    {
+      "name": "settings_privacy_secure_summary",
+      "value": "有効化すると、アプリの画面をキャプチャーできなくなり、アプリの内容も「最近のアプリ」リストに表示されません。\n\n変更を適用するには、アプリを再起動してください。"
+    },
+    {
+      "name": "download_service",
+      "value": "ダウンロードサービス"
+    },
+    {
+      "name": "favorite_name",
+      "value": "お気に入り"
+    },
+    {
+      "name": "gallery_toplists",
+      "value": "ギャラリーのトップリスト"
+    },
+    {
+      "name": "uploader_toplists",
+      "value": "アップローダーのトップリスト"
+    },
+    {
+      "name": "tagging_toplists",
+      "value": "タグのトップリスト"
+    },
+    {
+      "name": "hentai_home_toplists",
+      "value": "Hentai@Home のトップリスト"
+    },
+    {
+      "name": "ehtracker_toplists",
+      "value": "EHTracker のトップリスト"
+    },
+    {
+      "name": "cleanup_toplists",
+      "value": "トップリストのクリーンアップ"
+    },
+    {
+      "name": "rating_reviewing_toplists",
+      "value": "評価とトップリストのレビュー"
+    },
+    {
+      "name": "top_list",
+      "value": "トップリスト"
+    },
+    {
+      "name": "all_time_top_list",
+      "value": "すべての期間でのトップリスト"
+    },
+    {
+      "name": "past_year_top_list",
+      "value": "過去 1 年間のトップリスト"
+    },
+    {
+      "name": "past_month_top_list",
+      "value": "先月のトップリスト"
+    },
+    {
+      "name": "yesterday_top_list",
+      "value": "昨日のトップリスト"
+    },
+    {
+      "name": "change_background_title",
+      "value": "背景を変更してもよろしいですか？"
+    },
+    {
+      "name": "change_background_message",
+      "value": "背景の変更はこのアプリに限定されており、E-hentai や他の同様のアプリに同期することはできません。"
+    },
+    {
+      "name": "change_avatar_title",
+      "value": "アバターを変更してもよろしいですか？"
+    },
+    {
+      "name": "change_avatar_message",
+      "value": "アバターの変更はこのアプリに限定されており、E-hentai や他の同様のアプリに同期することはできません。"
+    },
+    {
+      "name": "take_a_photograph",
+      "value": "写真を撮る"
+    },
+    {
+      "name": "choose_from_the_album",
+      "value": "アルバムから選択"
+    },
+    {
+      "name": "request_camera_permission",
+      "value": "EhViewer は写真を撮影するためにカメラのアクセスを要求します。許可しますか？"
+    },
+    {
+      "name": "request_storage_permission",
+      "value": "EhViewer は写真を取得するためにデバイスのフォトアルバムへのアクセスを要求します。許可しますか？"
+    },
+    {
+      "name": "download_torrent_name",
+      "value": "Torrent: %s"
+    },
+    {
+      "name": "download_torrent_state",
+      "value": "ステータス:"
+    },
+    {
+      "name": "download_torrent_path",
+      "value": "パス: %s"
+    },
+    {
+      "name": "download_search",
+      "value": "ダウンロードリストで検索"
+    },
+    {
+      "name": "sure",
+      "value": "OK"
+    },
+    {
+      "name": "try_again",
+      "value": "再試行"
+    },
+    {
+      "name": "open_directory",
+      "value": "ディレクトリを開く"
+    },
+    {
+      "name": "downloading",
+      "value": "ダウンロード中…… 後ほどお試しください"
+    },
+    {
+      "name": "torrent_exist",
+      "value": "ファイルは既に存在します: %s"
+    },
+    {
+      "name": "subscription_watched",
+      "value": "閲覧済み"
+    },
+    {
+      "name": "subscription_hidden",
+      "value": "非表示"
+    },
+    {
+      "name": "delete_subscription_title",
+      "value": "タグを削除"
+    },
+    {
+      "name": "can_not_use_this_tag",
+      "value": "タグは利用できません"
+    },
+    {
+      "name": "add_tag_dialog_title",
+      "value": "タグを追加"
+    },
+    {
+      "name": "tag_title",
+      "value": "タグ"
+    },
+    {
+      "name": "empty_subscription",
+      "value": "購読が空です"
+    },
+    {
+      "name": "subscription_success",
+      "value": "%s 成功"
+    },
+    {
+      "name": "yes",
+      "value": "はい"
+    },
+    {
+      "name": "cancel",
+      "value": "キャンセル"
+    },
+    {
+      "name": "dummy_button",
+      "value": "ダミーボタン"
+    },
+    {
+      "name": "dummy_content",
+      "value": "ダミー\nコンテンツ"
+    },
+    {
+      "name": "wifi_server_name",
+      "value": "Wi-Fi サーバー"
+    },
+    {
+      "name": "wifi_server",
+      "value": "Wi-Fi サーバー"
+    },
+    {
+      "name": "wifi_client",
+      "value": "Wi-Fi クライアント"
+    },
+    {
+      "name": "wifi_send_bookmark",
+      "value": "ブックマークを移行"
+    },
+    {
+      "name": "wifi_send_favorite",
+      "value": "お気に入りを移行"
+    },
+    {
+      "name": "wifi_send_download",
+      "value": "ダウンロードデータを移行"
+    },
+    {
+      "name": "wifi_send_download_location",
+      "value": "ダウンロードフォルダを移行"
+    },
+    {
+      "name": "wifi_download_dir_empty",
+      "value": "移行可能なギャラリーフォルダが見つかりません"
+    },
+    {
+      "name": "wifi_download_dir_no_location",
+      "value": "この端末にダウンロードフォルダが設定されていません"
+    },
+    {
+      "name": "wifi_download_dir_migrating",
+      "value": "%1$s を移行中（%2$d/%3$d ファイル）"
+    },
+    {
+      "name": "wifi_download_dir_manifest_received",
+      "value": "%1$s（%2$d/%3$d）：スキップ %4$d、転送 %5$d"
+    },
+    {
+      "name": "wifi_download_dir_file_done",
+      "value": "ファイルを受信しました：%s"
+    },
+    {
+      "name": "wifi_download_dir_files_progress",
+      "value": "%d 個のファイルを受信しました"
+    },
+    {
+      "name": "wifi_download_dir_file_failed",
+      "value": "ファイルのチェックサム検証に失敗したため破棄しました"
+    },
+    {
+      "name": "wifi_send_done",
+      "value": "データの移行が完了しました"
+    },
+    {
+      "name": "wifi_send_start",
+      "value": "「%s」の移行を開始"
+    },
+    {
+      "name": "wifi_send_stop",
+      "value": "「%s」の移行を停止"
+    },
+    {
+      "name": "wifi_sending",
+      "value": "データの移行が進行中です。しばらく待つか、終了して再試行してください。"
+    },
+    {
+      "name": "wifi_send_text",
+      "value": "データを送信"
+    },
+    {
+      "name": "wifi_server_illustrate",
+      "value": "データを受信するデバイスが、ローカルホットスポットに接続されている事を確認し、移行が完了する前に切断や親ページに戻したりをしないでください！"
+    },
+    {
+      "name": "wifi_server_connect",
+      "value": "接続する"
+    },
+    {
+      "name": "wifi_server_connect_unable",
+      "value": "接続先がありません"
+    },
+    {
+      "name": "wifi_server_connection_succeeded",
+      "value": "デバイスは正常に接続されました。データの受信後にアプリを再起動してデータを有効化してください。"
+    },
+    {
+      "name": "wifi_server_disconnect",
+      "value": "デバイスが切断されました"
+    },
+    {
+      "name": "wifi_server_connection_fail",
+      "value": "コネクションの作成に失敗しました"
+    },
+    {
+      "name": "wifi_server_send_success",
+      "value": "送信に成功しました: %s"
+    },
+    {
+      "name": "wifi_server_send_fail",
+      "value": "送信に失敗しました: %s"
+    },
+    {
+      "name": "wifi_server_receive_message",
+      "value": "メッセージを受信しました: %s"
+    },
+    {
+      "name": "wifi_server_receive_message_unknown",
+      "value": "不明なデータタイプ"
+    },
+    {
+      "name": "wifi_server_opened",
+      "value": "ホットスポットSSID: %1s\n%2s"
+    },
+    {
+      "name": "wifi_server_closed",
+      "value": "ホットスポットが閉じられました"
+    },
+    {
+      "name": "wifi_server_password",
+      "value": "パスワード: %s"
+    },
+    {
+      "name": "wifi_server_no_permission",
+      "value": "権限の許可が不十分です。権限の許可を行なってください。"
+    },
+    {
+      "name": "refresh_limits",
+      "value": "更新の使用制限"
+    },
+    {
+      "name": "from_gallery_visits",
+      "value": "%s 件のギャラリーの訪問"
+    },
+    {
+      "name": "from_torrent_completions",
+      "value": "%s 件の Torrent の完了"
+    },
+    {
+      "name": "from_archive_download",
+      "value": "%s 件のアーカイブのダウンロード"
+    },
+    {
+      "name": "from_hentai_home",
+      "value": "%s 件の Hentai@Home"
+    },
+    {
+      "name": "current_moderation_power",
+      "value": "現在のモデレーションパワー %s"
+    },
+    {
+      "name": "reset_cost",
+      "value": "コスト %s をリセットする"
+    },
+    {
+      "name": "ip_base_limits",
+      "value": "IP-based limits"
+    },
+    {
+      "name": "limit_unneed_reset",
+      "value": "現在、クオータをリセットする必要はありません。更新後にもう一度お試しください～"
+    },
+    {
+      "name": "pagination_count",
+      "value": "カウント"
+    },
+    {
+      "name": "pagination_page_and_item",
+      "value": "r/p"
+    },
+    {
+      "name": "settings_eh_list_show_read_progress",
+      "value": "閲覧の進捗を表示"
+    },
+    {
+      "name": "settings_eh_list_show_read_progress_summary",
+      "value": "各ギャラリーの閲覧の進捗状況を詳細リストモードで表示します"
+    },
+    {
+      "name": "cookie_login_import_in_clipboard",
+      "value": "クリップボードからインポート"
+    },
+    {
+      "name": "no_cookie_in_clipboard",
+      "value": "クリップボードに有効なデータがありません"
+    },
+    {
+      "name": "gallery_update_dialog_title",
+      "value": "更新方法"
+    },
+    {
+      "name": "gallery_update_dialog_message",
+      "value": "古いギャラリーを上書き: ダウンロードしたバージョンのみ保持され、古いバージョンは削除されます。新しいギャラリーとしてダウンロード: ダウンロードしたギャラリーは新しいギャラリーとして存在し、新しいギャラリーと古いギャラリーの両方が保存されます。"
+    },
+    {
+      "name": "gallery_update_download_as_new",
+      "value": "新しくダウンロード"
+    },
+    {
+      "name": "gallery_update_override_old",
+      "value": "古いものを上書き"
+    },
+    {
+      "name": "loading_db_file",
+      "value": "データを読み込み中…"
+    },
+    {
+      "name": "settings_eh_history_size",
+      "value": "履歴の記録数"
+    },
+    {
+      "name": "history_info_unlimited",
+      "value": "無制限"
+    },
+    {
+      "name": "archiver",
+      "value": "アーカイブ"
+    },
+    {
+      "name": "archiver_dialog_current_funds",
+      "value": "現在の Funds:"
+    },
+    {
+      "name": "archiver_dialog_cost",
+      "value": "ダウンロードコスト:  %s"
+    },
+    {
+      "name": "archiver_dialog_download_original",
+      "value": "オリジナルのアーカイブをダウンロード"
+    },
+    {
+      "name": "archiver_dialog_download_resample",
+      "value": "リサンプルアーカイブをダウンロード"
+    },
+    {
+      "name": "archiver_dialog_size",
+      "value": "推定サイズ: %s"
+    },
+    {
+      "name": "dialog_archiver_title",
+      "value": "アーカイブダウンローダー"
+    },
+    {
+      "name": "download_receiver_label",
+      "value": "EhViewer ダウンロードレシーバー"
+    },
+    {
+      "name": "decompressed_successfully",
+      "value": "正常に展開されました！"
+    },
+    {
+      "name": "decompression_failed",
+      "value": "展開に失敗しました！"
+    },
+    {
+      "name": "download_label_archiver",
+      "value": "アーカイブ"
+    },
+    {
+      "name": "cookie_in_clipboard_incorrect",
+      "value": "Cookie の形式が正しくありません"
+    },
+    {
+      "name": "settings_download_timeout",
+      "value": "ダウンロードのタイムアウト"
+    },
+    {
+      "name": "download_timeout_unlimited",
+      "value": "無制限"
+    },
+    {
+      "name": "settings_download_timeout_summary",
+      "value": "画像のダウンロードを許可する最大時間 (%s 秒単位)"
+    },
+    {
+      "name": "have_new_version",
+      "value": "タップで新しいギャラリーのバージョンを表示"
+    },
+    {
+      "name": "appwidget_text",
+      "value": "例"
+    },
+    {
+      "name": "add_widget",
+      "value": "ウィジェットを追加"
+    },
+    {
+      "name": "app_widget_description",
+      "value": "これはアプリウィジェットの説明です"
+    },
+    {
+      "name": "archiver_downloading",
+      "value": "アーカイブをダウンロード中 %s"
+    },
+    {
+      "name": "order",
+      "value": "順番"
+    },
+    {
+      "name": "sort_by_pub_time",
+      "value": "公開日時"
+    },
+    {
+      "name": "sort_by_fav_time",
+      "value": "お気に入りをした日時"
+    },
+    {
+      "name": "settings_eh_sign_out_restart",
+      "value": "自動で再起動中です。しばらくお待ちください。"
+    },
+    {
+      "name": "settings_eh_theme_auto_switch",
+      "value": "システムのダークモードに従う"
+    },
+    {
+      "name": "spen_previous_page",
+      "value": "前のページ"
+    },
+    {
+      "name": "spen_next_page",
+      "value": "次のページ"
+    },
+    {
+      "name": "category_all",
+      "value": "すべて"
+    },
+    {
+      "name": "import_local_archive",
+      "value": "ローカルアーカイブをインポート"
+    },
+    {
+      "name": "import_archive_title",
+      "value": "アーカイブファイルを選択"
+    },
+    {
+      "name": "import_archive_failed",
+      "value": "アーカイブのインポートに失敗しました"
+    },
+    {
+      "name": "archive_permission_lost",
+      "value": "アーカイブへのアクセス権限が失われました。アーカイブファイルを再インポートしてください。"
+    },
+    {
+      "name": "import_archive_processing",
+      "value": "アーカイブを処理中…"
+    },
+    {
+      "name": "import_archive_invalid_format",
+      "value": "サポートされていないアーカイブ形式"
+    },
+    {
+      "name": "import_archive_already_imported",
+      "value": "アーカイブは既にインポートされています"
+    },
+    {
+      "name": "import_archive_success",
+      "value": "アーカイブのインポートが成功しました"
+    },
+    {
+      "name": "archive_not_accessible",
+      "value": "アーカイブファイルにアクセスできません"
+    },
+    {
+      "name": "imported_archive_info_title",
+      "value": "ローカルインポート情報"
+    },
+    {
+      "name": "imported_archive_info_message",
+      "value": "これはローカルストレージからインポートされたアイテムです"
+    },
+    {
+      "name": "imported_archive_category",
+      "value": "ローカルインポート"
+    },
+    {
+      "name": "import_local_album",
+      "value": "ローカルアルバムをインポート"
+    },
+    {
+      "name": "import_album_title",
+      "value": "画像フォルダを選択"
+    },
+    {
+      "name": "import_album_processing",
+      "value": "アルバムをインポート中…"
+    },
+    {
+      "name": "import_album_failed",
+      "value": "アルバムのインポートに失敗しました"
+    },
+    {
+      "name": "import_album_no_images",
+      "value": "選択したフォルダに対応する画像がありません"
+    },
+    {
+      "name": "import_album_already_imported",
+      "value": "アルバムは既にインポートされています"
+    },
+    {
+      "name": "import_album_success",
+      "value": "%d 枚の画像をインポートしました"
+    },
+    {
+      "name": "tag_selector_more",
+      "value": "▼ もっと見る"
+    },
+    {
+      "name": "tag_selector_collapse",
+      "value": "▲ 折りたたむ"
+    },
+    {
+      "name": "tag_selector_end",
+      "value": "--- 終了 ---"
+    },
+    {
+      "name": "error_rar_unsupported",
+      "value": "RAR 形式のアーカイブには対応していません（ZIP または 7z をご利用ください）"
+    },
+    {
+      "name": "shortcut_start_all_triggered",
+      "value": "「すべて開始」を実行しました"
+    },
+    {
+      "name": "shortcut_stop_all_triggered",
+      "value": "「すべて停止」を実行しました"
+    },
+    {
+      "name": "disable_pattern_protection",
+      "value": "パターン保護を無効にする"
+    },
+    {
+      "name": "pattern_protection_disabled",
+      "value": "パターン保護を無効にしました"
+    },
+    {
+      "name": "archiver_download_cancel",
+      "value": "アーカイブダウンロードをキャンセル"
+    },
+    {
+      "name": "archiver_download_cancel_confirm",
+      "value": "アーカイブダウンロードを中止して一時ファイルを削除しますか？"
+    },
+    {
+      "name": "archiver_download_canceled",
+      "value": "アーカイブダウンロードをキャンセルしました"
+    },
+    {
+      "name": "reset_limit_confirm_title",
+      "value": "画像制限をリセット"
+    },
+    {
+      "name": "reset_limit_confirm_message",
+      "value": "%s を消費して画像制限をリセットしますか？"
+    },
+    {
+      "name": "reset_limit_success",
+      "value": "画像制限をリセットしました"
+    },
+    {
+      "name": "reset_limit_failed",
+      "value": "画像制限のリセットに失敗しました"
+    }
+  ]
+}

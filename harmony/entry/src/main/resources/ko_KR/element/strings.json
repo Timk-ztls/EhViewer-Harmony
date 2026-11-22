@@ -1,0 +1,3316 @@
+{
+  "string": [
+    {
+      "name": "blacklist_id",
+      "value": "사용자 ID"
+    },
+    {
+      "name": "blacklist",
+      "value": "차단 목록"
+    },
+    {
+      "name": "join_in_blacklist",
+      "value": "차단 목록에 추가"
+    },
+    {
+      "name": "add_blacklist",
+      "value": "사용자 차단 추가"
+    },
+    {
+      "name": "blacklist_tip",
+      "value": "이 차단 시스템은 EHentai 웹사이트 댓글 시스템을 기반으로 댓글을 계속 차단합니다.\n\n댓글 작성자 차단 항목: 해당 댓글 작성자가 업로드한 댓글을 제외합니다. 이로 인해 갤러리 목록을 불러오는 데 더 많은 시간이 걸립니다."
+    },
+    {
+      "name": "blacklist_text",
+      "value": "사용자 차단"
+    },
+    {
+      "name": "delete_blacklist",
+      "value": "사용자 \"%s\" 차단을 해제하시겠습니까?"
+    },
+    {
+      "name": "blacklist_reason_text",
+      "value": "차단 사유"
+    },
+    {
+      "name": "settings_eh_blacklist",
+      "value": "댓글 차단 목록"
+    },
+    {
+      "name": "settings_eh_blacklist_summary",
+      "value": "계정 이름으로 다른 사람의 댓글 차단"
+    },
+    {
+      "name": "settings_advanced_dns_over_http_title",
+      "value": "보안 DNS (DoH)"
+    },
+    {
+      "name": "settings_advanced_dns_over_http_summary",
+      "value": "특정 지역의 DNS 오염 문제 해결"
+    },
+    {
+      "name": "settings_advanced_domain_fronting_title",
+      "value": "도메인 프론팅"
+    },
+    {
+      "name": "settings_advanced_domain_fronting_summary",
+      "value": "SNI 차단 우회"
+    },
+    {
+      "name": "settings_advanced_url_replace_title",
+      "value": "URL 위장, SNI를 닫아야 함"
+    },
+    {
+      "name": "settings_advanced_url_replace_summary",
+      "value": "URL 위장 (재시작 필요, 활성화 후 계정 기능이 작동하지 않음)"
+    },
+    {
+      "name": "settings_about_donate_guide",
+      "value": "지원 가이드"
+    },
+    {
+      "name": "share_favorites_dialog_title",
+      "value": "즐겨찾기 공유"
+    },
+    {
+      "name": "share_favorites_dialog_message",
+      "value": "즐겨찾기 %s을(를) 공유하시겠습니까?"
+    },
+    {
+      "name": "add_favorites_dialog_message",
+      "value": "즐겨찾기에 %s을(를) 추가하시겠습니까?"
+    },
+    {
+      "name": "settings_advanced_built_ex_hosts_title",
+      "value": "내장 exhentai hosts.txt"
+    },
+    {
+      "name": "settings_advanced_built_ex_hosts_summary",
+      "value": "앱에서 제공하는 호스트-IP 매핑\n사용자 지정 hosts.txt로 덮어쓸 수 있음"
+    },
+    {
+      "name": "network_remind",
+      "value": "VPN이 활성화된 것으로 감지되었습니다. 네트워크 보안에 주의하세요"
+    },
+    {
+      "name": "no_blicklist",
+      "value": "여기는 차단 목록입니다"
+    },
+    {
+      "name": "app_name",
+      "value": "EhViewer"
+    },
+    {
+      "name": "theme_light",
+      "value": "밝은 테마"
+    },
+    {
+      "name": "theme_dark",
+      "value": "어두운 테마"
+    },
+    {
+      "name": "theme_black",
+      "value": "검정색 테마"
+    },
+    {
+      "name": "homepage",
+      "value": "홈"
+    },
+    {
+      "name": "subscription",
+      "value": "구독"
+    },
+    {
+      "name": "whats_hot",
+      "value": "인기 갤러리"
+    },
+    {
+      "name": "top_lists",
+      "value": "상위 목록"
+    },
+    {
+      "name": "favourite",
+      "value": "즐겨찾기"
+    },
+    {
+      "name": "history",
+      "value": "방문 기록"
+    },
+    {
+      "name": "downloads",
+      "value": "다운로드"
+    },
+    {
+      "name": "news",
+      "value": "뉴스"
+    },
+    {
+      "name": "settings",
+      "value": "설정"
+    },
+    {
+      "name": "username",
+      "value": "사용자 이름"
+    },
+    {
+      "name": "password",
+      "value": "비밀번호"
+    },
+    {
+      "name": "recaptcha",
+      "value": "Recaptcha (선택)"
+    },
+    {
+      "name": "recaptcha_none",
+      "value": "여기를 누르세요"
+    },
+    {
+      "name": "recaptcha_loading",
+      "value": "불러오는 중…"
+    },
+    {
+      "name": "recaptcha_failure",
+      "value": "실패"
+    },
+    {
+      "name": "sign_in",
+      "value": "로그인"
+    },
+    {
+      "name": "register",
+      "value": "회원가입"
+    },
+    {
+      "name": "sign_in_via_webview",
+      "value": "WebView를 통하여 로그인"
+    },
+    {
+      "name": "sign_in_via_cookies",
+      "value": "쿠키를 사용하여 로그인"
+    },
+    {
+      "name": "display_name_dialog_title",
+      "value": "별명 입력"
+    },
+    {
+      "name": "display_name",
+      "value": "별명"
+    },
+    {
+      "name": "display_name_is_empty",
+      "value": "별명이 비어 있습니다."
+    },
+    {
+      "name": "sign_in_first",
+      "value": "먼저 로그인하세요."
+    },
+    {
+      "name": "default_display_name",
+      "value": "작은 하마"
+    },
+    {
+      "name": "cookie_explain",
+      "value": "쿠키는 웹 브라우저에 저장되는 적은 양의 데이터입니다. 이게 뭐고 어떻게 찾는지 잘 모르겠으면 검색해 보세요.\n\n특정 쿠키를 입력하여 로그인하세요."
+    },
+    {
+      "name": "text_is_empty",
+      "value": "텍스트가 비어 있습니다."
+    },
+    {
+      "name": "waring",
+      "value": "경고"
+    },
+    {
+      "name": "wrong_cookie_warning",
+      "value": "입력한 쿠키가 잘못된 것 같습니다. 확인해 보는 게 좋겠어요."
+    },
+    {
+      "name": "i_will_check_it",
+      "value": "확인해 볼게요"
+    },
+    {
+      "name": "i_dont_think_so",
+      "value": "아닌데요"
+    },
+    {
+      "name": "found_cookies",
+      "value": "쿠키를 찾았어요!"
+    },
+    {
+      "name": "invalid_download_location",
+      "value": "다운로드 위치가 잘못되었습니다. 설정을 확인하세요."
+    },
+    {
+      "name": "cellular_network_warning",
+      "value": "모바일 데이터를 사용하는 중입니다."
+    },
+    {
+      "name": "clipboard_gallery_url_snack_message",
+      "value": "클립보드에 갤러리 주소가 있습니다."
+    },
+    {
+      "name": "clipboard_gallery_url_snack_action",
+      "value": "보기"
+    },
+    {
+      "name": "image_save_success",
+      "value": "사진이 성공적으로 저장되었습니다"
+    },
+    {
+      "name": "error_bad_status_code",
+      "value": "비정상 상태 코드: %d"
+    },
+    {
+      "name": "error_timeout",
+      "value": "시간 초과"
+    },
+    {
+      "name": "error_unknown_host",
+      "value": "알 수 없는 호스트"
+    },
+    {
+      "name": "error_redirection",
+      "value": "너무 많은 서버 리디렉션"
+    },
+    {
+      "name": "error_socket",
+      "value": "네트워크 오류"
+    },
+    {
+      "name": "error_unknown",
+      "value": "이상함"
+    },
+    {
+      "name": "error_cant_find_activity",
+      "value": "앱을 찾을 수 없음"
+    },
+    {
+      "name": "error_cannot_parse_the_url",
+      "value": "URL을 분석할 수 없음"
+    },
+    {
+      "name": "error_not_folder_path",
+      "value": "폴더 경로가 아님"
+    },
+    {
+      "name": "error_no_provider",
+      "value": "제공자가 없음"
+    },
+    {
+      "name": "error_decoding_failed",
+      "value": "디코딩 실패"
+    },
+    {
+      "name": "error_not_found",
+      "value": "찾을 수 없음"
+    },
+    {
+      "name": "error_empty",
+      "value": "비어 있음"
+    },
+    {
+      "name": "error_invalid_archive",
+      "value": "잘못된 압축 파일"
+    },
+    {
+      "name": "error_reading_failed",
+      "value": "읽기 실패"
+    },
+    {
+      "name": "error_out_of_range",
+      "value": "범위 초과"
+    },
+    {
+      "name": "error_write_failed",
+      "value": "쓰기 오류"
+    },
+    {
+      "name": "error_parse_error",
+      "value": "분석 오류"
+    },
+    {
+      "name": "error_509",
+      "value": "509"
+    },
+    {
+      "name": "error_invalid_url",
+      "value": "잘못된 URL"
+    },
+    {
+      "name": "error_get_ptoken_error",
+      "value": "pToken 획득 오류"
+    },
+    {
+      "name": "error_cant_create_temp_file",
+      "value": "임시 파일을 만들 수 없음"
+    },
+    {
+      "name": "error_cant_save_image",
+      "value": "이미지를 저장할 수 없음"
+    },
+    {
+      "name": "error_save_image_existed",
+      "value": "이미 이미지가 존재함"
+    },
+    {
+      "name": "error_invalid_number",
+      "value": "잘못된 번호"
+    },
+    {
+      "name": "error_please_login_first",
+      "value": "로그인이 필요함"
+    },
+    {
+      "name": "error_empty_html",
+      "value": "페이지 내용이 비어있음"
+    },
+    {
+      "name": "error_cant_get_image",
+      "value": "이미지를 가져올 수 없음"
+    },
+    {
+      "name": "error_igneous_wrong",
+      "value": "잘못된 igneous\n권한을 확인하고 다시 로그인하세요"
+    },
+    {
+      "name": "gallery_gl_fallback_title",
+      "value": "OpenGL 렌더러를 사용할 수 없습니다"
+    },
+    {
+      "name": "gallery_gl_fallback_message",
+      "value": "이 기기에서는 현재 EGL을 초기화할 수 없습니다. 뒤로 돌아간 뒤 잠시 후 다시 시도하세요."
+    },
+    {
+      "name": "gallery_gl_fallback_action_close",
+      "value": "뒤로"
+    },
+    {
+      "name": "gallery_gl_fallback_toast",
+      "value": "GL 렌더링에 실패하여 안전한 대체 페이지로 전환했습니다"
+    },
+    {
+      "name": "kokomade_tip",
+      "value": "설정->EH->갤러리 사이트->e-hentai"
+    },
+    {
+      "name": "app_waring",
+      "value": "이 앱의 내용은 인터넷에서 받아옵니다. 이 앱을 사용하기 위해서는 받아온 내용 중 일부가 사용자에게 가할 수 있는 신체적 또는 정신적 피해를 감수해야 합니다."
+    },
+    {
+      "name": "error_username_cannot_empty",
+      "value": "사용자 이름은 비워둘 수 없습니다."
+    },
+    {
+      "name": "error_password_cannot_empty",
+      "value": "비밀번호는 비워둘 수 없습니다."
+    },
+    {
+      "name": "guest_mode",
+      "value": "게스트 모드"
+    },
+    {
+      "name": "sign_in_failed",
+      "value": "로그인 실패"
+    },
+    {
+      "name": "sign_in_failed_tip",
+      "value": "오류가 계속되면 WebView 또는 쿠키를 통한 로그인을 시도해보세요."
+    },
+    {
+      "name": "sign_in_failed_plain",
+      "value": "뭔가가 잘못되었습니다. 웹사이트가 업데이트 중일 수 있습니다. WebView 또는 쿠키를 사용하여 로그인하거나 아래 버튼을 눌러 로그인을 건너뛸 수 있습니다. 그러나 로그인을 건너뛰면 \"슬픈 팬더\"를 보게 될 것입니다."
+    },
+    {
+      "name": "press_twice_exit",
+      "value": "한 번 더 누르면 종료됩니다."
+    },
+    {
+      "name": "content_layout_restore_tip",
+      "value": "다시 시도하려면 누르기"
+    },
+    {
+      "name": "write_rationale",
+      "value": "앱이 갤러리를 다운로드하려면 WRITE_EXTERNAL_STORAGE 권한이 필요합니다. 권한을 허용하시겠습니까?"
+    },
+    {
+      "name": "you_rejected_me",
+      "value": "안돼요"
+    },
+    {
+      "name": "analytics_explain",
+      "value": "앱 개발자에게 기기 및 사용 정보를 보내시겠습니까? 앱 개발에 굉장한 도움이 됩니다. <br><br>데이터 분석 서비스는 Google Analytics for Firebase를 사용하며, 개인 정보 보호 정책은 <a href=\"https://www.google.com/policies/privacy/\">https://www.google.com/policies/privacy/</a> 에서 확인하실 수 있습니다.<br><br>데이터 분석을 허용하면 사용자의 기기 및 앱 사용 정보가 수집됩니다. 전화번호나 이메일 주소, IMEI와 같은 개인 정보는 수집하지 않습니다.<br><br>데이터 분석을 허용하기 전까지는 정보를 수집하지 않습니다.<br><br>수집한 정보는 Google Analytics for Firebase에 의해 분석됩니다. 분석된 정보는 이 애플리케이션의 개발자만 볼 수 있습니다."
+    },
+    {
+      "name": "get_it",
+      "value": "알겠습니다"
+    },
+    {
+      "name": "accept",
+      "value": "동의"
+    },
+    {
+      "name": "reject",
+      "value": "거부"
+    },
+    {
+      "name": "help_route",
+      "value": "설정 -> 정보 -> 도움말"
+    },
+    {
+      "name": "select_scene",
+      "value": "어느 갤러리 사이트를 사용하시겠습니까?"
+    },
+    {
+      "name": "select_scene_explain",
+      "value": "e-hentai: 모든 사람들이 사용할 수 있음\nexhentai: 로그인한 사람만 사용할 수 있음"
+    },
+    {
+      "name": "no_select",
+      "value": "두 사이트 중 하나를 선택하세요."
+    },
+    {
+      "name": "new_version",
+      "value": "새 버전"
+    },
+    {
+      "name": "update",
+      "value": "업데이트"
+    },
+    {
+      "name": "update_fail",
+      "value": "업데이트 확인 실패"
+    },
+    {
+      "name": "update_to",
+      "value": "업데이트"
+    },
+    {
+      "name": "update_plain",
+      "value": "버전: %1$s\n파일 크기: %2$s\n\n%3$s"
+    },
+    {
+      "name": "update_fail_info",
+      "value": "예를 클릭하여 Github 홈페이지로 이동"
+    },
+    {
+      "name": "update_to_date",
+      "value": "최신 버전의 EhViewer를 사용 중입니다."
+    },
+    {
+      "name": "update_ignore",
+      "value": "무시"
+    },
+    {
+      "name": "no_updates_available",
+      "value": "최신 버전입니다"
+    },
+    {
+      "name": "gallery_list_search_bar_hint_exhentai",
+      "value": "ExHentai 검색"
+    },
+    {
+      "name": "gallery_list_search_bar_hint_e_hentai",
+      "value": "E-Hentai 검색"
+    },
+    {
+      "name": "gallery_list_search_bar_open_gallery",
+      "value": "갤러리 열기"
+    },
+    {
+      "name": "gallery_list_empty_hit",
+      "value": "The World is Big and the panda sit alone"
+    },
+    {
+      "name": "gallery_list_empty_hit_subscription",
+      "value": "설정->EH->마이태그 구독태그까지 부탁드립니다."
+    },
+    {
+      "name": "gallery_list_no_preview_tag",
+      "value": "미리보기 탭 없음"
+    },
+    {
+      "name": "search",
+      "value": "검색"
+    },
+    {
+      "name": "gallery_list_action_url_missed",
+      "value": "다음 페이지를 찾을 수 없습니다"
+    },
+    {
+      "name": "gallery_list_no_more_data",
+      "value": "현재 목록에 더 이상 데이터가 없습니다"
+    },
+    {
+      "name": "gallery_list_date_jump_1d",
+      "value": "어제"
+    },
+    {
+      "name": "gallery_list_date_jump_3d",
+      "value": "3일 전"
+    },
+    {
+      "name": "gallery_list_date_jump_1w",
+      "value": "일주일 전"
+    },
+    {
+      "name": "gallery_list_date_jump_2w",
+      "value": "2주 전"
+    },
+    {
+      "name": "gallery_list_date_jump_1m",
+      "value": "한 달 전"
+    },
+    {
+      "name": "gallery_list_date_jump_6m",
+      "value": "6개월 전"
+    },
+    {
+      "name": "gallery_list_date_jump_1y",
+      "value": "1년 전"
+    },
+    {
+      "name": "gallery_list_date_jump_2y",
+      "value": "2년 전"
+    },
+    {
+      "name": "gallery_list_select_jump_date",
+      "value": "날짜 선택기 사용"
+    },
+    {
+      "name": "gallery_list_select_jump_node",
+      "value": "노드 선택기 사용"
+    },
+    {
+      "name": "gallery_list_jump_now",
+      "value": "지금 이동"
+    },
+    {
+      "name": "gallery_list_time_jump_dialog_title",
+      "value": "이동 선택기"
+    },
+    {
+      "name": "gallery_list_time_jump_dialog_found_message",
+      "value": "%s개 결과 발견"
+    },
+    {
+      "name": "gallery_tag_copy",
+      "value": "태그 복사됨"
+    },
+    {
+      "name": "keyword_search",
+      "value": "키워드 검색"
+    },
+    {
+      "name": "image_search",
+      "value": "이미지 검색"
+    },
+    {
+      "name": "search_normal",
+      "value": "일반 검색"
+    },
+    {
+      "name": "search_advance",
+      "value": "고급 옵션"
+    },
+    {
+      "name": "search_image",
+      "value": "이미지 검색"
+    },
+    {
+      "name": "search_normal_search",
+      "value": "일반 검색"
+    },
+    {
+      "name": "search_subscription_search",
+      "value": "구독 검색"
+    },
+    {
+      "name": "search_specify_uploader",
+      "value": "업로더 지정"
+    },
+    {
+      "name": "search_specify_tag",
+      "value": "태그 지정"
+    },
+    {
+      "name": "search_enable_advance",
+      "value": "고급 옵션 사용"
+    },
+    {
+      "name": "search_tip",
+      "value": "일반 검색: 그냥 검색합니다.\n\n업로더 지정: 해당 업로더가 업로드한 갤러리를 검색합니다. 다른 옵션은 무시됩니다.\n\n태그 지정: 해당 태그를 포함한 갤러리를 검색합니다. 하나의 태그만 지정할 수 있으며, 다른 옵션은 무시됩니다."
+    },
+    {
+      "name": "search_sname",
+      "value": "갤러리 검색"
+    },
+    {
+      "name": "search_stags",
+      "value": "갤러래 태그 검색"
+    },
+    {
+      "name": "search_sdesc",
+      "value": "갤러리 설명 검색"
+    },
+    {
+      "name": "search_storr",
+      "value": "토렌트 파일 이름 검색"
+    },
+    {
+      "name": "search_sto",
+      "value": "토렌트 파일이 있는 갤러리만 검색"
+    },
+    {
+      "name": "search_sdt1",
+      "value": "Low-Power 태그 검색"
+    },
+    {
+      "name": "search_sdt2",
+      "value": "Downvoted 태그 검색"
+    },
+    {
+      "name": "search_sh",
+      "value": "Expunged 갤러리 표시"
+    },
+    {
+      "name": "search_sr",
+      "value": "최소 평점:"
+    },
+    {
+      "name": "search_sp",
+      "value": "페이지 수:"
+    },
+    {
+      "name": "search_sp_to",
+      "value": "부터"
+    },
+    {
+      "name": "search_sp_suffix",
+      "value": ""
+    },
+    {
+      "name": "search_sf",
+      "value": "기본 필터 비활성화:"
+    },
+    {
+      "name": "search_sfl",
+      "value": "언어"
+    },
+    {
+      "name": "search_sfu",
+      "value": "업로더"
+    },
+    {
+      "name": "search_sft",
+      "value": "태그"
+    },
+    {
+      "name": "select_image",
+      "value": "이미지 선택"
+    },
+    {
+      "name": "search_uss",
+      "value": "유사한 검색 사용"
+    },
+    {
+      "name": "search_osc",
+      "value": "표지만 검색"
+    },
+    {
+      "name": "search_se",
+      "value": "삭제된 갤러리 보기"
+    },
+    {
+      "name": "select_image_first",
+      "value": "이미지를 먼저 선택해 주세요."
+    },
+    {
+      "name": "add_to_favourites",
+      "value": "즐겨찾기에 추가"
+    },
+    {
+      "name": "remove_from_favourites",
+      "value": "즐겨찾기에서 제거"
+    },
+    {
+      "name": "stop_downloading",
+      "value": "다운로드 중지"
+    },
+    {
+      "name": "delete_downloads",
+      "value": "다운로드 삭제"
+    },
+    {
+      "name": "quick_search",
+      "value": "빠른 검색"
+    },
+    {
+      "name": "quick_search_tip",
+      "value": "빠른 검색을 추가하려면 \"+\" 버튼을 누르세요."
+    },
+    {
+      "name": "add_quick_search_dialog_title",
+      "value": "빠른 검색 추가"
+    },
+    {
+      "name": "name_is_empty",
+      "value": "이름이 비어 있습니다."
+    },
+    {
+      "name": "delete",
+      "value": "삭제"
+    },
+    {
+      "name": "delete_quick_search_title",
+      "value": "빠른 검색 삭제"
+    },
+    {
+      "name": "delete_quick_search_message",
+      "value": "\"%s\" 항목을 삭제하시겠습니까?"
+    },
+    {
+      "name": "no_quick_search",
+      "value": "빠른 검색 목록이 여기에 표시됩니다."
+    },
+    {
+      "name": "add_quick_search_tip",
+      "value": "갤러리 목록의 상태가 빠른 검색으로 저장됩니다. 검색 패널의 상태를 저장하려면 먼저 검색을 해야 합니다."
+    },
+    {
+      "name": "readme",
+      "value": "README"
+    },
+    {
+      "name": "image_search_not_quick_search",
+      "value": "이미지 검색은 빠른 검색에 추가할 수 없습니다."
+    },
+    {
+      "name": "duplicate_quick_search",
+      "value": "이미 같은 내용의 빠른 검색 항목이 있습니다. 이름은 \"%s\"입니다."
+    },
+    {
+      "name": "duplicate_name",
+      "value": "같은 이름의 항목이 이미 있습니다."
+    },
+    {
+      "name": "subscription_tip",
+      "value": "\"+\" 를 클릭하여 구독목록에 추가"
+    },
+    {
+      "name": "go_to_hint",
+      "value": "페이지 %1$d, 총 %2$d 페이지"
+    },
+    {
+      "name": "star_2",
+      "value": "2개"
+    },
+    {
+      "name": "star_3",
+      "value": "3개"
+    },
+    {
+      "name": "star_4",
+      "value": "4개"
+    },
+    {
+      "name": "star_5",
+      "value": "5개"
+    },
+    {
+      "name": "error_cannot_find_gallery",
+      "value": "갤러리를 찾을 수 없습니다."
+    },
+    {
+      "name": "download",
+      "value": "다운로드"
+    },
+    {
+      "name": "read",
+      "value": "읽기"
+    },
+    {
+      "name": "more_information",
+      "value": "추가 정보"
+    },
+    {
+      "name": "favored_times",
+      "value": "♥ %d"
+    },
+    {
+      "name": "rating_text",
+      "value": "%1$s (%2$.2f, %3$d)"
+    },
+    {
+      "name": "favorites",
+      "value": "좋아요"
+    },
+    {
+      "name": "torrent_count",
+      "value": "토렌트 (%d)"
+    },
+    {
+      "name": "share",
+      "value": "공유"
+    },
+    {
+      "name": "rate",
+      "value": "평가"
+    },
+    {
+      "name": "similar_gallery",
+      "value": "유사"
+    },
+    {
+      "name": "search_cover",
+      "value": "커버 검색"
+    },
+    {
+      "name": "no_tags",
+      "value": "태그 없음"
+    },
+    {
+      "name": "no_comments",
+      "value": "코멘트 없음"
+    },
+    {
+      "name": "no_more_comments",
+      "value": "코멘트가 더 없음"
+    },
+    {
+      "name": "more_comment",
+      "value": "코멘트 더 보기"
+    },
+    {
+      "name": "no_previews",
+      "value": "미리 보기 없음"
+    },
+    {
+      "name": "no_more_previews",
+      "value": "미리 보기가 더 없음"
+    },
+    {
+      "name": "more_previews",
+      "value": "더 불러오기"
+    },
+    {
+      "name": "refresh",
+      "value": "새로고침"
+    },
+    {
+      "name": "open_in_other_app",
+      "value": "다른 앱에서 열기"
+    },
+    {
+      "name": "rate_successfully",
+      "value": "평가를 남겼습니다."
+    },
+    {
+      "name": "rate_failed",
+      "value": "평가에 실패했습니다."
+    },
+    {
+      "name": "no_torrents",
+      "value": "토렌트 없음"
+    },
+    {
+      "name": "torrents",
+      "value": "토렌트"
+    },
+    {
+      "name": "favorited",
+      "value": "즐겨찾기에 있음"
+    },
+    {
+      "name": "not_favorited",
+      "value": "즐겨찾기에 없음"
+    },
+    {
+      "name": "add_favorites_dialog_title",
+      "value": "즐겨찾기에 추가"
+    },
+    {
+      "name": "remember_favorite_collection",
+      "value": "즐겨찾기 저장 위치 기억"
+    },
+    {
+      "name": "add_to_favorite_success",
+      "value": "즐겨찾기에 추가했습니다."
+    },
+    {
+      "name": "remove_from_favorite_success",
+      "value": "즐겨찾기에서 제거했습니다."
+    },
+    {
+      "name": "add_to_favorite_failure",
+      "value": "즐겨찾기에 추가하지 못했습니다."
+    },
+    {
+      "name": "remove_from_favorite_failure",
+      "value": "즐겨찾기에서 제거하지 못했습니다."
+    },
+    {
+      "name": "filter_the_uploader",
+      "value": "업로더 \"%s\"을(를) 차단하시겠습니까?"
+    },
+    {
+      "name": "filter_the_tag",
+      "value": "태그 \"%s\"을(를) 차단하시겠습니까?"
+    },
+    {
+      "name": "filter_added",
+      "value": "차단 항목 추가됨"
+    },
+    {
+      "name": "copy_tag",
+      "value": "복사"
+    },
+    {
+      "name": "rating10",
+      "value": "최고"
+    },
+    {
+      "name": "rating9",
+      "value": "매우 좋음"
+    },
+    {
+      "name": "rating8",
+      "value": "좋음"
+    },
+    {
+      "name": "rating7",
+      "value": "괜찮음"
+    },
+    {
+      "name": "rating6",
+      "value": "그럭저럭"
+    },
+    {
+      "name": "rating5",
+      "value": "별로"
+    },
+    {
+      "name": "rating4",
+      "value": "그닥"
+    },
+    {
+      "name": "rating3",
+      "value": "안좋음"
+    },
+    {
+      "name": "rating2",
+      "value": "매우 안좋음"
+    },
+    {
+      "name": "rating1",
+      "value": "최악"
+    },
+    {
+      "name": "rating0",
+      "value": "…"
+    },
+    {
+      "name": "gallery_info",
+      "value": "갤러리 정보"
+    },
+    {
+      "name": "copied_to_clipboard",
+      "value": "클립보드에 복사했습니다."
+    },
+    {
+      "name": "header_key",
+      "value": "키"
+    },
+    {
+      "name": "header_value",
+      "value": "값"
+    },
+    {
+      "name": "key_gid",
+      "value": "GID"
+    },
+    {
+      "name": "key_token",
+      "value": "토큰"
+    },
+    {
+      "name": "key_url",
+      "value": "주소"
+    },
+    {
+      "name": "key_title",
+      "value": "제목"
+    },
+    {
+      "name": "key_title_jpn",
+      "value": "일본어 제목"
+    },
+    {
+      "name": "key_thumb",
+      "value": "섬네일"
+    },
+    {
+      "name": "key_category",
+      "value": "카테고리"
+    },
+    {
+      "name": "key_uploader",
+      "value": "업로더"
+    },
+    {
+      "name": "key_posted",
+      "value": "날짜"
+    },
+    {
+      "name": "key_parent",
+      "value": "부모"
+    },
+    {
+      "name": "key_visible",
+      "value": "가시성"
+    },
+    {
+      "name": "key_language",
+      "value": "언어"
+    },
+    {
+      "name": "key_pages",
+      "value": "페이지"
+    },
+    {
+      "name": "key_size",
+      "value": "크기"
+    },
+    {
+      "name": "key_favorite_count",
+      "value": "즐겨찾기\n횟수"
+    },
+    {
+      "name": "key_favorited",
+      "value": "즐겨찾기됨"
+    },
+    {
+      "name": "key_rating_count",
+      "value": "평가 횟수"
+    },
+    {
+      "name": "key_rating",
+      "value": "평가"
+    },
+    {
+      "name": "key_torrents",
+      "value": "토렌트"
+    },
+    {
+      "name": "key_torrent_url",
+      "value": "토렌트 주소"
+    },
+    {
+      "name": "gallery_comments",
+      "value": "갤러리 코멘트"
+    },
+    {
+      "name": "no_one_comments_gallery",
+      "value": "코멘트가 없습니다."
+    },
+    {
+      "name": "comment_successfully",
+      "value": "코멘트를 남겼습니다."
+    },
+    {
+      "name": "comment_failed",
+      "value": "코멘트를 남기지 못했습니다."
+    },
+    {
+      "name": "copy_comment_text",
+      "value": "코멘트 텍스트 복사"
+    },
+    {
+      "name": "edit_comment",
+      "value": "코멘트 수정"
+    },
+    {
+      "name": "edit_comment_successfully",
+      "value": "코멘트 수정 완료"
+    },
+    {
+      "name": "edit_comment_failed",
+      "value": "코멘트 수정 실패"
+    },
+    {
+      "name": "vote_up",
+      "value": "추천 (Vote up)"
+    },
+    {
+      "name": "cancel_vote_up",
+      "value": "추천 취소"
+    },
+    {
+      "name": "vote_down",
+      "value": "비추천 (Vote down)"
+    },
+    {
+      "name": "cancel_vote_down",
+      "value": "비추천 취소"
+    },
+    {
+      "name": "vote_up_successfully",
+      "value": "추천했습니다."
+    },
+    {
+      "name": "cancel_vote_up_successfully",
+      "value": "추천을 취소했습니다."
+    },
+    {
+      "name": "vote_down_successfully",
+      "value": "비추천했습니다."
+    },
+    {
+      "name": "cancel_vote_down_successfully",
+      "value": "비추천을 취소했습니다."
+    },
+    {
+      "name": "vote_failed",
+      "value": "추천/비추천에 실패했습니다."
+    },
+    {
+      "name": "check_vote_status",
+      "value": "추천/비추천 상태 보기"
+    },
+    {
+      "name": "click_more_comments",
+      "value": "코멘트 더 불러오기"
+    },
+    {
+      "name": "last_edited",
+      "value": "최종 수정시간:%s"
+    },
+    {
+      "name": "gallery_previews",
+      "value": "갤러리 미리 보기"
+    },
+    {
+      "name": "go_to",
+      "value": "이동"
+    },
+    {
+      "name": "tag_filter",
+      "value": "태그 필터링"
+    },
+    {
+      "name": "tag_selector_search_hint",
+      "value": "태그 검색…"
+    },
+    {
+      "name": "tag_selector_selected_count",
+      "value": "선택됨: %d"
+    },
+    {
+      "name": "tag_selector_selected_section_title",
+      "value": "선택한 태그"
+    },
+    {
+      "name": "tag_selector_empty_selected",
+      "value": "선택한 태그 없음"
+    },
+    {
+      "name": "tag_selector_other_group",
+      "value": "기타"
+    },
+    {
+      "name": "scene_download_title",
+      "value": "%s 갤러리 - %s"
+    },
+    {
+      "name": "no_download_info",
+      "value": "다운로드한 항목이 여기에 표시됩니다."
+    },
+    {
+      "name": "download_state_none",
+      "value": "유휴 상태"
+    },
+    {
+      "name": "download_state_wait",
+      "value": "대기 중"
+    },
+    {
+      "name": "download_state_downloading",
+      "value": "다운로드 중"
+    },
+    {
+      "name": "download_state_downloaded",
+      "value": "다운로드함"
+    },
+    {
+      "name": "download_state_failed",
+      "value": "실패함"
+    },
+    {
+      "name": "download_state_failed_2",
+      "value": "%d 남아 있음"
+    },
+    {
+      "name": "download_state_finish",
+      "value": "완료"
+    },
+    {
+      "name": "stat_509_alert_title",
+      "value": "509 경고"
+    },
+    {
+      "name": "stat_509_alert_text",
+      "value": "이미지 제한에 도달하였습니다. 다운로드를 멈추고 잠시 쉬세요."
+    },
+    {
+      "name": "stat_download_done_title",
+      "value": "다운로드 완료"
+    },
+    {
+      "name": "stat_download_done_text_succeeded",
+      "value": "%d 성공"
+    },
+    {
+      "name": "stat_download_done_text_failed",
+      "value": "%d 실패"
+    },
+    {
+      "name": "stat_download_done_text_mix",
+      "value": "%1$d 성공, %2$d 실패"
+    },
+    {
+      "name": "stat_download_done_line_succeeded",
+      "value": "성공: %s"
+    },
+    {
+      "name": "stat_download_done_line_failed",
+      "value": "실패: %s"
+    },
+    {
+      "name": "download_remove_dialog_title",
+      "value": "다운로드 항목 제거"
+    },
+    {
+      "name": "download_remove_dialog_message",
+      "value": "%s 항목을 다운로드 목록에서 제거하시겠습니까?"
+    },
+    {
+      "name": "download_remove_dialog_message_2",
+      "value": "%d개 항목을 다운로드 목록에서 제거하시겠습니까?"
+    },
+    {
+      "name": "download_remove_dialog_check_text",
+      "value": "이미지 파일 삭제"
+    },
+    {
+      "name": "stat_download_action_stop_all",
+      "value": "모두 중지"
+    },
+    {
+      "name": "drawer_download_label_title",
+      "value": "레이블"
+    },
+    {
+      "name": "default_download_label_name",
+      "value": "기본"
+    },
+    {
+      "name": "download_move_dialog_title",
+      "value": "이동"
+    },
+    {
+      "name": "download_labels",
+      "value": "다운로드 레이블"
+    },
+    {
+      "name": "download_sort_list",
+      "value": "정렬"
+    },
+    {
+      "name": "download_filter_by_status",
+      "value": "상태별 필터"
+    },
+    {
+      "name": "download_status_all",
+      "value": "전체"
+    },
+    {
+      "name": "download_status_not_started",
+      "value": "시작 안 함"
+    },
+    {
+      "name": "default_sort",
+      "value": "기본값"
+    },
+    {
+      "name": "sort_by_gallery_id_asc",
+      "value": "ID 오름차순"
+    },
+    {
+      "name": "sort_by_gallery_id_desc",
+      "value": "ID 내림차순"
+    },
+    {
+      "name": "sort_by_create_time_asc",
+      "value": "생성 시간 오름차순"
+    },
+    {
+      "name": "sort_by_create_time_desc",
+      "value": "생성 시간 내림차순"
+    },
+    {
+      "name": "sort_by_rating_asc",
+      "value": "평점 오름차순"
+    },
+    {
+      "name": "sort_by_rating_desc",
+      "value": "평점 내림차순"
+    },
+    {
+      "name": "sort_by_name_asc",
+      "value": "이름 오름차순"
+    },
+    {
+      "name": "sort_by_name_desc",
+      "value": "이름 내림차순"
+    },
+    {
+      "name": "sort_by_file_size_asc",
+      "value": "파일 크기 오름차순"
+    },
+    {
+      "name": "sort_by_file_size_desc",
+      "value": "파일 크기 내림차순"
+    },
+    {
+      "name": "sort_download_list",
+      "value": "목록 정렬"
+    },
+    {
+      "name": "download_start_all",
+      "value": "모두 시작"
+    },
+    {
+      "name": "download_stop_all",
+      "value": "모두 중지"
+    },
+    {
+      "name": "download_reset_reading_progress",
+      "value": "독서 진행도 초기화"
+    },
+    {
+      "name": "download_search_gallery",
+      "value": "갤러리 검색"
+    },
+    {
+      "name": "download_search_hint",
+      "value": "키워드 입력"
+    },
+    {
+      "name": "reset_reading_progress_message",
+      "value": "다운로드한 모든 갤러리의 독서 진행도를 초기화하시겠습니까?"
+    },
+    {
+      "name": "reset_reading_progress_processing",
+      "value": "독서 진행도를 초기화하는 중..."
+    },
+    {
+      "name": "reset_reading_progress_done",
+      "value": "독서 진행도가 초기화되었습니다"
+    },
+    {
+      "name": "download_service_label",
+      "value": "EhViewer 다운로드 서비스"
+    },
+    {
+      "name": "archiver_download_service_label",
+      "value": "EhViewer 아카이브 다운로드"
+    },
+    {
+      "name": "archiver_download_pause",
+      "value": "일시정지"
+    },
+    {
+      "name": "archiver_download_resume",
+      "value": "재개"
+    },
+    {
+      "name": "archiver_download_paused",
+      "value": "일시정지됨"
+    },
+    {
+      "name": "archiver_download_restart_no_range",
+      "value": "서버가 이어받기를 지원하지 않아 다운로드를 다시 시작합니다"
+    },
+    {
+      "name": "download_speed_text",
+      "value": "%s"
+    },
+    {
+      "name": "download_speed_text_2",
+      "value": "%1$s, %2$s 남음"
+    },
+    {
+      "name": "remember_download_label",
+      "value": "다운로드 레이블 기억"
+    },
+    {
+      "name": "default_download_label",
+      "value": "기본 다운로드 레이블"
+    },
+    {
+      "name": "added_to_download_list",
+      "value": "다운로드 목록에 추가됨"
+    },
+    {
+      "name": "download_searching",
+      "value": "검색 중..."
+    },
+    {
+      "name": "download_searching_failed",
+      "value": "검색 실패. 앱을 재실행해야합니다."
+    },
+    {
+      "name": "no_download_label",
+      "value": "다운로드 레이블이 여기에 표시됩니다."
+    },
+    {
+      "name": "add",
+      "value": "추가"
+    },
+    {
+      "name": "new_label_title",
+      "value": "새 레이블"
+    },
+    {
+      "name": "label_text_is_empty",
+      "value": "레이블 텍스트가 비어 있습니다."
+    },
+    {
+      "name": "label_text_is_invalid",
+      "value": "\"기본\"은 레이블 이름으로 사용할 수 없습니다."
+    },
+    {
+      "name": "label_text_exist",
+      "value": "이미 있는 레이블입니다."
+    },
+    {
+      "name": "rename_label_title",
+      "value": "레이블 이름 바꾸기"
+    },
+    {
+      "name": "delete_label_title",
+      "value": "레이블 삭제"
+    },
+    {
+      "name": "delete_label_message",
+      "value": "\"%s\" 레이블을 삭제하시겠습니까?"
+    },
+    {
+      "name": "no_history",
+      "value": "읽은 갤러리가 여기에 표시됩니다."
+    },
+    {
+      "name": "clear_all",
+      "value": "모두 지우기"
+    },
+    {
+      "name": "clear_all_history",
+      "value": "모든 방문 기록을 지우시겠습니까?"
+    },
+    {
+      "name": "filter",
+      "value": "갤러리 차단"
+    },
+    {
+      "name": "no_filter",
+      "value": "차단 목록"
+    },
+    {
+      "name": "filter_title",
+      "value": "제목"
+    },
+    {
+      "name": "filter_uploader",
+      "value": "업로더"
+    },
+    {
+      "name": "filter_tag",
+      "value": "태그"
+    },
+    {
+      "name": "filter_tag_namespace",
+      "value": "태그 네임스페이스"
+    },
+    {
+      "name": "delete_filter",
+      "value": "차단 항목 '%s' 을(를) 삭제하시겠습니까?"
+    },
+    {
+      "name": "tip",
+      "value": "팁"
+    },
+    {
+      "name": "add_filter",
+      "value": "차단 항목 추가"
+    },
+    {
+      "name": "show_definition",
+      "value": "정의 표시"
+    },
+    {
+      "name": "filter_text",
+      "value": "차단 항목 텍스트"
+    },
+    {
+      "name": "filter_tip",
+      "value": "본 차단 시스템은 EHentai 웹 사이트 차단 시스템을 기반으로 갤러리를 계속 차단합니다. \n\n 제목 차단 항목: 키워드를 포함하는 갤러리를 제외합니다. \n\n 게시자 차단 항목: 게시자가 업로드한 갤러리를 제외합니다. \n\n 태그 차단 항목: 태그를 포함하는 갤러리를 제외합니다. \n\n 태그 그룹 차단 항목: 태그 그룹을 포함하는 갤러리를 제외합니다. 갤러리 목록을 가져오는 데 더 많은 시간이 걸립니다."
+    },
+    {
+      "name": "set_pattern_protection",
+      "value": "패턴 보호 사용"
+    },
+    {
+      "name": "set_pattern_protection_tip",
+      "value": "패턴 보호를 사용하려면 패턴을 그리세요.\n비워두면 패턴 보호가 해제됩니다."
+    },
+    {
+      "name": "set",
+      "value": "지정"
+    },
+    {
+      "name": "enable_fingerprint",
+      "value": "지문으로 잠금 해제 허용"
+    },
+    {
+      "name": "u_config",
+      "value": "E-Hentai 설정"
+    },
+    {
+      "name": "apply",
+      "value": "적용"
+    },
+    {
+      "name": "apply_tip",
+      "value": "설정을 저장하려면 체크 표시를 누르세요."
+    },
+    {
+      "name": "my_tags",
+      "value": "나의 태그"
+    },
+    {
+      "name": "hosts",
+      "value": "사용자 지정 hosts.txt"
+    },
+    {
+      "name": "hosts_tip",
+      "value": "hosts.txt"
+    },
+    {
+      "name": "hosts_host",
+      "value": "호스트"
+    },
+    {
+      "name": "hosts_ip",
+      "value": "IP"
+    },
+    {
+      "name": "add_host",
+      "value": "호스트 추가"
+    },
+    {
+      "name": "add_host_add",
+      "value": "추가"
+    },
+    {
+      "name": "edit_host",
+      "value": "호스트 편집"
+    },
+    {
+      "name": "edit_host_confirm",
+      "value": "확인"
+    },
+    {
+      "name": "edit_host_delete",
+      "value": "삭제"
+    },
+    {
+      "name": "invalid_host",
+      "value": "잘못된 호스트"
+    },
+    {
+      "name": "invalid_ip",
+      "value": "잘못된 IP"
+    },
+    {
+      "name": "preset",
+      "value": "프리셋"
+    },
+    {
+      "name": "default_directory",
+      "value": "기본 디렉터리"
+    },
+    {
+      "name": "application_file_directory",
+      "value": "앱 파일 디렉터리 %d (앱 제거 후 자동 삭제됨)"
+    },
+    {
+      "name": "page_menu_title",
+      "value": "페이지 %d"
+    },
+    {
+      "name": "page_menu_refresh",
+      "value": "@string/refresh"
+    },
+    {
+      "name": "page_menu_share",
+      "value": "@string/share"
+    },
+    {
+      "name": "page_menu_save",
+      "value": "저장"
+    },
+    {
+      "name": "page_menu_save_to",
+      "value": "다른 이름으로 저장"
+    },
+    {
+      "name": "page_menu_add_bookmark",
+      "value": "북마크에 추가"
+    },
+    {
+      "name": "gallery_menu_title",
+      "value": "메뉴"
+    },
+    {
+      "name": "share_image",
+      "value": "이미지 공유"
+    },
+    {
+      "name": "image_saved",
+      "value": "이미지를 %s 경로에 저장함"
+    },
+    {
+      "name": "settings_eh",
+      "value": "EH"
+    },
+    {
+      "name": "settings_eh_sign_out",
+      "value": "로그아웃"
+    },
+    {
+      "name": "settings_eh_sign_out_summary",
+      "value": "다시 로그인하려면 앱을 재시작하세요."
+    },
+    {
+      "name": "settings_eh_sign_out_warning",
+      "value": "정말 로그아웃하시겠습니까?"
+    },
+    {
+      "name": "settings_eh_sign_out_yes",
+      "value": "네, 로그아웃합니다."
+    },
+    {
+      "name": "settings_eh_sign_out_tip",
+      "value": "로그아웃했습니다. 다시 로그인하려면 앱을 재시작하세요."
+    },
+    {
+      "name": "settings_eh_identity_cookies",
+      "value": "식별용 쿠키"
+    },
+    {
+      "name": "settings_eh_identity_cookies_summary",
+      "value": "쿠키는 로그인 시 사용할 수 있습니다."
+    },
+    {
+      "name": "settings_eh_identity_cookies_signed",
+      "value": "식별용 쿠키를 사용하여 이 계정으로 로그인할 수 있습니다.<br><b>안전하게 보관하세요.</b><br><br>%s"
+    },
+    {
+      "name": "settings_eh_identity_cookies_tourist",
+      "value": "로그인 상태가 아닙니다."
+    },
+    {
+      "name": "settings_eh_identity_cookies_copy",
+      "value": "복사"
+    },
+    {
+      "name": "settings_u_config",
+      "value": "E-Hentai 설정"
+    },
+    {
+      "name": "settings_u_config_summary",
+      "value": "E-Hentai 사이트의 설정 페이지를 엽니다."
+    },
+    {
+      "name": "settings_my_tags",
+      "value": "내 태그"
+    },
+    {
+      "name": "settings_my_tags_summary",
+      "value": "EHentai 사이트에 있는 내 태그"
+    },
+    {
+      "name": "settings_eh_theme",
+      "value": "테마"
+    },
+    {
+      "name": "settings_eh_theme_light",
+      "value": "밝은 테마"
+    },
+    {
+      "name": "settings_eh_theme_dark",
+      "value": "어두운 테마"
+    },
+    {
+      "name": "settings_eh_theme_black",
+      "value": "검정색 테마"
+    },
+    {
+      "name": "settings_eh_apply_nav_bar_theme_color",
+      "value": "내비게이션 바에 테마 색상 적용"
+    },
+    {
+      "name": "settings_eh_gallery_site",
+      "value": "갤러리 사이트"
+    },
+    {
+      "name": "settings_eh_launch_page",
+      "value": "시작 페이지"
+    },
+    {
+      "name": "settings_eh_list_mode",
+      "value": "목록 모드"
+    },
+    {
+      "name": "settings_eh_list_mode_detail",
+      "value": "자세히"
+    },
+    {
+      "name": "settings_eh_list_mode_thumb",
+      "value": "섬네일"
+    },
+    {
+      "name": "settings_eh_detail_size",
+      "value": "상세 정보 크기"
+    },
+    {
+      "name": "settings_eh_detail_size_long",
+      "value": "길게"
+    },
+    {
+      "name": "settings_eh_detail_size_short",
+      "value": "짧게"
+    },
+    {
+      "name": "settings_eh_thumb_size",
+      "value": "섬네일 크기"
+    },
+    {
+      "name": "settings_eh_thumb_size_large",
+      "value": "크게"
+    },
+    {
+      "name": "settings_eh_thumb_size_middle",
+      "value": "중간"
+    },
+    {
+      "name": "settings_eh_thumb_size_small",
+      "value": "작게"
+    },
+    {
+      "name": "settings_eh_thumb_resolution",
+      "value": "섬네일 해상도"
+    },
+    {
+      "name": "settings_eh_thumb_resolution_summary",
+      "value": "특정 해상도로 설정하면 섬네일을 불러오지 못할 수 있습니다. 현재 설정: [%s]"
+    },
+    {
+      "name": "settings_eh_thumb_resolution_auto",
+      "value": "자동"
+    },
+    {
+      "name": "settings_eh_fix_thumb_url",
+      "value": "섬네일 URL 바로잡기"
+    },
+    {
+      "name": "settings_eh_default_categories",
+      "value": "홈페이지 카테고리"
+    },
+    {
+      "name": "settings_eh_default_categories_summary",
+      "value": "홈페이지에 기본으로 보여질 카테고리"
+    },
+    {
+      "name": "settings_eh_excluded_tag_namespaces",
+      "value": "제외할 태그 네임스페이스"
+    },
+    {
+      "name": "settings_eh_excluded_tag_namespaces_summary",
+      "value": "기본 태그 검색에서 특정 네임스페이스 제외"
+    },
+    {
+      "name": "settings_eh_excluded_languages",
+      "value": "제외할 언어"
+    },
+    {
+      "name": "settings_eh_excluded_languages_summary",
+      "value": "갤러리 목록과 검색에서 특정 언어 숨기기"
+    },
+    {
+      "name": "settings_eh_show_jpn_title",
+      "value": "일본어 제목 표시"
+    },
+    {
+      "name": "settings_eh_show_gallery_comment",
+      "value": "갤러리 코멘트 보이기"
+    },
+    {
+      "name": "settings_eh_show_gallery_rating",
+      "value": "갤러리 평점 표시"
+    },
+    {
+      "name": "settings_eh_show_eh_event",
+      "value": "EH 이벤트 표시"
+    },
+    {
+      "name": "settings_eh_show_eh_limits",
+      "value": "EH 제한 표시"
+    },
+    {
+      "name": "settings_eh_show_jpn_title_summary",
+      "value": "EHentai 웹 사이트 설정에서 Japanese Title을 사용하도록 설정해야 함"
+    },
+    {
+      "name": "settings_eh_show_gallery_pages",
+      "value": "갤러리 페이지 수 표시"
+    },
+    {
+      "name": "settings_eh_show_gallery_pages_summary",
+      "value": "갤러리 목록에 해당 갤러리의 페이지 수를 표시합니다"
+    },
+    {
+      "name": "settings_eh_show_tag_translations",
+      "value": "번역된 태그 표시"
+    },
+    {
+      "name": "settings_eh_show_tag_translations_summary",
+      "value": "영어 태그 대신 번역된 태그를 표시합니다. 데이터 파일을 다운로드하는데 시간이 걸립 수 있습니다."
+    },
+    {
+      "name": "settings_eh_tag_translations_source",
+      "value": "Placeholder"
+    },
+    {
+      "name": "settings_eh_tag_translations_source_url",
+      "value": "https://placeholder"
+    },
+    {
+      "name": "settings_eh_filter",
+      "value": "갤러리 차단"
+    },
+    {
+      "name": "settings_eh_filter_summary",
+      "value": "제목, 게시자, 태그에 따라 갤러리 차단"
+    },
+    {
+      "name": "settings_eh_cellular_network_warning",
+      "value": "모바일 데이터 경고"
+    },
+    {
+      "name": "settings_read",
+      "value": "읽기"
+    },
+    {
+      "name": "settings_read_screen_rotation",
+      "value": "화면 회전"
+    },
+    {
+      "name": "settings_read_screen_rotation_default",
+      "value": "기본값"
+    },
+    {
+      "name": "settings_read_screen_rotation_portrait",
+      "value": "세로 모드"
+    },
+    {
+      "name": "settings_read_screen_rotation_landscape",
+      "value": "가로 모드"
+    },
+    {
+      "name": "settings_read_screen_rotation_sensor",
+      "value": "자동 회전"
+    },
+    {
+      "name": "settings_read_refresh_rate",
+      "value": "주사율"
+    },
+    {
+      "name": "settings_read_refresh_rate_default",
+      "value": "기본값"
+    },
+    {
+      "name": "settings_read_refresh_rate_60",
+      "value": "60 Hz"
+    },
+    {
+      "name": "settings_read_refresh_rate_90",
+      "value": "90 Hz"
+    },
+    {
+      "name": "settings_read_refresh_rate_120",
+      "value": "120 Hz"
+    },
+    {
+      "name": "settings_read_refresh_rate_max",
+      "value": "화면 최고"
+    },
+    {
+      "name": "settings_read_reading_direction",
+      "value": "읽기 방향"
+    },
+    {
+      "name": "settings_read_reading_direction_left_to_right",
+      "value": "왼쪽에서 오른쪽으로"
+    },
+    {
+      "name": "settings_read_reading_direction_right_to_Left",
+      "value": "오른쪽에서 왼쪽으로"
+    },
+    {
+      "name": "settings_read_reading_direction_top_to_bottom",
+      "value": "위에서 아래로"
+    },
+    {
+      "name": "settings_read_page_scaling",
+      "value": "페이지 표시"
+    },
+    {
+      "name": "settings_read_page_scaling_actual_size",
+      "value": "실제 크기"
+    },
+    {
+      "name": "settings_read_page_scaling_fit_to_width",
+      "value": "너비에 맞춤"
+    },
+    {
+      "name": "settings_read_page_scaling_fit_to_height",
+      "value": "높이에 맞춤"
+    },
+    {
+      "name": "settings_read_page_scaling_fit_to_screen",
+      "value": "화면에 맞춤"
+    },
+    {
+      "name": "settings_read_page_scaling_fixed_scale",
+      "value": "비율 고정"
+    },
+    {
+      "name": "settings_read_start_position",
+      "value": "시작 위치"
+    },
+    {
+      "name": "settings_read_start_position_top_left",
+      "value": "왼쪽 상단"
+    },
+    {
+      "name": "settings_read_start_position_top_right",
+      "value": "오른쪽 상단"
+    },
+    {
+      "name": "settings_read_start_position_bottom_left",
+      "value": "왼쪽 하단"
+    },
+    {
+      "name": "settings_read_start_position_bottom_right",
+      "value": "오른쪽 하단"
+    },
+    {
+      "name": "settings_read_auto_transfer_time",
+      "value": "자동 전환 시간(초)"
+    },
+    {
+      "name": "settings_read_start_position_center",
+      "value": "중앙"
+    },
+    {
+      "name": "settings_read_keep_screen_on",
+      "value": "화면 켜짐 유지"
+    },
+    {
+      "name": "settings_read_show_clock",
+      "value": "시계 표시"
+    },
+    {
+      "name": "settings_read_show_progress",
+      "value": "독서 진행도 표시"
+    },
+    {
+      "name": "settings_read_show_battery",
+      "value": "배터리 표시"
+    },
+    {
+      "name": "settings_read_show_page_interval",
+      "value": "페이지 간격 표시"
+    },
+    {
+      "name": "settings_read_volume_page",
+      "value": "볼륨 키로 페이지 넘기기"
+    },
+    {
+      "name": "settings_read_reverse_volume_page",
+      "value": "볼륨 키 전환 방향 반전"
+    },
+    {
+      "name": "settings_read_reading_fullscreen",
+      "value": "전체 화면"
+    },
+    {
+      "name": "settings_read_custom_screen_lightness",
+      "value": "화면 밝기 사용자 지정"
+    },
+    {
+      "name": "settings_read_screen_lightness",
+      "value": "화면 밝기"
+    },
+    {
+      "name": "settings_download",
+      "value": "다운로드"
+    },
+    {
+      "name": "settings_download_download_location",
+      "value": "다운로드 위치"
+    },
+    {
+      "name": "settings_download_invalid_download_location",
+      "value": "다운로드 위치가 잘못되었습니다."
+    },
+    {
+      "name": "settings_download_cant_get_download_location",
+      "value": "다운로드 위치를 가져올 수 없습니다."
+    },
+    {
+      "name": "settings_download_pick_dir_kk",
+      "value": "Android 4.4 이상에서는 루트 권한 없이 외장 SD 카드에 데이터를 쓸 수 있는 방법이 없습니다. 그러나 <SD 카드>/Android/data/me.loverain.fleur 폴더만은 쓸 수 있습니다."
+    },
+    {
+      "name": "settings_download_pick_dir_l",
+      "value": "Android 5.0 이상에서는 외장 SD 카드에 쓰기 작업을 할 수 있는 새 API를 제공합니다. SD 카드를 다운로드 위치로 지정하려면 \"문서\"를 누르세요."
+    },
+    {
+      "name": "settings_download_document",
+      "value": "문서"
+    },
+    {
+      "name": "settings_download_continue",
+      "value": "계속"
+    },
+    {
+      "name": "settings_download_multi_thread_download",
+      "value": "다중 스레드 다운로드"
+    },
+    {
+      "name": "settings_download_multi_thread_download_summary",
+      "value": "%s개 이미지까지"
+    },
+    {
+      "name": "settings_download_preload_image",
+      "value": "이미지 미리 불러오기"
+    },
+    {
+      "name": "settings_download_preload_image_summary",
+      "value": "다음 %s개 이미지를 미리 불러옴"
+    },
+    {
+      "name": "settings_download_image_resolution",
+      "value": "이미지 해상도"
+    },
+    {
+      "name": "settings_download_image_resolution_summary",
+      "value": "1280x 이상으로 설정하면 작동하지 않을 수 있습니다. 현재 설정: [%s]"
+    },
+    {
+      "name": "settings_download_image_resolution_auto",
+      "value": "자동"
+    },
+    {
+      "name": "settings_download_download_origin_image",
+      "value": "원본 이미지 다운로드"
+    },
+    {
+      "name": "settings_download_download_list_pagination",
+      "value": "페이지 목록"
+    },
+    {
+      "name": "settings_download_download_list_pagination_summary",
+      "value": "페이지 기능은 목록 길이가 500보다 클 때만 작동합니다"
+    },
+    {
+      "name": "settings_download_download_origin_image_summary",
+      "value": "이 옵션은 위험합니다! 509 오류가 발생할 수 있습니다."
+    },
+    {
+      "name": "settings_download_download_order_by_asc",
+      "value": "오름차순으로 다운로드"
+    },
+    {
+      "name": "settings_download_download_order_by_asc_summary",
+      "value": "모든 갤러리를 다운로드할 때 순서대로 다운로드"
+    },
+    {
+      "name": "settings_download_sync_while_reading",
+      "value": "읽기 중 동기화 다운로드"
+    },
+    {
+      "name": "settings_download_sync_while_reading_summary",
+      "value": "다운로드하지 않은 갤러리를 탐색할 때 보는 이미지를 자동으로 다운로드 디렉터리에 저장합니다"
+    },
+    {
+      "name": "settings_download_media_scan",
+      "value": "미디어 스캔 허용"
+    },
+    {
+      "name": "settings_download_media_scan_summary_on",
+      "value": "다른 사람들에게 갤러리 앱을 들키지 마세요."
+    },
+    {
+      "name": "settings_download_media_scan_summary_off",
+      "value": "대부분의 갤러리 앱에서 다운로드 경로에 있는 사진을 무시합니다."
+    },
+    {
+      "name": "settings_download_restore_download_items",
+      "value": "다운로드 항목 복구"
+    },
+    {
+      "name": "settings_download_restore_download_items_summary",
+      "value": "다운로드 위치에 존재하는 모든 다운로드 항목 복구"
+    },
+    {
+      "name": "settings_download_restoring",
+      "value": "복구 중"
+    },
+    {
+      "name": "settings_download_restore_not_found",
+      "value": "복구할 다운로드 항목을 찾을 수 없습니다."
+    },
+    {
+      "name": "settings_download_restore_failed",
+      "value": "복구하지 못했습니다."
+    },
+    {
+      "name": "settings_download_restore_successfully",
+      "value": "%d개 항목을 복구했습니다."
+    },
+    {
+      "name": "settings_download_clean_redundancy",
+      "value": "잉여 파일 삭제"
+    },
+    {
+      "name": "settings_download_clean_redundancy_summary",
+      "value": "다운로드 위치에 존재하지만 다운로드 목록에는 없는 갤러리 이미지 제거"
+    },
+    {
+      "name": "settings_download_clean_redundancy_no_redundancy",
+      "value": "잉여 파일이 없습니다."
+    },
+    {
+      "name": "settings_download_clean_redundancy_done",
+      "value": "잉여 파일을 청소했습니다. 모두 %d개 항목을 지웠습니다."
+    },
+    {
+      "name": "settings_advanced",
+      "value": "고급"
+    },
+    {
+      "name": "settings_advanced_save_parse_error_body",
+      "value": "파싱 오류 시 HTML 내용 저장"
+    },
+    {
+      "name": "settings_advanced_save_parse_error_body_summary",
+      "value": "HTML 파일에는 개인 정보가 포함될 수 있습니다."
+    },
+    {
+      "name": "settings_advanced_save_crash_log",
+      "value": "앱 충돌 시 로그 저장"
+    },
+    {
+      "name": "settings_advanced_save_crash_log_summary",
+      "value": "충돌 로그는 개발자가 버그를 수정하는 데 도움이 됩니다."
+    },
+    {
+      "name": "settings_advanced_dump_logcat",
+      "value": "로그캣 덤프"
+    },
+    {
+      "name": "settings_advanced_dump_logcat_summary",
+      "value": "외부 저장소에 로그캣 저장"
+    },
+    {
+      "name": "settings_advanced_dump_logcat_failed",
+      "value": "로그캣을 덤프하지 못했습니다."
+    },
+    {
+      "name": "settings_advanced_dump_logcat_to",
+      "value": "%s 경로에 로그캣을 저장했습니다."
+    },
+    {
+      "name": "settings_advanced_clear_download_path_cache",
+      "value": "다운로드 경로 캐시 삭제"
+    },
+    {
+      "name": "settings_advanced_clear_download_path_cache_summary",
+      "value": "갤러리 다운로드 경로가 잘못되었을 때 다운로드 경로 캐시를 삭제하면 문제를 해결할 수 있습니다."
+    },
+    {
+      "name": "settings_advanced_clear_download_path_cache_message",
+      "value": "다운로드 경로 캐시를 지우시겠습니까?"
+    },
+    {
+      "name": "settings_advanced_clear_memory_cache",
+      "value": "메모리 캐시 삭제"
+    },
+    {
+      "name": "settings_advanced_clear_memory_cache_summary",
+      "value": "섬네일, 갤러리 정보 메모리 캐시 삭제"
+    },
+    {
+      "name": "settings_advanced_read_cache_size",
+      "value": "읽기 캐시 크기"
+    },
+    {
+      "name": "settings_advanced_app_language_title",
+      "value": "앱 언어 (Language)"
+    },
+    {
+      "name": "settings_advanced_proxy",
+      "value": "프록시"
+    },
+    {
+      "name": "settings_advanced_proxy_summary_1",
+      "value": "%1$s %2$s:%3$d"
+    },
+    {
+      "name": "settings_advanced_proxy_summary_2",
+      "value": "%1$s"
+    },
+    {
+      "name": "settings_advanced_built_in_hosts_title",
+      "value": "앱 내장 hosts.txt"
+    },
+    {
+      "name": "settings_advanced_built_in_hosts_summary",
+      "value": "앱에 내장된 호스트-IP 지정 규칙을 사용합니다.\n대신 사용자 지정 hosts.txt 파일을 사용할 수도 있습니다."
+    },
+    {
+      "name": "settings_advanced_custom_hosts_title",
+      "value": "사용자 지정 hosts.txt"
+    },
+    {
+      "name": "settings_advanced_custom_hosts_summary",
+      "value": "호스트 이름을 IP 주소에 지정합니다.\n앱에 내장된 규칙은 무시됩니다."
+    },
+    {
+      "name": "settings_privacy_pattern_protection_title",
+      "value": "패턴 보호"
+    },
+    {
+      "name": "settings_privacy_pattern_protection_not_set",
+      "value": "패턴 보호가 설정되어 있지 않음"
+    },
+    {
+      "name": "settings_privacy_pattern_protection_set",
+      "value": "패턴 보호가 설정됨"
+    },
+    {
+      "name": "settings_advanced_export_data",
+      "value": "데이터 내보내기"
+    },
+    {
+      "name": "settings_advanced_export_data_summary",
+      "value": "다운로드 목록, 빠른 검색 목록 등의 데이터를 외부 저장소에 저장"
+    },
+    {
+      "name": "settings_advanced_export_data_to",
+      "value": "%s 경로에 데이터를 내보냈습니다."
+    },
+    {
+      "name": "settings_advanced_export_data_failed",
+      "value": "데이터를 내보내지 못했습니다."
+    },
+    {
+      "name": "settings_advanced_import_data",
+      "value": "데이터 가져오기"
+    },
+    {
+      "name": "settings_advanced_import_data_summary",
+      "value": "이전에 저장한 데이터 불러오기"
+    },
+    {
+      "name": "settings_advanced_import_data_successfully",
+      "value": "데이터를 가져왔습니다."
+    },
+    {
+      "name": "settings_advanced_wifi_sender",
+      "value": "WiFi 데이터 마이그레이션"
+    },
+    {
+      "name": "settings_advanced_wifi_sander_summary",
+      "value": "Wi-Fi 핫스팟을 통한 데이터 마이그레이션"
+    },
+    {
+      "name": "settings_advanced_wifi_client",
+      "value": "WiFi 마이그레이션 데이터 수신"
+    },
+    {
+      "name": "settings_advanced_wifi_client_summary",
+      "value": "Wi-Fi 핫스팟에서 마이그레이션 데이터 수신"
+    },
+    {
+      "name": "wifi_send_download_location",
+      "value": "다운로드 디렉터리 마이그레이션"
+    },
+    {
+      "name": "wifi_download_dir_empty",
+      "value": "마이그레이션 가능한 갤러리 폴더를 찾을 수 없습니다"
+    },
+    {
+      "name": "wifi_download_dir_no_location",
+      "value": "이 기기에 다운로드 디렉터리가 설정되어 있지 않습니다"
+    },
+    {
+      "name": "wifi_download_dir_migrating",
+      "value": "%1$s 마이그레이션 중 (%2$d/%3$d개 파일)"
+    },
+    {
+      "name": "wifi_download_dir_manifest_received",
+      "value": "%1$s (%2$d/%3$d): 건너뜀 %4$d, 전송 %5$d"
+    },
+    {
+      "name": "wifi_download_dir_file_done",
+      "value": "파일 수신: %s"
+    },
+    {
+      "name": "wifi_download_dir_files_progress",
+      "value": "%d개 파일 수신됨"
+    },
+    {
+      "name": "wifi_download_dir_file_failed",
+      "value": "파일 체크섬 검증 실패, 폐기됨"
+    },
+    {
+      "name": "settings_about",
+      "value": "앱 정보"
+    },
+    {
+      "name": "settings_about_declaration",
+      "value": "EhViewer"
+    },
+    {
+      "name": "settings_about_declaration_summary",
+      "value": "EhViewer는 E-Hentai.org 사이트와 아무런 관계가 없습니다."
+    },
+    {
+      "name": "settings_about_author",
+      "value": "개발자"
+    },
+    {
+      "name": "settings_about_author_summary",
+      "value": "SXJ_LonelyDog <xiaojieonly$foxmail.com>"
+    },
+    {
+      "name": "settings_about_telegram",
+      "value": "Telegram"
+    },
+    {
+      "name": "settings_about_latest_release",
+      "value": "최신 버전"
+    },
+    {
+      "name": "settings_about_website",
+      "value": "웹사이트"
+    },
+    {
+      "name": "settings_about_source",
+      "value": "소스 코드"
+    },
+    {
+      "name": "settings_about_changelog",
+      "value": "변경 사항"
+    },
+    {
+      "name": "settings_about_help",
+      "value": "도움말"
+    },
+    {
+      "name": "settings_about_issue_help",
+      "value": "문제 도움말"
+    },
+    {
+      "name": "settings_about_license",
+      "value": "라이선스"
+    },
+    {
+      "name": "settings_about_license_summary",
+      "value": "EhViewer는 많은 오픈 소스 프로젝트 덕분에 만들 수 있었습니다."
+    },
+    {
+      "name": "settings_about_donate",
+      "value": "후원"
+    },
+    {
+      "name": "settings_about_donate_message",
+      "value": "후원은 특권을 가져다주지 않습니다. 하지만 이 앱을 유지하는 데 도움이 됩니다."
+    },
+    {
+      "name": "settings_about_donate_alipay",
+      "value": "알리페이"
+    },
+    {
+      "name": "settings_about_donate_paypal",
+      "value": "PayPal"
+    },
+    {
+      "name": "settings_about_donate_open",
+      "value": "열기"
+    },
+    {
+      "name": "settings_about_donate_copy",
+      "value": "이메일 복사"
+    },
+    {
+      "name": "settings_save_image_aliPay",
+      "value": "알리페이 QR 코드 저장"
+    },
+    {
+      "name": "settings_save_image_weChat",
+      "value": "위챗 QR 코드 저장"
+    },
+    {
+      "name": "settings_about_donate_copied",
+      "value": "클립보드에 복사했습니다."
+    },
+    {
+      "name": "settings_privacy_enable_analytics",
+      "value": "데이터 분석 사용"
+    },
+    {
+      "name": "settings_privacy_about_analytics",
+      "value": "데이터 분석 정보"
+    },
+    {
+      "name": "settings_about_version",
+      "value": "빌드 버전"
+    },
+    {
+      "name": "settings_about_check_for_updates",
+      "value": "업데이트 확인"
+    },
+    {
+      "name": "settings_close_automatic_updates",
+      "value": "자동 업데이트 끄기"
+    },
+    {
+      "name": "settings_about_beta_update_channel",
+      "value": "베타 업데이트 채널"
+    },
+    {
+      "name": "settings_about_beta_update_channel_summary",
+      "value": "베타 버전은 해결되지 않은 문제가 발생할 수 있습니다."
+    },
+    {
+      "name": "excluded_languages",
+      "value": "제외할 언어"
+    },
+    {
+      "name": "select_all",
+      "value": "모두 선택"
+    },
+    {
+      "name": "deselect_all",
+      "value": "모두 선택 해제"
+    },
+    {
+      "name": "invert_selection",
+      "value": "선택 반전"
+    },
+    {
+      "name": "language",
+      "value": "언어"
+    },
+    {
+      "name": "original",
+      "value": "원어"
+    },
+    {
+      "name": "translated",
+      "value": "역본"
+    },
+    {
+      "name": "rewrite",
+      "value": "재필"
+    },
+    {
+      "name": "language_japanese",
+      "value": "일본어"
+    },
+    {
+      "name": "language_english",
+      "value": "영어"
+    },
+    {
+      "name": "language_chinese",
+      "value": "중국어"
+    },
+    {
+      "name": "language_dutch",
+      "value": "네덜란드어"
+    },
+    {
+      "name": "language_french",
+      "value": "프랑스어"
+    },
+    {
+      "name": "language_german",
+      "value": "독일어"
+    },
+    {
+      "name": "language_hungarian",
+      "value": "헝가리어"
+    },
+    {
+      "name": "language_italian",
+      "value": "이탈리아어"
+    },
+    {
+      "name": "language_korean",
+      "value": "한국어"
+    },
+    {
+      "name": "language_polish",
+      "value": "폴란드어"
+    },
+    {
+      "name": "language_portuguese",
+      "value": "포르투갈어"
+    },
+    {
+      "name": "language_russian",
+      "value": "러시아어"
+    },
+    {
+      "name": "language_spanish",
+      "value": "스페인어"
+    },
+    {
+      "name": "language_thai",
+      "value": "타이어"
+    },
+    {
+      "name": "language_vietnamese",
+      "value": "베트남어"
+    },
+    {
+      "name": "language_na",
+      "value": "없음"
+    },
+    {
+      "name": "language_other",
+      "value": "기타"
+    },
+    {
+      "name": "please_wait",
+      "value": "잠시만 기다려 주세요"
+    },
+    {
+      "name": "proxy_enable",
+      "value": "사용"
+    },
+    {
+      "name": "proxy_enabled",
+      "value": "사용함"
+    },
+    {
+      "name": "proxy_disabled",
+      "value": "사용 안 함"
+    },
+    {
+      "name": "proxy_direct",
+      "value": "다이렉트"
+    },
+    {
+      "name": "proxy_system",
+      "value": "시스템 프록시"
+    },
+    {
+      "name": "proxy_host_or_ip",
+      "value": "호스트 또는 IP"
+    },
+    {
+      "name": "proxy_port",
+      "value": "포트"
+    },
+    {
+      "name": "proxy_domain_not_supported",
+      "value": "지원하지 않는 도메인입니다."
+    },
+    {
+      "name": "proxy_invalid_port",
+      "value": "잘못된 포트입니다."
+    },
+    {
+      "name": "cant_get_data_dir",
+      "value": "데이터 디렉터리를 찾을 수 없습니다."
+    },
+    {
+      "name": "cant_find_any_data",
+      "value": "데이터를 가져올 수 없습니다."
+    },
+    {
+      "name": "cant_read_the_file",
+      "value": "파일을 읽을 수 없습니다."
+    },
+    {
+      "name": "app_language_system",
+      "value": "시스템 언어 (기본값)"
+    },
+    {
+      "name": "license",
+      "value": "라이선스"
+    },
+    {
+      "name": "dir_picker",
+      "value": "디렉터리 선택기"
+    },
+    {
+      "name": "directory_not_writable",
+      "value": "쓸 수 있는 디렉터리가 아닙니다."
+    },
+    {
+      "name": "cloud_favorites",
+      "value": "클라우드 즐겨찾기"
+    },
+    {
+      "name": "local_favorites",
+      "value": "로컬 즐겨찾기"
+    },
+    {
+      "name": "favorites_search_bar_hint",
+      "value": "%s 검색"
+    },
+    {
+      "name": "favorites_title",
+      "value": "%s"
+    },
+    {
+      "name": "favorites_title_2",
+      "value": "%1$s - %2$s"
+    },
+    {
+      "name": "delete_favorites_dialog_title",
+      "value": "즐겨찾기에서 삭제"
+    },
+    {
+      "name": "delete_favorites_dialog_message",
+      "value": "%d개 항목을 즐겨찾기에서 삭제하시겠습니까?"
+    },
+    {
+      "name": "move_favorites_dialog_title",
+      "value": "즐겨찾기 이동"
+    },
+    {
+      "name": "default_favorites_collection",
+      "value": "기본 즐겨찾기 컬렉션"
+    },
+    {
+      "name": "let_me_select",
+      "value": "직접 선택"
+    },
+    {
+      "name": "favorites_info",
+      "value": "즐겨찾기 정보"
+    },
+    {
+      "name": "collections",
+      "value": "컬렉션"
+    },
+    {
+      "name": "count",
+      "value": "개수"
+    },
+    {
+      "name": "need_sign_in",
+      "value": "로그인 필요"
+    },
+    {
+      "name": "error_something_wrong_happened",
+      "value": "뭔가 잘못되었습니다."
+    },
+    {
+      "name": "guide_quick_search_title",
+      "value": "빠른 검색"
+    },
+    {
+      "name": "guide_quick_search_text",
+      "value": "오른쪽에서 스와이프하면 빠른 검색 패널이 열립니다."
+    },
+    {
+      "name": "guide_collections_title",
+      "value": "컬렉션"
+    },
+    {
+      "name": "guide_collections_text",
+      "value": "오른쪽에서 스와이프하면 컬렉션을 선택할 수 있습니다."
+    },
+    {
+      "name": "guide_download_labels_title",
+      "value": "다운로드 레이블"
+    },
+    {
+      "name": "guide_download_labels_text",
+      "value": "오른쪽에서 스와이프하면 다운로드 레이블 패널이 열립니다."
+    },
+    {
+      "name": "guide_download_thumb_title",
+      "value": "갤러리 자세히 보기"
+    },
+    {
+      "name": "guide_download_thumb_text",
+      "value": "섬네일을 누르면 갤러리를 자세히 볼 수 있습니다."
+    },
+    {
+      "name": "guide_gallery_left",
+      "value": "페이지 넘기기"
+    },
+    {
+      "name": "guide_gallery_right",
+      "value": "페이지 넘기기"
+    },
+    {
+      "name": "guide_gallery_menu",
+      "value": "메뉴"
+    },
+    {
+      "name": "guide_gallery_progress",
+      "value": "독서 진행도"
+    },
+    {
+      "name": "guide_gallery_long_click",
+      "value": "페이지 메뉴를 열려면 길게 누르세요."
+    },
+    {
+      "name": "from_the_future",
+      "value": "미래에"
+    },
+    {
+      "name": "just_now",
+      "value": "방금"
+    },
+    {
+      "name": "yesterday",
+      "value": "어제"
+    },
+    {
+      "name": "some_days_ago",
+      "value": "%d일 전"
+    },
+    {
+      "name": "dialog_archive_title",
+      "value": "H@H 다운로더"
+    },
+    {
+      "name": "no_archives",
+      "value": "아카이브 없음"
+    },
+    {
+      "name": "download_archive_started",
+      "value": "아카이브 다운로드가 시작되었습니다."
+    },
+    {
+      "name": "download_archive_failure",
+      "value": "아카이브 다운로드에 실패했습니다."
+    },
+    {
+      "name": "h_h",
+      "value": "H@H"
+    },
+    {
+      "name": "download_h_h_failure_no_hath",
+      "value": "아카이브를 다운로드하려면 H@H 클라이언트가 필요합니다."
+    },
+    {
+      "name": "settings_privacy",
+      "value": "개인 정보"
+    },
+    {
+      "name": "settings_privacy_secure",
+      "value": "화면 캡처 허용 안 함"
+    },
+    {
+      "name": "settings_privacy_secure_summary",
+      "value": "이 앱에서 스크린샷을 찍을 수 없게 하며, \"최근 앱\" 화면에서 앱의 내용을 보이지 않게 합니다."
+    },
+    {
+      "name": "download_service",
+      "value": "다운로드 서비스"
+    },
+    {
+      "name": "favorite_name",
+      "value": "즐겨찾기"
+    },
+    {
+      "name": "gallery_toplists",
+      "value": "갤러리 순위표"
+    },
+    {
+      "name": "uploader_toplists",
+      "value": "업로 더 순위표"
+    },
+    {
+      "name": "tagging_toplists",
+      "value": "태그 순위표"
+    },
+    {
+      "name": "hentai_home_toplists",
+      "value": "Hentai@Home 순위표"
+    },
+    {
+      "name": "ehtracker_toplists",
+      "value": "EH트 래 커 순위표"
+    },
+    {
+      "name": "cleanup_toplists",
+      "value": "정리 순위표"
+    },
+    {
+      "name": "rating_reviewing_toplists",
+      "value": "등급&검토 순위표"
+    },
+    {
+      "name": "top_list",
+      "value": "순위표"
+    },
+    {
+      "name": "all_time_top_list",
+      "value": "전체 기간"
+    },
+    {
+      "name": "past_year_top_list",
+      "value": "최근 1년"
+    },
+    {
+      "name": "past_month_top_list",
+      "value": "최근 1달"
+    },
+    {
+      "name": "yesterday_top_list",
+      "value": "어제"
+    },
+    {
+      "name": "change_background_title",
+      "value": "배경을 변경하시겠습니까?"
+    },
+    {
+      "name": "change_background_message",
+      "value": "배경 수정은 이 소프트웨어에 한하며 E 스테이션 또는 기타 유사한 소프트웨어에 동기화할 수 없습니다."
+    },
+    {
+      "name": "change_avatar_title",
+      "value": "프로필 사진을 변경하시겠습니까?"
+    },
+    {
+      "name": "change_avatar_message",
+      "value": "프로필 수정은 본 소프트웨어에 한하며 E 스테이션 또는 기타 유사한 소프트웨어에 동기화할 수 없습니다."
+    },
+    {
+      "name": "take_a_photograph",
+      "value": "사진 찍기"
+    },
+    {
+      "name": "choose_from_the_album",
+      "value": "갤러리로부터 선택"
+    },
+    {
+      "name": "request_camera_permission",
+      "value": "EhViewer 사진을 찍을 수 있도록 카메라 접근 권한을 부여하시겠습니까?"
+    },
+    {
+      "name": "request_storage_permission",
+      "value": "EhViewer 이미지를 선택할 수 있도록 갤러리 접근 권한을 부여하시겠습니까?"
+    },
+    {
+      "name": "subscription_watched",
+      "value": "구독 중"
+    },
+    {
+      "name": "subscription_hidden",
+      "value": "구독 해제"
+    },
+    {
+      "name": "delete_subscription_title",
+      "value": "태그 삭제"
+    },
+    {
+      "name": "can_not_use_this_tag",
+      "value": "태그를 사용할 수 없음"
+    },
+    {
+      "name": "add_tag_dialog_title",
+      "value": "태그 추가"
+    },
+    {
+      "name": "tag_title",
+      "value": "태그"
+    },
+    {
+      "name": "empty_subscription",
+      "value": "구독 목록이 비어 있음"
+    },
+    {
+      "name": "subscription_success",
+      "value": "%s 성공"
+    },
+    {
+      "name": "download_torrent_name",
+      "value": "시드: %s"
+    },
+    {
+      "name": "download_torrent_state",
+      "value": "상태:"
+    },
+    {
+      "name": "download_torrent_path",
+      "value": "패스: %s"
+    },
+    {
+      "name": "download_search",
+      "value": "다운로드 목록내 검색"
+    },
+    {
+      "name": "sure",
+      "value": "예"
+    },
+    {
+      "name": "try_again",
+      "value": "잠시후 다시 시도하십시오."
+    },
+    {
+      "name": "open_directory",
+      "value": "디렉터리 열기"
+    },
+    {
+      "name": "downloading",
+      "value": "다운로드 중… 나중에 다시 시도하십시오."
+    },
+    {
+      "name": "torrent_exist",
+      "value": "파일이 이미 존재합니다.: %s"
+    },
+    {
+      "name": "yes",
+      "value": "예"
+    },
+    {
+      "name": "cancel",
+      "value": "취소"
+    },
+    {
+      "name": "dummy_button",
+      "value": "더미 버튼"
+    },
+    {
+      "name": "dummy_content",
+      "value": "더미\n내용"
+    },
+    {
+      "name": "settings_eh_list_show_read_progress",
+      "value": "독서 진행도 표시"
+    },
+    {
+      "name": "settings_eh_list_show_read_progress_summary",
+      "value": "상세 목록 모드에서 각 갤러리의 독서 진행도 표시"
+    },
+    {
+      "name": "cookie_login_import_in_clipboard",
+      "value": "클립보드에서 가져오기"
+    },
+    {
+      "name": "no_cookie_in_clipboard",
+      "value": "클립보드에서 유효한 데이터를 찾을 수 없습니다"
+    },
+    {
+      "name": "gallery_update_dialog_title",
+      "value": "업데이트 방법"
+    },
+    {
+      "name": "gallery_update_dialog_message",
+      "value": "기존 갤러리 덮어쓰기: 다운로드된 버전만 유지되고 기존 버전은 삭제됩니다.\n새 갤러리로 다운로드: 다운로드된 갤러리가 새 갤러리로 존재하며 새 갤러리와 기존 갤러리가 모두 저장됩니다."
+    },
+    {
+      "name": "gallery_update_download_as_new",
+      "value": "새 갤러리로 다운로드"
+    },
+    {
+      "name": "gallery_update_override_old",
+      "value": "기존 갤러리 덮어쓰기"
+    },
+    {
+      "name": "loading_db_file",
+      "value": "데이터 로딩 중…"
+    },
+    {
+      "name": "settings_eh_history_size",
+      "value": "기록 수"
+    },
+    {
+      "name": "history_info_unlimited",
+      "value": "무제한"
+    },
+    {
+      "name": "archiver",
+      "value": "아카이버"
+    },
+    {
+      "name": "archiver_dialog_current_funds",
+      "value": "현재 자금:"
+    },
+    {
+      "name": "archiver_dialog_cost",
+      "value": "다운로드 비용:  %s"
+    },
+    {
+      "name": "archiver_dialog_download_original",
+      "value": "원본 아카이브 다운로드"
+    },
+    {
+      "name": "archiver_dialog_download_resample",
+      "value": "리샘플 아카이브 다운로드"
+    },
+    {
+      "name": "archiver_dialog_size",
+      "value": "예상 크기:  %s"
+    },
+    {
+      "name": "dialog_archiver_title",
+      "value": "아카이버 다운로더"
+    },
+    {
+      "name": "download_receiver_label",
+      "value": "EhViewer 다운로드 수신기"
+    },
+    {
+      "name": "decompressed_successfully",
+      "value": "압축 해제 성공!"
+    },
+    {
+      "name": "decompression_failed",
+      "value": "압축 해제 실패!"
+    },
+    {
+      "name": "download_label_archiver",
+      "value": "아카이버"
+    },
+    {
+      "name": "cookie_in_clipboard_incorrect",
+      "value": "쿠키 형식이 올바르지 않습니다"
+    },
+    {
+      "name": "settings_download_timeout",
+      "value": "다운로드 타임아웃"
+    },
+    {
+      "name": "download_timeout_unlimited",
+      "value": "무제한"
+    },
+    {
+      "name": "settings_download_timeout_summary",
+      "value": "%s(초), 이미지 다운로드에 허용되는 최대 시간."
+    },
+    {
+      "name": "have_new_version",
+      "value": "새 갤러리 버전 보기"
+    },
+    {
+      "name": "appwidget_text",
+      "value": "예제"
+    },
+    {
+      "name": "add_widget",
+      "value": "위젯 추가"
+    },
+    {
+      "name": "app_widget_description",
+      "value": "이것은 앱 위젯 설명입니다"
+    },
+    {
+      "name": "archiver_downloading",
+      "value": "아카이브 다운로드 중 %s"
+    },
+    {
+      "name": "order",
+      "value": "순서"
+    },
+    {
+      "name": "sort_by_pub_time",
+      "value": "게시 시간"
+    },
+    {
+      "name": "sort_by_fav_time",
+      "value": "즐겨찾기 시간"
+    },
+    {
+      "name": "settings_eh_sign_out_restart",
+      "value": "자동으로 재시작 중입니다. 잠시만 기다려주세요"
+    },
+    {
+      "name": "settings_eh_theme_auto_switch",
+      "value": "시스템 다크 모드 따르기"
+    },
+    {
+      "name": "spen_previous_page",
+      "value": "이전 페이지"
+    },
+    {
+      "name": "spen_next_page",
+      "value": "다음 페이지"
+    },
+    {
+      "name": "category_all",
+      "value": "전체"
+    },
+    {
+      "name": "import_local_archive",
+      "value": "로컬 아카이브 가져오기"
+    },
+    {
+      "name": "import_archive_title",
+      "value": "아카이브 파일 선택"
+    },
+    {
+      "name": "import_archive_failed",
+      "value": "아카이브 가져오기 실패"
+    },
+    {
+      "name": "archive_permission_lost",
+      "value": "아카이브 접근 권한이 손실되었습니다. 아카이브 파일을 다시 가져오세요."
+    },
+    {
+      "name": "import_archive_processing",
+      "value": "아카이브 처리 중…"
+    },
+    {
+      "name": "import_archive_invalid_format",
+      "value": "지원하지 않는 아카이브 형식"
+    },
+    {
+      "name": "import_archive_already_imported",
+      "value": "이미 가져온 아카이브입니다"
+    },
+    {
+      "name": "import_archive_success",
+      "value": "아카이브를 성공적으로 가져왔습니다"
+    },
+    {
+      "name": "archive_not_accessible",
+      "value": "아카이브 파일에 접근할 수 없습니다"
+    },
+    {
+      "name": "imported_archive_info_title",
+      "value": "로컬 가져오기 정보"
+    },
+    {
+      "name": "imported_archive_info_message",
+      "value": "로컬 저장소에서 가져온 항목입니다"
+    },
+    {
+      "name": "imported_archive_category",
+      "value": "로컬 가져오기"
+    },
+    {
+      "name": "import_local_album",
+      "value": "로컬 앨범 가져오기"
+    },
+    {
+      "name": "import_album_title",
+      "value": "이미지 폴더 선택"
+    },
+    {
+      "name": "import_album_processing",
+      "value": "앨범 가져오는 중…"
+    },
+    {
+      "name": "import_album_failed",
+      "value": "앨범 가져오기 실패"
+    },
+    {
+      "name": "import_album_no_images",
+      "value": "선택한 폴더에 지원되는 이미지가 없습니다"
+    },
+    {
+      "name": "import_album_already_imported",
+      "value": "이미 가져온 앨범입니다"
+    },
+    {
+      "name": "import_album_success",
+      "value": "이미지 %d장을 가져왔습니다"
+    },
+    {
+      "name": "tag_selector_more",
+      "value": "▼ 더 보기"
+    },
+    {
+      "name": "tag_selector_collapse",
+      "value": "▲ 접기"
+    },
+    {
+      "name": "tag_selector_end",
+      "value": "--- 끝 ---"
+    },
+    {
+      "name": "error_rar_unsupported",
+      "value": "RAR 형식 압축 파일은 지원하지 않습니다 (ZIP 또는 7z를 사용해 주세요)"
+    },
+    {
+      "name": "shortcut_start_all_triggered",
+      "value": "모두 시작을 실행했습니다"
+    },
+    {
+      "name": "shortcut_stop_all_triggered",
+      "value": "모두 중지를 실행했습니다"
+    },
+    {
+      "name": "disable_pattern_protection",
+      "value": "Disable pattern protection"
+    },
+    {
+      "name": "pattern_protection_disabled",
+      "value": "Pattern protection disabled"
+    },
+    {
+      "name": "archiver_download_cancel",
+      "value": "Cancel archive download"
+    },
+    {
+      "name": "archiver_download_cancel_confirm",
+      "value": "Cancel this archive download and delete partial files?"
+    },
+    {
+      "name": "archiver_download_canceled",
+      "value": "Archive download canceled"
+    },
+    {
+      "name": "reset_limit_confirm_title",
+      "value": "Reset image limits"
+    },
+    {
+      "name": "reset_limit_confirm_message",
+      "value": "Spend %s to reset your image limits?"
+    },
+    {
+      "name": "reset_limit_success",
+      "value": "Image limits reset"
+    },
+    {
+      "name": "reset_limit_failed",
+      "value": "Failed to reset image limits"
+    }
+  ]
+}

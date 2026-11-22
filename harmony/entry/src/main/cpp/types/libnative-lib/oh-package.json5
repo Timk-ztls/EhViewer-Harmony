@@ -1,0 +1,8 @@
+{
+  "name": "libnative-lib.so",
+  "version": "1.0.0",
+  "description": "EhViewer native-image NAPI 模块（图片解码 / GIF / 7z / GL 边界）的类型声明包",
+  "main": "",
+  "types": "./index.d.ts",
+  "license": "GPL-3.0"
+}

@@ -1,0 +1,16 @@
+{
+  "boolean": [
+    {
+      "name": "beta",
+      "value": false
+    },
+    {
+      "name": "dad_spin_bars",
+      "value": true
+    },
+    {
+      "name": "ga_autoActivityTracking",
+      "value": true
+    }
+  ]
+}

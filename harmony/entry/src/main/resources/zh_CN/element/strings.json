@@ -1,0 +1,3492 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "EhViewer"
+    },
+    {
+      "name": "theme_light",
+      "value": "亮色主题"
+    },
+    {
+      "name": "theme_dark",
+      "value": "暗色主题"
+    },
+    {
+      "name": "theme_black",
+      "value": "黑色主题"
+    },
+    {
+      "name": "homepage",
+      "value": "主页"
+    },
+    {
+      "name": "subscription",
+      "value": "订阅"
+    },
+    {
+      "name": "whats_hot",
+      "value": "热门"
+    },
+    {
+      "name": "top_lists",
+      "value": "排行榜"
+    },
+    {
+      "name": "favourite",
+      "value": "收藏"
+    },
+    {
+      "name": "history",
+      "value": "历史"
+    },
+    {
+      "name": "downloads",
+      "value": "下载"
+    },
+    {
+      "name": "news",
+      "value": "新闻"
+    },
+    {
+      "name": "settings",
+      "value": "设置"
+    },
+    {
+      "name": "username",
+      "value": "用户名"
+    },
+    {
+      "name": "password",
+      "value": "密码"
+    },
+    {
+      "name": "recaptcha",
+      "value": "验证码（非必需）"
+    },
+    {
+      "name": "recaptcha_none",
+      "value": "点我"
+    },
+    {
+      "name": "recaptcha_loading",
+      "value": "加载中…"
+    },
+    {
+      "name": "recaptcha_failure",
+      "value": "失败"
+    },
+    {
+      "name": "sign_in",
+      "value": "登录"
+    },
+    {
+      "name": "register",
+      "value": "注册"
+    },
+    {
+      "name": "sign_in_via_webview",
+      "value": "通过网页登录"
+    },
+    {
+      "name": "sign_in_via_cookies",
+      "value": "通过 Cookie 登录"
+    },
+    {
+      "name": "webview_unavailable_title",
+      "value": "系统 WebView 不可用"
+    },
+    {
+      "name": "webview_unavailable_message",
+      "value": "系统自带的 Android 系统 WebView 无法正常加载（可能已损坏或与系统架构不匹配）。请在应用商店更新「Android 系统 WebView」、在开发者选项中切换 WebView 实现，或使用「通过 Cookie 登录」。"
+    },
+    {
+      "name": "display_name_dialog_title",
+      "value": "输入昵称"
+    },
+    {
+      "name": "display_name",
+      "value": "昵称"
+    },
+    {
+      "name": "display_name_is_empty",
+      "value": "昵称为空"
+    },
+    {
+      "name": "sign_in_first",
+      "value": "请先登录"
+    },
+    {
+      "name": "default_display_name",
+      "value": "Little Hippo"
+    },
+    {
+      "name": "cookie_explain",
+      "value": "Cookie 是存储在浏览器里的一小块数据。如果您不清楚 Cookie 什么或者怎么获取 Cookie，最好搜索一下。\n\n请输入特定的 Cookie 来登录。"
+    },
+    {
+      "name": "text_is_empty",
+      "value": "文本为空"
+    },
+    {
+      "name": "waring",
+      "value": "警告"
+    },
+    {
+      "name": "wrong_cookie_warning",
+      "value": "看起来您输入的 Cookie 是错误的，最好检查一下。"
+    },
+    {
+      "name": "i_will_check_it",
+      "value": "好的"
+    },
+    {
+      "name": "i_dont_think_so",
+      "value": "我没输错"
+    },
+    {
+      "name": "found_cookies",
+      "value": "找到旧版 Cookie"
+    },
+    {
+      "name": "invalid_download_location",
+      "value": "似乎下载路径不可用。请到重新设置下载路径。"
+    },
+    {
+      "name": "cellular_network_warning",
+      "value": "正在使用移动网络"
+    },
+    {
+      "name": "clipboard_gallery_url_snack_message",
+      "value": "剪切板里有画廊链接"
+    },
+    {
+      "name": "clipboard_gallery_url_snack_action",
+      "value": "查看"
+    },
+    {
+      "name": "image_save_success",
+      "value": "图片保存成功"
+    },
+    {
+      "name": "error_bad_status_code",
+      "value": "错误状态码：%d"
+    },
+    {
+      "name": "error_timeout",
+      "value": "超时"
+    },
+    {
+      "name": "error_unknown_host",
+      "value": "未知主机"
+    },
+    {
+      "name": "error_redirection",
+      "value": "太多重定向"
+    },
+    {
+      "name": "error_socket",
+      "value": "网络错误"
+    },
+    {
+      "name": "error_unknown",
+      "value": "奇怪的错误"
+    },
+    {
+      "name": "error_cant_find_activity",
+      "value": "找不到相应的应用"
+    },
+    {
+      "name": "error_cannot_parse_the_url",
+      "value": "无法解析链接"
+    },
+    {
+      "name": "error_not_folder_path",
+      "value": "非文件夹路径"
+    },
+    {
+      "name": "error_no_provider",
+      "value": "无 provider"
+    },
+    {
+      "name": "error_decoding_failed",
+      "value": "解码失败"
+    },
+    {
+      "name": "error_not_found",
+      "value": "未找到"
+    },
+    {
+      "name": "error_empty",
+      "value": "空"
+    },
+    {
+      "name": "error_invalid_archive",
+      "value": "无效的压缩包"
+    },
+    {
+      "name": "error_reading_failed",
+      "value": "读取失败"
+    },
+    {
+      "name": "error_out_of_range",
+      "value": "越界"
+    },
+    {
+      "name": "error_write_failed",
+      "value": "写入失败"
+    },
+    {
+      "name": "error_parse_error",
+      "value": "解析失败"
+    },
+    {
+      "name": "error_509",
+      "value": "509"
+    },
+    {
+      "name": "error_invalid_url",
+      "value": "无效链接"
+    },
+    {
+      "name": "error_get_ptoken_error",
+      "value": "获取 pToken 错误"
+    },
+    {
+      "name": "error_cant_create_temp_file",
+      "value": "无法创建临时文件"
+    },
+    {
+      "name": "error_cant_save_image",
+      "value": "无法保存图片"
+    },
+    {
+      "name": "error_save_image_existed",
+      "value": "图片已存在"
+    },
+    {
+      "name": "error_invalid_number",
+      "value": "非法数字"
+    },
+    {
+      "name": "error_please_login_first",
+      "value": "请先登陆"
+    },
+    {
+      "name": "error_empty_html",
+      "value": "页面内容为空"
+    },
+    {
+      "name": "error_cant_get_image",
+      "value": "无法获取图片"
+    },
+    {
+      "name": "error_igneous_wrong",
+      "value": "错误的igneous\n检查账号里站权限后重新登录"
+    },
+    {
+      "name": "gallery_gl_fallback_title",
+      "value": "OpenGL 渲染器不可用"
+    },
+    {
+      "name": "gallery_gl_fallback_message",
+      "value": "当前设备暂时无法初始化 EGL。请返回后稍后重试。"
+    },
+    {
+      "name": "gallery_gl_fallback_action_close",
+      "value": "返回"
+    },
+    {
+      "name": "gallery_gl_fallback_toast",
+      "value": "GL 渲染失败，已切换到安全占位页"
+    },
+    {
+      "name": "kokomade_tip",
+      "value": "设置->Eh->画廊站点->e-hentai"
+    },
+    {
+      "name": "app_waring",
+      "value": "本应用中内容来自互联网，部分内容可能对您的生理及心理造成难以恢复的伤害。本应用作者不会对由本应用造成的任何后果负责。\n\n未成年人应在监护人指导下使用本应用。"
+    },
+    {
+      "name": "error_username_cannot_empty",
+      "value": "用户名不可为空"
+    },
+    {
+      "name": "error_password_cannot_empty",
+      "value": "密码不可为空"
+    },
+    {
+      "name": "guest_mode",
+      "value": "游客模式"
+    },
+    {
+      "name": "sign_in_failed",
+      "value": "登录失败"
+    },
+    {
+      "name": "sign_in_failed_tip",
+      "value": "若持续出错，请尝试“通过网页登录”或“通过 Cookie 登录”。"
+    },
+    {
+      "name": "sign_in_failed_plain",
+      "value": "这可能是网站更新导致的，也有可能是发生了奇怪的事情。您可以选择在登录按钮下方通过网页登录或者输入 cookie，或者跳过登录。跳过登录可能导致无法正常使用应用。如果你已经在 0.6.x 版登录过了，请优先尝试选择“通过 Cookie 登录”。"
+    },
+    {
+      "name": "press_twice_exit",
+      "value": "再按一次退出"
+    },
+    {
+      "name": "content_layout_restore_tip",
+      "value": "点击重试"
+    },
+    {
+      "name": "write_rationale",
+      "value": "EhViewer 将申请设备存储空间访问权限以便下载画廊。您愿意授权吗？"
+    },
+    {
+      "name": "you_rejected_me",
+      "value": "好痛"
+    },
+    {
+      "name": "analytics_explain",
+      "value": "您同意让开发者收集您的设备信息与使用情况吗？这将对开发有很大帮助。<br><br>数据统计服务由 Google Analytics for Firebase 提供，其隐私政策可在 <a href=\"https://www.google.com/policies/privacy/\">https://www.google.com/policies/privacy/</a> 查看。<br><br>若您同意参与数据统计，您的设备信息与应用使用情况将会被记录，其包括但不限于：Android API 版本、设备型号、语言所在地、本应用版本号、会话时长、应用功能使用次数。开发者承诺以下信息并不会被记录：电话号码、电子邮件地址、IMEI。<br><br>在您同意参与数据统计之前，您的信息不会被记录。<br><br>被记录的数据会由 Google Analytics for Firebase 进行分析，分析报表仅可被本应用开发者访问。"
+    },
+    {
+      "name": "get_it",
+      "value": "知道了"
+    },
+    {
+      "name": "accept",
+      "value": "接受"
+    },
+    {
+      "name": "reject",
+      "value": "拒绝"
+    },
+    {
+      "name": "help_route",
+      "value": "设置->关于->帮助"
+    },
+    {
+      "name": "select_scene",
+      "value": "你想选择哪个画廊站点？"
+    },
+    {
+      "name": "select_scene_explain",
+      "value": "e-hentai：对任何人开放\nexhentai：仅对登录用户开放"
+    },
+    {
+      "name": "no_select",
+      "value": "请选择一个站点"
+    },
+    {
+      "name": "new_version",
+      "value": "新版本"
+    },
+    {
+      "name": "update",
+      "value": "更新"
+    },
+    {
+      "name": "update_dialog_sponsor",
+      "value": "赏饭给作者"
+    },
+    {
+      "name": "update_fail",
+      "value": "检查更新失败"
+    },
+    {
+      "name": "update_fail_info",
+      "value": "点击 是 跳转至Github主页"
+    },
+    {
+      "name": "update_to",
+      "value": "更新至"
+    },
+    {
+      "name": "update_plain",
+      "value": "版本：%1$s\n大小：%2$s\n\n%3$s"
+    },
+    {
+      "name": "update_to_date",
+      "value": "EhViewer 已是最新版本"
+    },
+    {
+      "name": "update_ignore",
+      "value": "忽略"
+    },
+    {
+      "name": "no_updates_available",
+      "value": "已是最新版本"
+    },
+    {
+      "name": "gallery_list_search_bar_hint_exhentai",
+      "value": "搜索 ExHentai"
+    },
+    {
+      "name": "gallery_list_search_bar_hint_e_hentai",
+      "value": "搜索 E-Hentai"
+    },
+    {
+      "name": "gallery_list_search_bar_open_gallery",
+      "value": "打开画廊"
+    },
+    {
+      "name": "gallery_list_empty_hit",
+      "value": "什么都没有找到"
+    },
+    {
+      "name": "gallery_list_empty_hit_subscription",
+      "value": "请至 设置->EH->我的标签 订阅标签"
+    },
+    {
+      "name": "gallery_list_no_preview_tag",
+      "value": "暂无预览标签"
+    },
+    {
+      "name": "search",
+      "value": "搜索"
+    },
+    {
+      "name": "gallery_list_action_url_missed",
+      "value": "没找到下一页"
+    },
+    {
+      "name": "gallery_list_no_more_data",
+      "value": "当前列表没有更多数据"
+    },
+    {
+      "name": "gallery_list_date_jump_1d",
+      "value": "昨天"
+    },
+    {
+      "name": "gallery_list_date_jump_3d",
+      "value": "三天前"
+    },
+    {
+      "name": "gallery_list_date_jump_1w",
+      "value": "一周前"
+    },
+    {
+      "name": "gallery_list_date_jump_2w",
+      "value": "两周前"
+    },
+    {
+      "name": "gallery_list_date_jump_1m",
+      "value": "一个月前"
+    },
+    {
+      "name": "gallery_list_date_jump_6m",
+      "value": "半年前"
+    },
+    {
+      "name": "gallery_list_date_jump_1y",
+      "value": "一年前"
+    },
+    {
+      "name": "gallery_list_date_jump_2y",
+      "value": "两年前"
+    },
+    {
+      "name": "gallery_list_select_jump_date",
+      "value": "选择日期"
+    },
+    {
+      "name": "gallery_list_select_jump_node",
+      "value": "选择节点"
+    },
+    {
+      "name": "gallery_list_jump_now",
+      "value": "立即跳转"
+    },
+    {
+      "name": "gallery_list_time_jump_dialog_title",
+      "value": "跳转选择器"
+    },
+    {
+      "name": "gallery_list_time_jump_dialog_found_message",
+      "value": "找到 %s 个结果"
+    },
+    {
+      "name": "gallery_tag_copy",
+      "value": "标签已复制"
+    },
+    {
+      "name": "keyword_search",
+      "value": "关键字搜索"
+    },
+    {
+      "name": "image_search",
+      "value": "图片搜索"
+    },
+    {
+      "name": "search_normal",
+      "value": "普通搜索"
+    },
+    {
+      "name": "search_advance",
+      "value": "高级选项"
+    },
+    {
+      "name": "search_image",
+      "value": "图片搜索"
+    },
+    {
+      "name": "tag_search_entrance",
+      "value": "标签检索"
+    },
+    {
+      "name": "search_normal_search",
+      "value": "一般搜索"
+    },
+    {
+      "name": "search_subscription_search",
+      "value": "订阅搜索"
+    },
+    {
+      "name": "search_specify_uploader",
+      "value": "指定上传者"
+    },
+    {
+      "name": "search_specify_tag",
+      "value": "指定标签"
+    },
+    {
+      "name": "search_enable_advance",
+      "value": "启用高级选项"
+    },
+    {
+      "name": "search_tip",
+      "value": "一般搜索：就是搜索。\n\n订阅搜素：在订阅中搜索。\n\n指定上传者：列出该上传者上传的画廊。其他选项会被忽略。\n\n指定标签：列出含有该标签的画廊。其他选项会被忽略。"
+    },
+    {
+      "name": "search_sname",
+      "value": "搜索画廊"
+    },
+    {
+      "name": "search_stags",
+      "value": "搜索画廊标签"
+    },
+    {
+      "name": "search_sdesc",
+      "value": "搜索画廊描述"
+    },
+    {
+      "name": "search_storr",
+      "value": "搜索种子文件名"
+    },
+    {
+      "name": "search_sto",
+      "value": "仅显示有种子的画廊"
+    },
+    {
+      "name": "search_sdt1",
+      "value": "搜索低愿力标签"
+    },
+    {
+      "name": "search_sdt2",
+      "value": "搜索差评标签"
+    },
+    {
+      "name": "search_sh",
+      "value": "只显示被删除的画廊"
+    },
+    {
+      "name": "search_sr",
+      "value": "最低评分："
+    },
+    {
+      "name": "search_sp",
+      "value": "页数："
+    },
+    {
+      "name": "search_sp_to",
+      "value": "到"
+    },
+    {
+      "name": "search_sf",
+      "value": "禁用排除项："
+    },
+    {
+      "name": "search_sfl",
+      "value": "语言"
+    },
+    {
+      "name": "search_sfu",
+      "value": "上传者"
+    },
+    {
+      "name": "search_sft",
+      "value": "标签"
+    },
+    {
+      "name": "select_image",
+      "value": "选择图片"
+    },
+    {
+      "name": "search_uss",
+      "value": "使用相似搜索"
+    },
+    {
+      "name": "search_osc",
+      "value": "只搜索封面"
+    },
+    {
+      "name": "search_se",
+      "value": "显示被删除的画廊"
+    },
+    {
+      "name": "select_image_first",
+      "value": "请先选择图片"
+    },
+    {
+      "name": "add_to_favourites",
+      "value": "收藏"
+    },
+    {
+      "name": "remove_from_favourites",
+      "value": "移除收藏"
+    },
+    {
+      "name": "stop_downloading",
+      "value": "停止下载"
+    },
+    {
+      "name": "delete_downloads",
+      "value": "删除下载"
+    },
+    {
+      "name": "quick_search",
+      "value": "书签栏"
+    },
+    {
+      "name": "quick_search_tip",
+      "value": "点击“+”来添加书签"
+    },
+    {
+      "name": "add_quick_search_dialog_title",
+      "value": "添加书签"
+    },
+    {
+      "name": "name_is_empty",
+      "value": "名称为空"
+    },
+    {
+      "name": "delete",
+      "value": "删除"
+    },
+    {
+      "name": "delete_quick_search_title",
+      "value": "删除书签"
+    },
+    {
+      "name": "delete_quick_search_message",
+      "value": "删除“%s”？"
+    },
+    {
+      "name": "no_quick_search",
+      "value": "这里是书签栏"
+    },
+    {
+      "name": "add_quick_search_tip",
+      "value": "画廊列表的状态将被保存为书签。如果你想保存搜索面板的状态，请先执行搜索。"
+    },
+    {
+      "name": "readme",
+      "value": "读我"
+    },
+    {
+      "name": "image_search_not_quick_search",
+      "value": "无法添加图片搜索为书签"
+    },
+    {
+      "name": "duplicate_quick_search",
+      "value": "已存在相同的书签，名称为“%s”。"
+    },
+    {
+      "name": "duplicate_name",
+      "value": "已存在相同名称"
+    },
+    {
+      "name": "subscription_tip",
+      "value": "点击“+”来添加书签"
+    },
+    {
+      "name": "go_to_hint",
+      "value": "第 %1$d 页，共 %2$d 页"
+    },
+    {
+      "name": "star_2",
+      "value": "2 星"
+    },
+    {
+      "name": "star_3",
+      "value": "3 星"
+    },
+    {
+      "name": "star_4",
+      "value": "4 星"
+    },
+    {
+      "name": "star_5",
+      "value": "5 星"
+    },
+    {
+      "name": "error_cannot_find_gallery",
+      "value": "找不到画廊"
+    },
+    {
+      "name": "download",
+      "value": "下载"
+    },
+    {
+      "name": "read",
+      "value": "阅读"
+    },
+    {
+      "name": "more_information",
+      "value": "查看更多信息"
+    },
+    {
+      "name": "favored_times",
+      "value": "♥ %d"
+    },
+    {
+      "name": "rating_text",
+      "value": "%1$s (%2$.2f, %3$d)"
+    },
+    {
+      "name": "favorites",
+      "value": "收藏"
+    },
+    {
+      "name": "torrent_count",
+      "value": "种子 (%d)"
+    },
+    {
+      "name": "share",
+      "value": "分享"
+    },
+    {
+      "name": "rate",
+      "value": "评分"
+    },
+    {
+      "name": "similar_gallery",
+      "value": "相似画廊"
+    },
+    {
+      "name": "search_cover",
+      "value": "搜索封面"
+    },
+    {
+      "name": "no_tags",
+      "value": "暂无标签"
+    },
+    {
+      "name": "no_comments",
+      "value": "暂无评论"
+    },
+    {
+      "name": "no_more_comments",
+      "value": "已显示所有评论"
+    },
+    {
+      "name": "more_comment",
+      "value": "查看更多评论"
+    },
+    {
+      "name": "no_previews",
+      "value": "没有预览"
+    },
+    {
+      "name": "no_more_previews",
+      "value": "已显示所有预览"
+    },
+    {
+      "name": "more_previews",
+      "value": "查看更多预览"
+    },
+    {
+      "name": "refresh",
+      "value": "刷新"
+    },
+    {
+      "name": "open_in_other_app",
+      "value": "在其他应用中打开"
+    },
+    {
+      "name": "rate_successfully",
+      "value": "评分成功"
+    },
+    {
+      "name": "rate_failed",
+      "value": "评分失败"
+    },
+    {
+      "name": "no_torrents",
+      "value": "没有种子"
+    },
+    {
+      "name": "torrents",
+      "value": "种子"
+    },
+    {
+      "name": "favorited",
+      "value": "已收藏"
+    },
+    {
+      "name": "not_favorited",
+      "value": "未收藏"
+    },
+    {
+      "name": "add_favorites_dialog_title",
+      "value": "添加收藏"
+    },
+    {
+      "name": "remember_favorite_collection",
+      "value": "记住收藏夹"
+    },
+    {
+      "name": "add_to_favorite_success",
+      "value": "已添加至收藏"
+    },
+    {
+      "name": "remove_from_favorite_success",
+      "value": "移除收藏"
+    },
+    {
+      "name": "add_to_favorite_failure",
+      "value": "添加收藏失败"
+    },
+    {
+      "name": "remove_from_favorite_failure",
+      "value": "移除收藏失败"
+    },
+    {
+      "name": "filter_the_uploader",
+      "value": "屏蔽上传者“%s”？"
+    },
+    {
+      "name": "filter_the_tag",
+      "value": "屏蔽标签“%s”？"
+    },
+    {
+      "name": "filter_added",
+      "value": "已添加屏蔽项"
+    },
+    {
+      "name": "copy_tag",
+      "value": "复制"
+    },
+    {
+      "name": "rating10",
+      "value": "根本把持不住"
+    },
+    {
+      "name": "rating9",
+      "value": "好极了"
+    },
+    {
+      "name": "rating8",
+      "value": "很棒"
+    },
+    {
+      "name": "rating7",
+      "value": "不错"
+    },
+    {
+      "name": "rating6",
+      "value": "还行"
+    },
+    {
+      "name": "rating5",
+      "value": "一般般"
+    },
+    {
+      "name": "rating4",
+      "value": "不行"
+    },
+    {
+      "name": "rating3",
+      "value": "糟糕"
+    },
+    {
+      "name": "rating2",
+      "value": "瞎眼"
+    },
+    {
+      "name": "rating1",
+      "value": "快要窒息了"
+    },
+    {
+      "name": "rating0",
+      "value": "…"
+    },
+    {
+      "name": "gallery_info",
+      "value": "画廊信息"
+    },
+    {
+      "name": "copied_to_clipboard",
+      "value": "已复制到剪切板"
+    },
+    {
+      "name": "header_key",
+      "value": "键"
+    },
+    {
+      "name": "header_value",
+      "value": "值"
+    },
+    {
+      "name": "key_gid",
+      "value": "Gid"
+    },
+    {
+      "name": "key_token",
+      "value": "Token"
+    },
+    {
+      "name": "key_url",
+      "value": "链接"
+    },
+    {
+      "name": "key_title",
+      "value": "标题"
+    },
+    {
+      "name": "key_title_jpn",
+      "value": "日文标题"
+    },
+    {
+      "name": "key_thumb",
+      "value": "缩略图"
+    },
+    {
+      "name": "key_category",
+      "value": "分类"
+    },
+    {
+      "name": "key_uploader",
+      "value": "上传者"
+    },
+    {
+      "name": "key_posted",
+      "value": "上传时间"
+    },
+    {
+      "name": "key_parent",
+      "value": "父画廊"
+    },
+    {
+      "name": "key_visible",
+      "value": "可见性"
+    },
+    {
+      "name": "key_language",
+      "value": "语言"
+    },
+    {
+      "name": "key_pages",
+      "value": "页数"
+    },
+    {
+      "name": "key_size",
+      "value": "大小"
+    },
+    {
+      "name": "key_favorite_count",
+      "value": "收藏次数"
+    },
+    {
+      "name": "key_favorited",
+      "value": "收藏"
+    },
+    {
+      "name": "key_rating_count",
+      "value": "评价次数"
+    },
+    {
+      "name": "key_rating",
+      "value": "评分"
+    },
+    {
+      "name": "key_torrents",
+      "value": "种子个数"
+    },
+    {
+      "name": "key_torrent_url",
+      "value": "种子"
+    },
+    {
+      "name": "gallery_comments",
+      "value": "画廊评论"
+    },
+    {
+      "name": "no_one_comments_gallery",
+      "value": "暂时没有评论"
+    },
+    {
+      "name": "comment_successfully",
+      "value": "评论成功"
+    },
+    {
+      "name": "comment_failed",
+      "value": "评论失败"
+    },
+    {
+      "name": "copy_comment_text",
+      "value": "复制评论文字"
+    },
+    {
+      "name": "edit_comment",
+      "value": "修改评论"
+    },
+    {
+      "name": "edit_comment_successfully",
+      "value": "评论已被修改"
+    },
+    {
+      "name": "edit_comment_failed",
+      "value": "修改评论失败"
+    },
+    {
+      "name": "vote_up",
+      "value": "深表赞同"
+    },
+    {
+      "name": "cancel_vote_up",
+      "value": "不再深表赞同"
+    },
+    {
+      "name": "vote_down",
+      "value": "垃圾评论"
+    },
+    {
+      "name": "cancel_vote_down",
+      "value": "不是垃圾评论"
+    },
+    {
+      "name": "vote_up_successfully",
+      "value": "已深表赞同"
+    },
+    {
+      "name": "cancel_vote_up_successfully",
+      "value": "已不再深表赞同"
+    },
+    {
+      "name": "vote_down_successfully",
+      "value": "已钦定为垃圾评论"
+    },
+    {
+      "name": "cancel_vote_down_successfully",
+      "value": "已不再钦定为垃圾评论"
+    },
+    {
+      "name": "vote_failed",
+      "value": "投票失败"
+    },
+    {
+      "name": "check_vote_status",
+      "value": "查看投票情况"
+    },
+    {
+      "name": "click_more_comments",
+      "value": "点击加载更多评论"
+    },
+    {
+      "name": "last_edited",
+      "value": "上次修改时间：%s"
+    },
+    {
+      "name": "gallery_previews",
+      "value": "画廊预览"
+    },
+    {
+      "name": "go_to",
+      "value": "跳页"
+    },
+    {
+      "name": "tag_filter",
+      "value": "标签过滤"
+    },
+    {
+      "name": "tag_selector_search_hint",
+      "value": "搜索标签…"
+    },
+    {
+      "name": "tag_selector_selected_count",
+      "value": "已选: %d"
+    },
+    {
+      "name": "tag_selector_selected_section_title",
+      "value": "已选标签"
+    },
+    {
+      "name": "tag_selector_empty_selected",
+      "value": "暂无已选标签"
+    },
+    {
+      "name": "tag_selector_other_group",
+      "value": "其他"
+    },
+    {
+      "name": "scene_download_title",
+      "value": "共%s个画廊 - %s"
+    },
+    {
+      "name": "no_download_info",
+      "value": "这里是下载项目"
+    },
+    {
+      "name": "download_state_none",
+      "value": "未启动"
+    },
+    {
+      "name": "download_state_wait",
+      "value": "等待中"
+    },
+    {
+      "name": "download_state_downloading",
+      "value": "下载中"
+    },
+    {
+      "name": "download_state_downloaded",
+      "value": "已下载"
+    },
+    {
+      "name": "download_state_failed",
+      "value": "失败"
+    },
+    {
+      "name": "download_state_failed_2",
+      "value": "%d 未完成"
+    },
+    {
+      "name": "download_state_finish",
+      "value": "已完成"
+    },
+    {
+      "name": "stat_509_alert_title",
+      "value": "509 警告"
+    },
+    {
+      "name": "stat_509_alert_text",
+      "value": "图片配额已用尽。请停止下载，休息一下。"
+    },
+    {
+      "name": "stat_download_done_title",
+      "value": "下载结束"
+    },
+    {
+      "name": "stat_download_done_text_succeeded",
+      "value": "%d 项下载成功"
+    },
+    {
+      "name": "stat_download_done_text_failed",
+      "value": "%d 项下载失败"
+    },
+    {
+      "name": "stat_download_done_text_mix",
+      "value": "%1$d 项下载成功，%2$d 项下载失败"
+    },
+    {
+      "name": "stat_download_done_line_succeeded",
+      "value": "下载成功：%s"
+    },
+    {
+      "name": "stat_download_done_line_failed",
+      "value": "下载失败：%s"
+    },
+    {
+      "name": "download_remove_dialog_title",
+      "value": "移除下载项"
+    },
+    {
+      "name": "download_remove_dialog_message",
+      "value": "从下载列表移除 %s ？"
+    },
+    {
+      "name": "download_remove_dialog_message_2",
+      "value": "从下载列表移除 %d 项？"
+    },
+    {
+      "name": "download_remove_dialog_check_text",
+      "value": "删除图片文件"
+    },
+    {
+      "name": "stat_download_action_stop_all",
+      "value": "全部停止"
+    },
+    {
+      "name": "drawer_download_label_title",
+      "value": "标签"
+    },
+    {
+      "name": "default_download_label_name",
+      "value": "默认"
+    },
+    {
+      "name": "download_move_dialog_title",
+      "value": "移动"
+    },
+    {
+      "name": "download_labels",
+      "value": "下载标签"
+    },
+    {
+      "name": "download_sort_list",
+      "value": "排序"
+    },
+    {
+      "name": "download_filter_by_status",
+      "value": "根据状态过滤"
+    },
+    {
+      "name": "download_filter_by_kind",
+      "value": "根据类型过滤"
+    },
+    {
+      "name": "download_status_all",
+      "value": "全部"
+    },
+    {
+      "name": "sort_download_list",
+      "value": "对内容排序"
+    },
+    {
+      "name": "default_sort",
+      "value": "默认"
+    },
+    {
+      "name": "sort_by_gallery_id_asc",
+      "value": "按ID升序"
+    },
+    {
+      "name": "sort_by_gallery_id_desc",
+      "value": "按ID降序"
+    },
+    {
+      "name": "sort_by_create_time_asc",
+      "value": "按创建时间升序"
+    },
+    {
+      "name": "sort_by_create_time_desc",
+      "value": "按创建时间降序"
+    },
+    {
+      "name": "sort_by_rating_asc",
+      "value": "按评分升序"
+    },
+    {
+      "name": "sort_by_rating_desc",
+      "value": "按评分降序"
+    },
+    {
+      "name": "sort_by_name_asc",
+      "value": "按名称升序"
+    },
+    {
+      "name": "sort_by_name_desc",
+      "value": "按名称降序"
+    },
+    {
+      "name": "sort_by_file_size_asc",
+      "value": "按文件大小升序"
+    },
+    {
+      "name": "sort_by_file_size_desc",
+      "value": "按文件大小降序"
+    },
+    {
+      "name": "download_start_all",
+      "value": "全部开始"
+    },
+    {
+      "name": "download_stop_all",
+      "value": "全部停止"
+    },
+    {
+      "name": "download_reset_reading_progress",
+      "value": "重置阅读进度"
+    },
+    {
+      "name": "download_search_gallery",
+      "value": "搜索画廊"
+    },
+    {
+      "name": "download_search_hint",
+      "value": "输入关键字"
+    },
+    {
+      "name": "reset_reading_progress_message",
+      "value": "重置所有已下载画廊的阅读进度？"
+    },
+    {
+      "name": "reset_reading_progress_processing",
+      "value": "正在重置阅读进度..."
+    },
+    {
+      "name": "reset_reading_progress_done",
+      "value": "阅读进度重置完毕"
+    },
+    {
+      "name": "download_service_label",
+      "value": "EhViewer 下载服务"
+    },
+    {
+      "name": "archiver_download_service_label",
+      "value": "EhViewer 档案下载"
+    },
+    {
+      "name": "archiver_download_pause",
+      "value": "暂停"
+    },
+    {
+      "name": "archiver_download_resume",
+      "value": "继续"
+    },
+    {
+      "name": "archiver_download_paused",
+      "value": "已暂停"
+    },
+    {
+      "name": "archiver_download_restart_no_range",
+      "value": "服务器不支持断点续传，将重新下载"
+    },
+    {
+      "name": "download_speed_text",
+      "value": "%s"
+    },
+    {
+      "name": "download_speed_text_2",
+      "value": "%1$s，剩余 %2$s"
+    },
+    {
+      "name": "remember_download_label",
+      "value": "记住下载标签"
+    },
+    {
+      "name": "default_download_label",
+      "value": "默认下载标签"
+    },
+    {
+      "name": "added_to_download_list",
+      "value": "已添加至下载列表"
+    },
+    {
+      "name": "download_searching",
+      "value": "正在搜索请稍候"
+    },
+    {
+      "name": "download_searching_failed",
+      "value": "搜索失败，请尝试重启软件"
+    },
+    {
+      "name": "no_download_label",
+      "value": "这里是下载标签"
+    },
+    {
+      "name": "add",
+      "value": "添加"
+    },
+    {
+      "name": "new_label_title",
+      "value": "新标签"
+    },
+    {
+      "name": "label_text_is_empty",
+      "value": "标签文本为空"
+    },
+    {
+      "name": "label_text_is_invalid",
+      "value": "“默认”是无效标签"
+    },
+    {
+      "name": "label_text_exist",
+      "value": "标签已存在"
+    },
+    {
+      "name": "rename_label_title",
+      "value": "重命名标签"
+    },
+    {
+      "name": "delete_label_title",
+      "value": "删除标签"
+    },
+    {
+      "name": "delete_label_message",
+      "value": "删除“%s”？"
+    },
+    {
+      "name": "no_history",
+      "value": "这里是阅读历史"
+    },
+    {
+      "name": "clear_all",
+      "value": "全部清除"
+    },
+    {
+      "name": "clear_all_history",
+      "value": "清除所有阅读历史？"
+    },
+    {
+      "name": "filter",
+      "value": "屏蔽画廊"
+    },
+    {
+      "name": "no_filter",
+      "value": "这里是屏蔽列表"
+    },
+    {
+      "name": "filter_title",
+      "value": "标题"
+    },
+    {
+      "name": "filter_uploader",
+      "value": "上传者"
+    },
+    {
+      "name": "filter_tag",
+      "value": "标签"
+    },
+    {
+      "name": "filter_tag_namespace",
+      "value": "标签组"
+    },
+    {
+      "name": "delete_filter",
+      "value": "删除屏蔽项“%s”？"
+    },
+    {
+      "name": "tip",
+      "value": "提示"
+    },
+    {
+      "name": "add_filter",
+      "value": "添加屏蔽项"
+    },
+    {
+      "name": "show_definition",
+      "value": "查看定义"
+    },
+    {
+      "name": "filter_text",
+      "value": "屏蔽项文本"
+    },
+    {
+      "name": "filter_tip",
+      "value": "该屏蔽系统会在 EHentai 网站屏蔽系统的基础上继续屏蔽画廊。\n\n标题屏蔽项：排除标题含有该关键字的画廊。\n\n上传者屏蔽项：排除该上传者上传的画廊。\n\n标签屏蔽项：排除包含该标签的画廊，这会使获取画廊列表花费更多时间。\n\n标签组屏蔽项：排除包含该标签组的画廊，这会使获取画廊列表花费更多时间。"
+    },
+    {
+      "name": "set_pattern_protection",
+      "value": "设置图案保护"
+    },
+    {
+      "name": "set_pattern_protection_tip",
+      "value": "绘制图案来设置图案保护\n留空来取消图案保护"
+    },
+    {
+      "name": "set",
+      "value": "设置"
+    },
+    {
+      "name": "enable_fingerprint",
+      "value": "允许使用指纹解锁"
+    },
+    {
+      "name": "u_config",
+      "value": "EHentai 设置"
+    },
+    {
+      "name": "apply",
+      "value": "应用"
+    },
+    {
+      "name": "apply_tip",
+      "value": "点击右上角的对勾来保存设置"
+    },
+    {
+      "name": "my_tags",
+      "value": "我的标签"
+    },
+    {
+      "name": "hosts",
+      "value": "自定义 hosts.txt"
+    },
+    {
+      "name": "hosts_tip",
+      "value": "hosts.txt"
+    },
+    {
+      "name": "hosts_host",
+      "value": "Host"
+    },
+    {
+      "name": "hosts_ip",
+      "value": "IP"
+    },
+    {
+      "name": "add_host",
+      "value": "添加 host"
+    },
+    {
+      "name": "add_host_add",
+      "value": "添加"
+    },
+    {
+      "name": "edit_host",
+      "value": "编辑 host"
+    },
+    {
+      "name": "edit_host_confirm",
+      "value": "确认"
+    },
+    {
+      "name": "edit_host_delete",
+      "value": "删除"
+    },
+    {
+      "name": "invalid_host",
+      "value": "无效的 host"
+    },
+    {
+      "name": "invalid_ip",
+      "value": "无效的 IP"
+    },
+    {
+      "name": "preset",
+      "value": "预设"
+    },
+    {
+      "name": "default_directory",
+      "value": "默认目录"
+    },
+    {
+      "name": "application_file_directory",
+      "value": "应用文件目录 %d （应用卸载后会被删除）"
+    },
+    {
+      "name": "page_menu_title",
+      "value": "第 %d 页"
+    },
+    {
+      "name": "page_menu_refresh",
+      "value": "@string/refresh"
+    },
+    {
+      "name": "page_menu_share",
+      "value": "@string/share"
+    },
+    {
+      "name": "page_menu_save",
+      "value": "保存"
+    },
+    {
+      "name": "page_menu_save_to",
+      "value": "保存到 …"
+    },
+    {
+      "name": "page_menu_add_bookmark",
+      "value": "添加书签"
+    },
+    {
+      "name": "gallery_menu_title",
+      "value": "菜单"
+    },
+    {
+      "name": "share_image",
+      "value": "分享图片"
+    },
+    {
+      "name": "image_saved",
+      "value": "图片已保存至 %s"
+    },
+    {
+      "name": "settings_eh",
+      "value": "EH"
+    },
+    {
+      "name": "settings_eh_sign_out",
+      "value": "退出登录"
+    },
+    {
+      "name": "settings_eh_sign_out_summary",
+      "value": "退出登录后重启应用以便再次登录"
+    },
+    {
+      "name": "settings_eh_sign_out_warning",
+      "value": "天哪，我的老伙计，你要退出登录吗？我是说，你真的要退出登录吗？"
+    },
+    {
+      "name": "settings_eh_sign_out_yes",
+      "value": "是的，我是说，真的"
+    },
+    {
+      "name": "settings_eh_sign_out_tip",
+      "value": "已退出登录，重启应用以便再次登录"
+    },
+    {
+      "name": "settings_eh_identity_cookies",
+      "value": "身份 Cookie"
+    },
+    {
+      "name": "settings_eh_identity_cookies_summary",
+      "value": "可用于登录"
+    },
+    {
+      "name": "settings_eh_identity_cookies_signed",
+      "value": "身份 Cookie 可用于登录该账号。<br><b>注意数据安全</b><br><br>%s"
+    },
+    {
+      "name": "settings_eh_identity_cookies_tourist",
+      "value": "未登录"
+    },
+    {
+      "name": "settings_eh_identity_cookies_copy",
+      "value": "复制"
+    },
+    {
+      "name": "settings_u_config",
+      "value": "EHentai 设置"
+    },
+    {
+      "name": "settings_u_config_summary",
+      "value": "EHentai 网站上的设置"
+    },
+    {
+      "name": "settings_my_tags",
+      "value": "我的标签"
+    },
+    {
+      "name": "settings_my_tags_summary",
+      "value": "EHentai 网站上的我的标签"
+    },
+    {
+      "name": "settings_eh_theme",
+      "value": "主题"
+    },
+    {
+      "name": "settings_eh_theme_light",
+      "value": "亮色"
+    },
+    {
+      "name": "settings_eh_theme_dark",
+      "value": "暗色"
+    },
+    {
+      "name": "settings_eh_theme_black",
+      "value": "黑色"
+    },
+    {
+      "name": "settings_eh_apply_nav_bar_theme_color",
+      "value": "导航栏应用主题配色"
+    },
+    {
+      "name": "settings_eh_gallery_site",
+      "value": "画廊站点"
+    },
+    {
+      "name": "settings_eh_launch_page",
+      "value": "启动页"
+    },
+    {
+      "name": "settings_eh_list_mode",
+      "value": "列表模式"
+    },
+    {
+      "name": "settings_eh_list_mode_detail",
+      "value": "详情"
+    },
+    {
+      "name": "settings_eh_list_mode_thumb",
+      "value": "缩略图"
+    },
+    {
+      "name": "settings_eh_list_show_read_progress",
+      "value": "显示阅读进度"
+    },
+    {
+      "name": "settings_eh_list_show_read_progress_summary",
+      "value": "在详情列表模式下显示每个画廊的阅读进度"
+    },
+    {
+      "name": "settings_eh_detail_size",
+      "value": "详情大小"
+    },
+    {
+      "name": "settings_eh_detail_size_long",
+      "value": "长"
+    },
+    {
+      "name": "settings_eh_detail_size_short",
+      "value": "短"
+    },
+    {
+      "name": "settings_eh_thumb_size",
+      "value": "缩略图大小"
+    },
+    {
+      "name": "settings_eh_thumb_size_large",
+      "value": "大"
+    },
+    {
+      "name": "settings_eh_thumb_size_middle",
+      "value": "中"
+    },
+    {
+      "name": "settings_eh_thumb_size_small",
+      "value": "小"
+    },
+    {
+      "name": "settings_eh_thumb_resolution",
+      "value": "缩略图分辨率"
+    },
+    {
+      "name": "settings_eh_thumb_resolution_summary",
+      "value": "%s，指定分辨率可能使获取缩略图失败"
+    },
+    {
+      "name": "settings_eh_thumb_resolution_auto",
+      "value": "自动"
+    },
+    {
+      "name": "settings_eh_fix_thumb_url",
+      "value": "修正缩略图链接"
+    },
+    {
+      "name": "settings_eh_default_categories",
+      "value": "主页分类显示"
+    },
+    {
+      "name": "settings_eh_default_categories_summary",
+      "value": "默认在主页所显示的分类"
+    },
+    {
+      "name": "settings_eh_excluded_tag_namespaces",
+      "value": "排除标签组"
+    },
+    {
+      "name": "settings_eh_excluded_tag_namespaces_summary",
+      "value": "在默认搜索中排除指定标签组"
+    },
+    {
+      "name": "settings_eh_excluded_languages",
+      "value": "排除语言"
+    },
+    {
+      "name": "settings_eh_excluded_languages_summary",
+      "value": "在主页与搜索中隐藏指定语言的画廊"
+    },
+    {
+      "name": "settings_eh_show_jpn_title",
+      "value": "显示日文标题"
+    },
+    {
+      "name": "settings_eh_show_gallery_comment",
+      "value": "显示画廊评论"
+    },
+    {
+      "name": "settings_eh_show_gallery_rating",
+      "value": "显示画廊评分"
+    },
+    {
+      "name": "settings_eh_show_eh_event",
+      "value": "显示E站事件"
+    },
+    {
+      "name": "settings_eh_show_eh_limits",
+      "value": "显示E站配额"
+    },
+    {
+      "name": "settings_eh_show_jpn_title_summary",
+      "value": "需同时在 EHentai 网站设置中启用 Japanese Title"
+    },
+    {
+      "name": "settings_eh_show_gallery_pages",
+      "value": "显示画廊页数"
+    },
+    {
+      "name": "settings_eh_show_gallery_pages_summary",
+      "value": "在画廊列表中显示页数"
+    },
+    {
+      "name": "settings_eh_show_tag_translations",
+      "value": "显示标签翻译"
+    },
+    {
+      "name": "settings_eh_show_tag_translations_summary",
+      "value": "显示翻译后的标签而非原始文字（需花费时间来下载数据文件）"
+    },
+    {
+      "name": "settings_eh_tag_translations_source",
+      "value": "补充翻译（由 EhTagTranslator 提供）"
+    },
+    {
+      "name": "settings_eh_tag_translations_source_url",
+      "value": "https://github.com/Mapaler/EhTagTranslator/wiki"
+    },
+    {
+      "name": "settings_eh_filter",
+      "value": "屏蔽画廊"
+    },
+    {
+      "name": "settings_eh_filter_summary",
+      "value": "根据标题、上传者、标签屏蔽画廊"
+    },
+    {
+      "name": "settings_eh_cellular_network_warning",
+      "value": "移动网络警告"
+    },
+    {
+      "name": "settings_read",
+      "value": "阅读"
+    },
+    {
+      "name": "settings_read_picture_decoding_method",
+      "value": "图片解码方式"
+    },
+    {
+      "name": "settings_read_picture_decoding_method_origin",
+      "value": "系统解码"
+    },
+    {
+      "name": "settings_read_picture_decoding_method_native",
+      "value": "开源C++解码库"
+    },
+    {
+      "name": "settings_read_screen_rotation",
+      "value": "屏幕方向"
+    },
+    {
+      "name": "settings_read_screen_rotation_default",
+      "value": "系统默认"
+    },
+    {
+      "name": "settings_read_screen_rotation_portrait",
+      "value": "竖屏"
+    },
+    {
+      "name": "settings_read_screen_rotation_landscape",
+      "value": "横屏"
+    },
+    {
+      "name": "settings_read_screen_rotation_sensor",
+      "value": "自动旋转"
+    },
+    {
+      "name": "settings_read_refresh_rate",
+      "value": "刷新率"
+    },
+    {
+      "name": "settings_read_refresh_rate_default",
+      "value": "系统默认"
+    },
+    {
+      "name": "settings_read_refresh_rate_60",
+      "value": "60 Hz"
+    },
+    {
+      "name": "settings_read_refresh_rate_90",
+      "value": "90 Hz"
+    },
+    {
+      "name": "settings_read_refresh_rate_120",
+      "value": "120 Hz"
+    },
+    {
+      "name": "settings_read_refresh_rate_max",
+      "value": "屏幕最高"
+    },
+    {
+      "name": "settings_read_reading_direction",
+      "value": "阅读方向"
+    },
+    {
+      "name": "settings_read_reading_direction_left_to_right",
+      "value": "从左至右"
+    },
+    {
+      "name": "settings_read_reading_direction_right_to_Left",
+      "value": "从右至左"
+    },
+    {
+      "name": "settings_read_reading_direction_top_to_bottom",
+      "value": "从上至下"
+    },
+    {
+      "name": "settings_read_page_scaling",
+      "value": "页面缩放"
+    },
+    {
+      "name": "settings_read_page_scaling_actual_size",
+      "value": "原始尺寸"
+    },
+    {
+      "name": "settings_read_page_scaling_fit_to_width",
+      "value": "匹配宽度"
+    },
+    {
+      "name": "settings_read_page_scaling_fit_to_height",
+      "value": "匹配长度"
+    },
+    {
+      "name": "settings_read_page_scaling_fit_to_screen",
+      "value": "匹配屏幕"
+    },
+    {
+      "name": "settings_read_page_scaling_fixed_scale",
+      "value": "固定缩放"
+    },
+    {
+      "name": "settings_read_start_position",
+      "value": "开页位置"
+    },
+    {
+      "name": "settings_read_start_position_top_left",
+      "value": "左上角"
+    },
+    {
+      "name": "settings_read_start_position_top_right",
+      "value": "右上角"
+    },
+    {
+      "name": "settings_read_start_position_bottom_left",
+      "value": "左下角"
+    },
+    {
+      "name": "settings_read_start_position_bottom_right",
+      "value": "右下角"
+    },
+    {
+      "name": "settings_read_auto_transfer_time",
+      "value": "自动翻页(秒)"
+    },
+    {
+      "name": "settings_read_start_position_center",
+      "value": "中心"
+    },
+    {
+      "name": "settings_read_keep_screen_on",
+      "value": "屏幕常亮"
+    },
+    {
+      "name": "settings_read_show_clock",
+      "value": "显示时钟"
+    },
+    {
+      "name": "settings_read_show_progress",
+      "value": "显示进度"
+    },
+    {
+      "name": "settings_read_show_battery",
+      "value": "显示电量"
+    },
+    {
+      "name": "settings_read_show_page_interval",
+      "value": "显示页面间隔"
+    },
+    {
+      "name": "settings_read_page_turn_animation",
+      "value": "翻页动画"
+    },
+    {
+      "name": "settings_read_volume_page",
+      "value": "使用音量键翻页"
+    },
+    {
+      "name": "settings_read_reverse_volume_page",
+      "value": "反转音量键翻页方向"
+    },
+    {
+      "name": "settings_read_reading_fullscreen",
+      "value": "全屏"
+    },
+    {
+      "name": "settings_read_custom_screen_lightness",
+      "value": "自定义屏幕亮度"
+    },
+    {
+      "name": "settings_read_screen_lightness",
+      "value": "屏幕亮度"
+    },
+    {
+      "name": "settings_download",
+      "value": "下载"
+    },
+    {
+      "name": "settings_download_download_location",
+      "value": "下载路径"
+    },
+    {
+      "name": "settings_download_invalid_download_location",
+      "value": "无效的下载路径"
+    },
+    {
+      "name": "settings_download_cant_get_download_location",
+      "value": "无法获取下载路径"
+    },
+    {
+      "name": "settings_download_pick_dir_kk",
+      "value": "在 KitKat 中您无法把数据写入外置 SD 卡，除非您做了奇怪的事情。不过 <SD card>/Android/data/com.hippo.ehviewer 这个路径比较特殊，是可以写入的。"
+    },
+    {
+      "name": "settings_download_pick_dir_l",
+      "value": "Lollipop 提供了新的写入外置 SD 卡的 API。如果您想把下载路径设置到外置 SD 卡上，点击“文档”按钮"
+    },
+    {
+      "name": "settings_download_document",
+      "value": "文档"
+    },
+    {
+      "name": "settings_download_continue",
+      "value": "继续"
+    },
+    {
+      "name": "settings_download_multi_thread_download",
+      "value": "下载线程数"
+    },
+    {
+      "name": "settings_download_multi_thread_download_summary",
+      "value": "最多同时下载 %s 张图片"
+    },
+    {
+      "name": "settings_download_preload_image",
+      "value": "预载图片"
+    },
+    {
+      "name": "settings_download_preload_image_summary",
+      "value": "向后预载 %s 张图片"
+    },
+    {
+      "name": "settings_download_image_resolution",
+      "value": "图片分辨率"
+    },
+    {
+      "name": "settings_download_image_resolution_summary",
+      "value": "%s，大于 1280x 的分辨率可能不好使"
+    },
+    {
+      "name": "settings_download_image_resolution_auto",
+      "value": "自动"
+    },
+    {
+      "name": "settings_download_download_origin_image",
+      "value": "下载原图"
+    },
+    {
+      "name": "settings_download_download_list_pagination",
+      "value": "列表分页"
+    },
+    {
+      "name": "settings_download_download_list_pagination_summary",
+      "value": "在列表长度大于500时分页功能才会生效"
+    },
+    {
+      "name": "settings_download_download_origin_image_summary",
+      "value": "这很危险！勾选此项会导致下载配额与GP迅速流失"
+    },
+    {
+      "name": "settings_download_download_order_by_asc",
+      "value": "正序下载"
+    },
+    {
+      "name": "settings_download_download_order_by_asc_summary",
+      "value": "下载全部画廊时正序下载"
+    },
+    {
+      "name": "settings_download_sync_while_reading",
+      "value": "观看时同步下载"
+    },
+    {
+      "name": "settings_download_sync_while_reading_summary",
+      "value": "在浏览未下载画廊时，自动将浏览到的图片保存到下载目录"
+    },
+    {
+      "name": "settings_download_media_scan",
+      "value": "允许媒体扫描"
+    },
+    {
+      "name": "settings_download_media_scan_summary_on",
+      "value": "请避免他人翻看你的图库应用"
+    },
+    {
+      "name": "settings_download_media_scan_summary_off",
+      "value": "大多数图库应用将不会显示下载目录中的图片"
+    },
+    {
+      "name": "settings_download_restore_download_items",
+      "value": "恢复下载项"
+    },
+    {
+      "name": "settings_download_restore_download_items_summary",
+      "value": "恢复下载目录里的所有下载项"
+    },
+    {
+      "name": "settings_download_restoring",
+      "value": "恢复中"
+    },
+    {
+      "name": "settings_download_restore_not_found",
+      "value": "未找到可恢复下载项"
+    },
+    {
+      "name": "settings_download_restore_failed",
+      "value": "恢复失败"
+    },
+    {
+      "name": "settings_download_restore_successfully",
+      "value": "成功恢复 %d 项"
+    },
+    {
+      "name": "settings_download_clean_redundancy",
+      "value": "清理下载冗余"
+    },
+    {
+      "name": "settings_download_clean_redundancy_summary",
+      "value": "清理下载目录中不在下载列表里的图片文件"
+    },
+    {
+      "name": "settings_download_clean_redundancy_no_redundancy",
+      "value": "未发现冗余"
+    },
+    {
+      "name": "settings_download_clean_redundancy_done",
+      "value": "完成冗余清理，共清理 %d 项"
+    },
+    {
+      "name": "settings_download_clean_invalid_download_summary",
+      "value": "清空任何无效的下载项，尤其是下载未完整的下载项，不会清空已完成的下载项"
+    },
+    {
+      "name": "settings_download_clean_invalid_download",
+      "value": "清空无效的下载项"
+    },
+    {
+      "name": "settings_advanced",
+      "value": "高级"
+    },
+    {
+      "name": "settings_advanced_save_parse_error_body",
+      "value": "解析失败时保存页面内容"
+    },
+    {
+      "name": "settings_advanced_save_parse_error_body_summary",
+      "value": "页面内容可能含有隐私敏感信息"
+    },
+    {
+      "name": "settings_advanced_save_crash_log",
+      "value": "应用崩溃时保存错误日志"
+    },
+    {
+      "name": "settings_advanced_save_crash_log_summary",
+      "value": "错误日志可以帮助开发者修正问题"
+    },
+    {
+      "name": "settings_advanced_dump_logcat",
+      "value": "导出日志"
+    },
+    {
+      "name": "settings_advanced_dump_logcat_summary",
+      "value": "保存日志至外置存储器"
+    },
+    {
+      "name": "settings_advanced_dump_logcat_failed",
+      "value": "导出日志失败"
+    },
+    {
+      "name": "settings_advanced_dump_logcat_to",
+      "value": "已保存日志至 %s"
+    },
+    {
+      "name": "settings_advanced_clear_download_path_cache",
+      "value": "清除画廊下载路径缓存"
+    },
+    {
+      "name": "settings_advanced_clear_download_path_cache_summary",
+      "value": "画廊下载路径可能出错了，导致重新下载。清除画廊下载路径缓存可能解决这个问题。"
+    },
+    {
+      "name": "settings_advanced_clear_download_path_cache_message",
+      "value": "清除画廊下载路径缓存？"
+    },
+    {
+      "name": "settings_advanced_clear_memory_cache",
+      "value": "清理内存缓存"
+    },
+    {
+      "name": "settings_advanced_clear_memory_cache_summary",
+      "value": "清理缩略图、画廊信息的内存缓存"
+    },
+    {
+      "name": "settings_advanced_read_cache_size",
+      "value": "阅读缓存大小"
+    },
+    {
+      "name": "settings_advanced_app_language_title",
+      "value": "App 界面语言"
+    },
+    {
+      "name": "settings_advanced_proxy",
+      "value": "代理"
+    },
+    {
+      "name": "settings_advanced_proxy_summary_1",
+      "value": "%1$s %2$s:%3$d"
+    },
+    {
+      "name": "settings_advanced_proxy_summary_2",
+      "value": "%1$s"
+    },
+    {
+      "name": "settings_advanced_built_in_hosts_title",
+      "value": "内置e-hentai hosts.txt"
+    },
+    {
+      "name": "settings_advanced_built_in_hosts_summary",
+      "value": "应用提供的主机到IP的映射\n可被自定义 hosts.txt 覆盖"
+    },
+    {
+      "name": "settings_advanced_custom_hosts_title",
+      "value": "自定义 hosts.txt"
+    },
+    {
+      "name": "settings_advanced_custom_hosts_summary",
+      "value": "将主机名称映射到相应的IP地址\n可覆盖内置 hosts.txt"
+    },
+    {
+      "name": "settings_privacy_pattern_protection_title",
+      "value": "图案保护"
+    },
+    {
+      "name": "settings_privacy_pattern_protection_not_set",
+      "value": "未设置图案保护"
+    },
+    {
+      "name": "settings_privacy_pattern_protection_set",
+      "value": "已设置图案保护"
+    },
+    {
+      "name": "settings_advanced_export_data",
+      "value": "导出数据"
+    },
+    {
+      "name": "settings_advanced_export_data_summary",
+      "value": "保存数据至外置存储器，例如下载列表，书签列表"
+    },
+    {
+      "name": "settings_advanced_export_data_to",
+      "value": "已导出数据至 %s"
+    },
+    {
+      "name": "settings_advanced_export_data_failed",
+      "value": "导出数据失败"
+    },
+    {
+      "name": "settings_advanced_import_data",
+      "value": "导入数据"
+    },
+    {
+      "name": "settings_advanced_import_data_summary",
+      "value": "从外置存储器导入数据"
+    },
+    {
+      "name": "settings_advanced_import_data_successfully",
+      "value": "导入数据成功"
+    },
+    {
+      "name": "settings_advanced_wifi_sender",
+      "value": "WiFi 数据迁移"
+    },
+    {
+      "name": "settings_advanced_wifi_sander_summary",
+      "value": "通过WiFi热点迁移数据"
+    },
+    {
+      "name": "settings_advanced_wifi_client",
+      "value": "WiFi 迁移数据接收"
+    },
+    {
+      "name": "settings_advanced_wifi_client_summary",
+      "value": "接收来自WiFi热点的迁移数据"
+    },
+    {
+      "name": "settings_about",
+      "value": "更新与支持"
+    },
+    {
+      "name": "settings_about_declaration_summary",
+      "value": "EhViewer 与 E-Hentai.org 无任何联系"
+    },
+    {
+      "name": "settings_about_author",
+      "value": "作者"
+    },
+    {
+      "name": "settings_about_latest_release",
+      "value": "最新版本"
+    },
+    {
+      "name": "settings_about_website",
+      "value": "网站"
+    },
+    {
+      "name": "settings_about_source",
+      "value": "源码"
+    },
+    {
+      "name": "settings_about_changelog",
+      "value": "更新日志"
+    },
+    {
+      "name": "settings_about_help",
+      "value": "帮助"
+    },
+    {
+      "name": "settings_about_issue_help",
+      "value": "问题帮助"
+    },
+    {
+      "name": "settings_about_license",
+      "value": "开源许可"
+    },
+    {
+      "name": "settings_about_license_summary",
+      "value": "EhViewer 的诞生离不开许多开源项目"
+    },
+    {
+      "name": "settings_about_donate",
+      "value": "捐赠"
+    },
+    {
+      "name": "settings_about_donate_message",
+      "value": "你的捐赠不能为你带来特权，但能帮助我继续维护这个应用。"
+    },
+    {
+      "name": "settings_about_donate_alipay",
+      "value": "邮箱"
+    },
+    {
+      "name": "settings_about_donate_paypal",
+      "value": "PayPal"
+    },
+    {
+      "name": "settings_about_donate_guide",
+      "value": "支持指南"
+    },
+    {
+      "name": "settings_about_donate_open",
+      "value": "打开"
+    },
+    {
+      "name": "settings_about_donate_copy",
+      "value": "复制邮箱"
+    },
+    {
+      "name": "settings_about_donate_copied",
+      "value": "已复制"
+    },
+    {
+      "name": "settings_privacy_enable_analytics",
+      "value": "启用数据统计"
+    },
+    {
+      "name": "settings_privacy_about_analytics",
+      "value": "关于数据统计"
+    },
+    {
+      "name": "settings_about_version",
+      "value": "版本号"
+    },
+    {
+      "name": "settings_about_check_for_updates",
+      "value": "检查更新"
+    },
+    {
+      "name": "settings_close_automatic_updates",
+      "value": "关闭自动更新"
+    },
+    {
+      "name": "settings_about_beta_update_channel",
+      "value": "更新测试版"
+    },
+    {
+      "name": "settings_about_beta_update_channel_summary",
+      "value": "测试版可能在你的设备上出现不可预知的错误"
+    },
+    {
+      "name": "blacklist_id",
+      "value": "用户ID"
+    },
+    {
+      "name": "blacklist",
+      "value": "黑名单"
+    },
+    {
+      "name": "join_in_blacklist",
+      "value": "加入黑名单"
+    },
+    {
+      "name": "add_blacklist",
+      "value": "添加屏蔽用户"
+    },
+    {
+      "name": "blacklist_tip",
+      "value": "该屏蔽系统会在 EHentai 网站评论系统的基础上继续屏蔽评论。\n\n评论者屏蔽项：排除该评论者上传的评论。这会使加载画廊列表花费更多时间。"
+    },
+    {
+      "name": "blacklist_text",
+      "value": "屏蔽用户"
+    },
+    {
+      "name": "delete_blacklist",
+      "value": "取消屏蔽用户“%s”？"
+    },
+    {
+      "name": "blacklist_reason_text",
+      "value": "屏蔽原因"
+    },
+    {
+      "name": "settings_eh_blacklist",
+      "value": "评论黑名单"
+    },
+    {
+      "name": "settings_eh_blacklist_summary",
+      "value": "根据账号名称屏蔽他人评论"
+    },
+    {
+      "name": "settings_advanced_dns_over_http_title",
+      "value": "安全 DNS（DoH）"
+    },
+    {
+      "name": "settings_advanced_dns_over_http_summary",
+      "value": "解决某些地区的 DNS 污染问题"
+    },
+    {
+      "name": "settings_advanced_domain_fronting_title",
+      "value": "域名前置"
+    },
+    {
+      "name": "settings_advanced_domain_fronting_summary",
+      "value": "绕过 SNI 封锁"
+    },
+    {
+      "name": "settings_advanced_url_replace_title",
+      "value": "url伪装,需关闭SNI"
+    },
+    {
+      "name": "settings_advanced_url_replace_summary",
+      "value": "url伪装(需重启，开启后账户功能失效)"
+    },
+    {
+      "name": "share_favorites_dialog_title",
+      "value": "分享收藏"
+    },
+    {
+      "name": "share_favorites_dialog_message",
+      "value": "分享收藏 %s ？"
+    },
+    {
+      "name": "add_favorites_dialog_message",
+      "value": "添加收藏 %s ？"
+    },
+    {
+      "name": "settings_advanced_built_ex_hosts_title",
+      "value": "内置exhentai hosts.txt"
+    },
+    {
+      "name": "settings_advanced_built_ex_hosts_summary",
+      "value": "应用提供的主机到IP的映射\n可被自定义 hosts.txt 覆盖"
+    },
+    {
+      "name": "network_remind",
+      "value": "检测到开启了vpn，请注意您的网络安全"
+    },
+    {
+      "name": "excluded_languages",
+      "value": "排除语言"
+    },
+    {
+      "name": "select_all",
+      "value": "全选"
+    },
+    {
+      "name": "deselect_all",
+      "value": "全取消"
+    },
+    {
+      "name": "invert_selection",
+      "value": "反选"
+    },
+    {
+      "name": "language",
+      "value": "语言"
+    },
+    {
+      "name": "original",
+      "value": "原作"
+    },
+    {
+      "name": "translated",
+      "value": "翻译"
+    },
+    {
+      "name": "rewrite",
+      "value": "改写"
+    },
+    {
+      "name": "language_japanese",
+      "value": "日语"
+    },
+    {
+      "name": "language_english",
+      "value": "英语"
+    },
+    {
+      "name": "language_chinese",
+      "value": "汉语"
+    },
+    {
+      "name": "language_dutch",
+      "value": "荷兰语"
+    },
+    {
+      "name": "language_french",
+      "value": "法语"
+    },
+    {
+      "name": "language_german",
+      "value": "德语"
+    },
+    {
+      "name": "language_hungarian",
+      "value": "匈牙利语"
+    },
+    {
+      "name": "language_italian",
+      "value": "意大利语"
+    },
+    {
+      "name": "language_korean",
+      "value": "韩语"
+    },
+    {
+      "name": "language_polish",
+      "value": "波兰语"
+    },
+    {
+      "name": "language_portuguese",
+      "value": "葡萄牙语"
+    },
+    {
+      "name": "language_russian",
+      "value": "俄语"
+    },
+    {
+      "name": "language_spanish",
+      "value": "西班牙语"
+    },
+    {
+      "name": "language_thai",
+      "value": "泰语"
+    },
+    {
+      "name": "language_vietnamese",
+      "value": "越南语"
+    },
+    {
+      "name": "language_na",
+      "value": "N/A"
+    },
+    {
+      "name": "language_other",
+      "value": "其他"
+    },
+    {
+      "name": "please_wait",
+      "value": "请稍候"
+    },
+    {
+      "name": "proxy_enable",
+      "value": "启用"
+    },
+    {
+      "name": "proxy_enabled",
+      "value": "已启用"
+    },
+    {
+      "name": "proxy_disabled",
+      "value": "未启用"
+    },
+    {
+      "name": "proxy_direct",
+      "value": "直接连接"
+    },
+    {
+      "name": "proxy_system",
+      "value": "系统代理"
+    },
+    {
+      "name": "proxy_host_or_ip",
+      "value": "主机或 IP"
+    },
+    {
+      "name": "proxy_port",
+      "value": "端口"
+    },
+    {
+      "name": "proxy_domain_not_supported",
+      "value": "不支持域名"
+    },
+    {
+      "name": "proxy_invalid_port",
+      "value": "无效的端口"
+    },
+    {
+      "name": "cant_get_data_dir",
+      "value": "无法获取数据文件夹"
+    },
+    {
+      "name": "cant_find_any_data",
+      "value": "找不到任何数据"
+    },
+    {
+      "name": "cant_read_the_file",
+      "value": "无法读取文件"
+    },
+    {
+      "name": "app_language_system",
+      "value": "系统语言（默认）"
+    },
+    {
+      "name": "license",
+      "value": "开源许可"
+    },
+    {
+      "name": "dir_picker",
+      "value": "选择文件夹"
+    },
+    {
+      "name": "directory_not_writable",
+      "value": "该文件夹不可写"
+    },
+    {
+      "name": "cloud_favorites",
+      "value": "云端收藏"
+    },
+    {
+      "name": "local_favorites",
+      "value": "本地收藏"
+    },
+    {
+      "name": "favorites_search_bar_hint",
+      "value": "搜索 %s"
+    },
+    {
+      "name": "favorites_title",
+      "value": "%s"
+    },
+    {
+      "name": "favorites_title_2",
+      "value": "%1$s - %2$s"
+    },
+    {
+      "name": "delete_favorites_dialog_title",
+      "value": "删除收藏"
+    },
+    {
+      "name": "delete_favorites_dialog_message",
+      "value": "删除 %d 项收藏？"
+    },
+    {
+      "name": "move_favorites_dialog_title",
+      "value": "移动收藏"
+    },
+    {
+      "name": "default_favorites_collection",
+      "value": "默认收藏夹"
+    },
+    {
+      "name": "let_me_select",
+      "value": "让我选择"
+    },
+    {
+      "name": "favorites_info",
+      "value": "收藏信息"
+    },
+    {
+      "name": "collections",
+      "value": "收藏夹"
+    },
+    {
+      "name": "count",
+      "value": "数量"
+    },
+    {
+      "name": "need_sign_in",
+      "value": "需要登录"
+    },
+    {
+      "name": "error_something_wrong_happened",
+      "value": "被玩坏了"
+    },
+    {
+      "name": "guide_quick_search_title",
+      "value": "书签栏"
+    },
+    {
+      "name": "guide_quick_search_text",
+      "value": "从右侧滑动打开书签栏面板"
+    },
+    {
+      "name": "guide_collections_title",
+      "value": "收藏夹"
+    },
+    {
+      "name": "guide_collections_text",
+      "value": "从右侧滑动来选择收藏夹"
+    },
+    {
+      "name": "guide_download_labels_title",
+      "value": "下载标签"
+    },
+    {
+      "name": "guide_download_labels_text",
+      "value": "从右侧滑动打开下载标签面板"
+    },
+    {
+      "name": "guide_download_thumb_title",
+      "value": "画廊详情"
+    },
+    {
+      "name": "guide_download_thumb_text",
+      "value": "点击缩略图查看画廊详情"
+    },
+    {
+      "name": "guide_gallery_left",
+      "value": "翻页"
+    },
+    {
+      "name": "guide_gallery_right",
+      "value": "翻页"
+    },
+    {
+      "name": "guide_gallery_menu",
+      "value": "菜单"
+    },
+    {
+      "name": "guide_gallery_progress",
+      "value": "进度条"
+    },
+    {
+      "name": "guide_gallery_long_click",
+      "value": "长按打开页面菜单"
+    },
+    {
+      "name": "from_the_future",
+      "value": "来自未来"
+    },
+    {
+      "name": "just_now",
+      "value": "刚刚"
+    },
+    {
+      "name": "yesterday",
+      "value": "昨天"
+    },
+    {
+      "name": "some_days_ago",
+      "value": "%d 天前"
+    },
+    {
+      "name": "dialog_archive_title",
+      "value": "通过 H@H 下载"
+    },
+    {
+      "name": "no_archives",
+      "value": "没有压缩包"
+    },
+    {
+      "name": "download_archive_started",
+      "value": "开始下载压缩包"
+    },
+    {
+      "name": "download_archive_failure",
+      "value": "无法下载压缩包"
+    },
+    {
+      "name": "h_h",
+      "value": "H@H"
+    },
+    {
+      "name": "download_h_h_failure_no_hath",
+      "value": "下载压缩包需要 H@H 客户端"
+    },
+    {
+      "name": "settings_privacy",
+      "value": "隐私"
+    },
+    {
+      "name": "settings_privacy_secure",
+      "value": "不允许屏幕抓取"
+    },
+    {
+      "name": "settings_privacy_secure_summary",
+      "value": "启用后，将不能截取该应用的屏幕截图，同时，将不会在系统任务切换器中显示该应用的内容预览\n\n重新启动应用以生效此更改"
+    },
+    {
+      "name": "download_service",
+      "value": "下载服务"
+    },
+    {
+      "name": "favorite_name",
+      "value": "收藏画廊"
+    },
+    {
+      "name": "no_blicklist",
+      "value": "这里是黑名单"
+    },
+    {
+      "name": "gallery_toplists",
+      "value": "画廊 排行榜"
+    },
+    {
+      "name": "uploader_toplists",
+      "value": "上传 排行榜"
+    },
+    {
+      "name": "tagging_toplists",
+      "value": "标签 排行榜"
+    },
+    {
+      "name": "hentai_home_toplists",
+      "value": "Hentai@Home 排行榜"
+    },
+    {
+      "name": "ehtracker_toplists",
+      "value": "EH订阅 排行榜"
+    },
+    {
+      "name": "cleanup_toplists",
+      "value": "整理 排行榜"
+    },
+    {
+      "name": "rating_reviewing_toplists",
+      "value": "等级&审核 排行榜"
+    },
+    {
+      "name": "top_list",
+      "value": "排行榜"
+    },
+    {
+      "name": "all_time_top_list",
+      "value": "有史以来"
+    },
+    {
+      "name": "past_year_top_list",
+      "value": "过去一年"
+    },
+    {
+      "name": "past_month_top_list",
+      "value": "过去一个月"
+    },
+    {
+      "name": "yesterday_top_list",
+      "value": "昨天"
+    },
+    {
+      "name": "change_background_title",
+      "value": "您确定要更改背景吗？"
+    },
+    {
+      "name": "change_background_message",
+      "value": "背景修改仅限于本软件，无法同步至E站或其他类似软件。"
+    },
+    {
+      "name": "change_avatar_title",
+      "value": "您确定要更改头像吗？"
+    },
+    {
+      "name": "change_avatar_message",
+      "value": "头像修改仅限于本软件，无法同步至E站或其他类似软件。"
+    },
+    {
+      "name": "take_a_photograph",
+      "value": "拍照"
+    },
+    {
+      "name": "choose_from_the_album",
+      "value": "从相册中选择"
+    },
+    {
+      "name": "request_camera_permission",
+      "value": "EhViewer 将申请设备相机访问权限以便拍摄照片。您愿意授权吗？"
+    },
+    {
+      "name": "request_storage_permission",
+      "value": "EhViewer 将申请设备相册访问权限以便获取图片。您愿意授权吗？"
+    },
+    {
+      "name": "subscription_watched",
+      "value": "订阅"
+    },
+    {
+      "name": "subscription_hidden",
+      "value": "排除"
+    },
+    {
+      "name": "delete_subscription_title",
+      "value": "删除标签"
+    },
+    {
+      "name": "can_not_use_this_tag",
+      "value": "标签不可用"
+    },
+    {
+      "name": "add_tag_dialog_title",
+      "value": "添加标签"
+    },
+    {
+      "name": "tag_title",
+      "value": "标签栏"
+    },
+    {
+      "name": "empty_subscription",
+      "value": "订阅内容为空"
+    },
+    {
+      "name": "subscription_success",
+      "value": "%s成功"
+    },
+    {
+      "name": "download_torrent_name",
+      "value": "种子: %s"
+    },
+    {
+      "name": "download_torrent_state",
+      "value": "状态:"
+    },
+    {
+      "name": "download_torrent_path",
+      "value": "路径: %s"
+    },
+    {
+      "name": "download_search",
+      "value": "在下载列表内搜索"
+    },
+    {
+      "name": "sure",
+      "value": "好的"
+    },
+    {
+      "name": "try_again",
+      "value": "再试一次"
+    },
+    {
+      "name": "open_directory",
+      "value": "打开目录"
+    },
+    {
+      "name": "downloading",
+      "value": "正在下载…… 请稍后再试"
+    },
+    {
+      "name": "torrent_exist",
+      "value": "文件已存在: %s"
+    },
+    {
+      "name": "yes",
+      "value": "是"
+    },
+    {
+      "name": "cancel",
+      "value": "取消"
+    },
+    {
+      "name": "wifi_server_name",
+      "value": "WiFiServer"
+    },
+    {
+      "name": "wifi_server",
+      "value": "WiFiServer"
+    },
+    {
+      "name": "wifi_client",
+      "value": "WiFiClient"
+    },
+    {
+      "name": "wifi_send_bookmark",
+      "value": "迁移书签"
+    },
+    {
+      "name": "wifi_send_favorite",
+      "value": "迁移本地收藏"
+    },
+    {
+      "name": "wifi_send_download",
+      "value": "迁移下载数据"
+    },
+    {
+      "name": "wifi_send_download_location",
+      "value": "迁移下载目录"
+    },
+    {
+      "name": "wifi_download_dir_empty",
+      "value": "未找到可迁移的画廊文件夹"
+    },
+    {
+      "name": "wifi_download_dir_no_location",
+      "value": "本机未设置下载目录"
+    },
+    {
+      "name": "wifi_download_dir_migrating",
+      "value": "正在迁移 %1$s（%2$d/%3$d 个文件）"
+    },
+    {
+      "name": "wifi_download_dir_manifest_received",
+      "value": "%1$s（%2$d/%3$d）：跳过 %4$d，待传 %5$d"
+    },
+    {
+      "name": "wifi_download_dir_file_done",
+      "value": "已接收文件：%s"
+    },
+    {
+      "name": "wifi_download_dir_files_progress",
+      "value": "已接收 %d 个文件"
+    },
+    {
+      "name": "wifi_download_dir_file_failed",
+      "value": "文件校验失败，已丢弃"
+    },
+    {
+      "name": "wifi_send_done",
+      "value": "该项数据迁移完毕"
+    },
+    {
+      "name": "wifi_send_start",
+      "value": "开始迁移%s"
+    },
+    {
+      "name": "wifi_send_stop",
+      "value": "暂停迁移%s"
+    },
+    {
+      "name": "wifi_sending",
+      "value": "数据迁移中请稍候或退出重试"
+    },
+    {
+      "name": "wifi_send_text",
+      "value": "发送数据"
+    },
+    {
+      "name": "wifi_server_illustrate",
+      "value": "请确保要接收数据的手机链接上本机热点，并且在迁移完成前请勿断开链接或者返回上级页面！"
+    },
+    {
+      "name": "wifi_server_connect",
+      "value": "连接"
+    },
+    {
+      "name": "wifi_server_connect_unable",
+      "value": "连接不存在"
+    },
+    {
+      "name": "wifi_server_connection_succeeded",
+      "value": "设备连接成功，数据接受完毕后请重启app使数据生效"
+    },
+    {
+      "name": "wifi_server_disconnect",
+      "value": "设备连接断开"
+    },
+    {
+      "name": "wifi_server_connection_fail",
+      "value": "创建通信失败"
+    },
+    {
+      "name": "wifi_server_send_success",
+      "value": "发送消息成功: %s"
+    },
+    {
+      "name": "wifi_server_send_fail",
+      "value": "发送消息失败: %s"
+    },
+    {
+      "name": "wifi_server_receive_message",
+      "value": "收到消息: %s"
+    },
+    {
+      "name": "wifi_server_receive_message_unknown",
+      "value": "未知数据类型"
+    },
+    {
+      "name": "wifi_server_opened",
+      "value": "热点已开启 SSID: %1s \n%2s"
+    },
+    {
+      "name": "wifi_server_closed",
+      "value": "热点已关闭"
+    },
+    {
+      "name": "wifi_server_password",
+      "value": "密码: %s"
+    },
+    {
+      "name": "wifi_server_no_permission",
+      "value": "权限不足，请授予权限"
+    },
+    {
+      "name": "refresh_limits",
+      "value": "刷新数据"
+    },
+    {
+      "name": "from_gallery_visits",
+      "value": "%s 来自画廊浏览"
+    },
+    {
+      "name": "from_torrent_completions",
+      "value": "%s 来自种子下载"
+    },
+    {
+      "name": "from_archive_download",
+      "value": "%s 来自内容下载"
+    },
+    {
+      "name": "from_hentai_home",
+      "value": "%s 来自Hentai@Home"
+    },
+    {
+      "name": "current_moderation_power",
+      "value": "每分钟恢复 %s"
+    },
+    {
+      "name": "reset_cost",
+      "value": "花费 %s 重置"
+    },
+    {
+      "name": "ip_base_limits",
+      "value": "IP基础限制"
+    },
+    {
+      "name": "limit_unneed_reset",
+      "value": "当前无需重置配额，请在刷新后重试~"
+    },
+    {
+      "name": "pagination_count",
+      "value": "共"
+    },
+    {
+      "name": "pagination_page_and_item",
+      "value": "条/页"
+    },
+    {
+      "name": "cookie_login_import_in_clipboard",
+      "value": "从剪切板导入"
+    },
+    {
+      "name": "no_cookie_in_clipboard",
+      "value": "未从剪切板中找到有效数据"
+    },
+    {
+      "name": "gallery_update_dialog_title",
+      "value": "更新方式"
+    },
+    {
+      "name": "gallery_update_dialog_message",
+      "value": "覆盖旧画廊：只保留下载版本，旧版本将被删除。\n下载为新画廊：下载画廊将以新画廊形式存在，新画廊与旧画廊均会被保存。"
+    },
+    {
+      "name": "gallery_update_download_as_new",
+      "value": "下载为新"
+    },
+    {
+      "name": "gallery_update_override_old",
+      "value": "覆盖下载"
+    },
+    {
+      "name": "loading_db_file",
+      "value": "数据加载中 …"
+    },
+    {
+      "name": "settings_eh_history_size",
+      "value": "历史记录数量"
+    },
+    {
+      "name": "history_info_unlimited",
+      "value": "无限制"
+    },
+    {
+      "name": "archiver",
+      "value": "档案"
+    },
+    {
+      "name": "archiver_dialog_current_funds",
+      "value": "当前拥有:"
+    },
+    {
+      "name": "archiver_dialog_download_original",
+      "value": "下载原始档案"
+    },
+    {
+      "name": "archiver_dialog_download_resample",
+      "value": "下载压缩档案"
+    },
+    {
+      "name": "archiver_dialog_size",
+      "value": "预计大小:  %s"
+    },
+    {
+      "name": "dialog_archiver_title",
+      "value": "档案下载"
+    },
+    {
+      "name": "download_receiver_label",
+      "value": "EhViewer 下载接收"
+    },
+    {
+      "name": "decompressed_successfully",
+      "value": "解压成功！"
+    },
+    {
+      "name": "decompression_failed",
+      "value": "解压失败！"
+    },
+    {
+      "name": "download_label_archiver",
+      "value": "档案"
+    },
+    {
+      "name": "cookie_in_clipboard_incorrect",
+      "value": "Cookie格式不正确"
+    },
+    {
+      "name": "settings_download_timeout",
+      "value": "下载超时时间"
+    },
+    {
+      "name": "download_timeout_unlimited",
+      "value": "无上限"
+    },
+    {
+      "name": "settings_download_timeout_summary",
+      "value": "%s 秒，下载一张图片的最大可用时长。"
+    },
+    {
+      "name": "have_new_version",
+      "value": "点击查看新的画廊版本"
+    },
+    {
+      "name": "archiver_downloading",
+      "value": "档案下载中 %s"
+    },
+    {
+      "name": "order",
+      "value": "排序"
+    },
+    {
+      "name": "sort_by_pub_time",
+      "value": "按上传时间"
+    },
+    {
+      "name": "sort_by_fav_time",
+      "value": "按收藏时间"
+    },
+    {
+      "name": "settings_eh_sign_out_restart",
+      "value": "正在为您自动重启，请稍候"
+    },
+    {
+      "name": "settings_eh_theme_auto_switch",
+      "value": "深色跟随系统"
+    },
+    {
+      "name": "settings_eh_system_theme",
+      "value": "系统主题"
+    },
+    {
+      "name": "spen_previous_page",
+      "value": "上一页"
+    },
+    {
+      "name": "spen_next_page",
+      "value": "下一页"
+    },
+    {
+      "name": "category_all",
+      "value": "全部"
+    },
+    {
+      "name": "import_local_archive",
+      "value": "导入本地压缩包"
+    },
+    {
+      "name": "import_archive_title",
+      "value": "选择压缩包文件"
+    },
+    {
+      "name": "import_archive_failed",
+      "value": "压缩包导入失败"
+    },
+    {
+      "name": "archive_permission_lost",
+      "value": "访问压缩包的权限已丢失，请重新导入压缩包文件。"
+    },
+    {
+      "name": "import_archive_processing",
+      "value": "正在处理压缩包…"
+    },
+    {
+      "name": "import_archive_invalid_format",
+      "value": "不支持的压缩包格式"
+    },
+    {
+      "name": "import_archive_already_imported",
+      "value": "压缩包已导入"
+    },
+    {
+      "name": "import_archive_success",
+      "value": "压缩包导入成功"
+    },
+    {
+      "name": "archive_not_accessible",
+      "value": "压缩包文件无法访问"
+    },
+    {
+      "name": "imported_archive_info_title",
+      "value": "本地导入信息"
+    },
+    {
+      "name": "imported_archive_info_message",
+      "value": "这是从本地存储中导入的项目"
+    },
+    {
+      "name": "imported_archive_category",
+      "value": "本地导入"
+    },
+    {
+      "name": "import_local_album",
+      "value": "导入本地相册"
+    },
+    {
+      "name": "import_album_title",
+      "value": "选择图片文件夹"
+    },
+    {
+      "name": "import_album_processing",
+      "value": "正在导入相册…"
+    },
+    {
+      "name": "import_album_failed",
+      "value": "相册导入失败"
+    },
+    {
+      "name": "import_album_no_images",
+      "value": "所选文件夹中没有支持的图片"
+    },
+    {
+      "name": "import_album_already_imported",
+      "value": "相册已导入"
+    },
+    {
+      "name": "import_album_success",
+      "value": "成功导入 %d 张图片"
+    },
+    {
+      "name": "ok",
+      "value": "确定"
+    },
+    {
+      "name": "proxy_http",
+      "value": "HTTP"
+    },
+    {
+      "name": "proxy_socks",
+      "value": "SOCKS"
+    },
+    {
+      "name": "proxy_saved",
+      "value": "代理设置已保存"
+    },
+    {
+      "name": "settings_network_proxy",
+      "value": "网络与代理"
+    },
+    {
+      "name": "settings_eh_need_sign_in_summary",
+      "value": "未登录时进入前提示登录"
+    },
+    {
+      "name": "settings_advanced_clear_download_path_cache_done",
+      "value": "已清除下载路径缓存"
+    },
+    {
+      "name": "hosts_load_failed",
+      "value": "加载自定义 hosts 失败"
+    },
+    {
+      "name": "hosts_save_failed",
+      "value": "保存 host 失败"
+    },
+    {
+      "name": "tag_selector_more",
+      "value": "▼ 更多"
+    },
+    {
+      "name": "tag_selector_collapse",
+      "value": "▲ 收起"
+    },
+    {
+      "name": "tag_selector_end",
+      "value": "--- 已到底 ---"
+    },
+    {
+      "name": "error_rar_unsupported",
+      "value": "暂不支持 RAR 格式的压缩包（请使用 ZIP 或 7z）"
+    },
+    {
+      "name": "shortcut_start_all_triggered",
+      "value": "已触发“全部开始下载”"
+    },
+    {
+      "name": "shortcut_stop_all_triggered",
+      "value": "已触发“全部暂停下载”"
+    },
+    {
+      "name": "disable_pattern_protection",
+      "value": "关闭图案保护"
+    },
+    {
+      "name": "pattern_protection_disabled",
+      "value": "已关闭图案保护"
+    },
+    {
+      "name": "archiver_download_cancel",
+      "value": "取消档案下载"
+    },
+    {
+      "name": "archiver_download_cancel_confirm",
+      "value": "确定取消当前档案下载并清理未完成文件吗？"
+    },
+    {
+      "name": "archiver_download_canceled",
+      "value": "已取消档案下载"
+    },
+    {
+      "name": "reset_limit_confirm_title",
+      "value": "重置图片配额"
+    },
+    {
+      "name": "reset_limit_confirm_message",
+      "value": "确定消耗 %s 重置图片配额吗？"
+    },
+    {
+      "name": "reset_limit_success",
+      "value": "图片配额已重置"
+    },
+    {
+      "name": "reset_limit_failed",
+      "value": "重置图片配额失败"
+    }
+  ]
+}

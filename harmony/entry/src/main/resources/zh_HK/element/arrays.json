@@ -1,0 +1,21 @@
+{
+  "strarray": [
+    {
+      "name": "tag_translation_metadata",
+      "value": [
+        {
+          "value": "tag-translations-zh-rCN.sha1"
+        },
+        {
+          "value": "https://raw.githubusercontent.com/Mapaler/EhViewer/tag-translations/tag-translations/tag-translations-zh-rCN.sha1"
+        },
+        {
+          "value": "tag-translations-zh-rCN"
+        },
+        {
+          "value": "https://raw.githubusercontent.com/Mapaler/EhViewer/tag-translations/tag-translations/tag-translations-zh-rCN"
+        }
+      ]
+    }
+  ]
+}

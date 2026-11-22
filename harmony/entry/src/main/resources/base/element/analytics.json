@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "ga_trackingId",
+      "value": "UA-51287788-1"
+    },
+    {
+      "name": "ga_logLevel",
+      "value": "error"
+    }
+  ]
+}

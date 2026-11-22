@@ -1,0 +1,135 @@
+{
+  "module": {
+    "name": "entry",
+    "type": "entry",
+    "description": "$string:module_desc",
+    "mainElement": "EntryAbility",
+    "deviceTypes": [
+      "default",
+      "tablet",
+      "2in1"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:main_pages",
+    // 上游 AndroidManifest 有 19 个 Activity + 2 个 Service，鸿蒙侧**只有一个 UIAbility 入口**：
+    //   上游 SplashActivity → MainActivity 是两次 startActivity；鸿蒙在 onWindowStageCreate 里按状态跳页面。
+    //   其余 17 个 Activity → pages/main_pages.json 的页面路由（不是 ability）。
+    //   2 个 Service（DownloadService / ArchiverDownloadService）→ 后台任务 + KEEP_BACKGROUND_RUNNING
+    //   （不是 ability，也不该出现在 abilities 数组里）。
+    "abilities": [
+      {
+        "name": "EntryAbility",
+        "srcEntry": "./ets/entryability/EntryAbility.ets",
+        "description": "$string:EntryAbility_desc",
+        "icon": "$media:layered_image",
+        "label": "$string:EntryAbility_label",
+        "startWindowIcon": "$media:startIcon",
+        "startWindowBackground": "$color:start_window_background",
+        "exported": true,
+        "skills": [
+          {
+            "entities": [
+              "entity.system.home"
+            ],
+            "actions": [
+              "action.system.home"
+            ]
+          },
+          {
+            "actions": [
+              "ohos.want.action.viewData"
+            ],
+            "uris": [
+              {
+                "scheme": "file",
+                "utd": "general.zip-archive",
+                "maxFileSupported": 1
+              },
+              {
+                "scheme": "file",
+                "utd": "org.7-zip.7-zip-archive",
+                "maxFileSupported": 1
+              }
+            ]
+          }
+        ],
+        "metadata": [
+          {
+            "name": "ohos.ability.shortcuts",
+            "resource": "$profile:shortcuts_config"
+          }
+        ]
+      }
+    ],
+    // ── 权限对照上游 AndroidManifest.xml（19 条 uses-permission）──────────────────
+    // 已申请且沿用：INTERNET / ACCESS_NETWORK_STATE / VIBRATE / FOREGROUND_SERVICE(+DATA_SYNC)
+    // 本轮补齐（上游有、鸿蒙缺、平台有对应）：
+    //   WAKE_LOCK                  → RUNNING_LOCK              （长下载保活）
+    //   USE_BIOMETRIC/FINGERPRINT  → ACCESS_BIOMETRIC          （SetSecurity 应用锁）
+    //   CAMERA                     → CAMERA                    （上游 UserImageChange.java:300
+    //                                                           MediaStore.ACTION_IMAGE_CAPTURE 换头像拍照）
+    //   ACCESS_WIFI_STATE          → GET_WIFI_INFO             （局域网传书）
+    //
+    // 鸿蒙平台特有（上游 Android `FLAG_SECURE` 无需权限，HarmonyOS API 11+ `setWindowPrivacyMode` 强制校验）：
+    //   FLAG_SECURE                → PRIVACY_WINDOW            （normal / system_grant，防截屏/隐藏多任务预览）
+    //
+    // 🔴 **`POST_NOTIFICATIONS` → `NOTIFICATION_CONTROLLER` 的映射是错的，已移除**
+    //   `ohos.permission.NOTIFICATION_CONTROLLER` 的 APL 等级是 **system_basic**（系统应用级），
+    //   而本应用签名档是 `"apl":"normal"` → **安装直接失败**：
+    //       code:9568289 error: install failed due to grant request permissions failed.
+    //       PermissionName: ohos.permission.NOTIFICATION_CONTROLLER
+    //
+    //   而我们的用法只是**发布普通通知**（`notificationManager.publish()` / `addSlot()`），
+    //   **HarmonyOS 的普通通知不需要任何权限**（不同于 Android 13+ 的 POST_NOTIFICATIONS 运行时授权）。
+    //   所以这一行既拿不到、也不需要 —— 移除。
+    //   判据：**鸿蒙权限的 `apl` 等级必须 ≤ 签名档的 apl**，否则安装阶段就失败（不是运行时失败）。
+    //   核对方法：`grep <permission> $env:LOCALAPPDATA\Huawei\Sdk\<ver>\...\permission_definitions.json` 看 apl 字段。
+    //
+    // **故意不申请**（已裁决，不是漏做）：
+    //   REQUEST_INSTALL_PACKAGES / ACCESS_DOWNLOAD_MANAGER → D-003 删除自更新模块
+    //   READ/WRITE_EXTERNAL_STORAGE / MANAGE_EXTERNAL_STORAGE → D-038 改用沙箱 + DocumentViewPicker
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.INTERNET"
+      },
+      {
+        "name": "ohos.permission.GET_NETWORK_INFO"
+      },
+      {
+        "name": "ohos.permission.PRIVACY_WINDOW"
+      },
+      {
+        "name": "ohos.permission.GET_WIFI_INFO",
+        "reason": "$string:reason_wifi_info",
+        "usedScene": { "abilities": ["EntryAbility"], "when": "inuse" }
+      },
+      {
+        "name": "ohos.permission.VIBRATE",
+        "reason": "$string:reason_vibrate",
+        "usedScene": { "abilities": ["EntryAbility"], "when": "inuse" }
+      },
+      {
+        "name": "ohos.permission.KEEP_BACKGROUND_RUNNING",
+        "reason": "$string:reason_background",
+        "usedScene": { "abilities": ["EntryAbility"], "when": "always" }
+      },
+      {
+        "name": "ohos.permission.RUNNING_LOCK",
+        "reason": "$string:reason_running_lock",
+        "usedScene": { "abilities": ["EntryAbility"], "when": "always" }
+      },
+      {
+        "name": "ohos.permission.ACCESS_BIOMETRIC",
+        "reason": "$string:reason_biometric",
+        "usedScene": { "abilities": ["EntryAbility"], "when": "inuse" }
+      },
+      {
+        "name": "ohos.permission.CAMERA",
+        "reason": "$string:reason_camera",
+        "usedScene": { "abilities": ["EntryAbility"], "when": "inuse" }
+      }
+    ]
+  }
+}
+

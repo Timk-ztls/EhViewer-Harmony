@@ -1,0 +1,654 @@
+{
+  "strarray": [
+    {
+      "name": "ActionBarStyle",
+      "value": [
+        {
+          "value": "parent|@style/Widget.AppCompat.ActionBar.Solid"
+        },
+        {
+          "value": "background|?attr/toolbarColor"
+        }
+      ]
+    },
+    {
+      "name": "TextAppearance",
+      "value": [
+        {
+          "value": "parent|TextAppearance.AppCompat"
+        }
+      ]
+    },
+    {
+      "name": "ProgressView",
+      "value": [
+        {
+          "value": "color|?attr/progressColor"
+        },
+        {
+          "value": "indeterminate|true"
+        },
+        {
+          "value": "android:minWidth|48dp"
+        },
+        {
+          "value": "android:minHeight|48dp"
+        }
+      ]
+    },
+    {
+      "name": "ProgressView_Small",
+      "value": [
+        {
+          "value": "android:minWidth|16dp"
+        },
+        {
+          "value": "android:minHeight|16dp"
+        }
+      ]
+    },
+    {
+      "name": "ProgressView_Large",
+      "value": [
+        {
+          "value": "android:minWidth|76dp"
+        },
+        {
+          "value": "android:minHeight|76dp"
+        }
+      ]
+    },
+    {
+      "name": "TextAppearance_CardTitle",
+      "value": [
+        {
+          "value": "android:textSize|16fp"
+        },
+        {
+          "value": "android:textColor|?android:attr/textColorPrimary"
+        }
+      ]
+    },
+    {
+      "name": "CardTitle",
+      "value": [
+        {
+          "value": "android:textAppearance|@style/TextAppearance.CardTitle"
+        },
+        {
+          "value": "android:ellipsize|end"
+        },
+        {
+          "value": "android:maxLines|2"
+        },
+        {
+          "value": "android:lineSpacingExtra|0sp"
+        }
+      ]
+    },
+    {
+      "name": "TextAppearance_TopListTitle",
+      "value": [
+        {
+          "value": "android:textSize|20fp"
+        },
+        {
+          "value": "android:textColor|?android:attr/textColorPrimary"
+        }
+      ]
+    },
+    {
+      "name": "TopListTitle",
+      "value": [
+        {
+          "value": "android:textAppearance|@style/TextAppearance.TopListTitle"
+        },
+        {
+          "value": "android:ellipsize|end"
+        },
+        {
+          "value": "android:maxLines|10"
+        },
+        {
+          "value": "android:gravity|start"
+        }
+      ]
+    },
+    {
+      "name": "GotoMessageStyle",
+      "value": [
+        {
+          "value": "android:textAppearance|@style/TextAppearance.GotoMessageStyle"
+        },
+        {
+          "value": "android:ellipsize|end"
+        },
+        {
+          "value": "android:maxLines|10"
+        },
+        {
+          "value": "android:gravity|start"
+        }
+      ]
+    },
+    {
+      "name": "TextAppearance_GotoMessageStyle",
+      "value": [
+        {
+          "value": "android:textSize|14fp"
+        },
+        {
+          "value": "android:textColor|?android:attr/textColorTertiary"
+        }
+      ]
+    },
+    {
+      "name": "TextAppearance_TopListItem",
+      "value": [
+        {
+          "value": "android:textSize|18fp"
+        },
+        {
+          "value": "android:textColor|?android:attr/textColorSecondary"
+        }
+      ]
+    },
+    {
+      "name": "TopListItem",
+      "value": [
+        {
+          "value": "android:textAppearance|@style/TextAppearance.TopListItem"
+        },
+        {
+          "value": "android:maxLines|99"
+        },
+        {
+          "value": "android:gravity|start"
+        },
+        {
+          "value": "android:singleLine|false"
+        },
+        {
+          "value": "android:paddingLeft|12dp"
+        },
+        {
+          "value": "android:paddingTop|4dp"
+        },
+        {
+          "value": "android:paddingRight|12dp"
+        },
+        {
+          "value": "android:paddingBottom|4dp"
+        }
+      ]
+    },
+    {
+      "name": "TextAppearance_CardMessage",
+      "value": [
+        {
+          "value": "android:textSize|14fp"
+        },
+        {
+          "value": "android:textColor|?android:attr/textColorSecondary"
+        }
+      ]
+    },
+    {
+      "name": "CardMessage",
+      "value": [
+        {
+          "value": "android:textAppearance|@style/TextAppearance.CardMessage"
+        },
+        {
+          "value": "android:ellipsize|end"
+        },
+        {
+          "value": "android:singleLine|true"
+        },
+        {
+          "value": "android:maxLines|1"
+        }
+      ]
+    },
+    {
+      "name": "CardMessageMultipleLines",
+      "value": [
+        {
+          "value": "android:textAppearance|@style/TextAppearance.CardMessage"
+        },
+        {
+          "value": "android:ellipsize|end"
+        },
+        {
+          "value": "android:singleLine|false"
+        },
+        {
+          "value": "android:maxLines|10"
+        }
+      ]
+    },
+    {
+      "name": "TextAppearance_ReadProgress",
+      "value": [
+        {
+          "value": "android:textSize|14fp"
+        },
+        {
+          "value": "android:textColor|?android:attr/textColorPrimary"
+        }
+      ]
+    },
+    {
+      "name": "ReadProgress",
+      "value": [
+        {
+          "value": "android:textAppearance|@style/TextAppearance.ReadProgress"
+        },
+        {
+          "value": "android:ellipsize|end"
+        },
+        {
+          "value": "android:singleLine|true"
+        },
+        {
+          "value": "android:maxLines|1"
+        }
+      ]
+    },
+    {
+      "name": "CategoryText",
+      "value": [
+        {
+          "value": "android:textAppearance|@style/TextAppearance.AppCompat.Subhead"
+        },
+        {
+          "value": "android:textStyle|bold"
+        },
+        {
+          "value": "android:gravity|center"
+        },
+        {
+          "value": "android:minHeight|40vp"
+        },
+        {
+          "value": "maskColor|#8A000000"
+        }
+      ]
+    },
+    {
+      "name": "TextAppearance_CategoryTitle",
+      "value": [
+        {
+          "value": "parent|TextAppearance.AppCompat.Small"
+        },
+        {
+          "value": "android:textColor|?attr/textColorThemeAccent"
+        },
+        {
+          "value": "android:textStyle|bold"
+        }
+      ]
+    },
+    {
+      "name": "CategoryTitle",
+      "value": [
+        {
+          "value": "android:textAppearance|@style/TextAppearance.CategoryTitle"
+        },
+        {
+          "value": "android:singleLine|true"
+        },
+        {
+          "value": "android:ellipsize|marquee"
+        },
+        {
+          "value": "android:gravity|center_vertical"
+        }
+      ]
+    },
+    {
+      "name": "ButtonInCard",
+      "value": [
+        {
+          "value": "android:textAppearance|@style/TextAppearance.AppCompat.Button"
+        },
+        {
+          "value": "android:textStyle|bold"
+        },
+        {
+          "value": "android:gravity|center"
+        },
+        {
+          "value": "android:minHeight|48dp"
+        },
+        {
+          "value": "android:minWidth|88dp"
+        },
+        {
+          "value": "android:padding|8dp"
+        },
+        {
+          "value": "android:textColor|?attr/colorPrimary"
+        }
+      ]
+    },
+    {
+      "name": "ButtonNewVersion",
+      "value": [
+        {
+          "value": "android:textAppearance|@style/TextAppearance.AppCompat.Button"
+        },
+        {
+          "value": "android:textStyle|bold"
+        },
+        {
+          "value": "android:gravity|center"
+        },
+        {
+          "value": "android:minHeight|0dp"
+        },
+        {
+          "value": "android:minWidth|88dp"
+        },
+        {
+          "value": "android:paddingLeft|16dp"
+        },
+        {
+          "value": "android:paddingRight|16dp"
+        },
+        {
+          "value": "android:paddingTop|4dp"
+        },
+        {
+          "value": "android:paddingBottom|4dp"
+        }
+      ]
+    },
+    {
+      "name": "ButtonInCard_Accent",
+      "value": [
+        {
+          "value": "android:textColor|?attr/colorAccent"
+        }
+      ]
+    },
+    {
+      "name": "Slider",
+      "value": [
+        {
+          "value": "thickness|2dp"
+        },
+        {
+          "value": "radius|6dp"
+        },
+        {
+          "value": "color|?attr/widgetColorThemeAccent"
+        },
+        {
+          "value": "textColor|#FFFFFFFF"
+        },
+        {
+          "value": "textSize|12sp"
+        },
+        {
+          "value": "dark|false"
+        }
+      ]
+    },
+    {
+      "name": "Slider_Dark",
+      "value": [
+        {
+          "value": "dark|true"
+        }
+      ]
+    },
+    {
+      "name": "Indicating",
+      "value": [
+        {
+          "value": "indicatorHeight|1dp"
+        },
+        {
+          "value": "indicatorColor|?attr/dividerColor"
+        }
+      ]
+    },
+    {
+      "name": "Widget_Design_FloatingActionButton_Mini",
+      "value": [
+        {
+          "value": "fabSize|mini"
+        }
+      ]
+    },
+    {
+      "name": "Guide_Title",
+      "value": [
+        {
+          "value": "parent|TextAppearance.AppCompat.Title"
+        },
+        {
+          "value": "android:textColor|?attr/guideTitleColor"
+        }
+      ]
+    },
+    {
+      "name": "Guide_Text",
+      "value": [
+        {
+          "value": "parent|TextAppearance.AppCompat.Subhead"
+        },
+        {
+          "value": "android:textColor|?attr/guideTextColor"
+        }
+      ]
+    },
+    {
+      "name": "Guide",
+      "value": [
+        {
+          "value": "sv_backgroundColor|?attr/guideBackgroundColor"
+        },
+        {
+          "value": "sv_titleTextAppearance|@style/Guide.Title"
+        },
+        {
+          "value": "sv_detailTextAppearance|@style/Guide.Text"
+        }
+      ]
+    },
+    {
+      "name": "CardView_Normal",
+      "value": [
+        {
+          "value": "cardCornerRadius|2dp"
+        },
+        {
+          "value": "cardUseCompatPadding|true"
+        },
+        {
+          "value": "cardElevation|2dp"
+        },
+        {
+          "value": "cardMaxElevation|2dp"
+        },
+        {
+          "value": "cardPreventCornerOverlap|true"
+        },
+        {
+          "value": "cardBackgroundColor|?attr/contentColorPrimary"
+        },
+        {
+          "value": "contentPadding|0dp"
+        }
+      ]
+    },
+    {
+      "name": "CardView_Reactive",
+      "value": [
+        {
+          "value": "parent|CardView.Normal"
+        },
+        {
+          "value": "cardBackgroundColor|?attr/contentColorReactive"
+        }
+      ]
+    },
+    {
+      "name": "ClipTheme",
+      "value": [
+        {
+          "value": "parent|Theme.MaterialComponents.Light.NoActionBar"
+        },
+        {
+          "value": "colorPrimary|#FF009688"
+        },
+        {
+          "value": "colorPrimaryDark|#FF00796B"
+        },
+        {
+          "value": "colorAccent|#FFE040FB"
+        },
+        {
+          "value": "android:windowContentTransitions|true"
+        },
+        {
+          "value": "textAllCaps|false"
+        },
+        {
+          "value": "buttonStyle|?android:attr/borderlessButtonStyle"
+        },
+        {
+          "value": "android:fontFamily|6fp"
+        }
+      ]
+    },
+    {
+      "name": "CustomChipChoice",
+      "value": [
+        {
+          "value": "parent|@style/Widget.MaterialComponents.Chip.Action"
+        },
+        {
+          "value": "textColor|#FFFFFFFF"
+        }
+      ]
+    },
+    {
+      "name": "ThemeChangeButtonStyleLight",
+      "value": [
+        {
+          "value": "parent|@style/Widget.AppCompat.Button.Borderless.Colored"
+        },
+        {
+          "value": "textColor|#FFE040FB"
+        },
+        {
+          "value": "backgroundColor|#FFFFFFFF"
+        }
+      ]
+    },
+    {
+      "name": "ThemeChangeButtonStyleDark",
+      "value": [
+        {
+          "value": "parent|@style/Widget.AppCompat.Button.Borderless.Colored"
+        },
+        {
+          "value": "textColor|#FF009688"
+        },
+        {
+          "value": "backgroundColor|#FF323232"
+        }
+      ]
+    },
+    {
+      "name": "ThemeChangeButtonStyleBlack",
+      "value": [
+        {
+          "value": "parent|@style/Widget.AppCompat.Button.Borderless.Colored"
+        },
+        {
+          "value": "textColor|#FF009688"
+        },
+        {
+          "value": "backgroundColor|#FF000000"
+        }
+      ]
+    },
+    {
+      "name": "PopupWindow",
+      "value": [
+        {
+          "value": "android:windowEnterAnimation|@anim/pop_enter"
+        },
+        {
+          "value": "android:windowExitAnimation|@anim/pop_exit"
+        }
+      ]
+    },
+    {
+      "name": "CoverImageDialogAnimation",
+      "value": [
+        {
+          "value": "android:windowEnterAnimation|@anim/cover_enter"
+        },
+        {
+          "value": "android:windowExitAnimation|@anim/cover_exit"
+        }
+      ]
+    },
+    {
+      "name": "Widget_AppTheme_ButtonBar_Fullscreen",
+      "value": [
+        {
+          "value": "android:background|#66000000"
+        },
+        {
+          "value": "android:buttonBarStyle|?android:attr/buttonBarStyle"
+        }
+      ]
+    },
+    {
+      "name": "Widget_Ehviewer_AppWidget_Container",
+      "value": [
+        {
+          "value": "parent|android:Widget"
+        },
+        {
+          "value": "android:id|@android:id/background"
+        },
+        {
+          "value": "android:background|?android:attr/colorBackground"
+        },
+        {
+          "value": "android:padding|?attr/appWidgetPadding"
+        },
+        {
+          "value": "android:background|@drawable/app_widget_background"
+        }
+      ]
+    },
+    {
+      "name": "Widget_Ehviewer_AppWidget_InnerView",
+      "value": [
+        {
+          "value": "parent|android:Widget"
+        },
+        {
+          "value": "android:background|?android:attr/colorBackground"
+        },
+        {
+          "value": "android:textColor|?android:attr/textColorPrimary"
+        },
+        {
+          "value": "android:padding|?attr/appWidgetPadding"
+        },
+        {
+          "value": "android:background|@drawable/app_widget_inner_view_background"
+        }
+      ]
+    }
+  ]
+}

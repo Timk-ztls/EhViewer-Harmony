@@ -1,0 +1,12 @@
+{
+  "color": [
+    {
+      "name": "primary_text_material_black_disabled",
+      "value": "#4DFFFFFF"
+    },
+    {
+      "name": "primary_text_material_black",
+      "value": "#D9FFFFFF"
+    }
+  ]
+}

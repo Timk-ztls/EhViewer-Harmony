@@ -1,0 +1,53 @@
+// 上游 app/build.gradle(177) → 本文件。逐项对照：
+//   compileSdk 35 / minSdk 23 / targetSdk 30 → 由 harmony/build-profile.json5 的 products 统一给
+//                                              （compileSdkVersion 20 / compatibleSdkVersion 20 / targetSdkVersion 6.0.0(20)）
+//   ndk { moduleName "native-lib"; abiFilters 4 种 } → externalNativeOptions（abiFilters 只 arm64-v8a，见下方说明）
+//   multiDexEnabled true      → 无对应物（ArkTS 无 dex 方法数上限），不设
+//   minifyEnabled false       → **release 的 obfuscation 必须关闭**（上游不混淆），见 buildOptionSet
+//   resourceConfigurations    → 资源语言目录（resources/zh_CN|zh_HK|zh_TW|es_ES|ja_JP|ko_KR|fr_FR|de_DE|th_TH 已就位）
+//   flavorDimensions/productFlavors(appRelease) → products.default（单产品）
+{
+  "apiType": "stageMode",
+  "buildOption": {
+    "externalNativeOptions": {
+      "path": "./src/main/cpp/CMakeLists.txt",
+      // 上游 abiFilters = armeabi-v7a / arm64-v8a / x86 / x86_64 四种；
+      // 鸿蒙侧只产出 arm64-v8a：OpenHarmony 设备为 64 位 ARM，且 cpp 里的 vendored 汇编/7z 只对 aarch64 验证过。
+      // 如需模拟器（x86_64）另开一批把 cpp 全量交叉编译验证后再加，不在此处蒙。
+      "arguments": "-DOHOS_ARCH=arm64-v8a -DEHVIEWER_7Z=ON",
+      "abiFilters": [
+        "arm64-v8a"
+      ]
+    },
+    "arkOptions": {
+      "runtimeOnly": {
+        "sources": []
+      }
+    }
+  },
+  "buildOptionSet": [
+    {
+      "name": "release",
+      "arkOptions": {
+        "obfuscation": {
+          "ruleOptions": {
+            // 上游 app/build.gradle：buildTypes.release { minifyEnabled **false** } → 这里必须 enable=false
+            // （开启混淆会改变堆栈与字符串常量，属行为差异，不是构建优化）
+            "enable": false,
+            "files": [
+              "./obfuscation-rules.txt"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "targets": [
+    {
+      "name": "default"
+    }
+  ]
+}
+
+
+

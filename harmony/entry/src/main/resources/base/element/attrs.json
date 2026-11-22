@@ -1,0 +1,100 @@
+{
+  "string": [
+    {
+      "name": "Theme",
+      "value": "android:windowBackground|color;android:navigationBarColor|color;buttonStyle|reference;colorEdgeEffect|color;dividerColor|color;toolbarColor|color;textColorThemePrimary|color;textColorThemePrimary2|color;textColorThemeAccent|color;drawableColorPrimary|color;drawableColorSecondary|color;drawableColorThemePrimary|color;contentColorPrimary|color;contentColorThemePrimary|color;contentColorThemeAccent|color;contentColorReactive|color;widgetColorThemePrimary|color;widgetColorThemeAccent|color;guideBackgroundColor|color;guideTitleColor|color;guideTextColor|color;progressColor|color;tagGroupBackgroundColor|color;tagBackgroundColor|color;galleryDetailHeaderTitleColor|color;galleryDetailHeaderBackgroundColor|color;galleryDetailButtonBackgroundColor|color;gallerySliderBackgroundColor|color;preferenceHeaderBackground|reference;toolbarPopupTheme|reference;galleryDetailDivider|reference;limitCountBgColor|color;iconColor|color;limits_shape_color|color;home_shadow|color"
+    },
+    {
+      "name": "ProgressView",
+      "value": "color|;indeterminate|boolean;progress|float"
+    },
+    {
+      "name": "MaxSizeContainer",
+      "value": "maxWidth|dimension;maxHeight|dimension"
+    },
+    {
+      "name": "FixedAspectImageView",
+      "value": "aspect|float"
+    },
+    {
+      "name": "LoadImageView",
+      "value": "image_radius|dimension;image_circle|boolean;retryType|"
+    },
+    {
+      "name": "FixedThumb",
+      "value": "minAspect|float;maxAspect|float"
+    },
+    {
+      "name": "FixedThumbNew",
+      "value": ""
+    },
+    {
+      "name": "CheckTextView",
+      "value": "maskColor|color"
+    },
+    {
+      "name": "DividerView",
+      "value": "dividerWidth|dimension;dividerHeight|dimension;dividerColor|"
+    },
+    {
+      "name": "AutoWrapLayout",
+      "value": "alignment|"
+    },
+    {
+      "name": "SimpleGridLayout",
+      "value": "columnCount|integer;itemMargin|dimension"
+    },
+    {
+      "name": "Slider",
+      "value": "start|integer;end|integer;slider_progress|integer;thickness|;radius|dimension;color|;textColor|color;textSize|dimension;dark|boolean"
+    },
+    {
+      "name": "SwitchPreference",
+      "value": "summaryOn|string;summaryOff|string;switchTextOn|string;switchTextOff|string;disableDependentsState|boolean"
+    },
+    {
+      "name": "BatteryView",
+      "value": "color|;warningColor|color"
+    },
+    {
+      "name": "Indicating",
+      "value": "indicatorHeight|dimension;indicatorColor|color"
+    },
+    {
+      "name": "DialogPreference",
+      "value": "dialogTitle|string;dialogIcon|reference;positiveButtonText|string;negativeButtonText|string;dialogLayout|reference"
+    },
+    {
+      "name": "MessagePreference",
+      "value": "dialogMessage|string;dialogMessageHtml|boolean;dialogMessageLinkify|boolean"
+    },
+    {
+      "name": "ListPreference",
+      "value": "entries|reference;entryValues|reference"
+    },
+    {
+      "name": "ActivityPreference",
+      "value": "activity|string"
+    },
+    {
+      "name": "UrlPreference",
+      "value": "url|string;android:maxLines|integer;singleLine|boolean;android:ellipsize|string"
+    },
+    {
+      "name": "SeekBarPreference",
+      "value": "max|integer"
+    },
+    {
+      "name": "FullscreenAttrs",
+      "value": "fullscreenBackgroundColor|color;fullscreenTextColor|color"
+    },
+    {
+      "name": "StrokeTextView",
+      "value": "stroke_color|color;stroke_width|dimension"
+    },
+    {
+      "name": "AppWidgetAttrs",
+      "value": "appWidgetPadding|dimension;appWidgetInnerRadius|dimension;appWidgetRadius|dimension"
+    }
+  ]
+}

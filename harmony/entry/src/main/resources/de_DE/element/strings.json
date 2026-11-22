@@ -1,0 +1,3440 @@
+{
+  "string": [
+    {
+      "name": "blacklist_id",
+      "value": "Benutzer-ID"
+    },
+    {
+      "name": "blacklist",
+      "value": "Schwarze Liste"
+    },
+    {
+      "name": "join_in_blacklist",
+      "value": "Zur schwarzen Liste hinzufügen"
+    },
+    {
+      "name": "add_blacklist",
+      "value": "Benutzer blockieren"
+    },
+    {
+      "name": "blacklist_tip",
+      "value": "Dieses Blockierungssystem blockiert Kommentare zusätzlich zum EHentai-Website-Kommentarsystem.\n\nKommentator-Blockierung: Kommentare dieses Kommentators ausschließen. Dies kann das Laden der Galerieliste länger dauern lassen."
+    },
+    {
+      "name": "blacklist_text",
+      "value": "Benutzer blockieren"
+    },
+    {
+      "name": "delete_blacklist",
+      "value": "Benutzer \"%s\" entsperren?"
+    },
+    {
+      "name": "blacklist_reason_text",
+      "value": "Blockierungsgrund"
+    },
+    {
+      "name": "settings_eh_blacklist",
+      "value": "Kommentar-Schwarze Liste"
+    },
+    {
+      "name": "settings_eh_blacklist_summary",
+      "value": "Kommentare nach Kontonamen blockieren"
+    },
+    {
+      "name": "settings_advanced_dns_over_http_title",
+      "value": "Sicheres DNS (DoH)"
+    },
+    {
+      "name": "settings_advanced_dns_over_http_summary",
+      "value": "Löst DNS-Verschmutzungsprobleme in bestimmten Regionen"
+    },
+    {
+      "name": "settings_advanced_domain_fronting_title",
+      "value": "Domain Fronting"
+    },
+    {
+      "name": "settings_advanced_domain_fronting_summary",
+      "value": "SNI-Blockierung umgehen"
+    },
+    {
+      "name": "settings_advanced_url_replace_title",
+      "value": "URL-Verschleierung, SNI muss deaktiviert sein"
+    },
+    {
+      "name": "settings_advanced_url_replace_summary",
+      "value": "URL-Verschleierung (Neustart erforderlich, Kontofunktionen werden nach Aktivierung deaktiviert)"
+    },
+    {
+      "name": "settings_about_donate_guide",
+      "value": "guide"
+    },
+    {
+      "name": "share_favorites_dialog_title",
+      "value": "Favoriten teilen"
+    },
+    {
+      "name": "share_favorites_dialog_message",
+      "value": "Favoriten %s teilen?"
+    },
+    {
+      "name": "add_favorites_dialog_message",
+      "value": "Favoriten %s hinzufügen?"
+    },
+    {
+      "name": "settings_advanced_built_ex_hosts_title",
+      "value": "Integrierte exhentai hosts.txt"
+    },
+    {
+      "name": "settings_advanced_built_ex_hosts_summary",
+      "value": "Von der App bereitgestellte Host-zu-IP-Zuordnung\nKann von benutzerdefinierter hosts.txt überschrieben werden"
+    },
+    {
+      "name": "network_remind",
+      "value": "VPN wurde erkannt, bitte achte auf deine Netzwerksicherheit"
+    },
+    {
+      "name": "no_blicklist",
+      "value": "Hier ist die schwarze Liste"
+    },
+    {
+      "name": "app_name",
+      "value": "EhViewer"
+    },
+    {
+      "name": "homepage",
+      "value": "Startseite"
+    },
+    {
+      "name": "subscription",
+      "value": "Gefolgte Etiketten"
+    },
+    {
+      "name": "whats_hot",
+      "value": "Top-Listen"
+    },
+    {
+      "name": "top_lists",
+      "value": "Bestenliste"
+    },
+    {
+      "name": "favourite",
+      "value": "Lesezeichen"
+    },
+    {
+      "name": "history",
+      "value": "Verlauf"
+    },
+    {
+      "name": "downloads",
+      "value": "Downloads"
+    },
+    {
+      "name": "settings",
+      "value": "Einstellungen"
+    },
+    {
+      "name": "stub",
+      "value": "Stub"
+    },
+    {
+      "name": "news",
+      "value": "Neuigkeiten"
+    },
+    {
+      "name": "username",
+      "value": "Benutzername"
+    },
+    {
+      "name": "password",
+      "value": "Kennwort"
+    },
+    {
+      "name": "recaptcha",
+      "value": "Recaptcha (nicht erforderlich)"
+    },
+    {
+      "name": "recaptcha_none",
+      "value": "Tippe hier"
+    },
+    {
+      "name": "recaptcha_loading",
+      "value": "Lädt …"
+    },
+    {
+      "name": "recaptcha_failure",
+      "value": "Gescheitert"
+    },
+    {
+      "name": "sign_in",
+      "value": "Anmelden"
+    },
+    {
+      "name": "register",
+      "value": "Konto erstellen"
+    },
+    {
+      "name": "sign_in_via_webview",
+      "value": "Mit WebView anmelden"
+    },
+    {
+      "name": "sign_in_via_cookies",
+      "value": "Mit den Cookies anmelden"
+    },
+    {
+      "name": "display_name_dialog_title",
+      "value": "Spitzname eingeben"
+    },
+    {
+      "name": "display_name",
+      "value": "Spitzname"
+    },
+    {
+      "name": "display_name_is_empty",
+      "value": "Spitzname wird nicht eingegeben"
+    },
+    {
+      "name": "sign_in_first",
+      "value": "Melde dich zunächst an"
+    },
+    {
+      "name": "default_display_name",
+      "value": "Kleines Nilpferd"
+    },
+    {
+      "name": "cookie_explain",
+      "value": "Die Cookies speichern in Browser deine Informationen. Falls du nicht wisst, was die Cookie sind, suche online darüber."
+    },
+    {
+      "name": "text_is_empty",
+      "value": "Der Text wird nicht eingegeben"
+    },
+    {
+      "name": "waring",
+      "value": "Achtung"
+    },
+    {
+      "name": "wrong_cookie_warning",
+      "value": "Die eingegebenen Cookies sehen korrekt nicht aus. Überprüfe sie."
+    },
+    {
+      "name": "i_will_check_it",
+      "value": "In Ordnung!"
+    },
+    {
+      "name": "i_dont_think_so",
+      "value": "Sie sind absolut korrekt!"
+    },
+    {
+      "name": "found_cookies",
+      "value": "Cookies werden gefunden"
+    },
+    {
+      "name": "invalid_download_location",
+      "value": "Der Downloadpfad ist nicht verfügbar. Geh zu die Einstellungen und stelle einen neue Pfad fest."
+    },
+    {
+      "name": "cellular_network_warning",
+      "value": "Zu den mobilen Daten verbunden."
+    },
+    {
+      "name": "error_bad_status_code",
+      "value": "Inkorrekter Statuscode: %d"
+    },
+    {
+      "name": "error_timeout",
+      "value": "Timeout"
+    },
+    {
+      "name": "error_unknown_host",
+      "value": "Unbekannter Hostcomputer"
+    },
+    {
+      "name": "error_redirection",
+      "value": "Zu viele Umleitungen"
+    },
+    {
+      "name": "error_socket",
+      "value": "Netwerkfehler"
+    },
+    {
+      "name": "error_unknown",
+      "value": "Unbekannter Fehler"
+    },
+    {
+      "name": "error_cant_find_activity",
+      "value": "Die Application wurde nicht gefunden"
+    },
+    {
+      "name": "error_cannot_parse_the_url",
+      "value": "Die URL konnte analysiert nicht werden"
+    },
+    {
+      "name": "error_not_folder_path",
+      "value": "Der Ordnerpfad ist ungültig"
+    },
+    {
+      "name": "error_no_provider",
+      "value": "Keiner Anbieter"
+    },
+    {
+      "name": "error_decoding_failed",
+      "value": "Dekodierung fehlgeschlagen"
+    },
+    {
+      "name": "error_not_found",
+      "value": "Nicht gefunden"
+    },
+    {
+      "name": "error_empty",
+      "value": "Leer"
+    },
+    {
+      "name": "error_reading_failed",
+      "value": "Lesefehler"
+    },
+    {
+      "name": "error_invalid_archive",
+      "value": "Ungültige Archivdatei"
+    },
+    {
+      "name": "error_out_of_range",
+      "value": "Außer Reichweite"
+    },
+    {
+      "name": "error_write_failed",
+      "value": "Schreibfehler"
+    },
+    {
+      "name": "error_parse_error",
+      "value": "Analyzierungfehler"
+    },
+    {
+      "name": "error_509",
+      "value": "509"
+    },
+    {
+      "name": "error_invalid_url",
+      "value": "URL ungültig"
+    },
+    {
+      "name": "error_get_ptoken_error",
+      "value": "Fehler beim Erhalten pTokens"
+    },
+    {
+      "name": "error_cant_create_temp_file",
+      "value": "Die Temporäre Datei konnte erstellt nicht werden"
+    },
+    {
+      "name": "error_cant_save_image",
+      "value": "Das Bild konnte nicht gespeichert werden"
+    },
+    {
+      "name": "error_save_image_existed",
+      "value": "Bild existiert bereits"
+    },
+    {
+      "name": "error_invalid_number",
+      "value": "Nummer ungültig"
+    },
+    {
+      "name": "error_empty_html",
+      "value": "Leere Seite"
+    },
+    {
+      "name": "error_cant_get_image",
+      "value": "Bild konnte nicht abgerufen werden"
+    },
+    {
+      "name": "error_igneous_wrong",
+      "value": "Falsches igneous\nStellen Sie sicher, dass Sie die Berechtigung haben und melden Sie sich erneut an"
+    },
+    {
+      "name": "gallery_gl_fallback_title",
+      "value": "OpenGL-Renderer nicht verfügbar"
+    },
+    {
+      "name": "gallery_gl_fallback_message",
+      "value": "Dieses Gerät kann EGL derzeit nicht initialisieren. Bitte gehen Sie zurück und versuchen Sie es später erneut."
+    },
+    {
+      "name": "gallery_gl_fallback_action_close",
+      "value": "Zurück"
+    },
+    {
+      "name": "gallery_gl_fallback_toast",
+      "value": "GL-Rendering fehlgeschlagen, auf sichere Ersatzseite umgeschaltet"
+    },
+    {
+      "name": "error_please_login_first",
+      "value": "Melde dich zuerst an."
+    },
+    {
+      "name": "kokomade_tip",
+      "value": "Einstellungen->EH->Galerie-Seite->e-hentai"
+    },
+    {
+      "name": "analytics_explain",
+      "value": "Darf der Entwickler die Informationen deines Geräts und deiner Nutzung sammeln? Diese Informationen sind für die Entwicklung sehr nützlich.<br><br>Daten-Analyse ist von Google Analytics for Firebase zur Verfügung gestellt, dessen Datenschutz-Bestimmungen auf <a href=\"https://www.google.com/policies/privacy/\">https://www.google.com/policies/privacy/</a>verfügbar sind.<br><br>Wenn du die Daten-Analyse teilnimmst, werden Informationen deines Geräts und deiner Nutzung, z. B. die Android API-Version, das Gerätsmodell, die Sprache, die App-Version, die Sessionszeit, gesammelt. Der Entwickler verspricht, dass private Informationen wie deine Telefonnummer, deine E-Mail-Adresse, die IMEI usw., gesammelt nicht werden.<br><br>Falls du die Daten-Analyse nicht teilnimmst, wird keine Information gesammelt.<br><br>Die gesammelten Informationen werden von Google Analytics for Firebase analysiert. Nur der Entwickler kann auf den Analyse-Bericht zugreifen."
+    },
+    {
+      "name": "get_it",
+      "value": "Verstanden"
+    },
+    {
+      "name": "accept",
+      "value": "Akzeptieren"
+    },
+    {
+      "name": "reject",
+      "value": "Ablehnen"
+    },
+    {
+      "name": "help_route",
+      "value": "Einstellungen->Über die App->Hilfe"
+    },
+    {
+      "name": "select_scene",
+      "value": "Wähle eine Galerie-Webseite aus."
+    },
+    {
+      "name": "select_scene_explain",
+      "value": "e-hentai: für jeden verfügbar\nexhentai: nur für diejenigen verfügbar, die sich angemeldet haben"
+    },
+    {
+      "name": "no_select",
+      "value": "Wähle eine Webseite aus."
+    },
+    {
+      "name": "new_version",
+      "value": "Neue Version"
+    },
+    {
+      "name": "update",
+      "value": "Update"
+    },
+    {
+      "name": "update_fail",
+      "value": "Update-Prüfung fehlgeschlagen"
+    },
+    {
+      "name": "update_to",
+      "value": "Aktualisieren auf"
+    },
+    {
+      "name": "update_plain",
+      "value": "Version: %1$s\nGröße: %2$s\n\n%3$s"
+    },
+    {
+      "name": "update_fail_info",
+      "value": "Auf Ja klicken, um zur Github-Startseite zu springen"
+    },
+    {
+      "name": "update_to_date",
+      "value": "EhViewer ist auf dem neusten Stand."
+    },
+    {
+      "name": "no_updates_available",
+      "value": "Da liegt das neueste raus"
+    },
+    {
+      "name": "update_ignore",
+      "value": "Ignorieren"
+    },
+    {
+      "name": "gallery_list_search_bar_hint_exhentai",
+      "value": "ExHentai durchsuchen"
+    },
+    {
+      "name": "gallery_list_search_bar_hint_e_hentai",
+      "value": "E-Hentai durchsuchen"
+    },
+    {
+      "name": "gallery_list_search_bar_open_gallery",
+      "value": "Galerie öffnen"
+    },
+    {
+      "name": "gallery_list_empty_hit",
+      "value": "Die Welt ist so groß und der Panda sitzt ganz allein"
+    },
+    {
+      "name": "gallery_list_empty_hit_subscription",
+      "value": "Abonniere Etiketten in Einstellungen->EH->Meine Etiketten"
+    },
+    {
+      "name": "gallery_list_no_preview_tag",
+      "value": "Kein Vorschaue-Etikett"
+    },
+    {
+      "name": "gallery_list_action_url_missed",
+      "value": "Nächste Seite nicht gefunden"
+    },
+    {
+      "name": "gallery_list_no_more_data",
+      "value": "Es gibt keine weiteren Daten für die aktuelle Liste"
+    },
+    {
+      "name": "gallery_list_date_jump_1d",
+      "value": "Gestern"
+    },
+    {
+      "name": "gallery_list_date_jump_3d",
+      "value": "Vor drei Tagen"
+    },
+    {
+      "name": "gallery_list_date_jump_1w",
+      "value": "Vor einer Woche"
+    },
+    {
+      "name": "gallery_list_date_jump_2w",
+      "value": "Vor zwei Wochen"
+    },
+    {
+      "name": "gallery_list_date_jump_1m",
+      "value": "Vor einem Monat"
+    },
+    {
+      "name": "gallery_list_date_jump_6m",
+      "value": "Vor sechs Monaten"
+    },
+    {
+      "name": "gallery_list_date_jump_1y",
+      "value": "Vor einem Jahr"
+    },
+    {
+      "name": "gallery_list_date_jump_2y",
+      "value": "Vor zwei Jahren"
+    },
+    {
+      "name": "gallery_list_select_jump_date",
+      "value": "Datumsauswahl verwenden"
+    },
+    {
+      "name": "gallery_list_select_jump_node",
+      "value": "Knotenauswahl verwenden"
+    },
+    {
+      "name": "gallery_list_jump_now",
+      "value": "Jetzt springen"
+    },
+    {
+      "name": "gallery_list_time_jump_dialog_title",
+      "value": "Spring-Auswahl"
+    },
+    {
+      "name": "gallery_list_time_jump_dialog_found_message",
+      "value": "%s Ergebnisse gefunden"
+    },
+    {
+      "name": "gallery_tag_copy",
+      "value": "Etikett kopiert"
+    },
+    {
+      "name": "search",
+      "value": "Suchen"
+    },
+    {
+      "name": "keyword_search",
+      "value": "Suche nach dem Schlüsselwort "
+    },
+    {
+      "name": "image_search",
+      "value": "Suche nach einem Bild"
+    },
+    {
+      "name": "search_normal",
+      "value": "Normale Suche"
+    },
+    {
+      "name": "search_advance",
+      "value": "Erweiterte Optionen"
+    },
+    {
+      "name": "search_image",
+      "value": "Suche nach einem Bild"
+    },
+    {
+      "name": "search_normal_search",
+      "value": "Normale Suche"
+    },
+    {
+      "name": "search_subscription_search",
+      "value": "Suche in gefolgten Etiketten"
+    },
+    {
+      "name": "search_specify_uploader",
+      "value": "Einen Uploader spezifizieren"
+    },
+    {
+      "name": "search_specify_tag",
+      "value": "Ein Etikett spezifizieren"
+    },
+    {
+      "name": "search_enable_advance",
+      "value": "Erweitere Optionen aktivieren"
+    },
+    {
+      "name": "search_sname",
+      "value": "Nach Galerie suchen"
+    },
+    {
+      "name": "search_stags",
+      "value": "Nach Galerie-Etikett suchen"
+    },
+    {
+      "name": "search_sdesc",
+      "value": "Nach Galeriebeschreibungen suchen"
+    },
+    {
+      "name": "search_storr",
+      "value": "Nach Torrentdateien suchen"
+    },
+    {
+      "name": "search_sto",
+      "value": "Nur die Galerien mit Torrentdateien anzeigen"
+    },
+    {
+      "name": "search_sdt1",
+      "value": "Nach unwichtigen Etiketten suchen"
+    },
+    {
+      "name": "search_sdt2",
+      "value": "Nach unerwünschten Etiketten suchen"
+    },
+    {
+      "name": "search_sh",
+      "value": "Gelöschte Galerien anzeigen"
+    },
+    {
+      "name": "search_sr",
+      "value": "Mindestpunktzahl:"
+    },
+    {
+      "name": "search_sp",
+      "value": "Seiten:"
+    },
+    {
+      "name": "search_sp_to",
+      "value": "zu"
+    },
+    {
+      "name": "search_sf",
+      "value": "Standard-Filter deaktivieren für:"
+    },
+    {
+      "name": "search_sfl",
+      "value": "Sprache"
+    },
+    {
+      "name": "search_sfu",
+      "value": "Uploader"
+    },
+    {
+      "name": "search_sft",
+      "value": "Etikett"
+    },
+    {
+      "name": "select_image",
+      "value": "Bild wählen"
+    },
+    {
+      "name": "search_uss",
+      "value": "Ähnlichkeitscan aktivieren"
+    },
+    {
+      "name": "search_osc",
+      "value": "Nur nach Umschläge suchen"
+    },
+    {
+      "name": "search_se",
+      "value": "Die gelöschten Galerien anzeigen"
+    },
+    {
+      "name": "select_image_first",
+      "value": "Wähle ein Bild"
+    },
+    {
+      "name": "add_to_favourites",
+      "value": "Zu den Favoriten hinzufügen"
+    },
+    {
+      "name": "remove_from_favourites",
+      "value": "Aus den Favoriten entfernen"
+    },
+    {
+      "name": "stop_downloading",
+      "value": "Download stoppen"
+    },
+    {
+      "name": "delete_downloads",
+      "value": "Downloads löschen"
+    },
+    {
+      "name": "quick_search",
+      "value": "Sofortsuche"
+    },
+    {
+      "name": "quick_search_tip",
+      "value": "Tippe an +, um eine Sofortsuche hinzuzufügen"
+    },
+    {
+      "name": "add_quick_search_dialog_title",
+      "value": "Sofortsuche hinzufügen"
+    },
+    {
+      "name": "name_is_empty",
+      "value": "Gib den Name ein"
+    },
+    {
+      "name": "delete",
+      "value": "Löschen"
+    },
+    {
+      "name": "delete_quick_search_title",
+      "value": "Sofortsuche löschen"
+    },
+    {
+      "name": "delete_quick_search_message",
+      "value": "%s löschen?"
+    },
+    {
+      "name": "no_quick_search",
+      "value": "Deine Sofortsuchen werden hier angezeigt"
+    },
+    {
+      "name": "add_quick_search_tip",
+      "value": "Das Suchergebnis wird als eine Sofortsuche gespeichert. Suche etwas zuerst, um das Ergebnis zu speichern."
+    },
+    {
+      "name": "readme",
+      "value": "README"
+    },
+    {
+      "name": "image_search_not_quick_search",
+      "value": "Die Bildsuchen können als Sofortsuchen gespeichert nicht werden."
+    },
+    {
+      "name": "duplicate_quick_search",
+      "value": "Eine Sofortsuche, deren Name ist %s, bereits besteht."
+    },
+    {
+      "name": "duplicate_name",
+      "value": "Dieser Name ist bereits besetzt."
+    },
+    {
+      "name": "go_to_hint",
+      "value": "Seite %1$d, insgesamt %2$d Seiten"
+    },
+    {
+      "name": "star_2",
+      "value": "2 Sterne"
+    },
+    {
+      "name": "star_3",
+      "value": "3 Sterne"
+    },
+    {
+      "name": "star_4",
+      "value": "4 Sterne"
+    },
+    {
+      "name": "star_5",
+      "value": "5 Sterne"
+    },
+    {
+      "name": "error_cannot_find_gallery",
+      "value": "Die Galerie konnte gefunden nicht werden"
+    },
+    {
+      "name": "download",
+      "value": "Herunterladen"
+    },
+    {
+      "name": "read",
+      "value": "Lesen"
+    },
+    {
+      "name": "more_information",
+      "value": "Weitere Informationen"
+    },
+    {
+      "name": "favorites",
+      "value": "Favoriten"
+    },
+    {
+      "name": "share",
+      "value": "Teilen"
+    },
+    {
+      "name": "rate",
+      "value": "Bewerten"
+    },
+    {
+      "name": "similar_gallery",
+      "value": "Ähnlich"
+    },
+    {
+      "name": "search_cover",
+      "value": "Nach dem Umschlag suchen"
+    },
+    {
+      "name": "no_tags",
+      "value": "Kein Etikett"
+    },
+    {
+      "name": "no_comments",
+      "value": "Kein Kommentar"
+    },
+    {
+      "name": "no_more_comments",
+      "value": "Keine weiteren Kommentare"
+    },
+    {
+      "name": "more_comment",
+      "value": "Weitere Kommentare"
+    },
+    {
+      "name": "no_previews",
+      "value": "Keine Vorschau"
+    },
+    {
+      "name": "no_more_previews",
+      "value": "Keine weiteren Vorschauen"
+    },
+    {
+      "name": "more_previews",
+      "value": "Weitere Vorschauen"
+    },
+    {
+      "name": "refresh",
+      "value": "Neu laden"
+    },
+    {
+      "name": "open_in_other_app",
+      "value": "Öffnen mit …"
+    },
+    {
+      "name": "rate_successfully",
+      "value": "Bewertung erfolgreich"
+    },
+    {
+      "name": "rate_failed",
+      "value": "Bewertung fehlgeschlagen"
+    },
+    {
+      "name": "no_torrents",
+      "value": "Keine Torrentdatei"
+    },
+    {
+      "name": "torrents",
+      "value": "Torrentdateien"
+    },
+    {
+      "name": "favorited",
+      "value": "Zu Favoriten hinzugefügt"
+    },
+    {
+      "name": "not_favorited",
+      "value": "Nicht zu Favoriten hinzugefügt"
+    },
+    {
+      "name": "add_favorites_dialog_title",
+      "value": "Zu Favoriten hinzufügen"
+    },
+    {
+      "name": "remember_favorite_collection",
+      "value": "Favoritenansammlung merken"
+    },
+    {
+      "name": "add_to_favorite_success",
+      "value": "Zu Favoriten hinzugefügt"
+    },
+    {
+      "name": "remove_from_favorite_success",
+      "value": "Aus Favoriten entfernt"
+    },
+    {
+      "name": "add_to_favorite_failure",
+      "value": "Fehler beim Hinzufügen zu Favoriten"
+    },
+    {
+      "name": "remove_from_favorite_failure",
+      "value": "Fehler beim Entfernen aus Favoriten"
+    },
+    {
+      "name": "filter_the_uploader",
+      "value": "Uploader \"%s\" blockieren?"
+    },
+    {
+      "name": "filter_the_tag",
+      "value": "Etikett \"%s\" blockieren?"
+    },
+    {
+      "name": "filter_added",
+      "value": "Element wurde blockiert."
+    },
+    {
+      "name": "copy_tag",
+      "value": "Kopieren"
+    },
+    {
+      "name": "rating10",
+      "value": "EIN MEISTERSTÜCK"
+    },
+    {
+      "name": "rating_none",
+      "value": "(´_ゝ`)"
+    },
+    {
+      "name": "rating9",
+      "value": "WUNDERVOLL"
+    },
+    {
+      "name": "rating8",
+      "value": "SEHR GUT"
+    },
+    {
+      "name": "rating7",
+      "value": "GUT"
+    },
+    {
+      "name": "rating6",
+      "value": "NICHT SCHLECHT"
+    },
+    {
+      "name": "rating5",
+      "value": "MÄßIG"
+    },
+    {
+      "name": "rating4",
+      "value": "SCHLECHT"
+    },
+    {
+      "name": "rating3",
+      "value": "SCHRECKLICH"
+    },
+    {
+      "name": "rating2",
+      "value": "PEINLICH"
+    },
+    {
+      "name": "rating1",
+      "value": "UNERTRÄGLICH"
+    },
+    {
+      "name": "rating0",
+      "value": "KATASTROPHE"
+    },
+    {
+      "name": "gallery_info",
+      "value": "Galeriesinfomationen"
+    },
+    {
+      "name": "copied_to_clipboard",
+      "value": "Text in Zwischenablage kopiert"
+    },
+    {
+      "name": "header_key",
+      "value": "Schlüssel"
+    },
+    {
+      "name": "header_value",
+      "value": "Wert"
+    },
+    {
+      "name": "key_gid",
+      "value": "Gid"
+    },
+    {
+      "name": "key_token",
+      "value": "Token"
+    },
+    {
+      "name": "key_url",
+      "value": "URL"
+    },
+    {
+      "name": "key_title",
+      "value": "Titel"
+    },
+    {
+      "name": "key_title_jpn",
+      "value": "Japanischer Titel"
+    },
+    {
+      "name": "key_thumb",
+      "value": "Vorschau"
+    },
+    {
+      "name": "key_category",
+      "value": "Kategorie"
+    },
+    {
+      "name": "key_uploader",
+      "value": "Uploader"
+    },
+    {
+      "name": "key_posted",
+      "value": "Hochladungsdatum"
+    },
+    {
+      "name": "key_parent",
+      "value": "Elternteil"
+    },
+    {
+      "name": "key_visible",
+      "value": "Sichtbar?"
+    },
+    {
+      "name": "key_language",
+      "value": "Sprache"
+    },
+    {
+      "name": "key_pages",
+      "value": "Seiten"
+    },
+    {
+      "name": "key_size",
+      "value": "Größe"
+    },
+    {
+      "name": "key_favorite_count",
+      "value": "Zahl der Hzfg zu Fav."
+    },
+    {
+      "name": "key_favorited",
+      "value": "Zu Fav. hinzugefügt"
+    },
+    {
+      "name": "key_rating_count",
+      "value": "Zahl der Bewertungen"
+    },
+    {
+      "name": "key_rating",
+      "value": "Bewertung"
+    },
+    {
+      "name": "key_torrents",
+      "value": "Zahl der Torrents"
+    },
+    {
+      "name": "key_torrent_url",
+      "value": "URL des Torrentdateis"
+    },
+    {
+      "name": "favored_times",
+      "value": "♥ %d"
+    },
+    {
+      "name": "rating_text",
+      "value": "%1$s (%2$.2f, %3$d)"
+    },
+    {
+      "name": "gallery_comments",
+      "value": "Kommentare der Galerie"
+    },
+    {
+      "name": "no_one_comments_gallery",
+      "value": "Keine Kommentare"
+    },
+    {
+      "name": "comment_successfully",
+      "value": "Kommentar erfolgreich gesendet"
+    },
+    {
+      "name": "comment_failed",
+      "value": "Kommentar nicht gesendet"
+    },
+    {
+      "name": "copy_comment_text",
+      "value": "Inhalt des Kommentars kopieren"
+    },
+    {
+      "name": "vote_up",
+      "value": "Für den Kommentar stimmen"
+    },
+    {
+      "name": "cancel_vote_up",
+      "value": "Positive Stimmung abbrechen"
+    },
+    {
+      "name": "vote_down",
+      "value": "Gegen den Kommentar stimmen"
+    },
+    {
+      "name": "cancel_vote_down",
+      "value": "Negative Stimmung abbrechen"
+    },
+    {
+      "name": "vote_up_successfully",
+      "value": "Positive Stimmung erfolgreich gesendet"
+    },
+    {
+      "name": "cancel_vote_up_successfully",
+      "value": "Die negative Stimmung wurde abgebrochen"
+    },
+    {
+      "name": "vote_down_successfully",
+      "value": "Negative Stimmung erfolgreich gesendet"
+    },
+    {
+      "name": "cancel_vote_down_successfully",
+      "value": "Die negative Stimmung wurde abgebrochen"
+    },
+    {
+      "name": "vote_failed",
+      "value": "Stimmung gescheitert"
+    },
+    {
+      "name": "check_vote_status",
+      "value": "Details der Stimmungen anzeigen"
+    },
+    {
+      "name": "click_more_comments",
+      "value": "Klicken, um weitere Kommentare zu laden"
+    },
+    {
+      "name": "last_edited",
+      "value": "Zuletzt bearbeitet: %s"
+    },
+    {
+      "name": "edit_comment",
+      "value": "Kommentar bearbeiten"
+    },
+    {
+      "name": "edit_comment_successfully",
+      "value": "Kommentar wurde bearbeitet"
+    },
+    {
+      "name": "edit_comment_failed",
+      "value": "Kommentar konnte nicht bearbeitet werden"
+    },
+    {
+      "name": "gallery_previews",
+      "value": "Vorschauen der Galerie"
+    },
+    {
+      "name": "go_to",
+      "value": "Gehe zu"
+    },
+    {
+      "name": "tag_filter",
+      "value": "Etikett filtern"
+    },
+    {
+      "name": "tag_selector_search_hint",
+      "value": "Tags durchsuchen…"
+    },
+    {
+      "name": "tag_selector_selected_count",
+      "value": "Ausgewählt: %d"
+    },
+    {
+      "name": "tag_selector_selected_section_title",
+      "value": "Ausgewählte Tags"
+    },
+    {
+      "name": "tag_selector_empty_selected",
+      "value": "Keine Tags ausgewählt"
+    },
+    {
+      "name": "tag_selector_other_group",
+      "value": "Sonstige"
+    },
+    {
+      "name": "scene_download_title",
+      "value": "%s Galleries - %s"
+    },
+    {
+      "name": "no_download_info",
+      "value": "Downloads werden hier angezeigt"
+    },
+    {
+      "name": "download_state_none",
+      "value": "Pausiert"
+    },
+    {
+      "name": "download_state_wait",
+      "value": "In der Warteschlange"
+    },
+    {
+      "name": "download_state_downloading",
+      "value": "Download läuft"
+    },
+    {
+      "name": "download_state_downloaded",
+      "value": "Abgeschlossen"
+    },
+    {
+      "name": "download_state_failed",
+      "value": "Gescheitert"
+    },
+    {
+      "name": "download_state_failed_2",
+      "value": "%d wurde noch nicht abgeschlossen"
+    },
+    {
+      "name": "download_state_finish",
+      "value": "Abgeschlossen"
+    },
+    {
+      "name": "download_sort_list",
+      "value": "Sortieren"
+    },
+    {
+      "name": "download_filter_by_status",
+      "value": "Nach Status filtern"
+    },
+    {
+      "name": "download_status_all",
+      "value": "Alle"
+    },
+    {
+      "name": "download_status_not_started",
+      "value": "Nicht gestartet"
+    },
+    {
+      "name": "default_sort",
+      "value": "Standard"
+    },
+    {
+      "name": "sort_by_gallery_id_asc",
+      "value": "Nach ID aufsteigend"
+    },
+    {
+      "name": "sort_by_gallery_id_desc",
+      "value": "Nach ID absteigend"
+    },
+    {
+      "name": "sort_by_create_time_asc",
+      "value": "Nach Erstellungszeit aufsteigend"
+    },
+    {
+      "name": "sort_by_create_time_desc",
+      "value": "Nach Erstellungszeit absteigend"
+    },
+    {
+      "name": "sort_by_rating_asc",
+      "value": "Nach Bewertung aufsteigend"
+    },
+    {
+      "name": "sort_by_rating_desc",
+      "value": "Nach Bewertung absteigend"
+    },
+    {
+      "name": "sort_by_name_asc",
+      "value": "Nach Name aufsteigend"
+    },
+    {
+      "name": "sort_by_name_desc",
+      "value": "Nach Name absteigend"
+    },
+    {
+      "name": "sort_by_file_size_asc",
+      "value": "Nach Dateigröße aufsteigend"
+    },
+    {
+      "name": "sort_by_file_size_desc",
+      "value": "Nach Dateigröße absteigend"
+    },
+    {
+      "name": "sort_download_list",
+      "value": "Liste sortieren"
+    },
+    {
+      "name": "download_search_gallery",
+      "value": "Galerie suchen"
+    },
+    {
+      "name": "download_search_hint",
+      "value": "Suchschlüssel eingeben"
+    },
+    {
+      "name": "download_searching",
+      "value": "Suche läuft, bitte warten"
+    },
+    {
+      "name": "download_searching_failed",
+      "value": "Suche fehlgeschlagen"
+    },
+    {
+      "name": "stat_509_alert_title",
+      "value": "509 Fehler"
+    },
+    {
+      "name": "stat_509_alert_text",
+      "value": "Die Genze der Downloads wurde erreichet. Versuche noch einmals später,"
+    },
+    {
+      "name": "stat_download_done_title",
+      "value": "Download abgeschlossen"
+    },
+    {
+      "name": "stat_download_done_text_succeeded",
+      "value": "%d Download(s) wurde(n) abgeschlossen"
+    },
+    {
+      "name": "stat_download_done_text_failed",
+      "value": "%d Download(s) gescheitert"
+    },
+    {
+      "name": "stat_download_done_text_mix",
+      "value": "%1$d erfolgreich abgeschlossen, %2$d gescheitert"
+    },
+    {
+      "name": "stat_download_done_line_succeeded",
+      "value": "Abgeschlossen: %s"
+    },
+    {
+      "name": "stat_download_done_line_failed",
+      "value": "Gescheitert: %s"
+    },
+    {
+      "name": "download_remove_dialog_title",
+      "value": "Download entfernen"
+    },
+    {
+      "name": "download_remove_dialog_message",
+      "value": "%s aus der Downloadliste entfernen?"
+    },
+    {
+      "name": "download_remove_dialog_message_2",
+      "value": "%d Downloads aus der Downloadliste entfernen?"
+    },
+    {
+      "name": "download_remove_dialog_check_text",
+      "value": "Bilddateien löschen"
+    },
+    {
+      "name": "stat_download_action_stop_all",
+      "value": "Alle stopppen"
+    },
+    {
+      "name": "drawer_download_label_title",
+      "value": "Etikette"
+    },
+    {
+      "name": "default_download_label_name",
+      "value": "Standard"
+    },
+    {
+      "name": "download_move_dialog_title",
+      "value": "Verschieben "
+    },
+    {
+      "name": "download_labels",
+      "value": "Download-Etikette"
+    },
+    {
+      "name": "download_start_all",
+      "value": "Alle starten"
+    },
+    {
+      "name": "download_stop_all",
+      "value": "Alle stoppen"
+    },
+    {
+      "name": "download_service_label",
+      "value": "EhViewer-Download-Dienst"
+    },
+    {
+      "name": "archiver_download_service_label",
+      "value": "EhViewer-Archiv-Download"
+    },
+    {
+      "name": "archiver_download_pause",
+      "value": "Pausieren"
+    },
+    {
+      "name": "archiver_download_resume",
+      "value": "Fortsetzen"
+    },
+    {
+      "name": "archiver_download_paused",
+      "value": "Pausiert"
+    },
+    {
+      "name": "archiver_download_restart_no_range",
+      "value": "Der Server unterstützt kein Fortsetzen; Download wird neu gestartet"
+    },
+    {
+      "name": "download_speed_text",
+      "value": "%s"
+    },
+    {
+      "name": "download_speed_text_2",
+      "value": "%1$s, noch %2$s übrig"
+    },
+    {
+      "name": "remember_download_label",
+      "value": "Download-Etikette merken"
+    },
+    {
+      "name": "default_download_label",
+      "value": "Standard-Download-Etikette"
+    },
+    {
+      "name": "added_to_download_list",
+      "value": "Zu Download-Liste hinzugefügt"
+    },
+    {
+      "name": "no_download_label",
+      "value": "Download-Etikette werden hier angezeigt"
+    },
+    {
+      "name": "add",
+      "value": "Hinzufügen"
+    },
+    {
+      "name": "new_label_title",
+      "value": "Neue Etikette"
+    },
+    {
+      "name": "label_text_is_empty",
+      "value": "Inhalt der Etikette erforderlich"
+    },
+    {
+      "name": "label_text_is_invalid",
+      "value": "\"Standard\" ist keine valide Etikett"
+    },
+    {
+      "name": "label_text_exist",
+      "value": "Sie bereits besteht"
+    },
+    {
+      "name": "rename_label_title",
+      "value": "Etikett umbenennen"
+    },
+    {
+      "name": "delete_label_title",
+      "value": "Etikett löschen"
+    },
+    {
+      "name": "delete_label_message",
+      "value": "%s löschen?"
+    },
+    {
+      "name": "no_history",
+      "value": "Deiner Lesungsverlauf wird hier angezeigt."
+    },
+    {
+      "name": "clear_all",
+      "value": "Verlaufdaten löschen"
+    },
+    {
+      "name": "clear_all_history",
+      "value": "Verlaufdaten löschen?"
+    },
+    {
+      "name": "filter",
+      "value": "Blocker"
+    },
+    {
+      "name": "no_filter",
+      "value": "Blocker werden hier angezeigt"
+    },
+    {
+      "name": "filter_title",
+      "value": "Titel"
+    },
+    {
+      "name": "filter_uploader",
+      "value": "Uploader"
+    },
+    {
+      "name": "filter_tag",
+      "value": "Etikett"
+    },
+    {
+      "name": "filter_tag_namespace",
+      "value": "Etikettsnamensraum"
+    },
+    {
+      "name": "tip",
+      "value": "Hinweis"
+    },
+    {
+      "name": "delete_filter",
+      "value": "Blocker \"%s\" entfernen?"
+    },
+    {
+      "name": "show_definition",
+      "value": "Definition anzeigen"
+    },
+    {
+      "name": "add_filter",
+      "value": "Blocker erstellen"
+    },
+    {
+      "name": "filter_text",
+      "value": "Blocker-Text"
+    },
+    {
+      "name": "filter_tip",
+      "value": "Die blockierten Galerien wurde in EHentai nicht angezeigt.\n\nTitel-Blocker: die Galerien, deren Titel das Wort enthalten, ausschließen.\n\nUploader-Blocker: Die vom Uploader hochgeladen Galerien ausschließen.\n\nEtikett-Blocker: Die Galerien, die die Etikett haben, ausschließen. Es wird länger dauern, Galerieliste zu laden.\n\nEtikettnamensraum-Blocker: Die Galerien, die den Etikettnamensraum haben, ausschließen. Es wird länger dauern, Galerieliste zu laden."
+    },
+    {
+      "name": "search_tip",
+      "value": "Normale Suche: Nur durchsuchen.\n\nSuche in gefolgten Etiketten: Nur die Galerien, die die gefolgten Etiketten haben, durchsuchen.\n\nUploader spezifizieren: Die Galerien, die vom Uploader hochgeladen sind, auflisten. Andere Optionen werden ignoriert.\n\nEtikett spezifizieren: Die Galerien, die das Etikett haben, auflisten. Nur ein Etikett kann eingegeben werden. Andere Optionen werden ignoriert."
+    },
+    {
+      "name": "set_pattern_protection",
+      "value": "Sperrmuster festlegen"
+    },
+    {
+      "name": "set_pattern_protection_tip",
+      "value": "Zeichne ein Muster, um es als Sperrmuster festzulegen.\nLasse frei, um das Sperrmuster zu entfernen."
+    },
+    {
+      "name": "set",
+      "value": "Festlegen"
+    },
+    {
+      "name": "enable_fingerprint",
+      "value": "Mit Fingerabdrücke entsperren"
+    },
+    {
+      "name": "u_config",
+      "value": "EHentai-Einstellungen"
+    },
+    {
+      "name": "apply",
+      "value": "Übernehmen"
+    },
+    {
+      "name": "apply_tip",
+      "value": "Zum Speichern der Einstellungen auf Häkchen tippen"
+    },
+    {
+      "name": "my_tags",
+      "value": "Meine Etiketten"
+    },
+    {
+      "name": "hosts",
+      "value": "Angepasstes hosts.txt"
+    },
+    {
+      "name": "hosts_tip",
+      "value": "hosts.txt"
+    },
+    {
+      "name": "hosts_host",
+      "value": "Host"
+    },
+    {
+      "name": "hosts_ip",
+      "value": "IP"
+    },
+    {
+      "name": "add_host",
+      "value": "Host hinzufügen"
+    },
+    {
+      "name": "add_host_add",
+      "value": "Hinzufügen"
+    },
+    {
+      "name": "edit_host",
+      "value": "Host bearbeiten"
+    },
+    {
+      "name": "edit_host_confirm",
+      "value": "Übernehmen"
+    },
+    {
+      "name": "edit_host_delete",
+      "value": "Entfernen"
+    },
+    {
+      "name": "invalid_host",
+      "value": "Ungültiger Host"
+    },
+    {
+      "name": "invalid_ip",
+      "value": "Ungültige IP"
+    },
+    {
+      "name": "page_menu_title",
+      "value": "Seite %d"
+    },
+    {
+      "name": "page_menu_refresh",
+      "value": "@string/refresh"
+    },
+    {
+      "name": "page_menu_share",
+      "value": "@string/share"
+    },
+    {
+      "name": "page_menu_save",
+      "value": "Speichern"
+    },
+    {
+      "name": "page_menu_save_to",
+      "value": "Speichern unter …"
+    },
+    {
+      "name": "page_menu_add_bookmark",
+      "value": "Zu Lesezeichen hinzufügen"
+    },
+    {
+      "name": "gallery_menu_title",
+      "value": "Menü"
+    },
+    {
+      "name": "share_image",
+      "value": "Das Bild teilen"
+    },
+    {
+      "name": "image_saved",
+      "value": "Das Bild wurde zu %s gespeichert"
+    },
+    {
+      "name": "settings_eh",
+      "value": "EH"
+    },
+    {
+      "name": "settings_eh_sign_out",
+      "value": "Abmelden"
+    },
+    {
+      "name": "settings_eh_sign_out_summary",
+      "value": "Starte die App neu, um dich weiter anzumelden"
+    },
+    {
+      "name": "settings_eh_sign_out_warning",
+      "value": "Möchtest du dich abmelden?"
+    },
+    {
+      "name": "settings_eh_sign_out_yes",
+      "value": "@android:string/ok"
+    },
+    {
+      "name": "settings_eh_sign_out_tip",
+      "value": "Du wurdest abgemeldet. Starte die App neu, um weiter anzumelden"
+    },
+    {
+      "name": "settings_u_config",
+      "value": "EHentai-Einstellungen"
+    },
+    {
+      "name": "settings_u_config_summary",
+      "value": "Einstellung auf der Webseite EHentais"
+    },
+    {
+      "name": "settings_my_tags",
+      "value": "Gefolgte Etiketten"
+    },
+    {
+      "name": "settings_my_tags_summary",
+      "value": "Die gefolgten Etiketten in EHentai-Webseite verwalten."
+    },
+    {
+      "name": "settings_eh_gallery_site",
+      "value": "Galerie-Seite"
+    },
+    {
+      "name": "settings_eh_launch_page",
+      "value": "Standard-Bildschirm nach App-Start"
+    },
+    {
+      "name": "settings_eh_list_mode",
+      "value": "Liste-Ansicht"
+    },
+    {
+      "name": "settings_eh_list_mode_detail",
+      "value": "Details"
+    },
+    {
+      "name": "settings_eh_list_mode_thumb",
+      "value": "Miniaturbild"
+    },
+    {
+      "name": "settings_eh_detail_size",
+      "value": "Größe der Details"
+    },
+    {
+      "name": "settings_eh_detail_size_long",
+      "value": "Lange"
+    },
+    {
+      "name": "settings_eh_detail_size_short",
+      "value": "Kurz"
+    },
+    {
+      "name": "settings_eh_thumb_size",
+      "value": "Größe des Miniaturbilds"
+    },
+    {
+      "name": "settings_eh_thumb_size_large",
+      "value": "Groß"
+    },
+    {
+      "name": "settings_eh_thumb_size_middle",
+      "value": "Mittel"
+    },
+    {
+      "name": "settings_eh_thumb_size_small",
+      "value": "Klein"
+    },
+    {
+      "name": "settings_eh_thumb_resolution",
+      "value": "Auflösung der Miniaturbilder"
+    },
+    {
+      "name": "settings_eh_thumb_resolution_summary",
+      "value": "Nun %s. Mit abnormale Auflösung kann die Miniaturbilder nicht normalerweise geladen werden."
+    },
+    {
+      "name": "settings_eh_thumb_resolution_auto",
+      "value": "Automatisch"
+    },
+    {
+      "name": "settings_eh_fix_thumb_url",
+      "value": "Link der Miniaturbilder reparieren"
+    },
+    {
+      "name": "settings_eh_default_categories",
+      "value": "Auf Startseite angezeigte Kategorie"
+    },
+    {
+      "name": "settings_eh_default_categories_summary",
+      "value": "Auf Startseite angezeigte Standard-Kategorie"
+    },
+    {
+      "name": "settings_eh_excluded_languages",
+      "value": "Ausgeschlossene Sprachen"
+    },
+    {
+      "name": "settings_advanced_app_language_title",
+      "value": "Sprache der App (Language)"
+    },
+    {
+      "name": "torrent_count",
+      "value": "Torrent (%d)"
+    },
+    {
+      "name": "settings_eh_excluded_languages_summary",
+      "value": "Galerie von den ausgeschlossenen Sprachen werden in der Galerieliste und der Suchen versteckt"
+    },
+    {
+      "name": "settings_eh_excluded_tag_namespaces",
+      "value": "Ausgeschlossene Namensraum-Etiketten"
+    },
+    {
+      "name": "settings_eh_excluded_tag_namespaces_summary",
+      "value": "Galerie in der ausgeschlossenen Namensraum werden vom Standard-Etikett-Suchen versteckt"
+    },
+    {
+      "name": "settings_eh_show_jpn_title",
+      "value": "Japanische Titel anzeigen"
+    },
+    {
+      "name": "settings_eh_show_jpn_title_summary",
+      "value": "Erfordert die Aktivierung von Japanischem Titel in den Einstellungen auf der EHentai-Website"
+    },
+    {
+      "name": "settings_eh_show_gallery_comment",
+      "value": "Galeriekommentar anzeigen"
+    },
+    {
+      "name": "settings_eh_show_eh_event",
+      "value": "EH-Ereignisse anzeigen"
+    },
+    {
+      "name": "settings_eh_show_eh_limits",
+      "value": "EH-Limits anzeigen"
+    },
+    {
+      "name": "settings_eh_show_tag_translations",
+      "value": "Etikettübersetzungen anzeigen"
+    },
+    {
+      "name": "settings_eh_show_tag_translations_summary",
+      "value": "Etikettübersetzungen statt Originaltext anzeigen (Das Herunterladen der Datendatei dauert eine Weile)"
+    },
+    {
+      "name": "settings_eh_tag_translations_source",
+      "value": "Platzhalter"
+    },
+    {
+      "name": "settings_eh_tag_translations_source_url",
+      "value": "https://placeholder"
+    },
+    {
+      "name": "settings_eh_filter",
+      "value": "Galerie-Blocker"
+    },
+    {
+      "name": "settings_eh_filter_summary",
+      "value": "Nach Titel, Uploader order Etiketten die unerwünschten Galerien verstecken"
+    },
+    {
+      "name": "settings_eh_cellular_network_warning",
+      "value": "Achtung auf mobile Daten anzeigen"
+    },
+    {
+      "name": "settings_read",
+      "value": "Lesen"
+    },
+    {
+      "name": "settings_read_screen_rotation",
+      "value": "Richtung des Bildschirms"
+    },
+    {
+      "name": "settings_read_screen_rotation_default",
+      "value": "Standard"
+    },
+    {
+      "name": "settings_read_screen_rotation_portrait",
+      "value": "Hochformat"
+    },
+    {
+      "name": "settings_read_screen_rotation_landscape",
+      "value": "Querformat"
+    },
+    {
+      "name": "settings_read_screen_rotation_sensor",
+      "value": "Automatisch drehen"
+    },
+    {
+      "name": "settings_read_refresh_rate",
+      "value": "Bildwiederholrate"
+    },
+    {
+      "name": "settings_read_refresh_rate_default",
+      "value": "Standard"
+    },
+    {
+      "name": "settings_read_refresh_rate_60",
+      "value": "60 Hz"
+    },
+    {
+      "name": "settings_read_refresh_rate_90",
+      "value": "90 Hz"
+    },
+    {
+      "name": "settings_read_refresh_rate_120",
+      "value": "120 Hz"
+    },
+    {
+      "name": "settings_read_refresh_rate_max",
+      "value": "Maximum des Bildschirms"
+    },
+    {
+      "name": "settings_read_reading_direction",
+      "value": "Richtung des Lesens"
+    },
+    {
+      "name": "settings_read_reading_direction_left_to_right",
+      "value": "Von links nach rechts"
+    },
+    {
+      "name": "settings_read_reading_direction_right_to_Left",
+      "value": "Von rechts nach links"
+    },
+    {
+      "name": "settings_read_reading_direction_top_to_bottom",
+      "value": "Von oben nach unter"
+    },
+    {
+      "name": "settings_read_page_scaling",
+      "value": "Seitenskalierung"
+    },
+    {
+      "name": "settings_read_page_scaling_actual_size",
+      "value": "Originale Größe"
+    },
+    {
+      "name": "settings_read_page_scaling_fit_to_width",
+      "value": "Nach der Länge anpassen"
+    },
+    {
+      "name": "settings_read_page_scaling_fit_to_height",
+      "value": "Nach der Höhe anpassen"
+    },
+    {
+      "name": "settings_read_page_scaling_fit_to_screen",
+      "value": "Nach dem Bildschirm anpassen"
+    },
+    {
+      "name": "settings_read_page_scaling_fixed_scale",
+      "value": "Festgesetzte Größe"
+    },
+    {
+      "name": "settings_read_start_position",
+      "value": "Seiten umblättern von"
+    },
+    {
+      "name": "settings_read_start_position_top_left",
+      "value": "Oben links"
+    },
+    {
+      "name": "settings_read_start_position_top_right",
+      "value": "Oben rechts"
+    },
+    {
+      "name": "settings_read_start_position_bottom_left",
+      "value": "Unter links"
+    },
+    {
+      "name": "settings_read_start_position_bottom_right",
+      "value": "Unter rechts"
+    },
+    {
+      "name": "settings_read_start_position_center",
+      "value": "Die Mitte"
+    },
+    {
+      "name": "settings_read_auto_transfer_time",
+      "value": "Automatische Übertragung (s)"
+    },
+    {
+      "name": "settings_read_keep_screen_on",
+      "value": "Bildschirm wach bleiben lassen"
+    },
+    {
+      "name": "settings_read_reverse_volume_page",
+      "value": "Lautstärketasten-Umblätterrichtung umkehren"
+    },
+    {
+      "name": "settings_read_show_clock",
+      "value": "Uhr anzeigen"
+    },
+    {
+      "name": "settings_read_show_progress",
+      "value": "Fortschritt anzeigen"
+    },
+    {
+      "name": "settings_read_show_battery",
+      "value": "Akku-Niveau anzeigen"
+    },
+    {
+      "name": "settings_read_show_page_interval",
+      "value": "Seitensabstand anzeigen"
+    },
+    {
+      "name": "settings_read_volume_page",
+      "value": "Seiten mit Lautstärketaste umblättern"
+    },
+    {
+      "name": "settings_read_reading_fullscreen",
+      "value": "Vollbild"
+    },
+    {
+      "name": "settings_read_custom_screen_lightness",
+      "value": "Helligkeit manuell festlegen"
+    },
+    {
+      "name": "settings_read_screen_lightness",
+      "value": "Helligkeit"
+    },
+    {
+      "name": "settings_download",
+      "value": "Download"
+    },
+    {
+      "name": "settings_download_download_location",
+      "value": "Downloadziel"
+    },
+    {
+      "name": "settings_download_invalid_download_location",
+      "value": "Ungültiges Downloadziel"
+    },
+    {
+      "name": "settings_download_cant_get_download_location",
+      "value": "Downloadziel konnte nicht geladen werden"
+    },
+    {
+      "name": "settings_download_pick_dir_l",
+      "value": "Android 5.0+ stellt eine neue API breit, die erlaubt, Daten auf SD-Karte zu schreiben. Auf DOKUMENT antippen, um SD-Karte als Downloadziel festzulegen"
+    },
+    {
+      "name": "settings_download_document",
+      "value": "Dokument"
+    },
+    {
+      "name": "settings_download_continue",
+      "value": "Weiter"
+    },
+    {
+      "name": "settings_download_media_scan",
+      "value": "Medienscan erlauben"
+    },
+    {
+      "name": "settings_download_media_scan_summary_on",
+      "value": "Du solltest deine Galerie-Apps verstecken"
+    },
+    {
+      "name": "settings_download_media_scan_summary_off",
+      "value": "Meisten Galerie-Apps ignorieren die Bilder im Downloadpfad"
+    },
+    {
+      "name": "settings_download_multi_thread_download",
+      "value": "Multi-Thread-Download"
+    },
+    {
+      "name": "settings_download_multi_thread_download_summary",
+      "value": "Bis zu %s Bild(er)"
+    },
+    {
+      "name": "settings_download_preload_image",
+      "value": "Bilder vorabladen"
+    },
+    {
+      "name": "settings_download_preload_image_summary",
+      "value": "Die nächste %s Bilder vorabladen"
+    },
+    {
+      "name": "settings_download_image_resolution",
+      "value": "Auflösung der Bilder"
+    },
+    {
+      "name": "settings_download_image_resolution_summary",
+      "value": "%s. Auflösung über 1280x funktioniert möglicherweise nicht"
+    },
+    {
+      "name": "settings_download_image_resolution_auto",
+      "value": "Automatisch"
+    },
+    {
+      "name": "settings_download_download_origin_image",
+      "value": "Originale Bilder herunterladen"
+    },
+    {
+      "name": "settings_download_download_list_pagination",
+      "value": "Seitenweise Liste"
+    },
+    {
+      "name": "settings_download_download_list_pagination_summary",
+      "value": "Die Seitenfunktion wird nur wirksam, wenn die Listenlänge größer als 500 ist"
+    },
+    {
+      "name": "settings_download_download_origin_image_summary",
+      "value": "Es ist gefährlich! Du könntest einen 509-Fehler bekommen"
+    },
+    {
+      "name": "settings_download_download_order_by_asc",
+      "value": "Download-Reihenfolge aufsteigend"
+    },
+    {
+      "name": "settings_download_download_order_by_asc_summary",
+      "value": "Beim Herunterladen aller Galerien in Reihenfolge herunterladen"
+    },
+    {
+      "name": "settings_download_sync_while_reading",
+      "value": "Synchron beim Lesen herunterladen"
+    },
+    {
+      "name": "settings_download_sync_while_reading_summary",
+      "value": "Beim Durchsuchen einer nicht heruntergeladenen Galerie werden angesehene Bilder automatisch im Download-Verzeichnis gespeichert"
+    },
+    {
+      "name": "settings_download_restore_download_items",
+      "value": "Download-Elemente wiederherstellen"
+    },
+    {
+      "name": "settings_download_restore_download_items_summary",
+      "value": "Alle Download-Elemente im Downloadpfad wiederherstellen"
+    },
+    {
+      "name": "settings_download_restoring",
+      "value": "Elemente werden wiederhergestellt"
+    },
+    {
+      "name": "settings_download_restore_not_found",
+      "value": "Keine zu wiederhestellenden Elemente"
+    },
+    {
+      "name": "settings_download_restore_failed",
+      "value": "Wiederherstellung gescheitert"
+    },
+    {
+      "name": "settings_download_restore_successfully",
+      "value": "%d Element(e) wiederhergestellt"
+    },
+    {
+      "name": "settings_download_clean_redundancy",
+      "value": "Unnötige Dateien löschen"
+    },
+    {
+      "name": "settings_download_clean_redundancy_summary",
+      "value": "Bilddateien, die sich im Downloadpfad befinden, aber nicht in Downloadliste, löschen"
+    },
+    {
+      "name": "settings_download_clean_redundancy_no_redundancy",
+      "value": "Keine zu löschenden Dateien gefunden"
+    },
+    {
+      "name": "settings_download_clean_redundancy_done",
+      "value": "Reinigung abgeschlossen. %d Datei(en) wurde(n) gelöscht."
+    },
+    {
+      "name": "settings_advanced",
+      "value": "Erweiterte Optionen"
+    },
+    {
+      "name": "settings_advanced_save_parse_error_body",
+      "value": "HTML-Datei beim Parsing-Fehler speichern"
+    },
+    {
+      "name": "settings_advanced_save_parse_error_body_summary",
+      "value": "Die Datei könnte etwas Privates enthalten"
+    },
+    {
+      "name": "settings_advanced_save_crash_log",
+      "value": "Crash-Bericht speichern"
+    },
+    {
+      "name": "settings_advanced_save_crash_log_summary",
+      "value": "Der Bericht hilft dem Entwickler dabei, Fehler schnell zu beheben."
+    },
+    {
+      "name": "settings_advanced_dump_logcat",
+      "value": "Logcat-Protokoll speichern"
+    },
+    {
+      "name": "settings_advanced_dump_logcat_summary",
+      "value": "Logcat-Protokolldatei auf externem Speicher speichern"
+    },
+    {
+      "name": "settings_advanced_dump_logcat_failed",
+      "value": "Speichern gescheitert"
+    },
+    {
+      "name": "settings_advanced_dump_logcat_to",
+      "value": "Protokolldatei wurde auf %s gespeichert."
+    },
+    {
+      "name": "settings_advanced_clear_download_path_cache",
+      "value": "Downloadpfadzwischenspeicher löschen"
+    },
+    {
+      "name": "settings_advanced_clear_download_path_cache_summary",
+      "value": "Der Galerie-Downloadpfad könnte falsch sein und muss möglicherweise erneut heruntergeladen werden. Das Löschen des Downloadpfad-Zwischenspeichers könnte das Problem lösen."
+    },
+    {
+      "name": "settings_advanced_clear_download_path_cache_message",
+      "value": "Downloadpfadzwischenspeicher löschen?"
+    },
+    {
+      "name": "settings_advanced_proxy",
+      "value": "Proxy"
+    },
+    {
+      "name": "settings_advanced_proxy_summary_1",
+      "value": "%1$s %2$s:%3$d"
+    },
+    {
+      "name": "settings_advanced_proxy_summary_2",
+      "value": "%1$s"
+    },
+    {
+      "name": "license",
+      "value": "Open Source-Lizenzen"
+    },
+    {
+      "name": "dir_picker",
+      "value": "Verzeichnis auswählen"
+    },
+    {
+      "name": "directory_not_writable",
+      "value": "Das Verzeichnis ist nicht beschreibbar"
+    },
+    {
+      "name": "cloud_favorites",
+      "value": "Cloud-Favoriten"
+    },
+    {
+      "name": "local_favorites",
+      "value": "Lokale Favoriten"
+    },
+    {
+      "name": "favorites_search_bar_hint",
+      "value": "%s durchsuchen"
+    },
+    {
+      "name": "favorites_title",
+      "value": "%s"
+    },
+    {
+      "name": "favorites_title_2",
+      "value": "%1$s - %2$s"
+    },
+    {
+      "name": "delete_favorites_dialog_title",
+      "value": "Aus Favoriten löschen"
+    },
+    {
+      "name": "delete_favorites_dialog_message",
+      "value": "%d Elemente aus Favoriten löschen?"
+    },
+    {
+      "name": "move_favorites_dialog_title",
+      "value": "Favoriten verschieben"
+    },
+    {
+      "name": "default_favorites_collection",
+      "value": "Standard-Favoriten"
+    },
+    {
+      "name": "let_me_select",
+      "value": "Manuell auswählen"
+    },
+    {
+      "name": "favorites_info",
+      "value": "Favoriten-Info"
+    },
+    {
+      "name": "collections",
+      "value": "Kollektionen"
+    },
+    {
+      "name": "count",
+      "value": "Zahl"
+    },
+    {
+      "name": "need_sign_in",
+      "value": "Du musst dich zuerst anmelden"
+    },
+    {
+      "name": "error_something_wrong_happened",
+      "value": "Ein Fehler ist aufgetreten"
+    },
+    {
+      "name": "guide_quick_search_title",
+      "value": "Sofortsuche"
+    },
+    {
+      "name": "guide_quick_search_text",
+      "value": "Nach rechts wischen, um Sofortsuche-Panel zu öffnen."
+    },
+    {
+      "name": "guide_collections_title",
+      "value": "Kollektion"
+    },
+    {
+      "name": "guide_collections_text",
+      "value": "Nach rechts wischen, um Kollektion auszuwählen."
+    },
+    {
+      "name": "guide_download_labels_title",
+      "value": "Download-Etiketten"
+    },
+    {
+      "name": "guide_download_labels_text",
+      "value": "Nach rechts wischen, um Download-Etiketten-Panel zu öffnen"
+    },
+    {
+      "name": "guide_download_thumb_title",
+      "value": "Galerie-Details"
+    },
+    {
+      "name": "guide_download_thumb_text",
+      "value": "Auf das Miniaturbild antippen, um Galerie-Details zu sehen"
+    },
+    {
+      "name": "guide_gallery_left",
+      "value": "Seiten umblättern"
+    },
+    {
+      "name": "guide_gallery_right",
+      "value": "Seiten umblättern"
+    },
+    {
+      "name": "guide_gallery_menu",
+      "value": "Menü"
+    },
+    {
+      "name": "guide_gallery_progress",
+      "value": "Fortschitt"
+    },
+    {
+      "name": "guide_gallery_long_click",
+      "value": "Drücken und halten, um Seitemenü zu öffnen"
+    },
+    {
+      "name": "from_the_future",
+      "value": "Von der Zukunft"
+    },
+    {
+      "name": "just_now",
+      "value": "Gerade"
+    },
+    {
+      "name": "yesterday",
+      "value": "Gestern"
+    },
+    {
+      "name": "some_days_ago",
+      "value": "Vor %d Tagen"
+    },
+    {
+      "name": "dialog_archive_title",
+      "value": "H@H Downloader"
+    },
+    {
+      "name": "no_archives",
+      "value": "Keine Archivdatei"
+    },
+    {
+      "name": "download_archive_started",
+      "value": "Archivdatei wird heruntergeladen"
+    },
+    {
+      "name": "download_archive_failure",
+      "value": "Fehler beim Herunterladen der Archivdatei"
+    },
+    {
+      "name": "h_h",
+      "value": "H@H"
+    },
+    {
+      "name": "download_h_h_failure_no_hath",
+      "value": "H@H-Klient ist für das Herunterladen der Archivdateien erforderlich"
+    },
+    {
+      "name": "settings_privacy",
+      "value": "Datenschutzoptionen"
+    },
+    {
+      "name": "settings_privacy_secure",
+      "value": "Screenshot verhindern"
+    },
+    {
+      "name": "settings_privacy_secure_summary",
+      "value": "Screenshots werden verhindert. Inhalt der App wird in Aktuelle Apps-Liste nicht angezeigt."
+    },
+    {
+      "name": "press_twice_exit",
+      "value": "Darauf erneut antippen, um die App zu beenden"
+    },
+    {
+      "name": "app_waring",
+      "value": "Inhalt dieser App kommt aus dem Internet, von dem einige dir körperlichen oder emotionalen Schaden zufügen kann. Du hast es wirklich erfahrt und möchtest immer noch fortsetzen."
+    },
+    {
+      "name": "error_username_cannot_empty",
+      "value": "Gibt den Nutzername ein"
+    },
+    {
+      "name": "error_password_cannot_empty",
+      "value": "Gibt das Passwort ein"
+    },
+    {
+      "name": "guest_mode",
+      "value": "Gastmodus"
+    },
+    {
+      "name": "sign_in_failed",
+      "value": "Anmeldung fehlgeschlagen"
+    },
+    {
+      "name": "sign_in_failed_tip",
+      "value": "Wenn dieses Problem weiterhin besteht, versuche \"Mit WebView anmelden\" oder \"Mit Cookies anmelden\""
+    },
+    {
+      "name": "sign_in_failed_plain",
+      "value": "Der Fehler könnte wegen des Updates der Webseite aufgetretet werden. Versuche, dich anzumelden, indem du WebView benutzt oder Cookie eingeben, oder überspringe die Anmeldung mit der Taste unter ANMELDEN-Taste. Du könntest aber den Sad Panda sehen, wenn du dich nicht anmelden. Falls du dich mit Version unter 0.6.x anmeldetest, versuche, dich mit Cookie anzumelden."
+    },
+    {
+      "name": "content_layout_restore_tip",
+      "value": "Zum Wiederholen antippen"
+    },
+    {
+      "name": "write_rationale",
+      "value": "EhViewer fordert jetzt die Genehmigung WRITE_EXTERNAL_STORAGE an, um die Galerie herunterzuladen. Die Genehmigung gewähren?"
+    },
+    {
+      "name": "you_rejected_me",
+      "value": "Mir ist weh ums Herz"
+    },
+    {
+      "name": "clipboard_gallery_url_snack_message",
+      "value": "Ein Link von einen Galerie wurde in Zwischenablage erkennt."
+    },
+    {
+      "name": "clipboard_gallery_url_snack_action",
+      "value": "Gehen"
+    },
+    {
+      "name": "settings_advanced_clear_memory_cache",
+      "value": "Zwischenspeicher löschen"
+    },
+    {
+      "name": "settings_advanced_clear_memory_cache_summary",
+      "value": "Zwischenspeicher der Miniaturbilder und der Galerie-Info löschen"
+    },
+    {
+      "name": "settings_advanced_read_cache_size",
+      "value": "Größe des Lesezwischenspeichers"
+    },
+    {
+      "name": "settings_advanced_built_in_hosts_title",
+      "value": "Standard-hosts.txt"
+    },
+    {
+      "name": "settings_download_pick_dir_kk",
+      "value": "Die App kann keine Daten auf Android 4.4 zum externen Speicher beschreiben, wenn du das System nicht hackst. Sie aber kann zu /Android/data/com.hippo.ehviewer beschreiben."
+    },
+    {
+      "name": "settings_about_website",
+      "value": "Webseite"
+    },
+    {
+      "name": "settings_about_declaration",
+      "value": "EhViewer"
+    },
+    {
+      "name": "settings_about_declaration_summary",
+      "value": "EhViewer verbindet sich in keiner Weise mit E-Hentai.org."
+    },
+    {
+      "name": "settings_about_source",
+      "value": "Quellcode"
+    },
+    {
+      "name": "settings_about_changelog",
+      "value": "Änderungsprotokoll"
+    },
+    {
+      "name": "settings_about_help",
+      "value": "Hilfe"
+    },
+    {
+      "name": "settings_about_issue_help",
+      "value": "Problemhilfe"
+    },
+    {
+      "name": "settings_about_license",
+      "value": "Lizenzen"
+    },
+    {
+      "name": "settings_about_license_summary",
+      "value": "EhViewer wurde dank vieler Open Source-Projekte entwicklt."
+    },
+    {
+      "name": "settings_about_donate",
+      "value": "Spenden"
+    },
+    {
+      "name": "settings_privacy_enable_analytics",
+      "value": "Analyse aktivieren"
+    },
+    {
+      "name": "settings_privacy_about_analytics",
+      "value": "Über die Analyse"
+    },
+    {
+      "name": "settings_about_version",
+      "value": "Versionnummer"
+    },
+    {
+      "name": "settings_about_check_for_updates",
+      "value": "Auf Update überprüfen"
+    },
+    {
+      "name": "settings_about_beta_update_channel",
+      "value": "Beta-Version testen"
+    },
+    {
+      "name": "settings_about_beta_update_channel_summary",
+      "value": "Beta-Version kann funktionieren möglicherweise nicht"
+    },
+    {
+      "name": "proxy_enable",
+      "value": "Aktivieren"
+    },
+    {
+      "name": "proxy_enabled",
+      "value": "Aktiviert"
+    },
+    {
+      "name": "proxy_disabled",
+      "value": "Nicht aktiviert"
+    },
+    {
+      "name": "proxy_direct",
+      "value": "Direkt"
+    },
+    {
+      "name": "proxy_system",
+      "value": "Vom System festgelegt"
+    },
+    {
+      "name": "proxy_host_or_ip",
+      "value": "Hostname oder IP"
+    },
+    {
+      "name": "proxy_port",
+      "value": "Port"
+    },
+    {
+      "name": "proxy_domain_not_supported",
+      "value": "Der Domain ist nicht unterstützt."
+    },
+    {
+      "name": "proxy_invalid_port",
+      "value": "Ungültiger Port"
+    },
+    {
+      "name": "cant_get_data_dir",
+      "value": "Datenverzeichnis konnte geladen werden"
+    },
+    {
+      "name": "cant_find_any_data",
+      "value": "Keine Daten gefunden"
+    },
+    {
+      "name": "cant_read_the_file",
+      "value": "Datei kann nicht gelesen werden"
+    },
+    {
+      "name": "app_language_system",
+      "value": "Sprache des Systems (Standard)"
+    },
+    {
+      "name": "please_wait",
+      "value": "Bitte warte"
+    },
+    {
+      "name": "settings_privacy_pattern_protection_title",
+      "value": "Sperrmuster"
+    },
+    {
+      "name": "settings_privacy_pattern_protection_not_set",
+      "value": "Kein Sperrmuster festgelegt"
+    },
+    {
+      "name": "settings_privacy_pattern_protection_set",
+      "value": "Sperrmuster festgelegt"
+    },
+    {
+      "name": "settings_advanced_export_data",
+      "value": "Daten exportieren"
+    },
+    {
+      "name": "settings_advanced_export_data_summary",
+      "value": "Daten, z. B. Downloadliste, Sofortsucheliste, zum externen Speicher speichern"
+    },
+    {
+      "name": "settings_advanced_export_data_to",
+      "value": "Daten wurden zu %s exportiert"
+    },
+    {
+      "name": "settings_advanced_export_data_failed",
+      "value": "Datenexport gescheitert"
+    },
+    {
+      "name": "settings_advanced_import_data",
+      "value": "Daten importieren"
+    },
+    {
+      "name": "settings_advanced_import_data_summary",
+      "value": "Gespeicherte Daten wiederherstellen"
+    },
+    {
+      "name": "settings_advanced_import_data_successfully",
+      "value": "Daten wurden erfolgreich importiert"
+    },
+    {
+      "name": "settings_advanced_wifi_sender",
+      "value": "WiFi-Datenmigration"
+    },
+    {
+      "name": "settings_advanced_wifi_sander_summary",
+      "value": "Datenmigration über Wi-Fi-Hotspot"
+    },
+    {
+      "name": "settings_advanced_wifi_client",
+      "value": "WiFi-Migrationsdatenempfang"
+    },
+    {
+      "name": "settings_advanced_wifi_client_summary",
+      "value": "Migrationsdaten von Wi-Fi-Hotspots empfangen"
+    },
+    {
+      "name": "settings_about",
+      "value": "Über die App"
+    },
+    {
+      "name": "settings_about_author",
+      "value": "Entwickler"
+    },
+    {
+      "name": "settings_about_latest_release",
+      "value": "Aktuelle Version"
+    },
+    {
+      "name": "settings_about_telegram",
+      "value": "Telegram"
+    },
+    {
+      "name": "settings_advanced_built_in_hosts_summary",
+      "value": "Host auf die IP, die nach die App festgelegt werden, umstellen\nKann von angepasstem hosts.txt überschrieben werden"
+    },
+    {
+      "name": "settings_advanced_custom_hosts_title",
+      "value": "Angepasstes hosts.txt"
+    },
+    {
+      "name": "settings_advanced_custom_hosts_summary",
+      "value": "Hostname auf die angepassten IP umstellen\nDie Regeln können die von der App festgelegt überschreiben"
+    },
+    {
+      "name": "download_reset_reading_progress",
+      "value": "Lesefortschritte zurücksetzen"
+    },
+    {
+      "name": "reset_reading_progress_message",
+      "value": "Lesefortschritte aus allen heruntergeladenen Galerie zurücksetzen?"
+    },
+    {
+      "name": "reset_reading_progress_processing",
+      "value": "Lesefortschritte werden zurückgesetzt..."
+    },
+    {
+      "name": "reset_reading_progress_done",
+      "value": "Lesefortschritte zurückgesetzt"
+    },
+    {
+      "name": "settings_eh_theme",
+      "value": "Theme"
+    },
+    {
+      "name": "settings_eh_theme_light",
+      "value": "Weiß"
+    },
+    {
+      "name": "settings_eh_theme_dark",
+      "value": "Dunkel"
+    },
+    {
+      "name": "settings_eh_theme_black",
+      "value": "Schwarz"
+    },
+    {
+      "name": "settings_eh_apply_nav_bar_theme_color",
+      "value": "Theme-Farbe in Navigation-Bar anwenden"
+    },
+    {
+      "name": "settings_about_donate_message",
+      "value": "Du bekommest kein Privileg davon. Deine Spende hilft mir dabei, diese App instand zu halten."
+    },
+    {
+      "name": "settings_about_donate_alipay",
+      "value": "Alipay"
+    },
+    {
+      "name": "settings_about_donate_paypal",
+      "value": "PayPal"
+    },
+    {
+      "name": "settings_about_donate_open",
+      "value": "Öffnen"
+    },
+    {
+      "name": "settings_save_image_aliPay",
+      "value": "Alipay-QR-Code speichern"
+    },
+    {
+      "name": "settings_save_image_weChat",
+      "value": "WeChat-QR-Code speichern"
+    },
+    {
+      "name": "settings_about_donate_copy",
+      "value": "E-Mail kopieren"
+    },
+    {
+      "name": "settings_about_donate_copied",
+      "value": "Kopiert"
+    },
+    {
+      "name": "settings_close_automatic_updates",
+      "value": "Automatische Updates deaktivieren"
+    },
+    {
+      "name": "settings_eh_identity_cookies",
+      "value": "Konto-Cookies"
+    },
+    {
+      "name": "settings_eh_identity_cookies_summary",
+      "value": "Die Cookies, die dich angemeldet halten."
+    },
+    {
+      "name": "settings_eh_identity_cookies_signed",
+      "value": "Wenn jemand die folgenden Informationen hat, kann er sich als du anmelden. <br><b>ALSO GEHEIM HALTEN!</b><br><br>%s"
+    },
+    {
+      "name": "settings_eh_identity_cookies_tourist",
+      "value": "Du hast dich noch nicht angemeldet."
+    },
+    {
+      "name": "settings_eh_identity_cookies_copy",
+      "value": "Kopieren"
+    },
+    {
+      "name": "settings_eh_theme_auto_switch",
+      "value": "System-Dunkelmodus folgen"
+    },
+    {
+      "name": "settings_eh_show_gallery_pages",
+      "value": "Galerieseitenzahl anzeigen"
+    },
+    {
+      "name": "settings_eh_show_gallery_pages_summary",
+      "value": "Die Galerieseitenzahle in der Galerieliste anzeigen"
+    },
+    {
+      "name": "excluded_languages",
+      "value": "Ausgeschlossene Sprachen"
+    },
+    {
+      "name": "select_all",
+      "value": "Alle"
+    },
+    {
+      "name": "deselect_all",
+      "value": "Keine"
+    },
+    {
+      "name": "invert_selection",
+      "value": "Umkehren"
+    },
+    {
+      "name": "language",
+      "value": "Sprache"
+    },
+    {
+      "name": "original",
+      "value": "Original"
+    },
+    {
+      "name": "translated",
+      "value": "Übersetzt"
+    },
+    {
+      "name": "rewrite",
+      "value": "Umschreiben"
+    },
+    {
+      "name": "language_japanese",
+      "value": "Japanisch"
+    },
+    {
+      "name": "language_english",
+      "value": "Englisch"
+    },
+    {
+      "name": "language_chinese",
+      "value": "Chinesisch"
+    },
+    {
+      "name": "language_dutch",
+      "value": "Niederländisch"
+    },
+    {
+      "name": "language_french",
+      "value": "Französisch"
+    },
+    {
+      "name": "language_german",
+      "value": "Deutsch"
+    },
+    {
+      "name": "language_hungarian",
+      "value": "Ungarisch"
+    },
+    {
+      "name": "language_italian",
+      "value": "Italienisch"
+    },
+    {
+      "name": "language_korean",
+      "value": "Koreanisch"
+    },
+    {
+      "name": "language_polish",
+      "value": "Polnisch"
+    },
+    {
+      "name": "language_portuguese",
+      "value": "Portugiesisch"
+    },
+    {
+      "name": "language_russian",
+      "value": "Russisch"
+    },
+    {
+      "name": "language_spanish",
+      "value": "Spanisch"
+    },
+    {
+      "name": "language_thai",
+      "value": "Thailändisch"
+    },
+    {
+      "name": "language_vietnamese",
+      "value": "Vietnamesisch"
+    },
+    {
+      "name": "language_na",
+      "value": "N/V"
+    },
+    {
+      "name": "language_other",
+      "value": "Andere"
+    },
+    {
+      "name": "preset",
+      "value": "Voreinstellung"
+    },
+    {
+      "name": "default_directory",
+      "value": "Standardverzeichnis"
+    },
+    {
+      "name": "application_file_directory",
+      "value": "App-Dateiverzeichnis %d (wird nach Deinstallation der App entfernt)"
+    },
+    {
+      "name": "download_service",
+      "value": "Download-Dienst"
+    },
+    {
+      "name": "favorite_name",
+      "value": "Favorit"
+    },
+    {
+      "name": "yes",
+      "value": "Ja"
+    },
+    {
+      "name": "cancel",
+      "value": "Abbrechen"
+    },
+    {
+      "name": "dummy_button",
+      "value": "Dummy-Button"
+    },
+    {
+      "name": "dummy_content",
+      "value": "DUMMY\nINHALT"
+    },
+    {
+      "name": "change_background_title",
+      "value": "Möchtest du wirklich den Hintergrund ändern?"
+    },
+    {
+      "name": "change_background_message",
+      "value": "Die Hintergrundänderung ist auf diese Software beschränkt und kann nicht mit E-hentai oder ähnlicher Software synchronisiert werden."
+    },
+    {
+      "name": "change_avatar_title",
+      "value": "Möchtest du wirklich dein Avatar ändern?"
+    },
+    {
+      "name": "change_avatar_message",
+      "value": "Die Avatar-Änderung ist auf diese Software beschränkt und kann nicht mit E-hentai oder ähnlicher Software synchronisiert werden."
+    },
+    {
+      "name": "take_a_photograph",
+      "value": "Foto aufnehmen"
+    },
+    {
+      "name": "choose_from_the_album",
+      "value": "Aus dem Album auswählen"
+    },
+    {
+      "name": "request_camera_permission",
+      "value": "EhViewer wird Zugriff auf die Gerätekamera anfordern, um Fotos aufzunehmen. Möchtest du autorisieren?"
+    },
+    {
+      "name": "request_storage_permission",
+      "value": "EhViewer wird Zugriff auf das Fotoalbum des Geräts anfordern, um Bilder zu erhalten. Möchtest du autorisieren?"
+    },
+    {
+      "name": "download_torrent_name",
+      "value": "Torrent: %s"
+    },
+    {
+      "name": "download_torrent_state",
+      "value": "Status:"
+    },
+    {
+      "name": "download_torrent_path",
+      "value": "Pfad: %s"
+    },
+    {
+      "name": "download_search",
+      "value": "In Downloadliste suchen"
+    },
+    {
+      "name": "sure",
+      "value": "OK"
+    },
+    {
+      "name": "try_again",
+      "value": "Erneut versuchen"
+    },
+    {
+      "name": "open_directory",
+      "value": "Verzeichnis öffnen"
+    },
+    {
+      "name": "downloading",
+      "value": "Wird heruntergeladen…… Bitte später erneut versuchen"
+    },
+    {
+      "name": "torrent_exist",
+      "value": "Datei existiert bereits: %s"
+    },
+    {
+      "name": "wifi_server_name",
+      "value": "WiFiServer"
+    },
+    {
+      "name": "wifi_server",
+      "value": "WiFiServer"
+    },
+    {
+      "name": "wifi_client",
+      "value": "WiFiClient"
+    },
+    {
+      "name": "wifi_send_bookmark",
+      "value": "Lesezeichen migrieren"
+    },
+    {
+      "name": "wifi_send_favorite",
+      "value": "Favoriten migrieren"
+    },
+    {
+      "name": "wifi_send_download",
+      "value": "Download-Daten migrieren"
+    },
+    {
+      "name": "wifi_send_download_location",
+      "value": "Download-Verzeichnis migrieren"
+    },
+    {
+      "name": "wifi_download_dir_empty",
+      "value": "Keine migrierbaren Galerie-Ordner gefunden"
+    },
+    {
+      "name": "wifi_download_dir_no_location",
+      "value": "Auf diesem Gerät ist kein Download-Verzeichnis festgelegt"
+    },
+    {
+      "name": "wifi_download_dir_migrating",
+      "value": "%1$s wird migriert (%2$d/%3$d Dateien)"
+    },
+    {
+      "name": "wifi_download_dir_manifest_received",
+      "value": "%1$s (%2$d/%3$d): %4$d übersprungen, %5$d zu übertragen"
+    },
+    {
+      "name": "wifi_download_dir_file_done",
+      "value": "Datei empfangen: %s"
+    },
+    {
+      "name": "wifi_download_dir_files_progress",
+      "value": "%d Dateien empfangen"
+    },
+    {
+      "name": "wifi_download_dir_file_failed",
+      "value": "Dateiprüfsumme fehlgeschlagen, verworfen"
+    },
+    {
+      "name": "wifi_send_done",
+      "value": "Datenmigration abgeschlossen"
+    },
+    {
+      "name": "wifi_send_start",
+      "value": "Migration %s starten"
+    },
+    {
+      "name": "wifi_send_stop",
+      "value": "Migration %s stoppen"
+    },
+    {
+      "name": "wifi_sending",
+      "value": "Datenmigration läuft, bitte warten oder beenden und erneut versuchen"
+    },
+    {
+      "name": "wifi_send_text",
+      "value": "Daten senden"
+    },
+    {
+      "name": "wifi_server_illustrate",
+      "value": "Bitte stelle sicher, dass das Mobiltelefon zum Empfangen von Daten mit dem lokalen Hotspot verbunden ist, und trenne nicht oder kehre nicht zur übergeordneten Seite zurück, bevor die Migration abgeschlossen ist!"
+    },
+    {
+      "name": "wifi_server_connect",
+      "value": "Verbinden"
+    },
+    {
+      "name": "wifi_server_connect_unable",
+      "value": "Verbindung existiert nicht"
+    },
+    {
+      "name": "wifi_server_connection_succeeded",
+      "value": "Das Gerät wurde erfolgreich verbunden. Nach dem Empfang der Daten bitte die App neu starten, damit die Daten wirksam werden."
+    },
+    {
+      "name": "wifi_server_disconnect",
+      "value": "Gerät getrennt"
+    },
+    {
+      "name": "wifi_server_connection_fail",
+      "value": "Kommunikation konnte nicht erstellt werden"
+    },
+    {
+      "name": "wifi_server_send_success",
+      "value": "Nachricht erfolgreich gesendet: %s"
+    },
+    {
+      "name": "wifi_server_send_fail",
+      "value": "Nachricht konnte nicht gesendet werden: %s"
+    },
+    {
+      "name": "wifi_server_receive_message",
+      "value": "Nachricht empfangen: %s"
+    },
+    {
+      "name": "wifi_server_receive_message_unknown",
+      "value": "unbekannter Datentyp"
+    },
+    {
+      "name": "wifi_server_opened",
+      "value": "Hotspot wurde geöffnet SSID: %1s \n%2s"
+    },
+    {
+      "name": "wifi_server_closed",
+      "value": "Hotspot wurde geschlossen"
+    },
+    {
+      "name": "wifi_server_password",
+      "value": "Passwort: %s"
+    },
+    {
+      "name": "wifi_server_no_permission",
+      "value": "Unzureichende Berechtigung, bitte Berechtigung erteilen"
+    },
+    {
+      "name": "refresh_limits",
+      "value": "Limits-Nutzung aktualisieren"
+    },
+    {
+      "name": "from_gallery_visits",
+      "value": "%s von Galeriebesuchen"
+    },
+    {
+      "name": "from_torrent_completions",
+      "value": "%s von Torrent-Abschlüssen"
+    },
+    {
+      "name": "from_archive_download",
+      "value": "%s von Archiv-Downloads"
+    },
+    {
+      "name": "from_hentai_home",
+      "value": "%s von Hentai@Home"
+    },
+    {
+      "name": "current_moderation_power",
+      "value": "Aktuelle Moderationskraft %s"
+    },
+    {
+      "name": "reset_cost",
+      "value": "Kosten %s zum Zurücksetzen"
+    },
+    {
+      "name": "ip_base_limits",
+      "value": "IP-basierte Limits"
+    },
+    {
+      "name": "limit_unneed_reset",
+      "value": "Es besteht derzeit keine Notwendigkeit, Kontingente zurückzusetzen, bitte nach dem Aktualisieren erneut versuchen~"
+    },
+    {
+      "name": "pagination_count",
+      "value": "Anzahl"
+    },
+    {
+      "name": "pagination_page_and_item",
+      "value": "r/p"
+    },
+    {
+      "name": "appwidget_text",
+      "value": "BEISPIEL"
+    },
+    {
+      "name": "add_widget",
+      "value": "Widget hinzufügen"
+    },
+    {
+      "name": "app_widget_description",
+      "value": "Dies ist eine App-Widget-Beschreibung"
+    },
+    {
+      "name": "spen_previous_page",
+      "value": "Vorherige Seite"
+    },
+    {
+      "name": "spen_next_page",
+      "value": "Nächste Seite"
+    },
+    {
+      "name": "category_all",
+      "value": "Alle"
+    },
+    {
+      "name": "gallery_toplists",
+      "value": "Galerie Die Charts."
+    },
+    {
+      "name": "uploader_toplists",
+      "value": "Uploader Die Charts."
+    },
+    {
+      "name": "tagging_toplists",
+      "value": "identifizieren Die Charts."
+    },
+    {
+      "name": "hentai_home_toplists",
+      "value": "Hentai@Home Die Charts."
+    },
+    {
+      "name": "ehtracker_toplists",
+      "value": "EHAufspürer Die Charts."
+    },
+    {
+      "name": "cleanup_toplists",
+      "value": "Säuberungsaktion Die Charts."
+    },
+    {
+      "name": "rating_reviewing_toplists",
+      "value": "Bewertung&Nachprüfend Die Charts."
+    },
+    {
+      "name": "top_list",
+      "value": "Die Charts."
+    },
+    {
+      "name": "all_time_top_list",
+      "value": "Alle Zeiten TopList"
+    },
+    {
+      "name": "past_year_top_list",
+      "value": "Vergangenes Jahr TopList"
+    },
+    {
+      "name": "past_month_top_list",
+      "value": "Vergangener Monat TopList"
+    },
+    {
+      "name": "yesterday_top_list",
+      "value": "Gestern TopList"
+    },
+    {
+      "name": "settings_eh_list_show_read_progress",
+      "value": "Lesefortschritt anzeigen"
+    },
+    {
+      "name": "settings_eh_list_show_read_progress_summary",
+      "value": "Lesefortschritt für jede Galerie im Detail-Listenmodus anzeigen"
+    },
+    {
+      "name": "cookie_login_import_in_clipboard",
+      "value": "Aus Zwischenablage importieren"
+    },
+    {
+      "name": "no_cookie_in_clipboard",
+      "value": "Keine gültigen Daten in der Zwischenablage gefunden"
+    },
+    {
+      "name": "gallery_update_dialog_title",
+      "value": "Update-Methode"
+    },
+    {
+      "name": "gallery_update_dialog_message",
+      "value": "Alte Galerie überschreiben: Nur die heruntergeladene Version wird behalten, die alte Version wird gelöscht.\nAls neue Galerie herunterladen: Die heruntergeladene Galerie existiert als neue Galerie, und sowohl die neue als auch die alte Galerie werden gespeichert."
+    },
+    {
+      "name": "gallery_update_download_as_new",
+      "value": "Als neu herunterladen"
+    },
+    {
+      "name": "gallery_update_override_old",
+      "value": "Alte überschreiben"
+    },
+    {
+      "name": "loading_db_file",
+      "value": "Daten werden geladen …"
+    },
+    {
+      "name": "settings_eh_history_size",
+      "value": "Anzahl der Verlaufseinträge"
+    },
+    {
+      "name": "history_info_unlimited",
+      "value": "Unbegrenzt"
+    },
+    {
+      "name": "archiver",
+      "value": "Archiver"
+    },
+    {
+      "name": "archiver_dialog_current_funds",
+      "value": "Aktuelle Mittel:"
+    },
+    {
+      "name": "archiver_dialog_cost",
+      "value": "Download-Kosten:  %s"
+    },
+    {
+      "name": "archiver_dialog_download_original",
+      "value": "Original-Archiv herunterladen"
+    },
+    {
+      "name": "archiver_dialog_download_resample",
+      "value": "Neu abgetastetes Archiv herunterladen"
+    },
+    {
+      "name": "archiver_dialog_size",
+      "value": "Geschätzte Größe:  %s"
+    },
+    {
+      "name": "dialog_archiver_title",
+      "value": "Archiver-Downloader"
+    },
+    {
+      "name": "download_receiver_label",
+      "value": "EhViewer Download-Empfänger"
+    },
+    {
+      "name": "decompressed_successfully",
+      "value": "Erfolgreich dekomprimiert!"
+    },
+    {
+      "name": "decompression_failed",
+      "value": "Dekomprimierung fehlgeschlagen!"
+    },
+    {
+      "name": "download_label_archiver",
+      "value": "Archiver"
+    },
+    {
+      "name": "cookie_in_clipboard_incorrect",
+      "value": "Cookie-Format ist falsch"
+    },
+    {
+      "name": "settings_download_timeout",
+      "value": "Download-Timeout"
+    },
+    {
+      "name": "download_timeout_unlimited",
+      "value": "Unbegrenzt"
+    },
+    {
+      "name": "settings_download_timeout_summary",
+      "value": "%s(S), Maximale Zeit zum Herunterladen eines Bildes."
+    },
+    {
+      "name": "have_new_version",
+      "value": "Klicken, um neue Galerieversion zu sehen"
+    },
+    {
+      "name": "archiver_downloading",
+      "value": "Archiv wird heruntergeladen %s"
+    },
+    {
+      "name": "order",
+      "value": "Sortierung"
+    },
+    {
+      "name": "sort_by_pub_time",
+      "value": "Veröffentlichungszeit"
+    },
+    {
+      "name": "sort_by_fav_time",
+      "value": "Zu Favoriten hinzugefügt am"
+    },
+    {
+      "name": "settings_eh_sign_out_restart",
+      "value": "Wird automatisch für dich neu gestartet, bitte warten"
+    },
+    {
+      "name": "subscription_watched",
+      "value": "Beobachtet"
+    },
+    {
+      "name": "subscription_hidden",
+      "value": "Versteckt"
+    },
+    {
+      "name": "delete_subscription_title",
+      "value": "Etikett entfernen"
+    },
+    {
+      "name": "can_not_use_this_tag",
+      "value": "Etiketten sind nicht verfügbar"
+    },
+    {
+      "name": "add_tag_dialog_title",
+      "value": "Etikett hinzufügen"
+    },
+    {
+      "name": "tag_title",
+      "value": "Etikett"
+    },
+    {
+      "name": "empty_subscription",
+      "value": "Abonnement ist leer"
+    },
+    {
+      "name": "subscription_success",
+      "value": "%s erfolgreich"
+    },
+    {
+      "name": "settings_eh_show_gallery_rating",
+      "value": "Galeriebewertung anzeigen"
+    },
+    {
+      "name": "import_local_archive",
+      "value": "Lokales Archiv importieren"
+    },
+    {
+      "name": "import_archive_title",
+      "value": "Archivdatei auswählen"
+    },
+    {
+      "name": "import_archive_failed",
+      "value": "Archivimport fehlgeschlagen"
+    },
+    {
+      "name": "archive_permission_lost",
+      "value": "Berechtigung zum Zugriff auf das Archiv wurde verloren. Bitte die Archivdatei erneut importieren."
+    },
+    {
+      "name": "import_archive_processing",
+      "value": "Archiv wird verarbeitet…"
+    },
+    {
+      "name": "import_archive_invalid_format",
+      "value": "Nicht unterstütztes Archivformat"
+    },
+    {
+      "name": "import_archive_already_imported",
+      "value": "Archiv wurde bereits importiert"
+    },
+    {
+      "name": "import_archive_success",
+      "value": "Archiv erfolgreich importiert"
+    },
+    {
+      "name": "archive_not_accessible",
+      "value": "Archivdatei ist nicht zugänglich"
+    },
+    {
+      "name": "imported_archive_info_title",
+      "value": "Lokaler Import-Info"
+    },
+    {
+      "name": "imported_archive_info_message",
+      "value": "Dies ist ein Element, das aus dem lokalen Speicher importiert wurde"
+    },
+    {
+      "name": "imported_archive_category",
+      "value": "Lokaler Import"
+    },
+    {
+      "name": "import_local_album",
+      "value": "Lokales Album importieren"
+    },
+    {
+      "name": "import_album_title",
+      "value": "Bildordner auswählen"
+    },
+    {
+      "name": "import_album_processing",
+      "value": "Album wird importiert…"
+    },
+    {
+      "name": "import_album_failed",
+      "value": "Albumimport fehlgeschlagen"
+    },
+    {
+      "name": "import_album_no_images",
+      "value": "Keine unterstützten Bilder im ausgewählten Ordner"
+    },
+    {
+      "name": "import_album_already_imported",
+      "value": "Album wurde bereits importiert"
+    },
+    {
+      "name": "import_album_success",
+      "value": "%d Bilder erfolgreich importiert"
+    },
+    {
+      "name": "tag_selector_more",
+      "value": "▼ Mehr"
+    },
+    {
+      "name": "tag_selector_collapse",
+      "value": "▲ Einklappen"
+    },
+    {
+      "name": "tag_selector_end",
+      "value": "--- Ende ---"
+    },
+    {
+      "name": "error_rar_unsupported",
+      "value": "RAR-Archive werden nicht unterstützt (bitte ZIP oder 7z verwenden)"
+    },
+    {
+      "name": "shortcut_start_all_triggered",
+      "value": "Alle Downloads starten ausgelöst"
+    },
+    {
+      "name": "shortcut_stop_all_triggered",
+      "value": "Alle Downloads anhalten ausgelöst"
+    },
+    {
+      "name": "disable_pattern_protection",
+      "value": "Disable pattern protection"
+    },
+    {
+      "name": "pattern_protection_disabled",
+      "value": "Pattern protection disabled"
+    },
+    {
+      "name": "archiver_download_cancel",
+      "value": "Cancel archive download"
+    },
+    {
+      "name": "archiver_download_cancel_confirm",
+      "value": "Cancel this archive download and delete partial files?"
+    },
+    {
+      "name": "archiver_download_canceled",
+      "value": "Archive download canceled"
+    },
+    {
+      "name": "reset_limit_confirm_title",
+      "value": "Reset image limits"
+    },
+    {
+      "name": "reset_limit_confirm_message",
+      "value": "Spend %s to reset your image limits?"
+    },
+    {
+      "name": "reset_limit_success",
+      "value": "Image limits reset"
+    },
+    {
+      "name": "reset_limit_failed",
+      "value": "Failed to reset image limits"
+    }
+  ]
+}

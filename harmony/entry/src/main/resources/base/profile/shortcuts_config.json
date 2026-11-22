@@ -1,0 +1,34 @@
+{
+  "shortcuts": [
+    {
+      "shortcutId": "start_all",
+      "label": "$string:download_start_all",
+      "icon": "$media:ic_shortcut_start",
+      "wants": [
+        {
+          "bundleName": "com.ehviewer.harmony",
+          "moduleName": "entry",
+          "abilityName": "EntryAbility",
+          "parameters": {
+            "shortcut_action": "start_all"
+          }
+        }
+      ]
+    },
+    {
+      "shortcutId": "stop_all",
+      "label": "$string:download_stop_all",
+      "icon": "$media:ic_shortcut_stop",
+      "wants": [
+        {
+          "bundleName": "com.ehviewer.harmony",
+          "moduleName": "entry",
+          "abilityName": "EntryAbility",
+          "parameters": {
+            "shortcut_action": "stop_all"
+          }
+        }
+      ]
+    }
+  ]
+}

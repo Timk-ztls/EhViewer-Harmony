@@ -1,0 +1,12 @@
+{
+  "color": [
+    {
+      "name": "content_reactive_dark_activated",
+      "value": "#FF757575"
+    },
+    {
+      "name": "content_reactive_dark",
+      "value": "#FF3A3A3A"
+    }
+  ]
+}

@@ -1,0 +1,3484 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "EhViewer"
+    },
+    {
+      "name": "site_e",
+      "value": "e-hentai"
+    },
+    {
+      "name": "site_ex",
+      "value": "exhentai"
+    },
+    {
+      "name": "theme_light",
+      "value": "亮色主題"
+    },
+    {
+      "name": "theme_dark",
+      "value": "暗色主題"
+    },
+    {
+      "name": "theme_black",
+      "value": "黑色主題"
+    },
+    {
+      "name": "homepage",
+      "value": "首頁"
+    },
+    {
+      "name": "subscription",
+      "value": "訂閱"
+    },
+    {
+      "name": "whats_hot",
+      "value": "熱門"
+    },
+    {
+      "name": "top_lists",
+      "value": "排行榜"
+    },
+    {
+      "name": "favourite",
+      "value": "收藏"
+    },
+    {
+      "name": "history",
+      "value": "歷史"
+    },
+    {
+      "name": "downloads",
+      "value": "下載"
+    },
+    {
+      "name": "news",
+      "value": "新聞"
+    },
+    {
+      "name": "settings",
+      "value": "設定"
+    },
+    {
+      "name": "stub",
+      "value": "Stub"
+    },
+    {
+      "name": "username",
+      "value": "使用者名稱"
+    },
+    {
+      "name": "password",
+      "value": "密碼"
+    },
+    {
+      "name": "recaptcha",
+      "value": "驗證碼（非必需）"
+    },
+    {
+      "name": "recaptcha_none",
+      "value": "點我"
+    },
+    {
+      "name": "recaptcha_loading",
+      "value": "載入中…"
+    },
+    {
+      "name": "recaptcha_failure",
+      "value": "失敗"
+    },
+    {
+      "name": "sign_in",
+      "value": "登入"
+    },
+    {
+      "name": "register",
+      "value": "註冊"
+    },
+    {
+      "name": "sign_in_via_webview",
+      "value": "透過網頁登入"
+    },
+    {
+      "name": "sign_in_via_cookies",
+      "value": "透過 Cookie 登入"
+    },
+    {
+      "name": "display_name_dialog_title",
+      "value": "輸入暱稱"
+    },
+    {
+      "name": "display_name",
+      "value": "暱稱"
+    },
+    {
+      "name": "display_name_is_empty",
+      "value": "暱稱是空的"
+    },
+    {
+      "name": "sign_in_first",
+      "value": "請先登入"
+    },
+    {
+      "name": "default_display_name",
+      "value": "Little Hippo"
+    },
+    {
+      "name": "cookie_explain",
+      "value": "Cookie 是儲存在瀏覽器裡的一小塊資料。如果您不清楚 Cookie 是什麼或者如何取得 Cookie，最好去查一下。\n\n請輸入特定的 Cookie 來登入。"
+    },
+    {
+      "name": "text_is_empty",
+      "value": "文字是空的"
+    },
+    {
+      "name": "waring",
+      "value": "警告"
+    },
+    {
+      "name": "wrong_cookie_warning",
+      "value": "看來您輸入的 Cookie 是錯誤的，最好再檢查一下。"
+    },
+    {
+      "name": "i_will_check_it",
+      "value": "好的"
+    },
+    {
+      "name": "i_dont_think_so",
+      "value": "我覺得沒打錯"
+    },
+    {
+      "name": "found_cookies",
+      "value": "找到 Cookie了!"
+    },
+    {
+      "name": "invalid_download_location",
+      "value": "看來下載路徑似乎沒辦法使用。請至設定重新設定下載路徑。"
+    },
+    {
+      "name": "cellular_network_warning",
+      "value": "正在使用行動數據"
+    },
+    {
+      "name": "clipboard_gallery_url_snack_message",
+      "value": "剪下板裡有圖庫連結"
+    },
+    {
+      "name": "clipboard_gallery_url_snack_action",
+      "value": "檢視"
+    },
+    {
+      "name": "image_save_success",
+      "value": "成功儲存圖片"
+    },
+    {
+      "name": "error_bad_status_code",
+      "value": "錯誤狀態碼：%d"
+    },
+    {
+      "name": "error_timeout",
+      "value": "逾時"
+    },
+    {
+      "name": "error_unknown_host",
+      "value": "未知的主機"
+    },
+    {
+      "name": "error_redirection",
+      "value": "重新導向迴圈"
+    },
+    {
+      "name": "error_socket",
+      "value": "網路錯誤"
+    },
+    {
+      "name": "error_unknown",
+      "value": "奇怪的錯誤"
+    },
+    {
+      "name": "error_cant_find_activity",
+      "value": "找不到相對應的應用程式"
+    },
+    {
+      "name": "error_cannot_parse_the_url",
+      "value": "無法解析連結"
+    },
+    {
+      "name": "error_not_folder_path",
+      "value": "非資料夾路徑"
+    },
+    {
+      "name": "error_no_provider",
+      "value": "無 provider"
+    },
+    {
+      "name": "error_decoding_failed",
+      "value": "解碼失敗"
+    },
+    {
+      "name": "error_not_found",
+      "value": "沒能找到"
+    },
+    {
+      "name": "error_empty",
+      "value": "空"
+    },
+    {
+      "name": "error_invalid_archive",
+      "value": "無效的壓縮包"
+    },
+    {
+      "name": "error_reading_failed",
+      "value": "讀取失敗"
+    },
+    {
+      "name": "error_out_of_range",
+      "value": "超出範圍"
+    },
+    {
+      "name": "error_write_failed",
+      "value": "寫入失敗"
+    },
+    {
+      "name": "error_parse_error",
+      "value": "解析失敗"
+    },
+    {
+      "name": "error_509",
+      "value": "509"
+    },
+    {
+      "name": "error_invalid_url",
+      "value": "不正確的連結"
+    },
+    {
+      "name": "error_get_ptoken_error",
+      "value": "取得 pToken 時發生錯誤"
+    },
+    {
+      "name": "error_cant_create_temp_file",
+      "value": "無法建立暫存檔案"
+    },
+    {
+      "name": "error_cant_save_image",
+      "value": "無法儲存圖片"
+    },
+    {
+      "name": "error_save_image_existed",
+      "value": "圖片已存在"
+    },
+    {
+      "name": "error_invalid_number",
+      "value": "無效的數字"
+    },
+    {
+      "name": "error_please_login_first",
+      "value": "請先登陸"
+    },
+    {
+      "name": "error_empty_html",
+      "value": "頁面內容為空"
+    },
+    {
+      "name": "error_cant_get_image",
+      "value": "無法獲取圖片"
+    },
+    {
+      "name": "error_igneous_wrong",
+      "value": "錯誤的igneous\n檢查帳號權限後重新登入"
+    },
+    {
+      "name": "gallery_gl_fallback_title",
+      "value": "OpenGL 渲染器無法使用"
+    },
+    {
+      "name": "gallery_gl_fallback_message",
+      "value": "目前裝置暫時無法初始化 EGL，請返回後稍後再試。"
+    },
+    {
+      "name": "gallery_gl_fallback_action_close",
+      "value": "返回"
+    },
+    {
+      "name": "gallery_gl_fallback_toast",
+      "value": "GL 渲染失敗，已切換到安全占位頁"
+    },
+    {
+      "name": "kokomade_tip",
+      "value": "設定->Eh->圖庫站台->e-hentai"
+    },
+    {
+      "name": "app_waring",
+      "value": "本應用程式中內容來自網際網路，部分內容可能對您的生理及心理造成難以恢復的傷害。本應用程式的作者不會對由其所造成的任何影響負責。\n\n未成年人應在監護人指導下使用本應用程式。"
+    },
+    {
+      "name": "error_username_cannot_empty",
+      "value": "使用者名稱欄位不能為空"
+    },
+    {
+      "name": "error_password_cannot_empty",
+      "value": "密碼欄位不能為空"
+    },
+    {
+      "name": "guest_mode",
+      "value": "略過登入"
+    },
+    {
+      "name": "sign_in_failed",
+      "value": "登入失敗"
+    },
+    {
+      "name": "sign_in_failed_tip",
+      "value": "若持續出錯，請嘗試“通過網頁登入”或“通過 Cookie 登入”。"
+    },
+    {
+      "name": "sign_in_failed_plain",
+      "value": "這可能是網站更新造成的，也有可能是哪裡出錯了。您可以選擇在登入按鈕下方透過網頁登入或者輸入 cookie，也可以略過登入。略過登入可能導致無法正常使用應用程式。如果你已經在 0.6.x 版登入過了，請先試試“透過 Cookie 登入”。"
+    },
+    {
+      "name": "press_twice_exit",
+      "value": "再按一次離開"
+    },
+    {
+      "name": "content_layout_restore_tip",
+      "value": "點擊重試"
+    },
+    {
+      "name": "write_rationale",
+      "value": "EhViewer 將請求裝置外部儲存空間的存取許可以下載圖庫。您願意授權嗎？"
+    },
+    {
+      "name": "you_rejected_me",
+      "value": "好難過"
+    },
+    {
+      "name": "analytics_explain",
+      "value": "您同意讓開發者收集您的裝置資訊與使用方式嗎？這對開發有很大幫助。<br><br>資料統計服務由 Google Analytics for Firebase 提供，其隱私政策可在 <a href=\"https://www.google.com/policies/privacy/\">https://www.google.com/policies/privacy/</a> 檢視。<br><br>若您同意參與資料統計，您的裝置資訊與應用使用情況將會被記錄，其包括但不限於：Android API 版本、裝置型號、語言所在地、本應用版本號、會話時長、應用功能使用次數。開發者承諾以下資訊並不會被記錄：電話號碼、電子郵件地址、IMEI。<br><br>在您同意參與資料統計之前，您的資訊不會被記錄。<br><br>被記錄的資料會由 Google Analytics for Firebase 進行分析，分析報表僅由此應用程式開發者存取。"
+    },
+    {
+      "name": "get_it",
+      "value": "知道了"
+    },
+    {
+      "name": "accept",
+      "value": "接受"
+    },
+    {
+      "name": "reject",
+      "value": "拒絕"
+    },
+    {
+      "name": "help_route",
+      "value": "設定->關於->說明"
+    },
+    {
+      "name": "select_scene",
+      "value": "你想選擇哪個圖庫站台？"
+    },
+    {
+      "name": "select_scene_explain",
+      "value": "e-hentai：對任何人開放\nexhentai：僅對登入使用者開放"
+    },
+    {
+      "name": "no_select",
+      "value": "請選擇一個站台"
+    },
+    {
+      "name": "new_version",
+      "value": "新版本"
+    },
+    {
+      "name": "update",
+      "value": "更新"
+    },
+    {
+      "name": "update_dialog_sponsor",
+      "value": "賞飯給作者"
+    },
+    {
+      "name": "update_fail",
+      "value": "检查更新失败"
+    },
+    {
+      "name": "update_plain",
+      "value": "版本：%1$s\n大小：%2$s\n\n%3$s"
+    },
+    {
+      "name": "update_fail_info",
+      "value": "点击 是 跳转至Github主页"
+    },
+    {
+      "name": "update_to_date",
+      "value": "EhViewer 已是最新版本"
+    },
+    {
+      "name": "no_updates_available",
+      "value": "已是最新版本"
+    },
+    {
+      "name": "update_to",
+      "value": "更新至"
+    },
+    {
+      "name": "update_ignore",
+      "value": "忽略"
+    },
+    {
+      "name": "gallery_list_search_bar_hint_exhentai",
+      "value": "在 ExHentai 中搜尋"
+    },
+    {
+      "name": "gallery_list_search_bar_hint_e_hentai",
+      "value": "在 E-Hentai 搜尋"
+    },
+    {
+      "name": "gallery_list_search_bar_open_gallery",
+      "value": "開啟圖庫"
+    },
+    {
+      "name": "gallery_list_empty_hit",
+      "value": "什麼都沒找到"
+    },
+    {
+      "name": "gallery_list_empty_hit_subscription",
+      "value": "請至 設定->EH->我的標籤 訂閱標籤"
+    },
+    {
+      "name": "gallery_list_no_preview_tag",
+      "value": "暫無預覽標籤"
+    },
+    {
+      "name": "gallery_list_action_url_missed",
+      "value": "未發現下一頁"
+    },
+    {
+      "name": "gallery_list_no_more_data",
+      "value": "當前的列表無更多資料"
+    },
+    {
+      "name": "gallery_list_date_jump_1d",
+      "value": "昨天"
+    },
+    {
+      "name": "gallery_list_date_jump_3d",
+      "value": "三天前"
+    },
+    {
+      "name": "gallery_list_date_jump_1w",
+      "value": "一週前"
+    },
+    {
+      "name": "gallery_list_date_jump_2w",
+      "value": "兩週前"
+    },
+    {
+      "name": "gallery_list_date_jump_1m",
+      "value": "一個月前"
+    },
+    {
+      "name": "gallery_list_date_jump_6m",
+      "value": "六個月前"
+    },
+    {
+      "name": "gallery_list_date_jump_1y",
+      "value": "一年前"
+    },
+    {
+      "name": "gallery_list_date_jump_2y",
+      "value": "兩年前"
+    },
+    {
+      "name": "gallery_list_select_jump_date",
+      "value": "使用日期選擇器"
+    },
+    {
+      "name": "gallery_list_select_jump_node",
+      "value": "使用節點選擇器"
+    },
+    {
+      "name": "gallery_list_jump_now",
+      "value": "跳到現在"
+    },
+    {
+      "name": "gallery_list_time_jump_dialog_title",
+      "value": "跳到選擇器"
+    },
+    {
+      "name": "gallery_list_time_jump_dialog_found_message",
+      "value": "發現 %s 個結果"
+    },
+    {
+      "name": "gallery_tag_copy",
+      "value": "已複製標籤"
+    },
+    {
+      "name": "search",
+      "value": "搜尋"
+    },
+    {
+      "name": "keyword_search",
+      "value": "關鍵字搜尋"
+    },
+    {
+      "name": "image_search",
+      "value": "圖片搜尋"
+    },
+    {
+      "name": "search_normal",
+      "value": "一般搜尋"
+    },
+    {
+      "name": "search_advance",
+      "value": "進階選項"
+    },
+    {
+      "name": "search_image",
+      "value": "圖片搜尋"
+    },
+    {
+      "name": "search_normal_search",
+      "value": "一般搜尋"
+    },
+    {
+      "name": "search_subscription_search",
+      "value": "訂閱搜尋"
+    },
+    {
+      "name": "search_specify_uploader",
+      "value": "指定上傳者"
+    },
+    {
+      "name": "search_specify_tag",
+      "value": "指定標籤"
+    },
+    {
+      "name": "search_enable_advance",
+      "value": "啟用進階選項"
+    },
+    {
+      "name": "search_tip",
+      "value": "一般搜尋：就是搜尋。\n\n訂閱搜素：在訂閱中搜索。\n\n指定上傳者：列出該上傳者上傳的圖庫。其他選項會被忽略。\n\n指定標籤：列出含有該標籤的圖庫。其他選項會被忽略。"
+    },
+    {
+      "name": "search_sname",
+      "value": "搜尋圖庫"
+    },
+    {
+      "name": "search_stags",
+      "value": "搜尋圖庫的標籤"
+    },
+    {
+      "name": "search_sdesc",
+      "value": "搜尋圖庫的描述"
+    },
+    {
+      "name": "search_storr",
+      "value": "搜尋種子檔名"
+    },
+    {
+      "name": "search_sto",
+      "value": "只顯示有種子的圖庫"
+    },
+    {
+      "name": "search_sdt1",
+      "value": "搜尋標籤:低願力"
+    },
+    {
+      "name": "search_sdt2",
+      "value": "搜尋標籤:被噓爆的"
+    },
+    {
+      "name": "search_sh",
+      "value": "顯示已被移除的的圖庫"
+    },
+    {
+      "name": "search_sr",
+      "value": "最低評分："
+    },
+    {
+      "name": "search_sp",
+      "value": "頁數："
+    },
+    {
+      "name": "search_sp_to",
+      "value": "到"
+    },
+    {
+      "name": "search_sp_suffix",
+      "value": ""
+    },
+    {
+      "name": "search_sf",
+      "value": "禁用排除項："
+    },
+    {
+      "name": "search_sfl",
+      "value": "語言"
+    },
+    {
+      "name": "search_sfu",
+      "value": "上傳者"
+    },
+    {
+      "name": "search_sft",
+      "value": "標籤"
+    },
+    {
+      "name": "select_image",
+      "value": "選擇圖片"
+    },
+    {
+      "name": "search_uss",
+      "value": "使用相似性搜尋"
+    },
+    {
+      "name": "search_osc",
+      "value": "只搜尋封面"
+    },
+    {
+      "name": "search_se",
+      "value": "顯示被刪除的圖庫"
+    },
+    {
+      "name": "select_image_first",
+      "value": "請先選擇圖片"
+    },
+    {
+      "name": "add_to_favourites",
+      "value": "收藏"
+    },
+    {
+      "name": "remove_from_favourites",
+      "value": "移除收藏"
+    },
+    {
+      "name": "stop_downloading",
+      "value": "停止下載"
+    },
+    {
+      "name": "delete_downloads",
+      "value": "刪除下載"
+    },
+    {
+      "name": "quick_search",
+      "value": "快速搜尋"
+    },
+    {
+      "name": "quick_search_tip",
+      "value": "點擊“+”以新增快速搜尋"
+    },
+    {
+      "name": "add_quick_search_dialog_title",
+      "value": "新增快速搜尋"
+    },
+    {
+      "name": "name_is_empty",
+      "value": "名稱是空的"
+    },
+    {
+      "name": "delete",
+      "value": "刪除"
+    },
+    {
+      "name": "delete_quick_search_title",
+      "value": "刪除快速搜尋"
+    },
+    {
+      "name": "delete_quick_search_message",
+      "value": "刪除“%s”嗎？"
+    },
+    {
+      "name": "no_quick_search",
+      "value": "快速搜尋會顯示在這裡"
+    },
+    {
+      "name": "add_quick_search_tip",
+      "value": "圖庫列表的狀態將被儲存為快速搜尋。如果你想儲存搜尋面板的狀態，請先進行搜尋。"
+    },
+    {
+      "name": "readme",
+      "value": "讀我檔"
+    },
+    {
+      "name": "image_search_not_quick_search",
+      "value": "無法將圖片搜尋加入快速搜尋"
+    },
+    {
+      "name": "duplicate_quick_search",
+      "value": "已存在相同的快速搜尋，名稱為“%s”。"
+    },
+    {
+      "name": "duplicate_name",
+      "value": "已經有重複的名稱了"
+    },
+    {
+      "name": "subscription_tip",
+      "value": "點擊 “+” 添加訂閱"
+    },
+    {
+      "name": "go_to_hint",
+      "value": "第 %1$d 頁，共 %2$d 頁"
+    },
+    {
+      "name": "star_2",
+      "value": "2 星"
+    },
+    {
+      "name": "star_3",
+      "value": "3 星"
+    },
+    {
+      "name": "star_4",
+      "value": "4 星"
+    },
+    {
+      "name": "star_5",
+      "value": "5 星"
+    },
+    {
+      "name": "error_cannot_find_gallery",
+      "value": "找不到圖庫"
+    },
+    {
+      "name": "download",
+      "value": "下載"
+    },
+    {
+      "name": "read",
+      "value": "閱讀"
+    },
+    {
+      "name": "more_information",
+      "value": "更多資訊"
+    },
+    {
+      "name": "favored_times",
+      "value": "♥ %d"
+    },
+    {
+      "name": "rating_text",
+      "value": "%1$s (%2$.2f, %3$d)"
+    },
+    {
+      "name": "favorites",
+      "value": "收藏"
+    },
+    {
+      "name": "torrent_count",
+      "value": "種子 (%d)"
+    },
+    {
+      "name": "share",
+      "value": "分享"
+    },
+    {
+      "name": "rate",
+      "value": "評分"
+    },
+    {
+      "name": "similar_gallery",
+      "value": "類似的圖庫"
+    },
+    {
+      "name": "search_cover",
+      "value": "以封面搜尋"
+    },
+    {
+      "name": "no_tags",
+      "value": "還沒有標籤"
+    },
+    {
+      "name": "no_comments",
+      "value": "沒有留言"
+    },
+    {
+      "name": "no_more_comments",
+      "value": "已顯示所有的留言了"
+    },
+    {
+      "name": "more_comment",
+      "value": "更多留言"
+    },
+    {
+      "name": "no_previews",
+      "value": "沒有預覽"
+    },
+    {
+      "name": "no_more_previews",
+      "value": "已經顯示所有預覽了"
+    },
+    {
+      "name": "more_previews",
+      "value": "更多預覽"
+    },
+    {
+      "name": "refresh",
+      "value": "重新整理"
+    },
+    {
+      "name": "open_in_other_app",
+      "value": "在其他應用程式中開啟"
+    },
+    {
+      "name": "rate_successfully",
+      "value": "評分成功"
+    },
+    {
+      "name": "rate_failed",
+      "value": "評分失敗"
+    },
+    {
+      "name": "no_torrents",
+      "value": "沒有種子"
+    },
+    {
+      "name": "torrents",
+      "value": "種子"
+    },
+    {
+      "name": "favorited",
+      "value": "已收藏"
+    },
+    {
+      "name": "not_favorited",
+      "value": "未收藏"
+    },
+    {
+      "name": "add_favorites_dialog_title",
+      "value": "新增到收藏裡"
+    },
+    {
+      "name": "remember_favorite_collection",
+      "value": "記住常用收藏"
+    },
+    {
+      "name": "add_to_favorite_success",
+      "value": "已新增至收藏中"
+    },
+    {
+      "name": "remove_from_favorite_success",
+      "value": "從收藏中移除"
+    },
+    {
+      "name": "add_to_favorite_failure",
+      "value": "無法新增至收藏"
+    },
+    {
+      "name": "remove_from_favorite_failure",
+      "value": "無法從收藏中移除"
+    },
+    {
+      "name": "filter_the_uploader",
+      "value": "把上傳者 \"%s\" 加入遮蔽列表？"
+    },
+    {
+      "name": "filter_the_tag",
+      "value": "把標籤 \"%s\" 加入遮蔽列表？"
+    },
+    {
+      "name": "filter_added",
+      "value": "已經新增遮蔽項"
+    },
+    {
+      "name": "copy_tag",
+      "value": "複製"
+    },
+    {
+      "name": "rating10",
+      "value": "太神啦!"
+    },
+    {
+      "name": "rating9",
+      "value": "根本把持不住"
+    },
+    {
+      "name": "rating8",
+      "value": "很棒"
+    },
+    {
+      "name": "rating7",
+      "value": "不錯"
+    },
+    {
+      "name": "rating6",
+      "value": "還好"
+    },
+    {
+      "name": "rating5",
+      "value": "普通"
+    },
+    {
+      "name": "rating4",
+      "value": "不行"
+    },
+    {
+      "name": "rating3",
+      "value": "超爛"
+    },
+    {
+      "name": "rating2",
+      "value": "快瞎了"
+    },
+    {
+      "name": "rating1",
+      "value": "快要窒息了"
+    },
+    {
+      "name": "rating0",
+      "value": "下去 !"
+    },
+    {
+      "name": "rating_none",
+      "value": "(´_ゝ`)"
+    },
+    {
+      "name": "gallery_info",
+      "value": "圖庫資訊"
+    },
+    {
+      "name": "copied_to_clipboard",
+      "value": "已複製到剪貼簿"
+    },
+    {
+      "name": "header_key",
+      "value": "索引鍵"
+    },
+    {
+      "name": "header_value",
+      "value": "數值"
+    },
+    {
+      "name": "key_gid",
+      "value": "Gid"
+    },
+    {
+      "name": "key_token",
+      "value": "Token"
+    },
+    {
+      "name": "key_url",
+      "value": "網址"
+    },
+    {
+      "name": "key_title",
+      "value": "標題"
+    },
+    {
+      "name": "key_title_jpn",
+      "value": "日文標題"
+    },
+    {
+      "name": "key_thumb",
+      "value": "縮圖"
+    },
+    {
+      "name": "key_category",
+      "value": "分類"
+    },
+    {
+      "name": "key_uploader",
+      "value": "上傳者"
+    },
+    {
+      "name": "key_posted",
+      "value": "上傳時間"
+    },
+    {
+      "name": "key_parent",
+      "value": "上層圖庫"
+    },
+    {
+      "name": "key_visible",
+      "value": "可見"
+    },
+    {
+      "name": "key_language",
+      "value": "語言"
+    },
+    {
+      "name": "key_pages",
+      "value": "頁數"
+    },
+    {
+      "name": "key_size",
+      "value": "大小"
+    },
+    {
+      "name": "key_favorite_count",
+      "value": "收藏次數"
+    },
+    {
+      "name": "key_favorited",
+      "value": "收藏"
+    },
+    {
+      "name": "key_rating_count",
+      "value": "評分次數"
+    },
+    {
+      "name": "key_rating",
+      "value": "分數"
+    },
+    {
+      "name": "key_torrents",
+      "value": "種子數"
+    },
+    {
+      "name": "key_torrent_url",
+      "value": "種子連結"
+    },
+    {
+      "name": "gallery_comments",
+      "value": "圖庫留言"
+    },
+    {
+      "name": "no_one_comments_gallery",
+      "value": "目前沒有留言"
+    },
+    {
+      "name": "comment_successfully",
+      "value": "留言成功"
+    },
+    {
+      "name": "comment_failed",
+      "value": "留言失敗"
+    },
+    {
+      "name": "copy_comment_text",
+      "value": "複製留言文字"
+    },
+    {
+      "name": "edit_comment",
+      "value": "修改留言"
+    },
+    {
+      "name": "edit_comment_successfully",
+      "value": "留言已被修改"
+    },
+    {
+      "name": "edit_comment_failed",
+      "value": "修改留言失敗"
+    },
+    {
+      "name": "vote_up",
+      "value": "推"
+    },
+    {
+      "name": "cancel_vote_up",
+      "value": "收回推"
+    },
+    {
+      "name": "vote_down",
+      "value": "噓"
+    },
+    {
+      "name": "cancel_vote_down",
+      "value": "收回噓"
+    },
+    {
+      "name": "vote_up_successfully",
+      "value": "發出推了"
+    },
+    {
+      "name": "cancel_vote_up_successfully",
+      "value": "已經收回推了"
+    },
+    {
+      "name": "vote_down_successfully",
+      "value": "發出噓了"
+    },
+    {
+      "name": "cancel_vote_down_successfully",
+      "value": "已經收回噓了"
+    },
+    {
+      "name": "vote_failed",
+      "value": "推噓失敗"
+    },
+    {
+      "name": "check_vote_status",
+      "value": "檢視推噓狀態"
+    },
+    {
+      "name": "click_more_comments",
+      "value": "點選載入更多留言"
+    },
+    {
+      "name": "last_edited",
+      "value": "上次修改時間：%s"
+    },
+    {
+      "name": "gallery_previews",
+      "value": "圖庫預覽"
+    },
+    {
+      "name": "go_to",
+      "value": "跳到"
+    },
+    {
+      "name": "tag_filter",
+      "value": "篩選標籤"
+    },
+    {
+      "name": "tag_selector_search_hint",
+      "value": "搜尋標籤…"
+    },
+    {
+      "name": "tag_selector_selected_count",
+      "value": "已選: %d"
+    },
+    {
+      "name": "tag_selector_selected_section_title",
+      "value": "已選標籤"
+    },
+    {
+      "name": "tag_selector_empty_selected",
+      "value": "尚無已選標籤"
+    },
+    {
+      "name": "tag_selector_other_group",
+      "value": "其他"
+    },
+    {
+      "name": "scene_download_title",
+      "value": "共%s個圖庫 - %s"
+    },
+    {
+      "name": "no_download_info",
+      "value": "下載的物件將會顯示在此"
+    },
+    {
+      "name": "download_state_none",
+      "value": "閒置中"
+    },
+    {
+      "name": "download_state_wait",
+      "value": "等待中"
+    },
+    {
+      "name": "download_state_downloading",
+      "value": "下載中"
+    },
+    {
+      "name": "download_state_downloaded",
+      "value": "已下載"
+    },
+    {
+      "name": "download_state_failed",
+      "value": "下載失敗"
+    },
+    {
+      "name": "download_state_failed_2",
+      "value": "還有 %d 尚未完成"
+    },
+    {
+      "name": "download_state_finish",
+      "value": "大功告成"
+    },
+    {
+      "name": "stat_509_alert_title",
+      "value": "509 警告"
+    },
+    {
+      "name": "stat_509_alert_text",
+      "value": "圖片流量已用盡。請停止下載，休息一下。"
+    },
+    {
+      "name": "stat_download_done_title",
+      "value": "下載結束"
+    },
+    {
+      "name": "stat_download_done_text_succeeded",
+      "value": "有 %d 項已成功下載"
+    },
+    {
+      "name": "stat_download_done_text_failed",
+      "value": "有 %d 項下載失敗"
+    },
+    {
+      "name": "stat_download_done_text_mix",
+      "value": "%1$d 項成功下載，%2$d 項下載失敗"
+    },
+    {
+      "name": "stat_download_done_line_succeeded",
+      "value": "%s 下載成功"
+    },
+    {
+      "name": "stat_download_done_line_failed",
+      "value": "%s 下載失敗"
+    },
+    {
+      "name": "download_remove_dialog_title",
+      "value": "移除下載佇列"
+    },
+    {
+      "name": "download_remove_dialog_message",
+      "value": "將 %s 從下載佇列中移除嗎?"
+    },
+    {
+      "name": "download_remove_dialog_message_2",
+      "value": "從下載佇列中移除 %d 項任務嗎？"
+    },
+    {
+      "name": "download_remove_dialog_check_text",
+      "value": "刪除圖檔"
+    },
+    {
+      "name": "stat_download_action_stop_all",
+      "value": "全部停止"
+    },
+    {
+      "name": "drawer_download_label_title",
+      "value": "標籤"
+    },
+    {
+      "name": "default_download_label_name",
+      "value": "預設"
+    },
+    {
+      "name": "download_move_dialog_title",
+      "value": "移動"
+    },
+    {
+      "name": "download_labels",
+      "value": "下載標籤"
+    },
+    {
+      "name": "download_start_all",
+      "value": "全部開始"
+    },
+    {
+      "name": "download_stop_all",
+      "value": "全部停止"
+    },
+    {
+      "name": "download_reset_reading_progress",
+      "value": "重置閱讀進度"
+    },
+    {
+      "name": "reset_reading_progress_message",
+      "value": "重置所有已下載圖庫的閱讀進度？"
+    },
+    {
+      "name": "reset_reading_progress_processing",
+      "value": "正在重置閱讀進度..."
+    },
+    {
+      "name": "reset_reading_progress_done",
+      "value": "閱讀進度重置完畢"
+    },
+    {
+      "name": "download_service_label",
+      "value": "EhViewer 下載服務"
+    },
+    {
+      "name": "archiver_download_service_label",
+      "value": "EhViewer 檔案下載"
+    },
+    {
+      "name": "archiver_download_pause",
+      "value": "暫停"
+    },
+    {
+      "name": "archiver_download_resume",
+      "value": "繼續"
+    },
+    {
+      "name": "archiver_download_paused",
+      "value": "已暫停"
+    },
+    {
+      "name": "archiver_download_restart_no_range",
+      "value": "伺服器不支援斷點續傳，將重新下載"
+    },
+    {
+      "name": "download_speed_text",
+      "value": "%s"
+    },
+    {
+      "name": "download_speed_text_2",
+      "value": "%1$s，剩餘 %2$s"
+    },
+    {
+      "name": "remember_download_label",
+      "value": "記住下載標籤"
+    },
+    {
+      "name": "default_download_label",
+      "value": "預設下載標籤"
+    },
+    {
+      "name": "added_to_download_list",
+      "value": "已新增至下載列表"
+    },
+    {
+      "name": "default_sort",
+      "value": "預設"
+    },
+    {
+      "name": "sort_by_gallery_id_asc",
+      "value": "依ID升序"
+    },
+    {
+      "name": "sort_by_gallery_id_desc",
+      "value": "依ID降序"
+    },
+    {
+      "name": "sort_by_create_time_asc",
+      "value": "依建立時間升序"
+    },
+    {
+      "name": "sort_by_create_time_desc",
+      "value": "依建立時間降序"
+    },
+    {
+      "name": "sort_by_rating_asc",
+      "value": "依評分升序"
+    },
+    {
+      "name": "sort_by_rating_desc",
+      "value": "依評分降序"
+    },
+    {
+      "name": "sort_by_name_asc",
+      "value": "依名稱升序"
+    },
+    {
+      "name": "sort_by_name_desc",
+      "value": "依名稱降序"
+    },
+    {
+      "name": "sort_by_file_size_asc",
+      "value": "依檔案大小升序"
+    },
+    {
+      "name": "sort_by_file_size_desc",
+      "value": "依檔案大小降序"
+    },
+    {
+      "name": "sort_download_list",
+      "value": "排序列表"
+    },
+    {
+      "name": "download_search_gallery",
+      "value": "搜尋圖庫"
+    },
+    {
+      "name": "download_search_hint",
+      "value": "輸入搜尋關鍵字"
+    },
+    {
+      "name": "download_searching",
+      "value": "搜尋中請稍後"
+    },
+    {
+      "name": "download_searching_failed",
+      "value": "搜尋失敗"
+    },
+    {
+      "name": "download_sort_list",
+      "value": "排序"
+    },
+    {
+      "name": "download_filter_by_status",
+      "value": "照狀態篩選"
+    },
+    {
+      "name": "download_status_all",
+      "value": "全部"
+    },
+    {
+      "name": "download_status_not_started",
+      "value": "未開始"
+    },
+    {
+      "name": "no_download_label",
+      "value": "下載標籤將會顯示在這裡"
+    },
+    {
+      "name": "add",
+      "value": "新增"
+    },
+    {
+      "name": "new_label_title",
+      "value": "新標籤"
+    },
+    {
+      "name": "label_text_is_empty",
+      "value": "標籤文字是空的"
+    },
+    {
+      "name": "label_text_is_invalid",
+      "value": "“預設”是無效的標籤"
+    },
+    {
+      "name": "label_text_exist",
+      "value": "標籤已存在"
+    },
+    {
+      "name": "rename_label_title",
+      "value": "重新命名標籤"
+    },
+    {
+      "name": "delete_label_title",
+      "value": "刪除標籤"
+    },
+    {
+      "name": "delete_label_message",
+      "value": "將 “%s”刪除？"
+    },
+    {
+      "name": "no_history",
+      "value": "歷史紀錄將會顯示在這裡"
+    },
+    {
+      "name": "clear_all",
+      "value": "全部清除"
+    },
+    {
+      "name": "clear_all_history",
+      "value": "清除所有歷史紀錄？"
+    },
+    {
+      "name": "filter",
+      "value": "遮蔽圖庫"
+    },
+    {
+      "name": "no_filter",
+      "value": "這裡是遮蔽列表"
+    },
+    {
+      "name": "filter_title",
+      "value": "標題"
+    },
+    {
+      "name": "filter_uploader",
+      "value": "上傳者"
+    },
+    {
+      "name": "filter_tag",
+      "value": "標籤"
+    },
+    {
+      "name": "filter_tag_namespace",
+      "value": "標籤組"
+    },
+    {
+      "name": "delete_filter",
+      "value": "刪除遮蔽項“%s”？"
+    },
+    {
+      "name": "tip",
+      "value": "提示"
+    },
+    {
+      "name": "add_filter",
+      "value": "新增遮蔽項"
+    },
+    {
+      "name": "show_definition",
+      "value": "檢視定義"
+    },
+    {
+      "name": "filter_text",
+      "value": "遮蔽項文字"
+    },
+    {
+      "name": "filter_tip",
+      "value": "該遮蔽系統會在 EHentai 網站遮蔽系統的基礎上繼續遮蔽圖庫。\n\n標題遮蔽項：排除標題含有該關鍵字的圖庫。\n\n上傳者遮蔽項：排除該上傳者上傳的圖庫。\n\n標籤遮蔽項：排除包含該標籤的圖庫，這會使獲取圖庫列表花費更多時間。\n\n標籤組遮蔽項：排除包含該標籤組的圖庫，這會使獲取圖庫列表花費更多時間。"
+    },
+    {
+      "name": "set_pattern_protection",
+      "value": "設定圖形解鎖"
+    },
+    {
+      "name": "set_pattern_protection_tip",
+      "value": "繪製圖案來設定繪圖解鎖\n留白以取消圖案保護"
+    },
+    {
+      "name": "set",
+      "value": "設定"
+    },
+    {
+      "name": "enable_fingerprint",
+      "value": "啟用指紋解鎖"
+    },
+    {
+      "name": "u_config",
+      "value": "EHentai 設定"
+    },
+    {
+      "name": "apply",
+      "value": "套用"
+    },
+    {
+      "name": "apply_tip",
+      "value": "點選右上角的勾勾以儲存設定"
+    },
+    {
+      "name": "my_tags",
+      "value": "我的標籤"
+    },
+    {
+      "name": "hosts",
+      "value": "自訂hosts.txt"
+    },
+    {
+      "name": "hosts_tip",
+      "value": "hosts.txt"
+    },
+    {
+      "name": "hosts_host",
+      "value": "Host"
+    },
+    {
+      "name": "hosts_ip",
+      "value": "IP"
+    },
+    {
+      "name": "add_host",
+      "value": "加入 host"
+    },
+    {
+      "name": "add_host_add",
+      "value": "加入"
+    },
+    {
+      "name": "edit_host",
+      "value": "編輯 host"
+    },
+    {
+      "name": "edit_host_confirm",
+      "value": "確認"
+    },
+    {
+      "name": "edit_host_delete",
+      "value": "刪除"
+    },
+    {
+      "name": "invalid_host",
+      "value": "無效的 host"
+    },
+    {
+      "name": "invalid_ip",
+      "value": "無效的 IP"
+    },
+    {
+      "name": "preset",
+      "value": "預設"
+    },
+    {
+      "name": "default_directory",
+      "value": "預設目錄"
+    },
+    {
+      "name": "application_file_directory",
+      "value": "應用檔案目錄 %d （應用解除安裝後會被刪除）"
+    },
+    {
+      "name": "page_menu_title",
+      "value": "第 %d 頁"
+    },
+    {
+      "name": "page_menu_refresh",
+      "value": "@string/refresh"
+    },
+    {
+      "name": "page_menu_share",
+      "value": "@string/share"
+    },
+    {
+      "name": "page_menu_save",
+      "value": "儲存"
+    },
+    {
+      "name": "page_menu_save_to",
+      "value": "儲存至 …"
+    },
+    {
+      "name": "page_menu_add_bookmark",
+      "value": "新增書籤"
+    },
+    {
+      "name": "gallery_menu_title",
+      "value": "選單"
+    },
+    {
+      "name": "share_image",
+      "value": "分享圖片"
+    },
+    {
+      "name": "image_saved",
+      "value": "已將圖片儲存至 %s"
+    },
+    {
+      "name": "settings_eh",
+      "value": "EH"
+    },
+    {
+      "name": "settings_eh_sign_out",
+      "value": "登出"
+    },
+    {
+      "name": "settings_eh_sign_out_summary",
+      "value": "登出後重新啟動程式以再次登入"
+    },
+    {
+      "name": "settings_eh_sign_out_warning",
+      "value": "天哪，老兄，你真的要登出嗎？我是說，你真的要登出嗎？"
+    },
+    {
+      "name": "settings_eh_sign_out_yes",
+      "value": "沒錯，我是說，對"
+    },
+    {
+      "name": "settings_eh_sign_out_tip",
+      "value": "已登出，重新啟動程式以再次登入"
+    },
+    {
+      "name": "settings_eh_identity_cookies",
+      "value": "身份識別 Cookie"
+    },
+    {
+      "name": "settings_eh_identity_cookies_summary",
+      "value": "可用於登入"
+    },
+    {
+      "name": "settings_eh_identity_cookies_signed",
+      "value": "身份 Cookie 可用於登入該帳號。<br><b>請注意資料安全</b><br><br>%s"
+    },
+    {
+      "name": "settings_eh_identity_cookies_tourist",
+      "value": "未登入"
+    },
+    {
+      "name": "settings_eh_identity_cookies_copy",
+      "value": "複製"
+    },
+    {
+      "name": "settings_u_config",
+      "value": "EHentai 設定"
+    },
+    {
+      "name": "settings_u_config_summary",
+      "value": "EHentai 網站上的設定"
+    },
+    {
+      "name": "settings_my_tags",
+      "value": "我的標籤"
+    },
+    {
+      "name": "settings_my_tags_summary",
+      "value": "EHentai 網站上的我的標籤"
+    },
+    {
+      "name": "settings_eh_theme",
+      "value": "主題"
+    },
+    {
+      "name": "settings_eh_theme_light",
+      "value": "亮色"
+    },
+    {
+      "name": "settings_eh_theme_dark",
+      "value": "暗色"
+    },
+    {
+      "name": "settings_eh_theme_black",
+      "value": "黑色"
+    },
+    {
+      "name": "settings_eh_theme_auto_switch",
+      "value": "跟隨系統暗色模式"
+    },
+    {
+      "name": "settings_eh_apply_nav_bar_theme_color",
+      "value": "導航欄應用主題配色"
+    },
+    {
+      "name": "settings_eh_gallery_site",
+      "value": "圖庫站台"
+    },
+    {
+      "name": "settings_eh_launch_page",
+      "value": "啟動頁"
+    },
+    {
+      "name": "settings_eh_list_mode",
+      "value": "列表模式"
+    },
+    {
+      "name": "settings_eh_list_mode_detail",
+      "value": "詳細資料"
+    },
+    {
+      "name": "settings_eh_list_mode_thumb",
+      "value": "縮圖"
+    },
+    {
+      "name": "settings_eh_detail_size",
+      "value": "詳細大小"
+    },
+    {
+      "name": "settings_eh_detail_size_long",
+      "value": "長"
+    },
+    {
+      "name": "settings_eh_detail_size_short",
+      "value": "短"
+    },
+    {
+      "name": "settings_eh_thumb_size",
+      "value": "縮圖大小"
+    },
+    {
+      "name": "settings_eh_thumb_size_large",
+      "value": "大"
+    },
+    {
+      "name": "settings_eh_thumb_size_middle",
+      "value": "中"
+    },
+    {
+      "name": "settings_eh_thumb_size_small",
+      "value": "小"
+    },
+    {
+      "name": "settings_eh_thumb_resolution",
+      "value": "縮圖解析度"
+    },
+    {
+      "name": "settings_eh_thumb_resolution_summary",
+      "value": "%s，指定解析度可能會使縮圖取得失敗"
+    },
+    {
+      "name": "settings_eh_thumb_resolution_auto",
+      "value": "自動"
+    },
+    {
+      "name": "settings_eh_fix_thumb_url",
+      "value": "修正縮圖連結"
+    },
+    {
+      "name": "settings_eh_default_categories",
+      "value": "顯示在首頁的分類"
+    },
+    {
+      "name": "settings_eh_default_categories_summary",
+      "value": "顯示在首頁的分類就跟預設一樣"
+    },
+    {
+      "name": "settings_eh_excluded_tag_namespaces",
+      "value": "除標籤命名空間"
+    },
+    {
+      "name": "settings_eh_excluded_tag_namespaces_summary",
+      "value": "在預設標籤搜尋中排除特定的標籤命名空間"
+    },
+    {
+      "name": "settings_eh_excluded_languages",
+      "value": "排除語言"
+    },
+    {
+      "name": "settings_eh_excluded_languages_summary",
+      "value": "在首頁與搜尋中隱藏指定語言的圖庫"
+    },
+    {
+      "name": "settings_eh_show_jpn_title",
+      "value": "顯示日文標題"
+    },
+    {
+      "name": "settings_eh_show_gallery_comment",
+      "value": "顯示圖庫留言"
+    },
+    {
+      "name": "settings_eh_show_gallery_rating",
+      "value": "顯示圖庫評分"
+    },
+    {
+      "name": "settings_eh_show_eh_event",
+      "value": "顯示 EH 事件"
+    },
+    {
+      "name": "settings_eh_show_eh_limits",
+      "value": "顯示 EH 限制"
+    },
+    {
+      "name": "settings_eh_show_jpn_title_summary",
+      "value": "需同時在 EHentai 網站設定中啟用 Japanese Title"
+    },
+    {
+      "name": "settings_eh_show_gallery_pages",
+      "value": "顯示圖庫頁數"
+    },
+    {
+      "name": "settings_eh_show_gallery_pages_summary",
+      "value": "在圖庫列表中顯示頁數"
+    },
+    {
+      "name": "settings_eh_show_tag_translations",
+      "value": "顯示標籤翻譯"
+    },
+    {
+      "name": "settings_eh_show_tag_translations_summary",
+      "value": "顯示翻譯後的標籤而非原始文字（需花費時間來下載資料檔案）"
+    },
+    {
+      "name": "settings_eh_tag_translations_source",
+      "value": "補充翻譯（由 EhTagTranslator 提供）"
+    },
+    {
+      "name": "settings_eh_tag_translations_source_url",
+      "value": "https://github.com/Mapaler/EhTagTranslator/wiki"
+    },
+    {
+      "name": "settings_eh_filter",
+      "value": "遮蔽圖庫"
+    },
+    {
+      "name": "settings_eh_filter_summary",
+      "value": "根據標題、上傳者、標籤遮蔽圖庫"
+    },
+    {
+      "name": "settings_eh_cellular_network_warning",
+      "value": "行動數據警告"
+    },
+    {
+      "name": "settings_read",
+      "value": "閱讀"
+    },
+    {
+      "name": "settings_read_screen_rotation",
+      "value": "螢幕方向"
+    },
+    {
+      "name": "settings_read_screen_rotation_default",
+      "value": "系統預設"
+    },
+    {
+      "name": "settings_read_screen_rotation_portrait",
+      "value": "直向"
+    },
+    {
+      "name": "settings_read_screen_rotation_landscape",
+      "value": "橫向"
+    },
+    {
+      "name": "settings_read_screen_rotation_sensor",
+      "value": "自動旋轉"
+    },
+    {
+      "name": "settings_read_refresh_rate",
+      "value": "畫面更新率"
+    },
+    {
+      "name": "settings_read_refresh_rate_default",
+      "value": "系統預設"
+    },
+    {
+      "name": "settings_read_refresh_rate_60",
+      "value": "60 Hz"
+    },
+    {
+      "name": "settings_read_refresh_rate_90",
+      "value": "90 Hz"
+    },
+    {
+      "name": "settings_read_refresh_rate_120",
+      "value": "120 Hz"
+    },
+    {
+      "name": "settings_read_refresh_rate_max",
+      "value": "螢幕最高"
+    },
+    {
+      "name": "settings_read_reading_direction",
+      "value": "閱讀方向"
+    },
+    {
+      "name": "settings_read_reading_direction_left_to_right",
+      "value": "由左到右"
+    },
+    {
+      "name": "settings_read_reading_direction_right_to_Left",
+      "value": "由右到左"
+    },
+    {
+      "name": "settings_read_reading_direction_top_to_bottom",
+      "value": "由上到下"
+    },
+    {
+      "name": "settings_read_page_scaling",
+      "value": "頁面縮放"
+    },
+    {
+      "name": "settings_read_page_scaling_actual_size",
+      "value": "原始尺寸"
+    },
+    {
+      "name": "settings_read_page_scaling_fit_to_width",
+      "value": "貼齊寬度"
+    },
+    {
+      "name": "settings_read_page_scaling_fit_to_height",
+      "value": "貼齊長度"
+    },
+    {
+      "name": "settings_read_page_scaling_fit_to_screen",
+      "value": "以螢幕大小縮放"
+    },
+    {
+      "name": "settings_read_page_scaling_fixed_scale",
+      "value": "固定尺寸"
+    },
+    {
+      "name": "settings_read_start_position",
+      "value": "開始位置"
+    },
+    {
+      "name": "settings_read_start_position_top_left",
+      "value": "左上角"
+    },
+    {
+      "name": "settings_read_start_position_top_right",
+      "value": "右上角"
+    },
+    {
+      "name": "settings_read_start_position_bottom_left",
+      "value": "左下角"
+    },
+    {
+      "name": "settings_read_start_position_bottom_right",
+      "value": "右下角"
+    },
+    {
+      "name": "settings_read_start_position_center",
+      "value": "中間"
+    },
+    {
+      "name": "settings_read_keep_screen_on",
+      "value": "保持螢幕開啟"
+    },
+    {
+      "name": "settings_read_show_clock",
+      "value": "顯示時鐘"
+    },
+    {
+      "name": "settings_read_show_progress",
+      "value": "顯示進度"
+    },
+    {
+      "name": "settings_read_show_battery",
+      "value": "顯示電量"
+    },
+    {
+      "name": "settings_read_show_page_interval",
+      "value": "顯示頁面間隔"
+    },
+    {
+      "name": "settings_read_page_turn_animation",
+      "value": "翻頁動畫"
+    },
+    {
+      "name": "settings_read_volume_page",
+      "value": "使用音量鍵翻頁"
+    },
+    {
+      "name": "settings_read_reverse_volume_page",
+      "value": "反轉音量鍵翻頁方向"
+    },
+    {
+      "name": "settings_read_reading_fullscreen",
+      "value": "全螢幕"
+    },
+    {
+      "name": "settings_read_auto_transfer_time",
+      "value": "自動切換時間（秒）"
+    },
+    {
+      "name": "settings_read_custom_screen_lightness",
+      "value": "自訂螢幕亮度"
+    },
+    {
+      "name": "settings_read_screen_lightness",
+      "value": "螢幕亮度"
+    },
+    {
+      "name": "settings_download",
+      "value": "下載"
+    },
+    {
+      "name": "settings_download_download_location",
+      "value": "下載路徑"
+    },
+    {
+      "name": "settings_download_invalid_download_location",
+      "value": "無效的下載路徑"
+    },
+    {
+      "name": "settings_download_cant_get_download_location",
+      "value": "無法取得下載路徑"
+    },
+    {
+      "name": "settings_download_pick_dir_kk",
+      "value": "在 Android 4.4+  KitKat 中您無法把數據寫到外接 SD 卡裡，除非你駭了他。不過 <SD card>/Android/data/com.hippo.ehviewer 這個路徑比較特別，可以寫入。"
+    },
+    {
+      "name": "settings_download_pick_dir_l",
+      "value": "Android 5.0+ Lollipop 提供了新的寫入外接 SD 卡的 API。如果您想把下載路徑設定到外接 SD 卡上，點擊“檔案”按鈕"
+    },
+    {
+      "name": "settings_download_document",
+      "value": "檔案"
+    },
+    {
+      "name": "settings_download_continue",
+      "value": "繼續"
+    },
+    {
+      "name": "settings_download_multi_thread_download",
+      "value": "同時多重下載"
+    },
+    {
+      "name": "settings_download_multi_thread_download_summary",
+      "value": "最多同時下載 %s 張圖片"
+    },
+    {
+      "name": "settings_download_preload_image",
+      "value": "預載圖片"
+    },
+    {
+      "name": "settings_download_preload_image_summary",
+      "value": "向後預載 %s 張圖片"
+    },
+    {
+      "name": "settings_download_image_resolution",
+      "value": "圖片解析度"
+    },
+    {
+      "name": "settings_download_image_resolution_summary",
+      "value": "%s，大於 1280x 的解析度可能不會生效"
+    },
+    {
+      "name": "settings_download_image_resolution_auto",
+      "value": "自動"
+    },
+    {
+      "name": "settings_download_download_origin_image",
+      "value": "下載原圖"
+    },
+    {
+      "name": "settings_download_download_origin_image_summary",
+      "value": "這很危險！勾選這個選項會導致圖片流量配額與GP快速耗用"
+    },
+    {
+      "name": "settings_download_download_list_pagination",
+      "value": "分頁列表"
+    },
+    {
+      "name": "settings_download_download_list_pagination_summary",
+      "value": "分頁功能僅在列表長度大於 500 時生效"
+    },
+    {
+      "name": "settings_download_download_order_by_asc",
+      "value": "以升序下載"
+    },
+    {
+      "name": "settings_download_download_order_by_asc_summary",
+      "value": "當下載全部圖庫時照順序下載"
+    },
+    {
+      "name": "settings_download_sync_while_reading",
+      "value": "觀看時同步下載"
+    },
+    {
+      "name": "settings_download_sync_while_reading_summary",
+      "value": "在瀏覽未下載圖庫時，自動將瀏覽到的圖片保存到下載目錄"
+    },
+    {
+      "name": "settings_download_media_scan",
+      "value": "允許其他程式進行媒體掃描"
+    },
+    {
+      "name": "settings_download_media_scan_summary_on",
+      "value": "請別讓別人看到你的相簿"
+    },
+    {
+      "name": "settings_download_media_scan_summary_off",
+      "value": "大部分相簿軟體將會忽略顯示下載路徑中的影像"
+    },
+    {
+      "name": "settings_download_restore_download_items",
+      "value": "回復下載的檔案"
+    },
+    {
+      "name": "settings_download_restore_download_items_summary",
+      "value": "回復下載路徑中的所有下載的檔案"
+    },
+    {
+      "name": "settings_download_restoring",
+      "value": "回復中"
+    },
+    {
+      "name": "settings_download_restore_not_found",
+      "value": "未尋獲可回復的已下載檔案"
+    },
+    {
+      "name": "settings_download_restore_failed",
+      "value": "回復失敗"
+    },
+    {
+      "name": "settings_download_restore_successfully",
+      "value": "成功回復 %d 項"
+    },
+    {
+      "name": "settings_download_clean_redundancy",
+      "value": "清除冗餘的檔案"
+    },
+    {
+      "name": "settings_download_clean_redundancy_summary",
+      "value": "清除已下載但不在下載列表中的圖檔"
+    },
+    {
+      "name": "settings_download_clean_redundancy_no_redundancy",
+      "value": "未發現冗餘檔案"
+    },
+    {
+      "name": "settings_download_clean_redundancy_done",
+      "value": "完成冗餘檔案清理，共清理了 %d 個檔案"
+    },
+    {
+      "name": "settings_advanced",
+      "value": "進階"
+    },
+    {
+      "name": "settings_advanced_save_parse_error_body",
+      "value": "解析失敗時儲存網頁的內容"
+    },
+    {
+      "name": "settings_advanced_save_parse_error_body_summary",
+      "value": "網頁內容可能含有敏感的隱私資料"
+    },
+    {
+      "name": "settings_advanced_save_crash_log",
+      "value": "應用崩潰時儲存錯誤日誌"
+    },
+    {
+      "name": "settings_advanced_save_crash_log_summary",
+      "value": "錯誤日誌可以幫助開發者修正問題"
+    },
+    {
+      "name": "settings_advanced_dump_logcat",
+      "value": "傾印log"
+    },
+    {
+      "name": "settings_advanced_dump_logcat_summary",
+      "value": "儲存log紀錄至外接儲存裝置中"
+    },
+    {
+      "name": "settings_advanced_dump_logcat_failed",
+      "value": "無法傾印log紀錄"
+    },
+    {
+      "name": "settings_advanced_dump_logcat_to",
+      "value": "已儲存log紀錄至 %s"
+    },
+    {
+      "name": "settings_advanced_clear_download_path_cache",
+      "value": "清除下載路徑的快取"
+    },
+    {
+      "name": "settings_advanced_clear_download_path_cache_summary",
+      "value": "圖庫下載路徑可能錯了，所以需要重新下載。清除圖庫下載路徑的快取可能可以解決這個問題。"
+    },
+    {
+      "name": "settings_advanced_clear_download_path_cache_message",
+      "value": "清除圖庫下載路徑的快取？"
+    },
+    {
+      "name": "settings_advanced_clear_memory_cache",
+      "value": "清除記憶體快取"
+    },
+    {
+      "name": "settings_advanced_clear_memory_cache_summary",
+      "value": "清除縮圖、圖庫詳細資料的記憶體快取"
+    },
+    {
+      "name": "settings_advanced_read_cache_size",
+      "value": "閱讀快取大小"
+    },
+    {
+      "name": "settings_advanced_app_language_title",
+      "value": "App 介面語言"
+    },
+    {
+      "name": "settings_advanced_proxy",
+      "value": "代理"
+    },
+    {
+      "name": "settings_advanced_proxy_summary_1",
+      "value": "%1$s %2$s:%3$d"
+    },
+    {
+      "name": "settings_advanced_proxy_summary_2",
+      "value": "%1$s"
+    },
+    {
+      "name": "settings_advanced_built_in_hosts_title",
+      "value": "內建 hosts.txt"
+    },
+    {
+      "name": "settings_advanced_built_in_hosts_summary",
+      "value": "應用提供的主機到IP的對映\n可被自定義 hosts.txt 覆蓋"
+    },
+    {
+      "name": "settings_advanced_custom_hosts_title",
+      "value": "自定義 hosts.txt"
+    },
+    {
+      "name": "settings_advanced_custom_hosts_summary",
+      "value": "將主機名稱對映到相應的IP位址\n可覆蓋內建 hosts.txt"
+    },
+    {
+      "name": "settings_privacy_pattern_protection_title",
+      "value": "繪圖解鎖"
+    },
+    {
+      "name": "settings_privacy_pattern_protection_not_set",
+      "value": "尚未設定繪圖解鎖"
+    },
+    {
+      "name": "settings_privacy_pattern_protection_set",
+      "value": "已設定繪圖解鎖"
+    },
+    {
+      "name": "settings_advanced_export_data",
+      "value": "匯出檔案"
+    },
+    {
+      "name": "settings_advanced_export_data_summary",
+      "value": "儲存資料至外接儲存設備，例如下載列表，快速搜尋列表"
+    },
+    {
+      "name": "settings_advanced_export_data_to",
+      "value": "已匯出資料至 %s"
+    },
+    {
+      "name": "settings_advanced_export_data_failed",
+      "value": "無法匯出資料"
+    },
+    {
+      "name": "settings_advanced_import_data",
+      "value": "匯入檔案"
+    },
+    {
+      "name": "settings_advanced_import_data_summary",
+      "value": "從之前儲存的檔案匯入"
+    },
+    {
+      "name": "settings_advanced_import_data_successfully",
+      "value": "成功將資料匯入"
+    },
+    {
+      "name": "settings_advanced_wifi_sender",
+      "value": "WiFi資料遷移"
+    },
+    {
+      "name": "settings_advanced_wifi_sander_summary",
+      "value": "透過Wi-Fi熱點來資料遷移"
+    },
+    {
+      "name": "settings_advanced_wifi_client",
+      "value": "WiFi遷移資料接受"
+    },
+    {
+      "name": "settings_advanced_wifi_client_summary",
+      "value": "接收來自Wi-Fi熱點的遷移資料"
+    },
+    {
+      "name": "settings_about",
+      "value": "關於"
+    },
+    {
+      "name": "settings_about_declaration",
+      "value": "EhViewer"
+    },
+    {
+      "name": "settings_about_declaration_summary",
+      "value": "EhViewer 與 E-Hentai.org 無任何聯繫"
+    },
+    {
+      "name": "settings_about_author",
+      "value": "作者"
+    },
+    {
+      "name": "settings_about_author_summary",
+      "value": "SXJ_LonelyDog <xiaojieonly$foxmail.com>"
+    },
+    {
+      "name": "settings_about_telegram",
+      "value": "Telegram"
+    },
+    {
+      "name": "settings_about_latest_release",
+      "value": "最新版本"
+    },
+    {
+      "name": "settings_about_website",
+      "value": "網站"
+    },
+    {
+      "name": "settings_about_source",
+      "value": "原始碼"
+    },
+    {
+      "name": "settings_about_changelog",
+      "value": "更新日誌"
+    },
+    {
+      "name": "settings_about_help",
+      "value": "說明"
+    },
+    {
+      "name": "settings_about_issue_help",
+      "value": "問題說明"
+    },
+    {
+      "name": "settings_about_license",
+      "value": "授權"
+    },
+    {
+      "name": "settings_about_license_summary",
+      "value": "EhViewer 的誕生離不開許多開源專案"
+    },
+    {
+      "name": "settings_about_donate",
+      "value": "贊助"
+    },
+    {
+      "name": "settings_about_donate_message",
+      "value": "您的贊助將不會替您產生任何特權，但能夠幫助我能夠繼續維護這個程式。"
+    },
+    {
+      "name": "settings_about_donate_alipay",
+      "value": "支付寶"
+    },
+    {
+      "name": "settings_about_donate_paypal",
+      "value": "PayPal"
+    },
+    {
+      "name": "settings_about_donate_guide",
+      "value": "支持指南"
+    },
+    {
+      "name": "settings_about_donate_open",
+      "value": "開啟"
+    },
+    {
+      "name": "settings_about_donate_copy",
+      "value": "複製"
+    },
+    {
+      "name": "settings_save_image_aliPay",
+      "value": "儲存支付寶二維碼"
+    },
+    {
+      "name": "settings_save_image_weChat",
+      "value": "儲存微信二維碼"
+    },
+    {
+      "name": "settings_about_donate_copied",
+      "value": "已複製"
+    },
+    {
+      "name": "settings_privacy_enable_analytics",
+      "value": "啟用資料統計"
+    },
+    {
+      "name": "settings_privacy_about_analytics",
+      "value": "關於資料統計"
+    },
+    {
+      "name": "settings_about_version",
+      "value": "版本號碼"
+    },
+    {
+      "name": "settings_about_check_for_updates",
+      "value": "檢查更新"
+    },
+    {
+      "name": "settings_close_automatic_updates",
+      "value": "關閉自動更新"
+    },
+    {
+      "name": "settings_about_beta_update_channel",
+      "value": "安裝測試更新版"
+    },
+    {
+      "name": "settings_about_beta_update_channel_summary",
+      "value": "測試更新版可能會使裝置出現不可預期的錯誤"
+    },
+    {
+      "name": "excluded_languages",
+      "value": "排除語言"
+    },
+    {
+      "name": "select_all",
+      "value": "全選"
+    },
+    {
+      "name": "deselect_all",
+      "value": "全取消"
+    },
+    {
+      "name": "invert_selection",
+      "value": "反轉選取"
+    },
+    {
+      "name": "language",
+      "value": "語言"
+    },
+    {
+      "name": "original",
+      "value": "原始作品"
+    },
+    {
+      "name": "translated",
+      "value": "翻譯版"
+    },
+    {
+      "name": "rewrite",
+      "value": "改寫"
+    },
+    {
+      "name": "language_japanese",
+      "value": "日語"
+    },
+    {
+      "name": "language_english",
+      "value": "英語"
+    },
+    {
+      "name": "language_chinese",
+      "value": "漢語"
+    },
+    {
+      "name": "language_dutch",
+      "value": "荷蘭語"
+    },
+    {
+      "name": "language_french",
+      "value": "法語"
+    },
+    {
+      "name": "language_german",
+      "value": "德語"
+    },
+    {
+      "name": "language_hungarian",
+      "value": "匈牙利語"
+    },
+    {
+      "name": "language_italian",
+      "value": "義大利語"
+    },
+    {
+      "name": "language_korean",
+      "value": "韓語"
+    },
+    {
+      "name": "language_polish",
+      "value": "波蘭語"
+    },
+    {
+      "name": "language_portuguese",
+      "value": "葡萄牙語"
+    },
+    {
+      "name": "language_russian",
+      "value": "俄語"
+    },
+    {
+      "name": "language_spanish",
+      "value": "西班牙語"
+    },
+    {
+      "name": "language_thai",
+      "value": "泰語"
+    },
+    {
+      "name": "language_vietnamese",
+      "value": "越南語"
+    },
+    {
+      "name": "language_na",
+      "value": "N/A"
+    },
+    {
+      "name": "language_other",
+      "value": "其他"
+    },
+    {
+      "name": "please_wait",
+      "value": "請稍候"
+    },
+    {
+      "name": "proxy_enable",
+      "value": "啟用"
+    },
+    {
+      "name": "proxy_enabled",
+      "value": "已啟用"
+    },
+    {
+      "name": "proxy_disabled",
+      "value": "未啟用"
+    },
+    {
+      "name": "proxy_direct",
+      "value": "直接連線"
+    },
+    {
+      "name": "proxy_system",
+      "value": "系統代理"
+    },
+    {
+      "name": "proxy_host_or_ip",
+      "value": "主機或 IP"
+    },
+    {
+      "name": "proxy_port",
+      "value": "通訊埠"
+    },
+    {
+      "name": "proxy_domain_not_supported",
+      "value": "不支援的域名"
+    },
+    {
+      "name": "proxy_invalid_port",
+      "value": "無效的通訊埠"
+    },
+    {
+      "name": "cant_get_data_dir",
+      "value": "無法取得檔案資料夾"
+    },
+    {
+      "name": "cant_find_any_data",
+      "value": "找不到任何資料"
+    },
+    {
+      "name": "cant_read_the_file",
+      "value": "無法讀取檔案"
+    },
+    {
+      "name": "app_language_system",
+      "value": "系統語言（預設）"
+    },
+    {
+      "name": "license",
+      "value": "授權"
+    },
+    {
+      "name": "dir_picker",
+      "value": "選擇資料夾"
+    },
+    {
+      "name": "directory_not_writable",
+      "value": "該資料夾無法寫入"
+    },
+    {
+      "name": "cloud_favorites",
+      "value": "雲端收藏"
+    },
+    {
+      "name": "local_favorites",
+      "value": "本機收藏"
+    },
+    {
+      "name": "favorites_search_bar_hint",
+      "value": "搜尋 %s"
+    },
+    {
+      "name": "favorites_title",
+      "value": "%s"
+    },
+    {
+      "name": "favorites_title_2",
+      "value": "%1$s - %2$s"
+    },
+    {
+      "name": "delete_favorites_dialog_title",
+      "value": "移除收藏"
+    },
+    {
+      "name": "delete_favorites_dialog_message",
+      "value": "將 %d 項收藏移除？"
+    },
+    {
+      "name": "move_favorites_dialog_title",
+      "value": "移動收藏"
+    },
+    {
+      "name": "default_favorites_collection",
+      "value": "預設收藏夾"
+    },
+    {
+      "name": "let_me_select",
+      "value": "讓我每次都選擇"
+    },
+    {
+      "name": "favorites_info",
+      "value": "收藏資訊"
+    },
+    {
+      "name": "collections",
+      "value": "收藏夾"
+    },
+    {
+      "name": "count",
+      "value": "數量"
+    },
+    {
+      "name": "need_sign_in",
+      "value": "需要登入"
+    },
+    {
+      "name": "error_something_wrong_happened",
+      "value": "被玩壞了"
+    },
+    {
+      "name": "guide_quick_search_title",
+      "value": "快速搜尋"
+    },
+    {
+      "name": "guide_quick_search_text",
+      "value": "從右側滑動以開啟快速搜尋面板"
+    },
+    {
+      "name": "guide_collections_title",
+      "value": "收藏夾"
+    },
+    {
+      "name": "guide_collections_text",
+      "value": "從右側滑動選擇收藏夾"
+    },
+    {
+      "name": "guide_download_labels_title",
+      "value": "下載標籤"
+    },
+    {
+      "name": "guide_download_labels_text",
+      "value": "從右側滑動以開啟下載標籤面板"
+    },
+    {
+      "name": "guide_download_thumb_title",
+      "value": "圖庫詳細資訊"
+    },
+    {
+      "name": "guide_download_thumb_text",
+      "value": "點擊縮圖檢視圖庫詳細資訊"
+    },
+    {
+      "name": "guide_gallery_left",
+      "value": "翻頁"
+    },
+    {
+      "name": "guide_gallery_right",
+      "value": "翻頁"
+    },
+    {
+      "name": "guide_gallery_menu",
+      "value": "選單"
+    },
+    {
+      "name": "guide_gallery_progress",
+      "value": "進度條"
+    },
+    {
+      "name": "guide_gallery_long_click",
+      "value": "長按以開啟頁面選單"
+    },
+    {
+      "name": "from_the_future",
+      "value": "來自未來"
+    },
+    {
+      "name": "just_now",
+      "value": "剛剛"
+    },
+    {
+      "name": "yesterday",
+      "value": "昨天"
+    },
+    {
+      "name": "some_days_ago",
+      "value": "%d 天前"
+    },
+    {
+      "name": "dialog_archive_title",
+      "value": "透過 H@H 下載"
+    },
+    {
+      "name": "no_archives",
+      "value": "沒有壓縮檔"
+    },
+    {
+      "name": "download_archive_started",
+      "value": "開始下載壓縮檔"
+    },
+    {
+      "name": "download_archive_failure",
+      "value": "下載失敗"
+    },
+    {
+      "name": "h_h",
+      "value": "H@H"
+    },
+    {
+      "name": "download_h_h_failure_no_hath",
+      "value": "下載壓縮檔需要 H@H 客戶端"
+    },
+    {
+      "name": "settings_privacy",
+      "value": "隱私"
+    },
+    {
+      "name": "settings_privacy_secure",
+      "value": "不允許螢幕擷取"
+    },
+    {
+      "name": "settings_privacy_secure_summary",
+      "value": "啟用後，將無法對本程式進行螢幕擷取，同時，將不會在系統任務切換器中顯示該程式的預覽內容\n\n重新啟動本程式以套用此變更"
+    },
+    {
+      "name": "download_service",
+      "value": "下載服務"
+    },
+    {
+      "name": "favorite_name",
+      "value": "收藏圖庫"
+    },
+    {
+      "name": "no_blicklist",
+      "value": "這裡是黑名單"
+    },
+    {
+      "name": "gallery_toplists",
+      "value": "圖庫 排行榜"
+    },
+    {
+      "name": "uploader_toplists",
+      "value": "上傳 排行榜"
+    },
+    {
+      "name": "tagging_toplists",
+      "value": "標籤 排行榜"
+    },
+    {
+      "name": "hentai_home_toplists",
+      "value": "Hentai@Home 排行榜"
+    },
+    {
+      "name": "ehtracker_toplists",
+      "value": "EH訂閱 排行榜"
+    },
+    {
+      "name": "cleanup_toplists",
+      "value": "整理 排行榜"
+    },
+    {
+      "name": "rating_reviewing_toplists",
+      "value": "等級&審核 排行榜"
+    },
+    {
+      "name": "top_list",
+      "value": "排行榜"
+    },
+    {
+      "name": "all_time_top_list",
+      "value": "有史以來"
+    },
+    {
+      "name": "past_year_top_list",
+      "value": "過去一年"
+    },
+    {
+      "name": "past_month_top_list",
+      "value": "過去一個月"
+    },
+    {
+      "name": "yesterday_top_list",
+      "value": "昨天"
+    },
+    {
+      "name": "blacklist_id",
+      "value": "使用者ID"
+    },
+    {
+      "name": "blacklist",
+      "value": "黑名單"
+    },
+    {
+      "name": "join_in_blacklist",
+      "value": "加入黑名單"
+    },
+    {
+      "name": "add_blacklist",
+      "value": "添加封鎖用戶"
+    },
+    {
+      "name": "blacklist_tip",
+      "value": "該封鎖系統會在 EHentai 網站評論系統的基礎上繼續封鎖評論。\n\n評論者封鎖項：排除該評論者上傳的評論。這會使載入圖庫列表花費更多時間。"
+    },
+    {
+      "name": "blacklist_text",
+      "value": "封鎖用戶"
+    },
+    {
+      "name": "delete_blacklist",
+      "value": "取消封鎖用戶“%s”？"
+    },
+    {
+      "name": "blacklist_reason_text",
+      "value": "封鎖原因"
+    },
+    {
+      "name": "settings_eh_blacklist",
+      "value": "評論黑名單"
+    },
+    {
+      "name": "settings_eh_blacklist_summary",
+      "value": "根據帳號名稱封鎖他人評論"
+    },
+    {
+      "name": "settings_advanced_dns_over_http_title",
+      "value": "安全 DNS（DoH）"
+    },
+    {
+      "name": "settings_advanced_dns_over_http_summary",
+      "value": "解決某些地區的 DNS 汙染問題"
+    },
+    {
+      "name": "settings_advanced_domain_fronting_title",
+      "value": "域名前置"
+    },
+    {
+      "name": "settings_advanced_domain_fronting_summary",
+      "value": "繞過 SNI 封鎖"
+    },
+    {
+      "name": "settings_advanced_url_replace_title",
+      "value": "url偽裝,需關閉SNI"
+    },
+    {
+      "name": "settings_advanced_url_replace_summary",
+      "value": "url偽裝(需重啟，開啟後帳號功能失效)"
+    },
+    {
+      "name": "share_favorites_dialog_title",
+      "value": "分享收藏"
+    },
+    {
+      "name": "share_favorites_dialog_message",
+      "value": "分享收藏 %s ？"
+    },
+    {
+      "name": "add_favorites_dialog_message",
+      "value": "添加收藏 %s ？"
+    },
+    {
+      "name": "settings_advanced_built_ex_hosts_title",
+      "value": "內建exhentai hosts.txt"
+    },
+    {
+      "name": "settings_advanced_built_ex_hosts_summary",
+      "value": "應用提供的主機到IP的映射\n可被自訂 hosts.txt 覆蓋"
+    },
+    {
+      "name": "network_remind",
+      "value": "檢測到開啟了vpn，請注意您的網路安全"
+    },
+    {
+      "name": "download_torrent_name",
+      "value": "種子: %s"
+    },
+    {
+      "name": "download_torrent_state",
+      "value": "狀態:"
+    },
+    {
+      "name": "download_torrent_path",
+      "value": "path: %s"
+    },
+    {
+      "name": "download_search",
+      "value": "在下載列表中搜尋"
+    },
+    {
+      "name": "sure",
+      "value": "OK"
+    },
+    {
+      "name": "try_again",
+      "value": "再試一次"
+    },
+    {
+      "name": "open_directory",
+      "value": "開啟目錄"
+    },
+    {
+      "name": "downloading",
+      "value": "正在下載…… 請稍後再試"
+    },
+    {
+      "name": "torrent_exist",
+      "value": "檔案已存在: %s"
+    },
+    {
+      "name": "subscription_watched",
+      "value": "訂閱"
+    },
+    {
+      "name": "subscription_hidden",
+      "value": "排除"
+    },
+    {
+      "name": "delete_subscription_title",
+      "value": "刪除標籤"
+    },
+    {
+      "name": "can_not_use_this_tag",
+      "value": "標籤不可用"
+    },
+    {
+      "name": "add_tag_dialog_title",
+      "value": "添加標籤"
+    },
+    {
+      "name": "tag_title",
+      "value": "標籤欄"
+    },
+    {
+      "name": "empty_subscription",
+      "value": "訂閱內容為空"
+    },
+    {
+      "name": "subscription_success",
+      "value": "%s成功"
+    },
+    {
+      "name": "yes",
+      "value": "是"
+    },
+    {
+      "name": "cancel",
+      "value": "取消"
+    },
+    {
+      "name": "change_background_title",
+      "value": "你確定要改變背景嗎？"
+    },
+    {
+      "name": "change_background_message",
+      "value": "背景修改僅限於此軟體，不與 E-hentai 或其它類似軟體同步。"
+    },
+    {
+      "name": "change_avatar_title",
+      "value": "你確定要改變你的頭像嗎？"
+    },
+    {
+      "name": "change_avatar_message",
+      "value": "頭像修改僅限於此軟體，不與 E-hentai 或其它類似軟體同步。"
+    },
+    {
+      "name": "take_a_photograph",
+      "value": "拍照"
+    },
+    {
+      "name": "choose_from_the_album",
+      "value": "從相簿選擇"
+    },
+    {
+      "name": "request_camera_permission",
+      "value": "為了拍照，EhViewer 將請求裝置相機的權限。您願意授權嗎？"
+    },
+    {
+      "name": "request_storage_permission",
+      "value": "為了獲取相片，EhViewer 將請求裝置的圖片相簿之權限。您願意授權嗎？"
+    },
+    {
+      "name": "wifi_server_name",
+      "value": "WiFi伺服器"
+    },
+    {
+      "name": "wifi_server",
+      "value": "WiFi伺服器"
+    },
+    {
+      "name": "wifi_client",
+      "value": "WiFi用戶端"
+    },
+    {
+      "name": "wifi_send_bookmark",
+      "value": "遷移書籤"
+    },
+    {
+      "name": "wifi_send_favorite",
+      "value": "遷移收藏"
+    },
+    {
+      "name": "wifi_send_download",
+      "value": "遷移下載資料"
+    },
+    {
+      "name": "wifi_send_download_location",
+      "value": "遷移下載目錄"
+    },
+    {
+      "name": "wifi_download_dir_empty",
+      "value": "未找到可遷移的畫廊資料夾"
+    },
+    {
+      "name": "wifi_download_dir_no_location",
+      "value": "本機未設定下載目錄"
+    },
+    {
+      "name": "wifi_download_dir_migrating",
+      "value": "正在遷移 %1$s（%2$d/%3$d 個檔案）"
+    },
+    {
+      "name": "wifi_download_dir_manifest_received",
+      "value": "%1$s（%2$d/%3$d）：略過 %4$d，待傳 %5$d"
+    },
+    {
+      "name": "wifi_download_dir_file_done",
+      "value": "已接收檔案：%s"
+    },
+    {
+      "name": "wifi_download_dir_files_progress",
+      "value": "已接收 %d 個檔案"
+    },
+    {
+      "name": "wifi_download_dir_file_failed",
+      "value": "檔案校驗失敗，已丟棄"
+    },
+    {
+      "name": "wifi_send_done",
+      "value": "遷移資料完成"
+    },
+    {
+      "name": "wifi_send_start",
+      "value": "開始遷移%s"
+    },
+    {
+      "name": "wifi_send_stop",
+      "value": "停止遷移%s"
+    },
+    {
+      "name": "wifi_sending",
+      "value": "資料遷移中請稍候或退出重試"
+    },
+    {
+      "name": "wifi_send_text",
+      "value": "發送資料"
+    },
+    {
+      "name": "wifi_server_illustrate",
+      "value": "請確保要接收資料的手機以連接本機熱點，並再遷移完成前切勿斷開連結或返回上層頁面！"
+    },
+    {
+      "name": "wifi_server_connect",
+      "value": "連接"
+    },
+    {
+      "name": "wifi_server_connect_unable",
+      "value": "連接不存在"
+    },
+    {
+      "name": "wifi_server_connection_succeeded",
+      "value": "裝置已連接成功。收到資料後，請重新開啟應用程式以使資料生效。"
+    },
+    {
+      "name": "wifi_server_disconnect",
+      "value": "裝置斷開連結"
+    },
+    {
+      "name": "wifi_server_connection_fail",
+      "value": "創建通信失敗"
+    },
+    {
+      "name": "wifi_server_send_success",
+      "value": "發送消息成功: %s"
+    },
+    {
+      "name": "wifi_server_send_fail",
+      "value": "發送消息失敗: %s"
+    },
+    {
+      "name": "wifi_server_receive_message",
+      "value": "收到消息: %s"
+    },
+    {
+      "name": "wifi_server_receive_message_unknown",
+      "value": "未知資料類型"
+    },
+    {
+      "name": "wifi_server_opened",
+      "value": "熱點已開啟 SSID: %1s \n%2s"
+    },
+    {
+      "name": "wifi_server_closed",
+      "value": "熱點已關閉"
+    },
+    {
+      "name": "wifi_server_password",
+      "value": "密碼: %s"
+    },
+    {
+      "name": "wifi_server_no_permission",
+      "value": "權限不足，請授予權限"
+    },
+    {
+      "name": "refresh_limits",
+      "value": "重新整理使用限額"
+    },
+    {
+      "name": "from_gallery_visits",
+      "value": "%s 來自圖庫瀏覽"
+    },
+    {
+      "name": "from_torrent_completions",
+      "value": "%s 來自種子完成"
+    },
+    {
+      "name": "from_archive_download",
+      "value": "%s 來自內容下載"
+    },
+    {
+      "name": "from_hentai_home",
+      "value": "%s 來自 Hentai@Home"
+    },
+    {
+      "name": "current_moderation_power",
+      "value": "當前願力 %s"
+    },
+    {
+      "name": "reset_cost",
+      "value": "花費 %s 重置"
+    },
+    {
+      "name": "ip_base_limits",
+      "value": "IP 基礎限制"
+    },
+    {
+      "name": "limit_unneed_reset",
+      "value": "目前無需重置配額，請重新整理後再試試~"
+    },
+    {
+      "name": "pagination_count",
+      "value": "計數"
+    },
+    {
+      "name": "pagination_page_and_item",
+      "value": "r/p"
+    },
+    {
+      "name": "settings_eh_list_show_read_progress",
+      "value": "顯示閱讀進度"
+    },
+    {
+      "name": "settings_eh_list_show_read_progress_summary",
+      "value": "在詳細列表模式中顯示每個圖庫的閱讀進度"
+    },
+    {
+      "name": "cookie_login_import_in_clipboard",
+      "value": "從剪貼簿匯入"
+    },
+    {
+      "name": "no_cookie_in_clipboard",
+      "value": "剪貼簿中找不到有效資料"
+    },
+    {
+      "name": "gallery_update_dialog_title",
+      "value": "更新方式"
+    },
+    {
+      "name": "gallery_update_dialog_message",
+      "value": "覆蓋舊圖庫：僅保留下載的版本，舊版本將被刪除。\n下載為新圖庫：下載的圖庫將作為新圖庫存在，新圖庫和舊圖庫都將被保存。"
+    },
+    {
+      "name": "gallery_update_download_as_new",
+      "value": "下載為新圖庫"
+    },
+    {
+      "name": "gallery_update_override_old",
+      "value": "覆蓋舊圖庫"
+    },
+    {
+      "name": "loading_db_file",
+      "value": "資料載入中…"
+    },
+    {
+      "name": "settings_eh_history_size",
+      "value": "歷史記錄數量"
+    },
+    {
+      "name": "history_info_unlimited",
+      "value": "無限制"
+    },
+    {
+      "name": "archiver",
+      "value": "歸檔器"
+    },
+    {
+      "name": "archiver_dialog_current_funds",
+      "value": "當前資金："
+    },
+    {
+      "name": "archiver_dialog_cost",
+      "value": "下載成本：  %s"
+    },
+    {
+      "name": "archiver_dialog_download_original",
+      "value": "下載原始歸檔"
+    },
+    {
+      "name": "archiver_dialog_download_resample",
+      "value": "下載重採樣歸檔"
+    },
+    {
+      "name": "archiver_dialog_size",
+      "value": "預估大小：  %s"
+    },
+    {
+      "name": "dialog_archiver_title",
+      "value": "歸檔下載器"
+    },
+    {
+      "name": "download_receiver_label",
+      "value": "EhViewer 下載接收器"
+    },
+    {
+      "name": "decompressed_successfully",
+      "value": "解壓縮成功！"
+    },
+    {
+      "name": "decompression_failed",
+      "value": "解壓縮失敗！"
+    },
+    {
+      "name": "download_label_archiver",
+      "value": "歸檔器"
+    },
+    {
+      "name": "cookie_in_clipboard_incorrect",
+      "value": "Cookie 格式不正確"
+    },
+    {
+      "name": "settings_download_timeout",
+      "value": "下載逾時"
+    },
+    {
+      "name": "download_timeout_unlimited",
+      "value": "無限制"
+    },
+    {
+      "name": "settings_download_timeout_summary",
+      "value": "%s（秒），允許下載一張圖片的最大時間。"
+    },
+    {
+      "name": "have_new_version",
+      "value": "點擊查看新圖庫版本"
+    },
+    {
+      "name": "appwidget_text",
+      "value": "範例"
+    },
+    {
+      "name": "add_widget",
+      "value": "新增小工具"
+    },
+    {
+      "name": "app_widget_description",
+      "value": "這是應用程式小工具的描述"
+    },
+    {
+      "name": "archiver_downloading",
+      "value": "歸檔下載中 %s"
+    },
+    {
+      "name": "order",
+      "value": "順序"
+    },
+    {
+      "name": "sort_by_pub_time",
+      "value": "發布時間"
+    },
+    {
+      "name": "sort_by_fav_time",
+      "value": "收藏時間"
+    },
+    {
+      "name": "settings_eh_sign_out_restart",
+      "value": "正在為您自動重新啟動，請稍候"
+    },
+    {
+      "name": "import_local_archive",
+      "value": "匯入本機歸檔"
+    },
+    {
+      "name": "import_archive_title",
+      "value": "選擇歸檔檔案"
+    },
+    {
+      "name": "import_archive_failed",
+      "value": "匯入歸檔失敗"
+    },
+    {
+      "name": "archive_permission_lost",
+      "value": "歸檔檔案的存取權限已遺失。請重新匯入歸檔檔案。"
+    },
+    {
+      "name": "import_archive_processing",
+      "value": "處理歸檔中…"
+    },
+    {
+      "name": "import_archive_invalid_format",
+      "value": "不支援的歸檔格式"
+    },
+    {
+      "name": "import_archive_already_imported",
+      "value": "歸檔已匯入"
+    },
+    {
+      "name": "import_archive_success",
+      "value": "歸檔匯入成功"
+    },
+    {
+      "name": "archive_not_accessible",
+      "value": "無法存取歸檔檔案"
+    },
+    {
+      "name": "imported_archive_info_title",
+      "value": "本機匯入資訊"
+    },
+    {
+      "name": "imported_archive_info_message",
+      "value": "這是從本機儲存空間匯入的項目"
+    },
+    {
+      "name": "imported_archive_category",
+      "value": "本機匯入"
+    },
+    {
+      "name": "import_local_album",
+      "value": "匯入本機相簿"
+    },
+    {
+      "name": "import_album_title",
+      "value": "選擇圖片資料夾"
+    },
+    {
+      "name": "import_album_processing",
+      "value": "正在匯入相簿…"
+    },
+    {
+      "name": "import_album_failed",
+      "value": "相簿匯入失敗"
+    },
+    {
+      "name": "import_album_no_images",
+      "value": "所選資料夾中沒有支援的圖片"
+    },
+    {
+      "name": "import_album_already_imported",
+      "value": "相簿已匯入"
+    },
+    {
+      "name": "import_album_success",
+      "value": "成功匯入 %d 張圖片"
+    },
+    {
+      "name": "spen_previous_page",
+      "value": "上一頁"
+    },
+    {
+      "name": "spen_next_page",
+      "value": "下一頁"
+    },
+    {
+      "name": "category_all",
+      "value": "全部"
+    },
+    {
+      "name": "dummy_button",
+      "value": "虛擬按鈕"
+    },
+    {
+      "name": "dummy_content",
+      "value": "虛擬\n內容"
+    },
+    {
+      "name": "tag_selector_more",
+      "value": "▼ 更多"
+    },
+    {
+      "name": "tag_selector_collapse",
+      "value": "▲ 收起"
+    },
+    {
+      "name": "tag_selector_end",
+      "value": "--- 已到底 ---"
+    },
+    {
+      "name": "error_rar_unsupported",
+      "value": "暫不支援 RAR 格式的壓縮檔（請使用 ZIP 或 7z）"
+    },
+    {
+      "name": "shortcut_start_all_triggered",
+      "value": "已觸發「全部開始下載」"
+    },
+    {
+      "name": "shortcut_stop_all_triggered",
+      "value": "已觸發「全部暫停下載」"
+    },
+    {
+      "name": "disable_pattern_protection",
+      "value": "關閉圖案保護"
+    },
+    {
+      "name": "pattern_protection_disabled",
+      "value": "已關閉圖案保護"
+    },
+    {
+      "name": "archiver_download_cancel",
+      "value": "取消封存下載"
+    },
+    {
+      "name": "archiver_download_cancel_confirm",
+      "value": "確定取消目前封存下載並清理未完成檔案嗎？"
+    },
+    {
+      "name": "archiver_download_canceled",
+      "value": "已取消封存下載"
+    },
+    {
+      "name": "reset_limit_confirm_title",
+      "value": "重設圖片配額"
+    },
+    {
+      "name": "reset_limit_confirm_message",
+      "value": "確定消耗 %s 重設圖片配額嗎？"
+    },
+    {
+      "name": "reset_limit_success",
+      "value": "圖片配額已重設"
+    },
+    {
+      "name": "reset_limit_failed",
+      "value": "重設圖片配額失敗"
+    }
+  ]
+}

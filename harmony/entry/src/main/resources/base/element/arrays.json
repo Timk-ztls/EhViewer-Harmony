@@ -1,0 +1,959 @@
+{
+  "strarray": [
+    {
+      "name": "fav_sort",
+      "value": [
+        {
+          "value": "$string:sort_by_fav_time"
+        },
+        {
+          "value": "$string:sort_by_pub_time"
+        }
+      ]
+    },
+    {
+      "name": "top_list_type",
+      "value": [
+        {
+          "value": "$string:gallery_toplists"
+        },
+        {
+          "value": "$string:uploader_toplists"
+        },
+        {
+          "value": "$string:tagging_toplists"
+        },
+        {
+          "value": "$string:hentai_home_toplists"
+        },
+        {
+          "value": "$string:ehtracker_toplists"
+        },
+        {
+          "value": "$string:cleanup_toplists"
+        },
+        {
+          "value": "$string:rating_reviewing_toplists"
+        }
+      ]
+    },
+    {
+      "name": "top_list_history_list_test_data",
+      "value": [
+        {
+          "value": "$string:gallery_toplists"
+        },
+        {
+          "value": "$string:uploader_toplists"
+        },
+        {
+          "value": "$string:tagging_toplists"
+        },
+        {
+          "value": "$string:hentai_home_toplists"
+        },
+        {
+          "value": "$string:ehtracker_toplists"
+        },
+        {
+          "value": "$string:cleanup_toplists"
+        },
+        {
+          "value": "$string:rating_reviewing_toplists"
+        },
+        {
+          "value": "$string:rating_reviewing_toplists"
+        },
+        {
+          "value": "$string:rating_reviewing_toplists"
+        },
+        {
+          "value": "$string:rating_reviewing_toplists"
+        }
+      ]
+    },
+    {
+      "name": "theme_entries",
+      "value": [
+        {
+          "value": "$string:settings_eh_theme_light"
+        },
+        {
+          "value": "$string:settings_eh_theme_dark"
+        },
+        {
+          "value": "$string:settings_eh_theme_black"
+        }
+      ]
+    },
+    {
+      "name": "theme_entry_values",
+      "value": [
+        {
+          "value": "0"
+        },
+        {
+          "value": "1"
+        },
+        {
+          "value": "2"
+        }
+      ]
+    },
+    {
+      "name": "list_mode_entries",
+      "value": [
+        {
+          "value": "$string:settings_eh_list_mode_detail"
+        },
+        {
+          "value": "$string:settings_eh_list_mode_thumb"
+        }
+      ]
+    },
+    {
+      "name": "list_mode_entry_values",
+      "value": [
+        {
+          "value": "0"
+        },
+        {
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "name": "gallery_site_entries",
+      "value": [
+        {
+          "value": "$string:site_e"
+        },
+        {
+          "value": "$string:site_ex"
+        }
+      ]
+    },
+    {
+      "name": "gallery_site_entry_values",
+      "value": [
+        {
+          "value": "0"
+        },
+        {
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "name": "launch_page_entries",
+      "value": [
+        {
+          "value": "$string:homepage"
+        },
+        {
+          "value": "$string:subscription"
+        },
+        {
+          "value": "$string:whats_hot"
+        }
+      ]
+    },
+    {
+      "name": "launch_page_entry_values",
+      "value": [
+        {
+          "value": "0"
+        },
+        {
+          "value": "1"
+        },
+        {
+          "value": "2"
+        }
+      ]
+    },
+    {
+      "name": "detail_size_entries",
+      "value": [
+        {
+          "value": "$string:settings_eh_detail_size_long"
+        },
+        {
+          "value": "$string:settings_eh_detail_size_short"
+        }
+      ]
+    },
+    {
+      "name": "detail_size_entry_values",
+      "value": [
+        {
+          "value": "0"
+        },
+        {
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "name": "thumb_size_entries",
+      "value": [
+        {
+          "value": "$string:settings_eh_thumb_size_large"
+        },
+        {
+          "value": "$string:settings_eh_thumb_size_middle"
+        },
+        {
+          "value": "$string:settings_eh_thumb_size_small"
+        }
+      ]
+    },
+    {
+      "name": "thumb_size_entry_values",
+      "value": [
+        {
+          "value": "0"
+        },
+        {
+          "value": "1"
+        },
+        {
+          "value": "2"
+        }
+      ]
+    },
+    {
+      "name": "history_info_size_entries",
+      "value": [
+        {
+          "value": "100"
+        },
+        {
+          "value": "500"
+        },
+        {
+          "value": "1000"
+        },
+        {
+          "value": "5000"
+        },
+        {
+          "value": "10000"
+        },
+        {
+          "value": "20000"
+        }
+      ]
+    },
+    {
+      "name": "history_info_size_entry_values",
+      "value": [
+        {
+          "value": "100"
+        },
+        {
+          "value": "500"
+        },
+        {
+          "value": "1000"
+        },
+        {
+          "value": "5000"
+        },
+        {
+          "value": "10000"
+        },
+        {
+          "value": "20000"
+        }
+      ]
+    },
+    {
+      "name": "download_timeout_entries",
+      "value": [
+        {
+          "value": "$string:download_timeout_unlimited"
+        },
+        {
+          "value": "10"
+        },
+        {
+          "value": "30"
+        },
+        {
+          "value": "50"
+        },
+        {
+          "value": "100"
+        },
+        {
+          "value": "200"
+        },
+        {
+          "value": "300"
+        }
+      ]
+    },
+    {
+      "name": "download_timeout_entries_values",
+      "value": [
+        {
+          "value": "0"
+        },
+        {
+          "value": "10"
+        },
+        {
+          "value": "30"
+        },
+        {
+          "value": "50"
+        },
+        {
+          "value": "100"
+        },
+        {
+          "value": "200"
+        },
+        {
+          "value": "300"
+        }
+      ]
+    },
+    {
+      "name": "thumb_resolution_entries",
+      "value": [
+        {
+          "value": "$string:settings_eh_thumb_resolution_auto"
+        },
+        {
+          "value": "250x"
+        },
+        {
+          "value": "300x"
+        }
+      ]
+    },
+    {
+      "name": "thumb_resolution_entry_values",
+      "value": [
+        {
+          "value": "0"
+        },
+        {
+          "value": "1"
+        },
+        {
+          "value": "2"
+        }
+      ]
+    },
+    {
+      "name": "search_min_rating",
+      "value": [
+        {
+          "value": "$string:star_2"
+        },
+        {
+          "value": "$string:star_3"
+        },
+        {
+          "value": "$string:star_4"
+        },
+        {
+          "value": "$string:star_5"
+        }
+      ]
+    },
+    {
+      "name": "multi_thread_download_entries",
+      "value": [
+        {
+          "value": "1"
+        },
+        {
+          "value": "3"
+        },
+        {
+          "value": "5"
+        },
+        {
+          "value": "7"
+        }
+      ]
+    },
+    {
+      "name": "multi_thread_download_entry_values",
+      "value": [
+        {
+          "value": "1"
+        },
+        {
+          "value": "3"
+        },
+        {
+          "value": "5"
+        },
+        {
+          "value": "7"
+        }
+      ]
+    },
+    {
+      "name": "preload_image_entries",
+      "value": [
+        {
+          "value": "3"
+        },
+        {
+          "value": "5"
+        },
+        {
+          "value": "7"
+        },
+        {
+          "value": "11"
+        },
+        {
+          "value": "13"
+        },
+        {
+          "value": "17"
+        }
+      ]
+    },
+    {
+      "name": "preload_image_entry_values",
+      "value": [
+        {
+          "value": "3"
+        },
+        {
+          "value": "5"
+        },
+        {
+          "value": "7"
+        },
+        {
+          "value": "11"
+        },
+        {
+          "value": "13"
+        },
+        {
+          "value": "17"
+        }
+      ]
+    },
+    {
+      "name": "image_resolution_entries",
+      "value": [
+        {
+          "value": "$string:settings_download_image_resolution_auto"
+        },
+        {
+          "value": "780x"
+        },
+        {
+          "value": "1280x"
+        },
+        {
+          "value": "1600x"
+        },
+        {
+          "value": "2400x"
+        }
+      ]
+    },
+    {
+      "name": "image_resolution_entry_values",
+      "value": [
+        {
+          "value": "a"
+        },
+        {
+          "value": "780"
+        },
+        {
+          "value": "1280"
+        },
+        {
+          "value": "1600"
+        },
+        {
+          "value": "2400"
+        }
+      ]
+    },
+    {
+      "name": "screen_rotation_entries",
+      "value": [
+        {
+          "value": "$string:settings_read_screen_rotation_default"
+        },
+        {
+          "value": "$string:settings_read_screen_rotation_portrait"
+        },
+        {
+          "value": "$string:settings_read_screen_rotation_landscape"
+        },
+        {
+          "value": "$string:settings_read_screen_rotation_sensor"
+        }
+      ]
+    },
+    {
+      "name": "screen_rotation_entry_values",
+      "value": [
+        {
+          "value": "0"
+        },
+        {
+          "value": "1"
+        },
+        {
+          "value": "2"
+        },
+        {
+          "value": "3"
+        }
+      ]
+    },
+    {
+      "name": "reading_refresh_rate_entries",
+      "value": [
+        {
+          "value": "$string:settings_read_refresh_rate_default"
+        },
+        {
+          "value": "$string:settings_read_refresh_rate_60"
+        },
+        {
+          "value": "$string:settings_read_refresh_rate_90"
+        },
+        {
+          "value": "$string:settings_read_refresh_rate_120"
+        },
+        {
+          "value": "$string:settings_read_refresh_rate_max"
+        }
+      ]
+    },
+    {
+      "name": "reading_refresh_rate_entry_values",
+      "value": [
+        {
+          "value": "0"
+        },
+        {
+          "value": "60"
+        },
+        {
+          "value": "90"
+        },
+        {
+          "value": "120"
+        },
+        {
+          "value": "-1"
+        }
+      ]
+    },
+    {
+      "name": "picture_decoding_method",
+      "value": [
+        {
+          "value": "$string:settings_read_picture_decoding_method_origin"
+        },
+        {
+          "value": "$string:settings_read_picture_decoding_method_native"
+        }
+      ]
+    },
+    {
+      "name": "picture_decoding_method_values",
+      "value": [
+        {
+          "value": "0"
+        },
+        {
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "name": "reading_direction_entries",
+      "value": [
+        {
+          "value": "$string:settings_read_reading_direction_left_to_right"
+        },
+        {
+          "value": "$string:settings_read_reading_direction_right_to_Left"
+        },
+        {
+          "value": "$string:settings_read_reading_direction_top_to_bottom"
+        }
+      ]
+    },
+    {
+      "name": "reading_direction_entry_values",
+      "value": [
+        {
+          "value": "0"
+        },
+        {
+          "value": "1"
+        },
+        {
+          "value": "2"
+        }
+      ]
+    },
+    {
+      "name": "page_scaling_entries",
+      "value": [
+        {
+          "value": "$string:settings_read_page_scaling_actual_size"
+        },
+        {
+          "value": "$string:settings_read_page_scaling_fit_to_width"
+        },
+        {
+          "value": "$string:settings_read_page_scaling_fit_to_height"
+        },
+        {
+          "value": "$string:settings_read_page_scaling_fit_to_screen"
+        },
+        {
+          "value": "$string:settings_read_page_scaling_fixed_scale"
+        }
+      ]
+    },
+    {
+      "name": "page_scaling_entry_values",
+      "value": [
+        {
+          "value": "0"
+        },
+        {
+          "value": "1"
+        },
+        {
+          "value": "2"
+        },
+        {
+          "value": "3"
+        },
+        {
+          "value": "4"
+        }
+      ]
+    },
+    {
+      "name": "start_position_entries",
+      "value": [
+        {
+          "value": "$string:settings_read_start_position_top_left"
+        },
+        {
+          "value": "$string:settings_read_start_position_top_right"
+        },
+        {
+          "value": "$string:settings_read_start_position_bottom_left"
+        },
+        {
+          "value": "$string:settings_read_start_position_bottom_right"
+        },
+        {
+          "value": "$string:settings_read_start_position_center"
+        }
+      ]
+    },
+    {
+      "name": "start_position_values",
+      "value": [
+        {
+          "value": "0"
+        },
+        {
+          "value": "1"
+        },
+        {
+          "value": "2"
+        },
+        {
+          "value": "3"
+        },
+        {
+          "value": "4"
+        }
+      ]
+    },
+    {
+      "name": "read_cache_size_entries",
+      "value": [
+        {
+          "value": "40 MB"
+        },
+        {
+          "value": "80 MB"
+        },
+        {
+          "value": "160 MB"
+        },
+        {
+          "value": "320 MB"
+        },
+        {
+          "value": "640 MB"
+        }
+      ]
+    },
+    {
+      "name": "read_cache_size_entry_values",
+      "value": [
+        {
+          "value": "40"
+        },
+        {
+          "value": "80"
+        },
+        {
+          "value": "160"
+        },
+        {
+          "value": "320"
+        },
+        {
+          "value": "640"
+        }
+      ]
+    },
+    {
+      "name": "gallery_list_menu_entries",
+      "value": [
+        {
+          "value": "$string:download"
+        },
+        {
+          "value": "$string:add_to_favourites"
+        }
+      ]
+    },
+    {
+      "name": "filter_entries",
+      "value": [
+        {
+          "value": "$string:filter_title"
+        },
+        {
+          "value": "$string:filter_uploader"
+        },
+        {
+          "value": "$string:filter_tag"
+        },
+        {
+          "value": "$string:filter_tag_namespace"
+        }
+      ]
+    },
+    {
+      "name": "blacklist_entries",
+      "value": [
+        {
+          "value": "$string:blacklist_id"
+        }
+      ]
+    },
+    {
+      "name": "tag_menu_entries",
+      "value": [
+        {
+          "value": "$string:show_definition"
+        },
+        {
+          "value": "$string:add_filter"
+        }
+      ]
+    },
+    {
+      "name": "app_language_entries",
+      "value": [
+        {
+          "value": "$string:app_language_system"
+        },
+        {
+          "value": "$string:app_language_de"
+        },
+        {
+          "value": "$string:app_language_en"
+        },
+        {
+          "value": "$string:app_language_es"
+        },
+        {
+          "value": "$string:app_language_fr"
+        },
+        {
+          "value": "$string:app_language_ja"
+        },
+        {
+          "value": "$string:app_language_ko"
+        },
+        {
+          "value": "$string:app_language_th"
+        },
+        {
+          "value": "$string:app_language_zh_cn"
+        },
+        {
+          "value": "$string:app_language_zh_hk"
+        },
+        {
+          "value": "$string:app_language_zh_tw"
+        }
+      ]
+    },
+    {
+      "name": "app_language_entry_values",
+      "value": [
+        {
+          "value": "system"
+        },
+        {
+          "value": "de"
+        },
+        {
+          "value": "en"
+        },
+        {
+          "value": "es"
+        },
+        {
+          "value": "fr"
+        },
+        {
+          "value": "ja"
+        },
+        {
+          "value": "ko"
+        },
+        {
+          "value": "th"
+        },
+        {
+          "value": "zh-CN"
+        },
+        {
+          "value": "zh-HK"
+        },
+        {
+          "value": "zh-TW"
+        }
+      ]
+    },
+    {
+      "name": "tag_translation_metadata",
+      "value": [
+        {
+          "value": "tag-translations-zh-rCN.sha1"
+        },
+        {
+          "value": "https://raw.githubusercontent.com/Mapaler/EhViewer/tag-translations/tag-translations/tag-translations-zh-rCN.sha1"
+        },
+        {
+          "value": "tag-translations-zh-rCN"
+        },
+        {
+          "value": "https://raw.githubusercontent.com/Mapaler/EhViewer/tag-translations/tag-translations/tag-translations-zh-rCN"
+        }
+      ]
+    },
+    {
+      "name": "proxy_types",
+      "value": [
+        {
+          "value": "$string:proxy_direct"
+        },
+        {
+          "value": "$string:proxy_system"
+        },
+        {
+          "value": "HTTP"
+        },
+        {
+          "value": "SOCKS"
+        }
+      ]
+    },
+    {
+      "name": "socket_colors",
+      "value": [
+        {
+          "value": "#FFe21400"
+        },
+        {
+          "value": "#FF91580f"
+        },
+        {
+          "value": "#FFf8a700"
+        },
+        {
+          "value": "#FFf78b00"
+        },
+        {
+          "value": "#FF58dc00"
+        },
+        {
+          "value": "#FF287b00"
+        },
+        {
+          "value": "#FFa8f07a"
+        },
+        {
+          "value": "#FF4ae8c4"
+        },
+        {
+          "value": "#FF3b88eb"
+        },
+        {
+          "value": "#FF3824aa"
+        },
+        {
+          "value": "#FFa700ff"
+        },
+        {
+          "value": "#FFd300e7"
+        }
+      ]
+    },
+    {
+      "name": "migrate_data_types",
+      "value": [
+        {
+          "value": "$string:wifi_send_bookmark"
+        },
+        {
+          "value": "$string:wifi_send_favorite"
+        },
+        {
+          "value": "$string:wifi_send_download"
+        },
+        {
+          "value": "$string:wifi_send_download_location"
+        }
+      ]
+    },
+    {
+      "name": "update_metadata",
+      "value": [
+        {
+          "value": "update_json"
+        },
+        {
+          "value": "https://raw.githubusercontent.com/xiaojieonly/Ehviewer_CN_SXJ/refs/heads/BiLi_PC_Gamer/feedauthor/update.json"
+        }
+      ]
+    }
+  ]
+}

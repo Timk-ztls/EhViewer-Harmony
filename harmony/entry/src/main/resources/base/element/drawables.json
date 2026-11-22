@@ -1,0 +1,16 @@
+{
+  "color": [
+    {
+      "name": "transparent",
+      "value": "#00000000"
+    },
+    {
+      "name": "tile_background_activated",
+      "value": "#7F9C27B0"
+    },
+    {
+      "name": "sadpanda_low_poly",
+      "value": "#FF009688"
+    }
+  ]
+}

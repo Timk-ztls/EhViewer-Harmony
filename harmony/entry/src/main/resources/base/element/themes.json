@@ -1,0 +1,734 @@
+{
+  "strarray": [
+    {
+      "name": "BaseTheme",
+      "value": [
+        {
+          "value": "parent|Theme.MaterialComponents.Light"
+        },
+        {
+          "value": "colorPrimary|#FF009688"
+        },
+        {
+          "value": "popupWindowStyle|#FFF2F2F2"
+        },
+        {
+          "value": "android:navigationBarColor|#FFFFFFFF"
+        },
+        {
+          "value": "android:windowDrawsSystemBarBackgrounds|true"
+        },
+        {
+          "value": "android:windowLightNavigationBar|true"
+        },
+        {
+          "value": "buttonStyle|@style/ThemeChangeButtonStyleLight"
+        },
+        {
+          "value": "android:windowBackground|#FFFFFFFF"
+        },
+        {
+          "value": "colorPrimaryDark|#FF00796B"
+        },
+        {
+          "value": "colorAccent|#FFE040FB"
+        },
+        {
+          "value": "actionBarStyle|@style/ActionBarStyle"
+        },
+        {
+          "value": "colorEdgeEffect|#FF009688"
+        },
+        {
+          "value": "dividerColor|#20000000"
+        },
+        {
+          "value": "toolbarColor|#FF009688"
+        },
+        {
+          "value": "textColorThemePrimary|#FF009688"
+        },
+        {
+          "value": "textColorThemePrimary2|#FF1D87E4"
+        },
+        {
+          "value": "textColorThemeAccent|#FFE040FB"
+        },
+        {
+          "value": "drawableColorPrimary|#8A000000"
+        },
+        {
+          "value": "drawableColorSecondary|#42000000"
+        },
+        {
+          "value": "drawableColorThemePrimary|#FF009688"
+        },
+        {
+          "value": "contentColorPrimary|#00000000"
+        },
+        {
+          "value": "contentColorThemePrimary|#FF009688"
+        },
+        {
+          "value": "contentColorThemeAccent|#FFE040FB"
+        },
+        {
+          "value": "contentColorReactive|@color/content_reactive_light"
+        },
+        {
+          "value": "widgetColorThemePrimary|#FF009688"
+        },
+        {
+          "value": "widgetColorThemeAccent|#FFE040FB"
+        },
+        {
+          "value": "progressColor|#00000000"
+        },
+        {
+          "value": "guideBackgroundColor|#E5009688"
+        },
+        {
+          "value": "guideTitleColor|?android:attr/textColorPrimaryInverse"
+        },
+        {
+          "value": "guideTextColor|?android:attr/textColorSecondaryInverse"
+        },
+        {
+          "value": "tagGroupBackgroundColor|#00000000"
+        },
+        {
+          "value": "tagBackgroundColor|#00000000"
+        },
+        {
+          "value": "galleryDetailHeaderTitleColor|?android:attr/textColorPrimaryInverse"
+        },
+        {
+          "value": "galleryDetailHeaderBackgroundColor|?attr/contentColorThemePrimary"
+        },
+        {
+          "value": "galleryDetailButtonBackgroundColor|#00000000"
+        },
+        {
+          "value": "preferenceHeaderBackground|@drawable/preference_header_background_light"
+        },
+        {
+          "value": "toolbarPopupTheme|@style/ThemeOverlay.AppCompat.Light"
+        },
+        {
+          "value": "galleryDetailDivider|@drawable/divider_gallery_detail_light"
+        },
+        {
+          "value": "limitCountBgColor|#FF009688"
+        },
+        {
+          "value": "limits_shape_color|#FF009688"
+        },
+        {
+          "value": "home_shadow|#FFCFCFCF"
+        },
+        {
+          "value": "iconColor|#00000000"
+        }
+      ]
+    },
+    {
+      "name": "AppTheme",
+      "value": [
+        {
+          "value": "parent|BaseTheme"
+        },
+        {
+          "value": "android:windowBackground|#FFFFFFFF"
+        },
+        {
+          "value": "android:colorEdgeEffect|?attr/colorEdgeEffect"
+        }
+      ]
+    },
+    {
+      "name": "AppTheme_NoActionBar",
+      "value": [
+        {
+          "value": "windowActionBar|false"
+        },
+        {
+          "value": "windowNoTitle|true"
+        }
+      ]
+    },
+    {
+      "name": "AppTheme_NoActionBar_Translucent",
+      "value": [
+        {
+          "value": "parent|AppTheme"
+        },
+        {
+          "value": "android:windowTranslucentStatus|true"
+        },
+        {
+          "value": "android:windowTranslucentNavigation|false"
+        },
+        {
+          "value": "android:windowContentOverlay|"
+        },
+        {
+          "value": "android:windowDrawsSystemBarBackgrounds|true"
+        },
+        {
+          "value": "android:statusBarColor|#00000000"
+        }
+      ]
+    },
+    {
+      "name": "BaseTheme_Dark",
+      "value": [
+        {
+          "value": "parent|Theme.MaterialComponents"
+        },
+        {
+          "value": "colorPrimary|#FF009688"
+        },
+        {
+          "value": "colorPrimaryDark|#FF212121"
+        },
+        {
+          "value": "colorAccent|#FF009688"
+        },
+        {
+          "value": "colorControlActivated|#FF009688"
+        },
+        {
+          "value": "actionBarStyle|@style/ActionBarStyle"
+        },
+        {
+          "value": "popupWindowStyle|#FF2E2E2E"
+        },
+        {
+          "value": "android:navigationBarColor|#FF323232"
+        },
+        {
+          "value": "android:windowDrawsSystemBarBackgrounds|true"
+        },
+        {
+          "value": "android:windowLightNavigationBar|false"
+        },
+        {
+          "value": "buttonStyle|@style/ThemeChangeButtonStyleDark"
+        },
+        {
+          "value": "android:windowBackground|#FF323232"
+        },
+        {
+          "value": "android:colorBackground|#FF323232"
+        },
+        {
+          "value": "colorBackgroundFloating|#FF323232"
+        },
+        {
+          "value": "colorEdgeEffect|#FF9E9E9E"
+        },
+        {
+          "value": "dividerColor|#20FFFFFF"
+        },
+        {
+          "value": "toolbarColor|?android:attr/colorBackground"
+        },
+        {
+          "value": "textColorThemePrimary|?android:attr/textColorSecondary"
+        },
+        {
+          "value": "textColorThemeAccent|?android:attr/textColorSecondary"
+        },
+        {
+          "value": "drawableColorPrimary|#FFFFFFFF"
+        },
+        {
+          "value": "drawableColorSecondary|#4DFFFFFF"
+        },
+        {
+          "value": "drawableColorThemePrimary|#FFFFFFFF"
+        },
+        {
+          "value": "contentColorPrimary|#00000000"
+        },
+        {
+          "value": "contentColorThemePrimary|?attr/contentColorPrimary"
+        },
+        {
+          "value": "contentColorThemeAccent|?attr/contentColorPrimary"
+        },
+        {
+          "value": "contentColorReactive|@color/content_reactive_dark"
+        },
+        {
+          "value": "widgetColorThemePrimary|#00000000"
+        },
+        {
+          "value": "widgetColorThemeAccent|#00000000"
+        },
+        {
+          "value": "progressColor|#00000000"
+        },
+        {
+          "value": "guideBackgroundColor|#e5303030"
+        },
+        {
+          "value": "guideTitleColor|?android:attr/textColorPrimary"
+        },
+        {
+          "value": "guideTextColor|?android:attr/textColorSecondary"
+        },
+        {
+          "value": "tagGroupBackgroundColor|#00000000"
+        },
+        {
+          "value": "tagBackgroundColor|#00000000"
+        },
+        {
+          "value": "galleryDetailHeaderTitleColor|?android:attr/textColorPrimary"
+        },
+        {
+          "value": "galleryDetailHeaderBackgroundColor|?attr/contentColorThemePrimary"
+        },
+        {
+          "value": "galleryDetailButtonBackgroundColor|#00000000"
+        },
+        {
+          "value": "preferenceHeaderBackground|@drawable/preference_header_background_dark"
+        },
+        {
+          "value": "toolbarPopupTheme|@style/ThemeOverlay.AppCompat.Dark"
+        },
+        {
+          "value": "galleryDetailDivider|@drawable/divider_gallery_detail_dark"
+        },
+        {
+          "value": "limitCountBgColor|#FF009688"
+        },
+        {
+          "value": "limits_shape_color|#FF666666"
+        },
+        {
+          "value": "home_shadow|#FF3A3A3A"
+        },
+        {
+          "value": "iconColor|#00000000"
+        }
+      ]
+    },
+    {
+      "name": "AppTheme_Dark",
+      "value": [
+        {
+          "value": "parent|BaseTheme.Dark"
+        },
+        {
+          "value": "android:colorEdgeEffect|?attr/colorEdgeEffect"
+        }
+      ]
+    },
+    {
+      "name": "AppTheme_Dark_NoActionBar",
+      "value": [
+        {
+          "value": "windowActionBar|false"
+        },
+        {
+          "value": "windowNoTitle|true"
+        }
+      ]
+    },
+    {
+      "name": "AppTheme_Dark_NoActionBar_Translucent",
+      "value": [
+        {
+          "value": "android:windowTranslucentStatus|true"
+        },
+        {
+          "value": "android:windowTranslucentNavigation|false"
+        },
+        {
+          "value": "android:windowContentOverlay|"
+        },
+        {
+          "value": "android:windowDrawsSystemBarBackgrounds|true"
+        },
+        {
+          "value": "android:statusBarColor|#00000000"
+        }
+      ]
+    },
+    {
+      "name": "BaseTheme_Black",
+      "value": [
+        {
+          "value": "parent|Theme.MaterialComponents"
+        },
+        {
+          "value": "colorPrimary|#FF009688"
+        },
+        {
+          "value": "colorPrimaryDark|#FF000000"
+        },
+        {
+          "value": "colorAccent|#FF009688"
+        },
+        {
+          "value": "colorControlActivated|#FF009688"
+        },
+        {
+          "value": "actionBarStyle|@style/ActionBarStyle"
+        },
+        {
+          "value": "popupWindowStyle|#FF151515"
+        },
+        {
+          "value": "android:navigationBarColor|#FF000000"
+        },
+        {
+          "value": "android:windowDrawsSystemBarBackgrounds|true"
+        },
+        {
+          "value": "android:windowLightNavigationBar|false"
+        },
+        {
+          "value": "buttonStyle|@style/ThemeChangeButtonStyleBlack"
+        },
+        {
+          "value": "android:windowBackground|#FF000000"
+        },
+        {
+          "value": "android:colorBackground|#FF000000"
+        },
+        {
+          "value": "colorBackgroundFloating|#FF000000"
+        },
+        {
+          "value": "android:textColorPrimary|@color/primary_text_material_black"
+        },
+        {
+          "value": "colorEdgeEffect|#FF9E9E9E"
+        },
+        {
+          "value": "dividerColor|#20FFFFFF"
+        },
+        {
+          "value": "toolbarColor|#FF000000"
+        },
+        {
+          "value": "textColorThemePrimary|?android:attr/textColorSecondary"
+        },
+        {
+          "value": "textColorThemeAccent|?android:attr/textColorSecondary"
+        },
+        {
+          "value": "drawableColorPrimary|#CCFFFFFF"
+        },
+        {
+          "value": "drawableColorSecondary|#3DFFFFFF"
+        },
+        {
+          "value": "drawableColorThemePrimary|#CCFFFFFF"
+        },
+        {
+          "value": "contentColorPrimary|#00000000"
+        },
+        {
+          "value": "contentColorThemePrimary|?attr/contentColorPrimary"
+        },
+        {
+          "value": "contentColorThemeAccent|?attr/contentColorPrimary"
+        },
+        {
+          "value": "contentColorReactive|@color/content_reactive_black"
+        },
+        {
+          "value": "widgetColorThemePrimary|#00000000"
+        },
+        {
+          "value": "widgetColorThemeAccent|#00000000"
+        },
+        {
+          "value": "progressColor|#00000000"
+        },
+        {
+          "value": "guideBackgroundColor|#e5000000"
+        },
+        {
+          "value": "guideTitleColor|?android:attr/textColorPrimary"
+        },
+        {
+          "value": "guideTextColor|?android:attr/textColorSecondary"
+        },
+        {
+          "value": "tagGroupBackgroundColor|#00000000"
+        },
+        {
+          "value": "tagBackgroundColor|#00000000"
+        },
+        {
+          "value": "galleryDetailHeaderTitleColor|?android:attr/textColorPrimary"
+        },
+        {
+          "value": "galleryDetailHeaderBackgroundColor|#FF000000"
+        },
+        {
+          "value": "galleryDetailButtonBackgroundColor|#00000000"
+        },
+        {
+          "value": "preferenceHeaderBackground|@drawable/preference_header_background_black"
+        },
+        {
+          "value": "toolbarPopupTheme|@style/ThemeOverlay.AppCompat.Dark"
+        },
+        {
+          "value": "galleryDetailDivider|@drawable/divider_gallery_detail_dark"
+        },
+        {
+          "value": "limitCountBgColor|#FF009688"
+        },
+        {
+          "value": "limits_shape_color|#FF666666"
+        },
+        {
+          "value": "home_shadow|#FF3A3A3A"
+        },
+        {
+          "value": "iconColor|#00000000"
+        }
+      ]
+    },
+    {
+      "name": "AppTheme_Black",
+      "value": [
+        {
+          "value": "parent|BaseTheme.Black"
+        },
+        {
+          "value": "android:colorEdgeEffect|?attr/colorEdgeEffect"
+        }
+      ]
+    },
+    {
+      "name": "AppTheme_Black_NoActionBar",
+      "value": [
+        {
+          "value": "windowActionBar|false"
+        },
+        {
+          "value": "windowNoTitle|true"
+        }
+      ]
+    },
+    {
+      "name": "AppTheme_Black_NoActionBar_Translucent",
+      "value": [
+        {
+          "value": "android:windowTranslucentStatus|true"
+        },
+        {
+          "value": "android:windowTranslucentNavigation|false"
+        },
+        {
+          "value": "android:windowContentOverlay|"
+        },
+        {
+          "value": "android:windowDrawsSystemBarBackgrounds|true"
+        },
+        {
+          "value": "android:statusBarColor|#00000000"
+        }
+      ]
+    },
+    {
+      "name": "AppTheme_Main",
+      "value": [
+        {
+          "value": "parent|AppTheme.NoActionBar.Translucent"
+        }
+      ]
+    },
+    {
+      "name": "AppTheme_Main_Dark",
+      "value": [
+        {
+          "value": "parent|AppTheme.Dark.NoActionBar.Translucent"
+        }
+      ]
+    },
+    {
+      "name": "AppTheme_Main_Black",
+      "value": [
+        {
+          "value": "parent|AppTheme.Black.NoActionBar.Translucent"
+        }
+      ]
+    },
+    {
+      "name": "AppTheme_Toolbar",
+      "value": [
+        {
+          "value": "parent|AppTheme.NoActionBar"
+        }
+      ]
+    },
+    {
+      "name": "AppTheme_Toolbar_Dark",
+      "value": [
+        {
+          "value": "parent|AppTheme.Dark.NoActionBar"
+        }
+      ]
+    },
+    {
+      "name": "AppTheme_Toolbar_Black",
+      "value": [
+        {
+          "value": "parent|AppTheme.Black.NoActionBar"
+        }
+      ]
+    },
+    {
+      "name": "AppTheme_Gallery",
+      "value": [
+        {
+          "value": "parent|AppTheme.Dark"
+        },
+        {
+          "value": "gallerySliderBackgroundColor|#FF424242"
+        },
+        {
+          "value": "windowNoTitle|true"
+        }
+      ]
+    },
+    {
+      "name": "AppTheme_Gallery_Dark",
+      "value": [
+        {
+          "name": "__empty__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "name": "AppTheme_Gallery_Black",
+      "value": [
+        {
+          "value": "parent|AppTheme.Black.NoActionBar"
+        },
+        {
+          "value": "gallerySliderBackgroundColor|#FF212121"
+        }
+      ]
+    },
+    {
+      "name": "AppTheme_Settings",
+      "value": [
+        {
+          "value": "parent|AppTheme"
+        }
+      ]
+    },
+    {
+      "name": "AppTheme_Settings_Dark",
+      "value": [
+        {
+          "value": "parent|AppTheme.Dark"
+        }
+      ]
+    },
+    {
+      "name": "AppTheme_Settings_Black",
+      "value": [
+        {
+          "value": "parent|AppTheme.Black"
+        }
+      ]
+    },
+    {
+      "name": "SplashTheme",
+      "value": [
+        {
+          "value": "parent|BaseTheme"
+        },
+        {
+          "value": "android:windowBackground|#00FFFFFF"
+        },
+        {
+          "value": "windowNoTitle|true"
+        },
+        {
+          "value": "android:windowFullscreen|true"
+        }
+      ]
+    },
+    {
+      "name": "CommentEditText",
+      "value": [
+        {
+          "value": "parent|ThemeOverlay.AppCompat"
+        },
+        {
+          "value": "colorPrimary|#FF009688"
+        },
+        {
+          "value": "colorPrimaryDark|#FF00796B"
+        },
+        {
+          "value": "colorAccent|#FFFFFFFF"
+        }
+      ]
+    },
+    {
+      "name": "RatingBarTheme",
+      "value": [
+        {
+          "value": "parent|ThemeOverlay.AppCompat"
+        },
+        {
+          "value": "colorControlNormal|#FFF9A825"
+        },
+        {
+          "value": "colorControlActivated|#FFF9A825"
+        }
+      ]
+    },
+    {
+      "name": "ThemeOverlay_Ehviewer_FullscreenContainer",
+      "value": [
+        {
+          "value": "fullscreenBackgroundColor|#FF039BE5"
+        },
+        {
+          "value": "fullscreenTextColor|#FF40C4FF"
+        }
+      ]
+    },
+    {
+      "name": "AppTheme_AppWidgetContainerParent",
+      "value": [
+        {
+          "value": "parent|@android:style/Theme.DeviceDefault"
+        },
+        {
+          "value": "appWidgetRadius|16dp"
+        },
+        {
+          "value": "appWidgetInnerRadius|8dp"
+        }
+      ]
+    },
+    {
+      "name": "AppTheme_AppWidgetContainer",
+      "value": [
+        {
+          "value": "parent|AppTheme.AppWidgetContainerParent"
+        },
+        {
+          "value": "appWidgetPadding|16dp"
+        }
+      ]
+    }
+  ]
+}

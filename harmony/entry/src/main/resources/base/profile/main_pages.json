@@ -1,0 +1,18 @@
+{
+  "src": [
+    "pages/Index",
+    "pages/SettingsPage",
+    "pages/HostsPage",
+    "pages/GalleryReaderPage",
+    "pages/SetSecurityPage",
+    "pages/DirPickerPage",
+    "pages/LicensePage",
+    "pages/FilterPage",
+    "pages/BlackListPage",
+    "pages/MyTagsPage",
+    "pages/UConfigPage",
+    "pages/TagSelectorPage",
+    "pages/WiFiServerPage",
+    "pages/WiFiClientPage"
+  ]
+}

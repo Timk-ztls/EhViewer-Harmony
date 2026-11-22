@@ -1,0 +1,14 @@
+{
+  "string": [
+    { "name": "module_desc", "value": "EhViewer 主模块" },
+    { "name": "EntryAbility_desc", "value": "EhViewer" },
+    { "name": "EntryAbility_label", "value": "EhViewer" },
+    { "name": "reason_vibrate", "value": "图案锁与操作反馈需要振动" },
+    { "name": "reason_background", "value": "下载与归档任务需要在后台继续" },
+    { "name": "reason_camera", "value": "更换头像时需要拍照" },
+    { "name": "reason_biometric", "value": "解锁应用时需要指纹或人脸验证" },
+    { "name": "reason_notification", "value": "下载进度与完成提醒需要通知" },
+    { "name": "reason_running_lock", "value": "长时间下载时需要保持唤醒" },
+    { "name": "reason_wifi_info", "value": "局域网传书需要读取 WiFi 状态" }
+  ]
+}

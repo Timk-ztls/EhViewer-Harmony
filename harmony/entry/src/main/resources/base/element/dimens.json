@@ -1,0 +1,424 @@
+{
+  "float": [
+    {
+      "name": "progress_bar_height",
+      "value": "24vp"
+    },
+    {
+      "name": "keyline_margin",
+      "value": "16vp"
+    },
+    {
+      "name": "progress_padding",
+      "value": "18vp"
+    },
+    {
+      "name": "single_max_width",
+      "value": "260vp"
+    },
+    {
+      "name": "drawer_max_width",
+      "value": "280vp"
+    },
+    {
+      "name": "dialog_padding_top_material",
+      "value": "18vp"
+    },
+    {
+      "name": "title_text_top_padding",
+      "value": "6vp"
+    },
+    {
+      "name": "text_super_large",
+      "value": "24fp"
+    },
+    {
+      "name": "text_large",
+      "value": "22fp"
+    },
+    {
+      "name": "text_little_large",
+      "value": "20fp"
+    },
+    {
+      "name": "text_medium",
+      "value": "18fp"
+    },
+    {
+      "name": "text_little_small",
+      "value": "16fp"
+    },
+    {
+      "name": "text_small",
+      "value": "14fp"
+    },
+    {
+      "name": "text_super_small",
+      "value": "12fp"
+    },
+    {
+      "name": "text_more_super_small",
+      "value": "6fp"
+    },
+    {
+      "name": "rating_size",
+      "value": "16vp"
+    },
+    {
+      "name": "rating_interval",
+      "value": "1vp"
+    },
+    {
+      "name": "gallery_list_thumb_height",
+      "value": "120vp"
+    },
+    {
+      "name": "gallery_list_thumb_width",
+      "value": "80vp"
+    },
+    {
+      "name": "gallery_list_interval",
+      "value": "0vp"
+    },
+    {
+      "name": "gallery_list_margin_h",
+      "value": "4vp"
+    },
+    {
+      "name": "gallery_list_margin_v",
+      "value": "4vp"
+    },
+    {
+      "name": "gallery_grid_interval",
+      "value": "0vp"
+    },
+    {
+      "name": "gallery_grid_margin_h",
+      "value": "4vp"
+    },
+    {
+      "name": "gallery_grid_margin_v",
+      "value": "4vp"
+    },
+    {
+      "name": "gallery_search_bar_margin_h",
+      "value": "6vp"
+    },
+    {
+      "name": "gallery_search_bar_margin_v",
+      "value": "8vp"
+    },
+    {
+      "name": "gallery_padding_top_search_bar",
+      "value": "64vp"
+    },
+    {
+      "name": "gallery_padding_bottom_fab",
+      "value": "80vp"
+    },
+    {
+      "name": "gallery_list_column_width_long",
+      "value": "480vp"
+    },
+    {
+      "name": "gallery_list_column_width_short",
+      "value": "320vp"
+    },
+    {
+      "name": "gallery_grid_column_width_large",
+      "value": "160vp"
+    },
+    {
+      "name": "gallery_grid_column_width_middle",
+      "value": "120vp"
+    },
+    {
+      "name": "gallery_grid_column_width_small",
+      "value": "80vp"
+    },
+    {
+      "name": "search_layout_interval",
+      "value": "0vp"
+    },
+    {
+      "name": "search_layout_margin_h",
+      "value": "4vp"
+    },
+    {
+      "name": "search_layout_margin_v",
+      "value": "4vp"
+    },
+    {
+      "name": "dad_drawable_size",
+      "value": "24vp"
+    },
+    {
+      "name": "dad_bar_size",
+      "value": "18vp"
+    },
+    {
+      "name": "dad_top_bottom_bar_arrow_size",
+      "value": "11.31vp"
+    },
+    {
+      "name": "dad_thickness",
+      "value": "2vp"
+    },
+    {
+      "name": "dad_gap_between_bars",
+      "value": "3vp"
+    },
+    {
+      "name": "dad_middle_bar_arrow_size",
+      "value": "16vp"
+    },
+    {
+      "name": "add_size",
+      "value": "20vp"
+    },
+    {
+      "name": "add_thickness",
+      "value": "2vp"
+    },
+    {
+      "name": "category_table_item_height",
+      "value": "40vp"
+    },
+    {
+      "name": "category_table_item_margin",
+      "value": "4vp"
+    },
+    {
+      "name": "advance_search_table_item_margin",
+      "value": "4vp"
+    },
+    {
+      "name": "search_item_interval",
+      "value": "8vp"
+    },
+    {
+      "name": "search_category_padding_h",
+      "value": "16vp"
+    },
+    {
+      "name": "search_category_padding_v",
+      "value": "16vp"
+    },
+    {
+      "name": "search_category_title_height",
+      "value": "48vp"
+    },
+    {
+      "name": "image_search_max_size",
+      "value": "240vp"
+    },
+    {
+      "name": "switch_padding",
+      "value": "8vp"
+    },
+    {
+      "name": "fab_layout_primary_margin",
+      "value": "24vp"
+    },
+    {
+      "name": "fab_layout_secondary_margin",
+      "value": "16vp"
+    },
+    {
+      "name": "fab_size",
+      "value": "56vp"
+    },
+    {
+      "name": "fab_min_size",
+      "value": "40vp"
+    },
+    {
+      "name": "slider_bubble_width",
+      "value": "26vp"
+    },
+    {
+      "name": "slider_bubble_height",
+      "value": "32vp"
+    },
+    {
+      "name": "corner_fab_margin",
+      "value": "16vp"
+    },
+    {
+      "name": "corner_fab_margin_download_bottom",
+      "value": "70vp"
+    },
+    {
+      "name": "corner_fab_margin_download_right",
+      "value": "3vp"
+    },
+    {
+      "name": "gallery_detail_thumb_width",
+      "value": "128vp"
+    },
+    {
+      "name": "gallery_detail_thumb_height",
+      "value": "192vp"
+    },
+    {
+      "name": "gallery_page_text",
+      "value": "56fp"
+    },
+    {
+      "name": "gallery_widget_margin_h",
+      "value": "12vp"
+    },
+    {
+      "name": "gallery_widget_margin_v",
+      "value": "12vp"
+    },
+    {
+      "name": "gallery_guide_divider_width",
+      "value": "3vp"
+    },
+    {
+      "name": "lock_pattern_dot_line_width",
+      "value": "3vp"
+    },
+    {
+      "name": "lock_pattern_dot_size",
+      "value": "12vp"
+    },
+    {
+      "name": "lock_pattern_dot_size_activated",
+      "value": "28vp"
+    },
+    {
+      "name": "preference_widget_width",
+      "value": "48vp"
+    },
+    {
+      "name": "preference_item_padding_side",
+      "value": "8vp"
+    },
+    {
+      "name": "preference_item_padding_inner",
+      "value": "8vp"
+    },
+    {
+      "name": "gallery_pager_interval",
+      "value": "48vp"
+    },
+    {
+      "name": "gallery_scroll_interval",
+      "value": "28vp"
+    },
+    {
+      "name": "gallery_page_min_height",
+      "value": "256vp"
+    },
+    {
+      "name": "gallery_page_info_interval",
+      "value": "24vp"
+    },
+    {
+      "name": "gallery_progress_size",
+      "value": "56vp"
+    },
+    {
+      "name": "gallery_page_text_size",
+      "value": "56fp"
+    },
+    {
+      "name": "gallery_error_text_size",
+      "value": "24fp"
+    },
+    {
+      "name": "gallery_tab_layout_pad",
+      "value": "2vp"
+    },
+    {
+      "name": "gallery_tab_layout_spacing",
+      "value": "3vp"
+    },
+    {
+      "name": "top_list_spinner_height",
+      "value": "50vp"
+    },
+    {
+      "name": "top_list_spinner_elevation",
+      "value": "3vp"
+    },
+    {
+      "name": "top_list_spinner_margin",
+      "value": "12vp"
+    },
+    {
+      "name": "top_list_scrollview_margin_top",
+      "value": "74vp"
+    },
+    {
+      "name": "top_list_item_table_margin",
+      "value": "18vp"
+    },
+    {
+      "name": "top_list_item_margin_bottom",
+      "value": "7vp"
+    },
+    {
+      "name": "top_list_item_radius",
+      "value": "5vp"
+    },
+    {
+      "name": "top_list_item_margin_width",
+      "value": "24vp"
+    },
+    {
+      "name": "photo_select_margin_top",
+      "value": "12vp"
+    },
+    {
+      "name": "photo_select_margin_bottom",
+      "value": "12vp"
+    },
+    {
+      "name": "popup_text_padding",
+      "value": "4vp"
+    },
+    {
+      "name": "popup_text_margin",
+      "value": "12vp"
+    },
+    {
+      "name": "download_search_bar_height",
+      "value": "40vp"
+    },
+    {
+      "name": "button_space_between",
+      "value": "20vp"
+    },
+    {
+      "name": "spinner_horizontal_padding",
+      "value": "16vp"
+    },
+    {
+      "name": "spacing",
+      "value": "8vp"
+    },
+    {
+      "name": "limits_layout_margin_h",
+      "value": "24vp"
+    },
+    {
+      "name": "limits_home_item_margin_h",
+      "value": "30vp"
+    },
+    {
+      "name": "limits_layout_margin_v",
+      "value": "2vp"
+    },
+    {
+      "name": "limits_layout_padding",
+      "value": "12vp"
+    },
+    {
+      "name": "widget_margin",
+      "value": "0vp"
+    }
+  ]
+}
