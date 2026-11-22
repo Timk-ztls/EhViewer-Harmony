@@ -24,3 +24,7 @@
 *.hap  binary
 *.so   binary
 *.protoBin binary
+
+# GitHub Linguist：将 HarmonyOS ArkTS（.ets）统计为 TypeScript
+*.ets linguist-language=TypeScript linguist-detectable=true
+
