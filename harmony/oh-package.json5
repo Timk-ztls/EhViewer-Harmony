@@ -1,7 +1,7 @@
 {
   "modelVersion": "6.0.2",
   "name": "ehviewer-harmony",
-  "version": "2.0.2-7.3",
+  "version": "2.0.2-7.4",
   "description": "EhViewer — HarmonyOS 1:1 重构版（基准 Android 2.0.2.7）",
   "main": "",
   "author": "harmony",

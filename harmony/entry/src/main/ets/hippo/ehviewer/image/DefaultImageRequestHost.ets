@@ -111,8 +111,11 @@ export class DefaultImageRequestHost implements ImageRequestHost {
   private cachedThumbClient: OkHttpClient | null = null;
   private visibleStart: number = -1;
   private visibleEnd: number = -1;
+  private downloadGeneration: number = 0;
 
   private readonly targetLatestTask: Map<LoadImageController, number> = new Map<LoadImageController, number>();
+  private readonly targetRequests: Map<LoadImageController, ImageRequest> = new Map<LoadImageController, ImageRequest>();
+  private readonly failedTargets: Set<LoadImageController> = new Set<LoadImageController>();
   private readonly targetUrls: Map<LoadImageController, string> = new Map<LoadImageController, string>();
   private readonly urlWaiters: Map<string, Set<LoadImageController>> = new Map<string, Set<LoadImageController>>();
   private readonly visibleQueue: QueuedDownloadJob[] = [];
@@ -139,12 +142,14 @@ export class DefaultImageRequestHost implements ImageRequestHost {
 
   request(target: LoadImageController, req: ImageRequest): void {
     const taskId: number = this.nextTaskId++;
+    this.failedTargets.delete(target);
     target.listIndex = req.listIndex;
     const orphanedUrl: string | null = this.detachWaiter(target);
     if (orphanedUrl !== null && orphanedUrl !== req.url) {
       this.cancelOrphanedUrl(orphanedUrl);
     }
     this.targetLatestTask.set(target, taskId);
+    this.targetRequests.set(target, req);
     target.taskId = taskId;
 
     const clip: ClipBox | null = DefaultImageRequestHost.extractClipBox(target);
@@ -182,17 +187,131 @@ export class DefaultImageRequestHost implements ImageRequestHost {
       if (this.isTaskActive(target, taskId)) {
         this.clearTask(target);
         target.onFailure();
+        if (target.attached && req.useNetwork && req.url.length > 0) {
+          this.failedTargets.add(target);
+        }
       }
     });
   }
 
   cancel(target: LoadImageController): void {
     this.targetLatestTask.delete(target);
+    this.targetRequests.delete(target);
+    this.failedTargets.delete(target);
     target.taskId = INVALID_TASK_ID;
     const orphanedUrl: string | null = this.detachWaiter(target);
     if (orphanedUrl !== null) {
       this.cancelOrphanedUrl(orphanedUrl);
     }
+  }
+
+  getTrackedFailedCount(): number {
+    return this.failedTargets.size;
+  }
+
+  private isTargetVisible(target: LoadImageController): boolean {
+    if (this.visibleStart < 0 || this.visibleEnd < 0) {
+      return true;
+    }
+    return target.listIndex < 0 || (target.listIndex >= this.visibleStart && target.listIndex <= this.visibleEnd);
+  }
+
+  /**
+   * 网络切换 / VPN 状态改变后恢复缩略图加载：
+   *   1. 作废并重建下载 client 缓存，生成新 generation；
+   *   2. 中断旧网络上在途 HTTP 调用并排空旧等待队列；
+   *   3. 可见区优先重新投递当前在途目标，并静默重试仍挂载的失败目标（每个 epoch 至多 1 次）。
+   */
+  recoverOnNetworkChange(epoch: number): number {
+    this.cachedThumbBaseClient = null;
+    this.cachedThumbClient = null;
+
+    const visibleActive: Array<[LoadImageController, ImageRequest]> = [];
+    const prefetchActive: Array<[LoadImageController, ImageRequest]> = [];
+    this.targetRequests.forEach((req: ImageRequest, target: LoadImageController): void => {
+      if (!target.attached || !req.useNetwork || req.url.length === 0) {
+        return;
+      }
+      if (this.isTargetVisible(target)) {
+        visibleActive.push([target, req]);
+      } else {
+        prefetchActive.push([target, req]);
+      }
+    });
+
+    const visibleFailed: LoadImageController[] = [];
+    const otherFailed: LoadImageController[] = [];
+    this.failedTargets.forEach((target: LoadImageController): void => {
+      if (!target.attached) {
+        return;
+      }
+      if (this.isTargetVisible(target)) {
+        visibleFailed.push(target);
+      } else {
+        otherFailed.push(target);
+      }
+    });
+    this.failedTargets.clear();
+
+    this.downloadGeneration++;
+
+    const callsToCancel: Call[] = [];
+    this.activeCallsByUrl.forEach((call: Call): void => {
+      callsToCancel.push(call);
+    });
+    this.activeCallsByUrl.clear();
+    for (let i = 0; i < callsToCancel.length; i++) {
+      try {
+        callsToCancel[i].cancel();
+      } catch (_e) {
+        // Ignore cancel failures from already completed calls.
+      }
+    }
+
+    const drainJobs: QueuedDownloadJob[] = [];
+    for (let i = 0; i < this.visibleQueue.length; i++) {
+      drainJobs.push(this.visibleQueue[i]);
+    }
+    for (let i = 0; i < this.prefetchQueue.length; i++) {
+      drainJobs.push(this.prefetchQueue[i]);
+    }
+    this.visibleQueue.length = 0;
+    this.prefetchQueue.length = 0;
+    this.queuedJobsByUrl.clear();
+    for (let i = 0; i < drainJobs.length; i++) {
+      drainJobs[i].cancelled = true;
+      drainJobs[i].resolveAll(false);
+    }
+
+    this.inFlightDownloads.clear();
+    this.activeDownloadCount = 0;
+
+    let recoveredCount: number = 0;
+    for (let i = 0; i < visibleActive.length; i++) {
+      const pair = visibleActive[i];
+      if (pair[0].attached) {
+        this.request(pair[0], pair[1]);
+        recoveredCount++;
+      }
+    }
+    for (let i = 0; i < prefetchActive.length; i++) {
+      const pair = prefetchActive[i];
+      if (pair[0].attached) {
+        this.request(pair[0], pair[1]);
+        recoveredCount++;
+      }
+    }
+    for (let i = 0; i < visibleFailed.length; i++) {
+      if (visibleFailed[i].retryForNetworkRecovery(epoch)) {
+        recoveredCount++;
+      }
+    }
+    for (let i = 0; i < otherFailed.length; i++) {
+      if (otherFailed[i].retryForNetworkRecovery(epoch)) {
+        recoveredCount++;
+      }
+    }
+    return recoveredCount;
   }
 
   private attachWaiter(target: LoadImageController, url: string): void {
@@ -326,6 +445,7 @@ export class DefaultImageRequestHost implements ImageRequestHost {
 
   private clearTask(target: LoadImageController): void {
     this.targetLatestTask.delete(target);
+    this.targetRequests.delete(target);
     this.detachWaiter(target);
     target.taskId = INVALID_TASK_ID;
   }
@@ -351,6 +471,9 @@ export class DefaultImageRequestHost implements ImageRequestHost {
     if (cacheDir === null) {
       this.clearTask(target);
       target.onFailure();
+      if (target.attached && req.useNetwork) {
+        this.failedTargets.add(target);
+      }
       return;
     }
 
@@ -378,6 +501,9 @@ export class DefaultImageRequestHost implements ImageRequestHost {
     if (!rawReady) {
       this.clearTask(target);
       target.onFailure();
+      if (target.attached && req.useNetwork) {
+        this.failedTargets.add(target);
+      }
       return;
     }
 
@@ -483,12 +609,16 @@ export class DefaultImageRequestHost implements ImageRequestHost {
     if (existing !== undefined) {
       return existing;
     }
+    const gen: number = this.downloadGeneration;
     this.activeDownloadCount++;
-    const job: Promise<boolean> = this.downloadToFile(url, rawPath).finally((): void => {
-      this.activeDownloadCount = Math.max(0, this.activeDownloadCount - 1);
-      this.inFlightDownloads.delete(url);
-      this.activeCallsByUrl.delete(url);
-      this.pumpDownloadQueue();
+    const job: Promise<boolean> = this.downloadToFile(url, rawPath, gen).finally((): void => {
+      if (gen === this.downloadGeneration) {
+        this.activeDownloadCount = Math.max(0, this.activeDownloadCount - 1);
+        if (this.inFlightDownloads.get(url) === job) {
+          this.inFlightDownloads.delete(url);
+        }
+        this.pumpDownloadQueue();
+      }
     });
     this.inFlightDownloads.set(url, job);
     return job;
@@ -541,11 +671,11 @@ export class DefaultImageRequestHost implements ImageRequestHost {
     return this.cachedThumbClient;
   }
 
-  private async downloadToFile(url: string, rawPath: string): Promise<boolean> {
+  private async downloadToFile(url: string, rawPath: string, gen: number): Promise<boolean> {
     if (await DefaultImageRequestHost.hasNonEmptyFileAsync(rawPath)) {
       return true;
     }
-    if (!this.urlWaiters.has(url)) {
+    if (!this.urlWaiters.has(url) || gen !== this.downloadGeneration) {
       return false;
     }
     const parsed: HttpUrl | null = HttpUrl.parse(url);
@@ -555,13 +685,20 @@ export class DefaultImageRequestHost implements ImageRequestHost {
     const client: OkHttpClient = this.getThumbClient();
     let response: Response | null = null;
     let body: ResponseBody | null = null;
+    let call: Call | null = null;
     try {
       const request: Request = EhRequestBuilder.of(parsed.toString())
         .header('Cache-Control', 'no-store')
         .build();
-      const call: Call = client.newCall(request);
+      if (gen !== this.downloadGeneration) {
+        return false;
+      }
+      call = client.newCall(request);
       this.activeCallsByUrl.set(url, call);
       response = await call.execute();
+      if (gen !== this.downloadGeneration) {
+        return false;
+      }
       const code: number = response.code();
       body = response.body();
       if (code < 200 || code >= 300 || body === null) {
@@ -578,7 +715,9 @@ export class DefaultImageRequestHost implements ImageRequestHost {
         'download failed for %{public}s: %{public}s', url, msg);
       return false;
     } finally {
-      this.activeCallsByUrl.delete(url);
+      if (call !== null && this.activeCallsByUrl.get(url) === call) {
+        this.activeCallsByUrl.delete(url);
+      }
       if (body !== null) {
         try {
           body.close();

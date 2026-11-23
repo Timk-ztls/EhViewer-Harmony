@@ -1,4 +1,4 @@
-import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
+import { AbilityConstant, Configuration, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
 import { AppWiring } from '../hippo/AppWiring';
@@ -11,13 +11,19 @@ import { ArchiverDownloadService } from '../hippo/ehviewer/download/ArchiverDown
 import { DownloadService } from '../hippo/ehviewer/download/DownloadService';
 import { ShortcutsActivity } from '../hippo/ehviewer/shortcuts/ShortcutsActivity';
 import { Settings } from '../hippo/ehviewer/Settings';
+import { CachedThemeStartup, ThemeAutoSwitchHelper } from '../hippo/ui/ThemeAutoSwitchHelper';
 import {
   applySystemBarTheme,
   applyWindowPrivacyMode,
   applyWindowPrivacyToWindow,
+  applyWindowTheme,
   readCachedPrivacyMode,
-  readCachedThemeId,
-  syncAppThemeStorage
+  readCachedThemeStartup,
+  resolveActiveThemeId,
+  syncAppShowGalleryPagesStorage,
+  syncAppShowReadProgressStorage,
+  syncAppThemeStorage,
+  syncSystemColorModeStorage
 } from '../hippo/ui/ThemeSystemBar';
 import {
   ExternalWantRouter,
@@ -45,9 +51,16 @@ export default class EntryAbility extends UIAbility {
    * 不做同步阻塞：`relationalStore.getRdbStore` 与 `preferences.getPreferences` 都是 Promise，
    * 阻塞 `onCreate` 会拖慢首帧。
    */
+  private syncInitialSystemColorMode(): void {
+    const rawMode: number | undefined = this.context.config ? this.context.config.colorMode : undefined;
+    const sysMode: number = ThemeAutoSwitchHelper.setSystemColorMode(rawMode);
+    syncSystemColorModeStorage(sysMode);
+  }
+
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     hilog.info(DOMAIN, TAG, 'onCreate: action=%{public}s uri=%{public}s params=%{public}s',
       String(want?.action), String(want?.uri), JSON.stringify(want?.parameters));
+    this.syncInitialSystemColorMode();
     EhApplication.initialize();
     const app: EhApplication | null = EhApplication.getInstance();
     if (app !== null) {
@@ -143,7 +156,12 @@ export default class EntryAbility extends UIAbility {
 
   onWindowStageCreate(windowStage: window.WindowStage): void {
     hilog.info(DOMAIN, TAG, 'onWindowStageCreate');
-    const initialThemeId: number = syncAppThemeStorage(readCachedThemeId(this.context));
+    this.syncInitialSystemColorMode();
+    const cachedStartup: CachedThemeStartup = readCachedThemeStartup(
+      this.context,
+      ThemeAutoSwitchHelper.getSystemColorMode()
+    );
+    const initialThemeId: number = syncAppThemeStorage(cachedStartup.themeId);
     const initialPrivacy: boolean = readCachedPrivacyMode(this.context, false);
     try {
       const mainWin: window.Window = windowStage.getMainWindowSync();
@@ -172,8 +190,16 @@ export default class EntryAbility extends UIAbility {
       }
       AppWiring.whenReady().then((): void => {
         AdvancedSettingsHelpers.applyAppLanguage(this.context, Settings.getAppLanguage());
-        const wiredThemeId: number = syncAppThemeStorage();
-        applySystemBarTheme(this.context, wiredThemeId, true);
+        Settings.setDarkModeProvider((): boolean => ThemeAutoSwitchHelper.isSystemDark());
+        const autoSwitch: boolean = Settings.isThemeAutoSwitchAvailable();
+        const wiredThemeId: number = resolveActiveThemeId();
+        if (autoSwitch && wiredThemeId !== Settings.getTheme()) {
+          Settings.putTheme(wiredThemeId);
+        }
+        syncAppThemeStorage(wiredThemeId);
+        syncAppShowGalleryPagesStorage(Settings.getShowGalleryPages());
+        syncAppShowReadProgressStorage(Settings.getShowReadProgress());
+        applySystemBarTheme(this.context, wiredThemeId, true, autoSwitch, true);
         const wiredPrivacy: boolean = Settings.getEnabledSecurity();
         applyWindowPrivacyMode(this.context, wiredPrivacy, true);
       }).catch((wireErr: Error): void => {
@@ -181,6 +207,32 @@ export default class EntryAbility extends UIAbility {
       });
       hilog.info(DOMAIN, TAG, 'loadContent succeeded');
     });
+  }
+
+  onConfigurationUpdate(newConfig: Configuration): void {
+    hilog.info(DOMAIN, TAG, 'onConfigurationUpdate: colorMode=%{public}s', String(newConfig.colorMode));
+    if (newConfig.colorMode === undefined) {
+      return;
+    }
+    const sysMode: number = ThemeAutoSwitchHelper.setSystemColorMode(newConfig.colorMode);
+    syncSystemColorModeStorage(sysMode);
+    const attached: boolean = Settings.isAttached();
+    const cached: CachedThemeStartup = readCachedThemeStartup(this.context, sysMode);
+    const autoSwitch: boolean = attached ? Settings.isThemeAutoSwitchAvailable() : cached.autoSwitch;
+    if (!autoSwitch) {
+      return;
+    }
+    const savedTheme: number = attached ? Settings.getTheme() : cached.themeId;
+    const darkVariant: number = attached ? Settings.getThemeDarkVariant() : cached.darkVariant;
+    const nextTheme: number = ThemeAutoSwitchHelper.resolveEffectiveTheme(savedTheme, true, sysMode, darkVariant);
+    if (attached && nextTheme !== Settings.getTheme()) {
+      Settings.putTheme(nextTheme);
+    }
+    syncAppThemeStorage(nextTheme);
+    if (this.mainWindow !== null) {
+      applyWindowTheme(this.mainWindow, nextTheme);
+    }
+    applySystemBarTheme(this.context, nextTheme, true, true, false);
   }
 
   onWindowStageDestroy(): void {

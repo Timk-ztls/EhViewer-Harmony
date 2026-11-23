@@ -8,20 +8,20 @@ A native **HarmonyOS NEXT / OpenHarmony (API 20)** port of **EhViewer** ([xiaoji
 
 ## Key Features
 
-- **Gallery Browsing & Filtering**: Home feed, What's Hot, Subscriptions, Toplists, Quick Search, local & cloud Favorites, and local tag filtering; automatically scrolls back to the top after search/section changes/page jumps while preserving scroll position when returning from gallery details.
-- **Viewport-First Thumbnail Scheduling**: Prioritizes currently visible thumbnails (LIFO visible queue over prefetch queue) during fast scrolling, cancels orphaned URLs on card reuse, and bypasses duplicate HTTP cache writes.
+- **Gallery Browsing & Filtering**: Home feed, What's Hot, Subscriptions, Toplists, Quick Search, local & cloud Favorites, and local tag filtering; automatically scrolls back to the top after search/section changes/page jumps while preserving detail-return position, displays async in-memory reading progress on gallery cards (`show_read_progress`), and presents E-Hentai event/daily-reward dialogs (`show_eh_events`).
+- **Viewport-First Thumbnail Scheduling**: Prioritizes currently visible thumbnails (LIFO visible queue over prefetch queue) during fast scrolling, cancels orphaned URLs on card reuse, bypasses duplicate HTTP cache writes, and recovers hung/failed visible thumbnails via 400ms debounced network/VPN switch recovery.
 - **Search & Tag System**: Advanced search filters, image reverse search, and auto-updating `EhTagDatabase` tag translation cache.
 - **Gallery Details & In-App Browser Closure**: Complete gallery metadata, preview grids, grouped tags (Tag Wiki strips `namespace:` prefixes automatically), rating/favoriting, comment posting, built-in lightweight browser (`InAppBrowserPage`) for account sign-up / Tag Wiki, and in-app `.torrent` downloads with system Save (`DocumentViewPicker`) and Share/Open handoff.
 - **Native Reader & Network Adaptations**:
   - Left-to-right, right-to-left (manga), and vertical continuous reading modes; 1:1 swipe tracking, tap-zone navigation, pinch/double-tap zoom, and volume-key page turning.
-  - Routes image downloads through `@ohos.net.http` with circular byte-level progress (`dataReceiveProgress`), 30x hijack detection, and `/fullimg` original-image resolution (`download_origin_image`, aborting immediately on insufficient GP).
-  - Syncs in-app proxy settings into `@kit.ArkWeb` (`ProxyController`) for WebView sign-in, UConfig, My Tags, and the built-in browser; detects active system VPNs via `@ohos.net.connection` to automatically bypass built-in hosts, Domain Fronting, and DoH when using `SYSTEM` / `DIRECT` mode.
+  - Routes image downloads through `@ohos.net.http` with circular byte-level progress (`dataReceiveProgress`), 30x hijack detection, `/fullimg` original-image resolution (`download_origin_image`, aborting immediately on insufficient GP), and 400ms debounced silent recovery when switching networks or toggling a VPN.
+  - Syncs in-app proxy settings into `@kit.ArkWeb` (`ProxyController`) for WebView sign-in, UConfig, My Tags, and the built-in browser; detects active system VPNs via `@ohos.net.connection` to automatically bypass built-in hosts, Domain Fronting, and DoH when using `SYSTEM` / `DIRECT` mode, and provides smart cellular data warnings (`cellular_network_warning`) that auto-reset on Wi-Fi or Ethernet.
 - **Downloads & Local Archives**:
   - Background download service, download labels, pagination controls, and Wi-Fi LAN transfer.
   - Streaming C++ `zlib` decompression with `@kit.BasicServicesKit` fallback for `.zip` / `.cbz` / `.7z` archives (RAR/CBR is not supported; see `DEVIATIONS.md` D-079).
 - **Privacy & Appearance**:
   - Privacy mode via `ohos.permission.PRIVACY_WINDOW` (blocks screenshots, screen recording, and recents preview from cold start and foreground resume).
-  - Material-aligned themes synced with light/dark system status bars and RDB backup/import/export.
+  - Material-aligned themes with system dark mode auto-switch (`theme_auto_switch` + `system_theme`, supporting dark/pure-black variants, cold-start window sync, and system status bar tinting) plus RDB backup/import/export.
 
 ## Requirements
 

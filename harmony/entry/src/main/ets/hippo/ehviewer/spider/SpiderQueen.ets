@@ -46,6 +46,7 @@ import { GalleryPageApiParserResult } from '../client/parser/GalleryPageApiParse
 import { GalleryProvider } from '../../lib/glgallery/GalleryProvider';
 import { Utils } from '../../unifile/Utils';
 import { GetText } from '../GetText';
+import { ReadProgressCache } from '../ReadProgressCache';
 import { Settings } from '../Settings';
 import { MathUtils } from '../../lib/yorozuya/MathUtils';
 
@@ -338,6 +339,9 @@ export class SpiderQueen implements SpiderQueenLike {
     const info: SpiderInfo | null = queen.mSpiderInfo;
     if (info !== null) {
       info.startPage = 0;
+    }
+    if (ReadProgressCache.getCached(gid) !== undefined) {
+      ReadProgressCache.update(gid, 0);
     }
   }
 
@@ -637,6 +641,7 @@ export class SpiderQueen implements SpiderQueenLike {
     if (info !== null) {
       info.startPage = page;
       this.writeSpiderInfoToLocal(info);
+      ReadProgressCache.update(this.mGalleryInfo.gid, page);
     }
   }
 

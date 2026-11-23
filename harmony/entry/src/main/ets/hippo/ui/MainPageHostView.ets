@@ -9,10 +9,13 @@
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { common } from '@kit.AbilityKit';
 import { EhApplication } from '../ehviewer/EhApplication';
+import { EhEventPaneBus, EhEventPaneListener, EhEventPaneMessage } from '../ehviewer/EhEventPaneBus';
 import { GetText } from '../ehviewer/GetText';
+import { CellularNetworkWarningGuard } from '../ehviewer/OhosNetworkMonitor';
 import { Settings } from '../ehviewer/Settings';
 import { EhEngine } from '../ehviewer/client/EhEngine';
 import { EhUrl } from '../ehviewer/client/EhUrl';
+import { EhNewsDetail } from '../ehviewer/client/data/EhNewsDetail';
 import { HomeDetail, HomeDetailConfig } from '../ehviewer/client/data/HomeDetail';
 import { NotifyKind } from '../ehviewer/widget/LimitsCountView';
 import { OkHttpCallerAdapter } from '../AppWiring';
@@ -20,6 +23,7 @@ import { SceneArgs } from '../scene/SceneTypes';
 import { SceneFragment } from '../scene/SceneFragment';
 import { MainPageHost } from './MainPageHost';
 import { NavDrawerPanel } from './NavDrawerPanel';
+import { EhEventPaneMaterialDialog } from './EhEventPaneDialog';
 import { APP_THEME_STORAGE_KEY, applySystemBarTheme, syncAppThemeStorage } from './ThemeSystemBar';
 import { VArrowLeftDarkX24 } from './drawable/v_arrow_left_dark_x24';
 import { VSettingsDarkX24 } from './drawable/v_settings_dark_x24';
@@ -144,6 +148,13 @@ class LocalizedHomeDetailConfig extends HomeDetailConfig {
 
   private renderCount: number = 0;
   private lastAttachedGateEpoch: number = -1;
+  private eventDialogController: CustomDialogController | null = null;
+  private eventDialogOpen: boolean = false;
+  private eventQueue: EhEventPaneMessage[] = [];
+  private startupNewsChecked: boolean = false;
+  private readonly eventPaneListener: EhEventPaneListener = (msg: EhEventPaneMessage): void => {
+    this.enqueueEventPane(msg);
+  };
 
   private palette(): ThemePalette {
     return ThemeTokens.of(this.themeId);
@@ -191,6 +202,9 @@ class LocalizedHomeDetailConfig extends HomeDetailConfig {
       this.lastRenderError = '';
       this.sceneEpoch = this.sceneEpoch + 1;
       this.onActiveSceneChanged(name);
+      if (name === 'GalleryListScene') {
+        this.maybeFetchStartupEhNews();
+      }
       hilog.info(DOMAIN, TAG, 'navigator → renderBranch=%{public}s', name);
     });
     this.host.setOnEmptyStack((): void => {
@@ -209,7 +223,122 @@ class LocalizedHomeDetailConfig extends HomeDetailConfig {
       }
     });
     this.lastAttachedGateEpoch = this.gateEpoch;
+    EhEventPaneBus.getInstance().subscribe(this.eventPaneListener);
+    let pendingEvent: EhEventPaneMessage | null = EhEventPaneBus.getInstance().consumePending();
+    while (pendingEvent !== null) {
+      this.enqueueEventPane(pendingEvent);
+      pendingEvent = EhEventPaneBus.getInstance().consumePending();
+    }
+    CellularNetworkWarningGuard.setWarningListener((): void => {
+      this.showCellularNetworkWarning();
+    });
+    CellularNetworkWarningGuard.checkAndNotify();
     this.attach(this.initialScene, this.initialArgs);
+    this.maybeFetchStartupEhNews();
+  }
+
+  aboutToDisappear(): void {
+    EhEventPaneBus.getInstance().unsubscribe(this.eventPaneListener);
+    CellularNetworkWarningGuard.setWarningListener(null);
+    if (this.eventDialogController !== null) {
+      try {
+        this.eventDialogController.close();
+      } catch (_e) {
+        // Ignore dialog close errors on tear-down.
+      }
+      this.eventDialogController = null;
+    }
+    this.eventDialogOpen = false;
+    this.eventQueue = [];
+  }
+
+  private enqueueEventPane(msg: EhEventPaneMessage): void {
+    if (msg.body.length === 0) {
+      return;
+    }
+    this.eventQueue.push(msg);
+    this.showNextEventPane();
+  }
+
+  private showNextEventPane(): void {
+    if (this.eventDialogOpen || this.eventQueue.length === 0) {
+      return;
+    }
+    const next: EhEventPaneMessage | undefined = this.eventQueue.shift();
+    if (next === undefined) {
+      return;
+    }
+    this.eventDialogOpen = true;
+    try {
+      this.eventDialogController = new CustomDialogController({
+        builder: EhEventPaneMaterialDialog({
+          bodyText: next.body,
+          themeId: this.themeId,
+          onDismiss: (): void => {
+            this.eventDialogOpen = false;
+            this.eventDialogController = null;
+            this.showNextEventPane();
+          }
+        }),
+        customStyle: true,
+        autoCancel: true,
+        alignment: DialogAlignment.Center,
+        cancel: (): void => {
+          this.eventDialogOpen = false;
+          this.eventDialogController = null;
+          this.showNextEventPane();
+        }
+      });
+      this.eventDialogController.open();
+    } catch (e) {
+      this.eventDialogOpen = false;
+      this.eventDialogController = null;
+      hilog.warn(DOMAIN, TAG, 'open EhEventPaneMaterialDialog failed: %{public}s',
+        e instanceof Error ? e.message : String(e));
+    }
+  }
+
+  private maybeFetchStartupEhNews(): void {
+    if (this.startupNewsChecked) {
+      return;
+    }
+    try {
+      if (!Settings.isAttached() || !Settings.getShowEhEvents()) {
+        return;
+      }
+    } catch (_e) {
+      return;
+    }
+    if (this.sceneName !== 'GalleryListScene' && this.initialScene !== 'GalleryListScene') {
+      return;
+    }
+    this.startupNewsChecked = true;
+    const ctx: common.Context | undefined = this.getUIContext().getHostContext();
+    const caller: OkHttpCallerAdapter = new OkHttpCallerAdapter(
+      EhApplication.getOkHttpClient(ctx === undefined ? null : ctx)
+    );
+    EhEngine.getEhNews(null, caller).then((detail: EhNewsDetail | null): void => {
+      if (detail !== null) {
+        const paneHtml: string | null = detail.getEventPane();
+        if (paneHtml !== null) {
+          EhEventPaneBus.getInstance().publishHtml(paneHtml);
+        }
+      }
+    }).catch((e: Error): void => {
+      hilog.warn(DOMAIN, TAG, 'startup getEhNews failed: %{public}s', e.message);
+    });
+  }
+
+  private showCellularNetworkWarning(): void {
+    try {
+      this.getUIContext().getPromptAction().showToast({
+        message: $r('app.string.cellular_network_warning'),
+        duration: 2500
+      });
+    } catch (e) {
+      hilog.warn(DOMAIN, TAG, 'showCellularNetworkWarning skipped: %{public}s',
+        e instanceof Error ? e.message : String(e));
+    }
   }
 
   private onInitialSceneChanged(): void {
@@ -500,13 +629,19 @@ class LocalizedHomeDetailConfig extends HomeDetailConfig {
   private toggleTheme(): void {
     const next: number = (this.themeId + 1) % 3;
     try {
+      if (next === ThemeMode.DARK || next === ThemeMode.BLACK) {
+        Settings.putThemeDarkVariant(next);
+      }
+      if (Settings.isThemeAutoSwitchAvailable()) {
+        Settings.putThemeAutoSwitchAvailable(false);
+      }
       Settings.putTheme(next);
     } catch (e) {
       hilog.warn(DOMAIN, TAG, 'putTheme failed: %{public}s', e instanceof Error ? e.message : String(e));
     }
     this.themeId = next;
     syncAppThemeStorage(next);
-    applySystemBarTheme(this.getUIContext().getHostContext(), next);
+    applySystemBarTheme(this.getUIContext().getHostContext(), next, true, false, true);
   }
 
   /** 挂载根场景：失败也保留明确原因（不静默空白） */
@@ -535,6 +670,9 @@ class LocalizedHomeDetailConfig extends HomeDetailConfig {
       this.canBack = this.host.canGoBack();
       this.lastRenderError = '';
       this.sceneEpoch = this.sceneEpoch + 1;
+      if (name === 'GalleryListScene') {
+        this.maybeFetchStartupEhNews();
+      }
       hilog.info(DOMAIN, TAG, 'renderBranch=%{public}s scene=%{public}s', this.renderBranch, name);
     } catch (e) {
       this.currentScene = null;

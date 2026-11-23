@@ -16,6 +16,7 @@ import { GalleryInfo } from '../../ehviewer/client/data/GalleryInfo';
 import { EhCacheKeyFactory } from '../../ehviewer/client/EhCacheKeyFactory';
 import { EhUtils } from '../../ehviewer/client/EhUtils';
 import { GetText } from '../../ehviewer/GetText';
+import { ReadProgressCache, ReadProgressChangeListener } from '../../ehviewer/ReadProgressCache';
 import { Settings } from '../../ehviewer/Settings';
 import { DownloadManager } from '../../ehviewer/download/DownloadManager';
 import { FavoritesCategory, FavoritesScene } from '../../ehviewer/ui/scene/gallery/list/FavoritesScene';
@@ -27,7 +28,11 @@ import { VRefreshDarkX24 } from '../drawable/v_refresh_dark_x24';
 import { GalleryListClient } from '../GalleryListClient';
 import { GalleryListItemLayout } from '../layout/item_gallery_list';
 import { MainPageHost } from '../MainPageHost';
-import { APP_SHOW_JPN_TITLE_STORAGE_KEY } from '../ThemeSystemBar';
+import {
+  APP_SHOW_GALLERY_PAGES_STORAGE_KEY,
+  APP_SHOW_JPN_TITLE_STORAGE_KEY,
+  APP_SHOW_READ_PROGRESS_STORAGE_KEY
+} from '../ThemeSystemBar';
 import { DataOperation, SceneDataSourceListener } from '../SceneDataSource';
 
 const DOMAIN: number = 0x0000;
@@ -106,6 +111,11 @@ export struct FavoritesSceneView {
   @State defaultFavSlot: number = FavoritesCategory.ALL;
   @State downloadedGids: number[] = [];
   @StorageLink(APP_SHOW_JPN_TITLE_STORAGE_KEY) showJpnTitle: boolean = Settings.getShowJpnTitle();
+  @StorageLink(APP_SHOW_GALLERY_PAGES_STORAGE_KEY) @Watch('onPagesPrefChanged') showGalleryPages: boolean =
+    Settings.getShowGalleryPages();
+  @StorageLink(APP_SHOW_READ_PROGRESS_STORAGE_KEY) @Watch('onPagesPrefChanged') showReadProgress: boolean =
+    Settings.getShowReadProgress();
+  @State readProgressRev: number = 0;
 
   private hostContext: common.Context | undefined = undefined;
   private dataListener: FavoritesDataListener | null = null;
@@ -113,6 +123,18 @@ export struct FavoritesSceneView {
   private readonly listScroller: ListScroller = new ListScroller();
   private lastListResetSeq: number = 0;
   private scrollTopTimerId: number = -1;
+  private readonly onReadProgressChanged: ReadProgressChangeListener = (changedGids: number[]): void => {
+    if (!this.showGalleryPages || !this.showReadProgress || this.items.length === 0) {
+      return;
+    }
+    const set: Set<number> = new Set<number>(changedGids);
+    for (let i = 0; i < this.items.length; i++) {
+      if (set.has(this.items[i].gid)) {
+        this.readProgressRev = this.readProgressRev + 1;
+        return;
+      }
+    }
+  };
 
   private palette(): ThemePalette {
     return this.themeId >= 0 ? ThemeTokens.of(this.themeId) : ThemeTokens.current();
@@ -216,6 +238,7 @@ export struct FavoritesSceneView {
 
   aboutToAppear(): void {
     this.lastRightDragEndSeq = this.rightDrawerDragEndSeq;
+    ReadProgressCache.addListener(this.onReadProgressChanged);
     const ctx: common.Context | undefined = this.getUIContext().getHostContext();
     this.hostContext = ctx;
     if (ctx !== undefined && !GetText.isInitialized()) {
@@ -252,6 +275,7 @@ export struct FavoritesSceneView {
   }
 
   aboutToDisappear(): void {
+    ReadProgressCache.removeListener(this.onReadProgressChanged);
     if (this.scrollTopTimerId !== -1) {
       clearTimeout(this.scrollTopTimerId);
       this.scrollTopTimerId = -1;
@@ -319,11 +343,47 @@ export struct FavoritesSceneView {
       }
     }
     this.items = list;
+    this.prefetchReadProgressForList(list);
     const nextResetSeq: number = s.getListResetSeq();
     if (nextResetSeq !== this.lastListResetSeq) {
       this.lastListResetSeq = nextResetSeq;
       this.scrollToTopAfterReload(list.length > 0);
     }
+  }
+
+  private onPagesPrefChanged(): void {
+    if (this.showGalleryPages && this.showReadProgress) {
+      this.prefetchReadProgressForList(this.items);
+    }
+    this.readProgressRev = this.readProgressRev + 1;
+  }
+
+  private prefetchReadProgressForList(list: GalleryInfo[]): void {
+    if (!this.showGalleryPages || !this.showReadProgress || list.length === 0) {
+      return;
+    }
+    const gids: number[] = [];
+    for (let i = 0; i < list.length; i++) {
+      if (list[i].pages > 0 && list[i].gid > 0) {
+        gids.push(list[i].gid);
+      }
+    }
+    if (gids.length > 0) {
+      void ReadProgressCache.prefetchGids(gids);
+    }
+  }
+
+  private formatCardPages(item: GalleryInfo): string {
+    const _rev: number = this.readProgressRev;
+    if (_rev < 0) {
+      return '';
+    }
+    return ReadProgressCache.formatPagesLabel(
+      item.gid,
+      item.pages,
+      this.showGalleryPages,
+      this.showReadProgress
+    );
   }
 
   private getSlotDisplayName(cat: number): string {
@@ -655,7 +715,7 @@ export struct FavoritesSceneView {
                   category: GalleryListClient.formatCategoryLabel(item.category),
                   categoryBgColor: GalleryListClient.formatCategoryColor(item.category),
                   posted: item.posted,
-                  pages: item.pages > 0 ? `${item.pages}P` : '',
+                  pages: this.formatCardPages(item),
                   simpleLanguage: item.simpleLanguage ?? '',
                   thumbUrl: item.thumb,
                   thumbKey: EhCacheKeyFactory.getThumbKey(item.gid),
@@ -678,7 +738,7 @@ export struct FavoritesSceneView {
                   s.openGalleryDetail(item);
                 }
               })
-            }, (item: GalleryInfo) => `${item.gid}_${item.favoriteSlot}_${this.showJpnTitle ? 1 : 0}`)
+            }, (item: GalleryInfo) => `${item.gid}_${item.favoriteSlot}_${this.showJpnTitle ? 1 : 0}_${this.formatCardPages(item)}`)
 
             if (this.loading) {
               ListItem() {

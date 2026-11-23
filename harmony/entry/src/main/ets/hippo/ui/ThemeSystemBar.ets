@@ -20,7 +20,14 @@ import { fileIo as fs } from '@kit.CoreFileKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { ColorMetrics, window } from '@kit.ArkUI';
 import { ThemeMode, ThemePalette, ThemeTokens } from '../../common/theme/ThemeTokens';
+import { Settings } from '../ehviewer/Settings';
 import { PrivacySettingsRules } from '../ehviewer/ui/fragment/PrivacySettingsRules';
+import {
+  CachedThemeStartup,
+  SYSTEM_COLOR_MODE_DARK,
+  SYSTEM_COLOR_MODE_NOT_SET,
+  ThemeAutoSwitchHelper
+} from './ThemeAutoSwitchHelper';
 
 const DOMAIN: number = 0x0000;
 const TAG: string = 'ThemeSystemBar';
@@ -28,7 +35,10 @@ const THEME_CACHE_FILE: string = 'theme_id.cache';
 const PRIVACY_CACHE_FILE: string = 'privacy_mode.cache';
 
 export const APP_THEME_STORAGE_KEY: string = 'appThemeId';
+export const APP_SYSTEM_COLOR_MODE_STORAGE_KEY: string = 'appSystemColorMode';
 export const APP_SHOW_JPN_TITLE_STORAGE_KEY: string = 'appShowJpnTitle';
+export const APP_SHOW_GALLERY_PAGES_STORAGE_KEY: string = 'appShowGalleryPages';
+export const APP_SHOW_READ_PROGRESS_STORAGE_KEY: string = 'appShowReadProgress';
 
 function themeStartBackgroundNumeric(themeId: number): number {
   if (themeId === ThemeMode.BLACK) {
@@ -40,45 +50,74 @@ function themeStartBackgroundNumeric(themeId: number): number {
   return 0xFFFFFFFF;
 }
 
-export function readCachedThemeId(ctx: common.Context | undefined): number {
+export function readCachedThemeStartup(
+  ctx: common.Context | undefined,
+  systemColorMode: number = ThemeAutoSwitchHelper.getSystemColorMode()
+): CachedThemeStartup {
   if (ctx !== undefined) {
     try {
       const path: string = ctx.filesDir + '/' + THEME_CACHE_FILE;
       if (fs.accessSync(path)) {
         const raw: string = fs.readTextSync(path).trim();
-        const parsed: number = Number(raw);
-        if (parsed === ThemeMode.LIGHT || parsed === ThemeMode.DARK || parsed === ThemeMode.BLACK) {
-          return parsed;
+        if (raw.length > 0) {
+          return ThemeAutoSwitchHelper.decodeThemeCache(raw, systemColorMode);
         }
       }
     } catch (e) {
       const msg: string = e instanceof Error ? e.message : String(e);
-      hilog.warn(DOMAIN, TAG, 'readCachedThemeId failed: %{public}s', msg);
+      hilog.warn(DOMAIN, TAG, 'readCachedThemeStartup failed: %{public}s', msg);
     }
   }
-  return ThemeTokens.getThemeId();
+  return new CachedThemeStartup(ThemeTokens.getThemeId(), false, ThemeMode.DARK);
 }
 
-function writeCachedThemeId(ctx: common.Context | undefined, themeId: number): void {
+export function readCachedThemeId(ctx: common.Context | undefined): number {
+  return readCachedThemeStartup(ctx, ThemeAutoSwitchHelper.getSystemColorMode()).themeId;
+}
+
+function writeCachedThemeStartup(
+  ctx: common.Context | undefined,
+  themeId: number,
+  autoSwitch: boolean,
+  darkVariant: number
+): void {
   if (ctx === undefined) {
     return;
   }
   const path: string = ctx.filesDir + '/' + THEME_CACHE_FILE;
+  const payload: string = ThemeAutoSwitchHelper.encodeThemeCache(themeId, autoSwitch, darkVariant);
   fs.open(path, fs.OpenMode.CREATE | fs.OpenMode.WRITE_ONLY | fs.OpenMode.TRUNC)
     .then(async (file: fs.File): Promise<void> => {
       try {
-        await fs.write(file.fd, String(themeId));
+        await fs.write(file.fd, payload);
       } finally {
         await fs.close(file);
       }
     })
     .catch((e: Error): void => {
-      hilog.warn(DOMAIN, TAG, 'writeCachedThemeId failed: %{public}s', e.message);
+      hilog.warn(DOMAIN, TAG, 'writeCachedThemeStartup failed: %{public}s', e.message);
     });
 }
 
+export function resolveActiveThemeId(): number {
+  try {
+    if (Settings.isAttached()) {
+      return ThemeAutoSwitchHelper.resolveEffectiveTheme(
+        Settings.getTheme(),
+        Settings.isThemeAutoSwitchAvailable(),
+        ThemeAutoSwitchHelper.getSystemColorMode(),
+        Settings.getThemeDarkVariant()
+      );
+    }
+  } catch (e) {
+    const msg: string = e instanceof Error ? e.message : String(e);
+    hilog.warn(DOMAIN, TAG, 'resolveActiveThemeId failed: %{public}s', msg);
+  }
+  return ThemeTokens.getThemeId();
+}
+
 export function syncAppThemeStorage(themeId?: number): number {
-  const resolved: number = themeId !== undefined ? themeId : ThemeTokens.getThemeId();
+  const resolved: number = themeId !== undefined ? themeId : resolveActiveThemeId();
   try {
     AppStorage.setOrCreate<number>(APP_THEME_STORAGE_KEY, resolved);
   } catch (e) {
@@ -88,12 +127,42 @@ export function syncAppThemeStorage(themeId?: number): number {
   return resolved;
 }
 
+export function syncSystemColorModeStorage(colorMode: number): number {
+  try {
+    AppStorage.setOrCreate<number>(APP_SYSTEM_COLOR_MODE_STORAGE_KEY, colorMode);
+  } catch (e) {
+    const msg: string = e instanceof Error ? e.message : String(e);
+    hilog.warn(DOMAIN, TAG, 'AppStorage systemColorMode sync failed: %{public}s', msg);
+  }
+  return colorMode;
+}
+
 export function syncAppShowJpnTitleStorage(enabled: boolean): boolean {
   try {
     AppStorage.setOrCreate<boolean>(APP_SHOW_JPN_TITLE_STORAGE_KEY, enabled);
   } catch (e) {
     const msg: string = e instanceof Error ? e.message : String(e);
     hilog.warn(DOMAIN, TAG, 'AppStorage showJpnTitle sync failed: %{public}s', msg);
+  }
+  return enabled;
+}
+
+export function syncAppShowGalleryPagesStorage(enabled: boolean): boolean {
+  try {
+    AppStorage.setOrCreate<boolean>(APP_SHOW_GALLERY_PAGES_STORAGE_KEY, enabled);
+  } catch (e) {
+    const msg: string = e instanceof Error ? e.message : String(e);
+    hilog.warn(DOMAIN, TAG, 'AppStorage showGalleryPages sync failed: %{public}s', msg);
+  }
+  return enabled;
+}
+
+export function syncAppShowReadProgressStorage(enabled: boolean): boolean {
+  try {
+    AppStorage.setOrCreate<boolean>(APP_SHOW_READ_PROGRESS_STORAGE_KEY, enabled);
+  } catch (e) {
+    const msg: string = e instanceof Error ? e.message : String(e);
+    hilog.warn(DOMAIN, TAG, 'AppStorage showReadProgress sync failed: %{public}s', msg);
   }
   return enabled;
 }
@@ -120,7 +189,9 @@ export function applyWindowTheme(win: window.Window, themeId: number): void {
 export function applySystemBarTheme(
   ctx: common.Context | undefined,
   themeId: number,
-  persistStartWindow: boolean = true
+  persistStartWindow: boolean = true,
+  autoSwitchOverride?: boolean,
+  updateAppColorMode: boolean = true
 ): void {
   if (ctx === undefined) {
     return;
@@ -133,15 +204,27 @@ export function applySystemBarTheme(
   if (!persistStartWindow) {
     return;
   }
-  writeCachedThemeId(ctx, themeId);
-  try {
-    const mode: ConfigurationConstant.ColorMode = themeId === ThemeMode.LIGHT
-      ? ConfigurationConstant.ColorMode.COLOR_MODE_LIGHT
-      : ConfigurationConstant.ColorMode.COLOR_MODE_DARK;
-    ctx.getApplicationContext().setColorMode(mode);
-  } catch (e) {
-    const msg: string = e instanceof Error ? e.message : String(e);
-    hilog.warn(DOMAIN, TAG, 'setColorMode failed: %{public}s', msg);
+  const autoSwitch: boolean = autoSwitchOverride !== undefined
+    ? autoSwitchOverride
+    : (Settings.isAttached() ? Settings.isThemeAutoSwitchAvailable() : false);
+  const darkVariant: number = Settings.isAttached()
+    ? Settings.getThemeDarkVariant()
+    : ThemeAutoSwitchHelper.normalizeDarkVariant(themeId);
+  writeCachedThemeStartup(ctx, themeId, autoSwitch, darkVariant);
+  if (updateAppColorMode) {
+    try {
+      const targetMode: number = ThemeAutoSwitchHelper.resolveApplicationColorMode(themeId, autoSwitch);
+      let mode: ConfigurationConstant.ColorMode = ConfigurationConstant.ColorMode.COLOR_MODE_LIGHT;
+      if (targetMode === SYSTEM_COLOR_MODE_NOT_SET) {
+        mode = ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET;
+      } else if (targetMode === SYSTEM_COLOR_MODE_DARK) {
+        mode = ConfigurationConstant.ColorMode.COLOR_MODE_DARK;
+      }
+      ctx.getApplicationContext().setColorMode(mode);
+    } catch (e) {
+      const msg: string = e instanceof Error ? e.message : String(e);
+      hilog.warn(DOMAIN, TAG, 'setColorMode failed: %{public}s', msg);
+    }
   }
   try {
     window.setStartWindowBackgroundColor(

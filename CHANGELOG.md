@@ -2,6 +2,25 @@
 
 All notable changes to **EhViewer for HarmonyOS** are documented in this file.
 
+## [2.0.2.7.4] - 2026-11-24
+
+### Added & Improved
+- **Follow system dark mode (`theme_auto_switch` + `system_theme`)**:
+  - Wired `EntryAbility.onConfigurationUpdate`, `ThemeAutoSwitchHelper`, and `ThemeSystemBar` to react live to system `Configuration.colorMode` changes (sets `COLOR_MODE_NOT_SET` when auto-switch is enabled so callbacks stay active, and restores in-app theme mode when disabled).
+  - Synced cold-start window color mode via `readCachedThemeStartup`, exposed `Settings.KEY_THEME_DARK_VARIANT` / `settings_eh_system_theme` in `SettingsPage` supporting dark and pure-black variants, and wired `Settings.setDarkModeProvider`.
+- **Gallery list read progress (`show_read_progress`)**:
+  - Restored `settings_eh_list_show_read_progress` and introduced an async in-memory `ReadProgressCache` updated by `SpiderQueen` during reading and hydrated off the render path for `GalleryListSceneView`, `FavoritesSceneView`, `HistorySceneView`, and `GalleryListHostPage`.
+- **E-Hentai event & daily reward dialog (`show_eh_events`)**:
+  - Restored `settings_eh_show_eh_event` and wired `EhEventPaneBus` with `EhEventPaneDialog` (`customStyle: true`, 3-state `ThemeTokens`) inside `MainPageHostView`.
+- **Smart cellular network warning (`cellular_network_warning`)**:
+  - Restored `settings_eh_cellular_network_warning` and upgraded `CellularNetworkWarningGuard` on `OhosNetworkMonitor` so cellular warnings deduplicate across continuous mobile browsing (including brief offline dips) and automatically reset when Wi-Fi or Ethernet becomes active (`isWifiOrEthernetActive()`).
+- **400ms debounced network / VPN switch auto-recovery**:
+  - Added genuine network/VPN signature change detection with a `400ms` debounce (`OhosNetworkMonitor.NETWORK_RECOVERY_DEBOUNCE_MS`) wired through `AppWiring.refreshNetworkStateOnChange`, resetting OkHttp pools and skipping triggers while `'offline'`.
+  - **Thumbnails**: `DefaultImageRequestHost.recoverOnNetworkChange` cancels hung HTTP `Call`s, increments `downloadGeneration` to prevent stale `.finally()` counter corruption, re-enqueues active mounted targets (visible viewport first), and triggers `LoadImageController.retryForNetworkRecovery` (including `RETRY_TYPE_NONE`, capped at once per epoch, cleaned up on `unload()` / `onDetached()` / `onGetValue()`).
+  - **Reader**: `PageImageDownloaderImpl.cancelAllActiveCalls()` aborts hung page transfers; `ReaderNetworkRecoveryGuard` + `GalleryReaderPage` silently retry `initError` or failed `currentPage` (with a `3000ms` delayed-failure guard if recovery hits mid-load and `MAX_AUTO_RETRIES_PER_PAGE = 3`, skipping HTTP `509` and `Insufficient GP`).
+- **Version metadata**:
+  - Bumped `harmony/AppScope/app.json5` to `versionName: "2.0.2.7.4"` (`versionCode: 116`) and synced `harmony/oh-package.json5` / `harmony/entry/oh-package.json5` to `"2.0.2-7.4"`.
+
 ## [2.0.2.7.3] - 2026-11-23
 
 ### Added & Improved

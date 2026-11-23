@@ -27,7 +27,10 @@ import {
   APP_THEME_STORAGE_KEY,
   applySystemBarTheme,
   applyWindowPrivacyMode,
+  resolveActiveThemeId,
+  syncAppShowGalleryPagesStorage,
   syncAppShowJpnTitleStorage,
+  syncAppShowReadProgressStorage,
   syncAppThemeStorage
 } from '../hippo/ui/ThemeSystemBar';
 import {
@@ -171,9 +174,11 @@ struct Index {
 
   onPageShow(): void {
     if (AppWiring.isWired()) {
-      const currentTheme: number = ThemeTokens.getThemeId();
+      const currentTheme: number = resolveActiveThemeId();
       syncAppThemeStorage(currentTheme);
       syncAppShowJpnTitleStorage(Settings.getShowJpnTitle());
+      syncAppShowGalleryPagesStorage(Settings.getShowGalleryPages());
+      syncAppShowReadProgressStorage(Settings.getShowReadProgress());
       const hostCtx = this.getUIContext().getHostContext();
       applySystemBarTheme(hostCtx, currentTheme);
       applyWindowPrivacyMode(hostCtx, Settings.getEnabledSecurity(), false);
@@ -230,6 +235,8 @@ struct Index {
     const ctx: Context | undefined = this.getUIContext().getHostContext();
     this.listClient = new GalleryListClient((): OkHttpClient => EhApplication.getOkHttpClient(ctx === undefined ? null : ctx));
     syncAppShowJpnTitleStorage(Settings.getShowJpnTitle());
+    syncAppShowGalleryPagesStorage(Settings.getShowGalleryPages());
+    syncAppShowReadProgressStorage(Settings.getShowReadProgress());
     if (this.pendingExternalLaunch === null) {
       const lateQueued: ParsedLaunchRequest | null = PendingLaunchBus.getInstance().consumePending();
       if (lateQueued !== null) {

@@ -29,6 +29,7 @@ import { EhEngine, HttpCaller } from '../../ehviewer/client/EhEngine';
 import { UserTag, UserTagList } from '../../ehviewer/client/data/UserTag';
 import { QuickSearch } from '../../ehviewer/dao/QuickSearch';
 import { GetText } from '../../ehviewer/GetText';
+import { ReadProgressCache, ReadProgressChangeListener } from '../../ehviewer/ReadProgressCache';
 import { Settings } from '../../ehviewer/Settings';
 import { LocalFavoriteInfo } from '../../ehviewer/dao/LocalFavoriteInfo';
 import { DownloadManager } from '../../ehviewer/download/DownloadManager';
@@ -63,7 +64,11 @@ import { GalleryArrayDataSource } from '../GalleryListHostPage';
 import { MainPageHost } from '../MainPageHost';
 import { PageRoutes, RouteActionKind, RouteNavigationPlan } from '../PageRoutes';
 import { TagSelectorResultBus } from '../p3/P3PageAdapters';
-import { APP_SHOW_JPN_TITLE_STORAGE_KEY } from '../ThemeSystemBar';
+import {
+  APP_SHOW_GALLERY_PAGES_STORAGE_KEY,
+  APP_SHOW_JPN_TITLE_STORAGE_KEY,
+  APP_SHOW_READ_PROGRESS_STORAGE_KEY
+} from '../ThemeSystemBar';
 import { Announcer } from '../../scene/Announcer';
 import { OkHttpCallerAdapter } from '../../AppWiring';
 import { GalleryListItemLayout } from '../layout/item_gallery_list';
@@ -189,7 +194,10 @@ export struct GalleryListSceneView {
 
   @State listMode: number = Settings.getListMode();
   @State showRating: boolean = Settings.getShowGalleryRating();
-  @State showGalleryPages: boolean = Settings.getShowGalleryPages();
+  @StorageLink(APP_SHOW_GALLERY_PAGES_STORAGE_KEY) @Watch('onPagesPrefChanged') showGalleryPages: boolean =
+    Settings.getShowGalleryPages();
+  @StorageLink(APP_SHOW_READ_PROGRESS_STORAGE_KEY) @Watch('onPagesPrefChanged') showReadProgress: boolean =
+    Settings.getShowReadProgress();
   @StorageLink(APP_SHOW_JPN_TITLE_STORAGE_KEY) @Watch('onShowJpnTitleChanged') showJpnTitlePref: boolean =
     Settings.getShowJpnTitle();
   @State listLanes: number = 1;
@@ -228,6 +236,11 @@ export struct GalleryListSceneView {
       this.updateSuggestions(this.searchKeyword);
     }
   };
+  private readonly onReadProgressChanged: ReadProgressChangeListener = (changedGids: number[]): void => {
+    if (this.showGalleryPages && this.showReadProgress) {
+      this.dataSource.notifyDataChangeByGids(changedGids);
+    }
+  };
   @State rightDrawerPage: number = 0;
   @State quickSearchList: QuickSearch[] = [];
   @State quickSearchLoading: boolean = false;
@@ -254,6 +267,42 @@ export struct GalleryListSceneView {
 
   private onShowJpnTitleChanged(): void {
     this.dataSource.notifyDataReload();
+  }
+
+  private onPagesPrefChanged(): void {
+    if (this.showGalleryPages && this.showReadProgress) {
+      const count: number = this.dataSource.totalCount();
+      const list: GalleryInfo[] = [];
+      for (let i = 0; i < count; i++) {
+        list.push(this.dataSource.getData(i));
+      }
+      this.prefetchReadProgressForList(list);
+    }
+    this.dataSource.notifyDataReload();
+  }
+
+  private prefetchReadProgressForList(list: GalleryInfo[]): void {
+    if (!this.showGalleryPages || !this.showReadProgress || list.length === 0) {
+      return;
+    }
+    const gids: number[] = [];
+    for (let i = 0; i < list.length; i++) {
+      if (list[i].pages > 0 && list[i].gid > 0) {
+        gids.push(list[i].gid);
+      }
+    }
+    if (gids.length > 0) {
+      void ReadProgressCache.prefetchGids(gids);
+    }
+  }
+
+  private formatCardPages(item: GalleryInfo): string {
+    return ReadProgressCache.formatPagesLabel(
+      item.gid,
+      item.pages,
+      this.showGalleryPages,
+      this.showReadProgress
+    );
   }
 
   private onRightDrawerDragChanged(): void {
@@ -505,6 +554,7 @@ export struct GalleryListSceneView {
   aboutToAppear(): void {
     this.lastRightDragEndSeq = this.rightDrawerDragEndSeq;
     EhTagDatabaseUpdater.addUpdateListener(this.onTagDbUpdated);
+    ReadProgressCache.addListener(this.onReadProgressChanged);
     this.syncDisplaySettings();
 
     this.searchBarMover.helper = new SearchBarMoverHelperImpl(
@@ -600,6 +650,7 @@ export struct GalleryListSceneView {
       this.scrollTopTimerId = -1;
     }
     EhTagDatabaseUpdater.removeUpdateListener(this.onTagDbUpdated);
+    ReadProgressCache.removeListener(this.onReadProgressChanged);
     TagSelectorResultBus.setListener(null);
     const reqHost = LoadImageController.getDefaultRequestHost();
     if (reqHost instanceof DefaultImageRequestHost) {
@@ -613,7 +664,6 @@ export struct GalleryListSceneView {
   private syncDisplaySettings(): void {
     this.listMode = Settings.getListMode();
     this.showRating = Settings.getShowGalleryRating();
-    this.showGalleryPages = Settings.getShowGalleryPages();
     this.updateGridMetrics();
   }
 
@@ -727,6 +777,7 @@ export struct GalleryListSceneView {
       }
       this.dataSource.syncItems(list);
       this.itemCount = list.length;
+      this.prefetchReadProgressForList(list);
       const nextResetSeq: number = s.getListResetSeq();
       if (nextResetSeq !== this.lastListResetSeq) {
         this.lastListResetSeq = nextResetSeq;
@@ -1740,7 +1791,7 @@ export struct GalleryListSceneView {
             category: GalleryListClient.formatCategoryLabel(item.category),
             categoryBgColor: GalleryListClient.formatCategoryColor(item.category),
             posted: item.posted,
-            pages: (this.showGalleryPages && item.pages > 0) ? (item.pages.toString() + 'P') : '',
+            pages: this.formatCardPages(item),
             simpleLanguage: item.simpleLanguage ?? '',
             rating: item.rating,
             showRating: this.showRating,
@@ -1774,7 +1825,8 @@ export struct GalleryListSceneView {
               this.openItemMenu(index, item);
             })
         )
-      }, (item: GalleryInfo, idx: number) => this.dataSource.getItemKey(item, idx, this.themeId))
+      }, (item: GalleryInfo, idx: number) => this.dataSource.getItemKey(
+        item, idx, this.themeId, this.formatCardPages(item)))
 
       if (this.loading || this.reachEnd) {
         ListItem() {

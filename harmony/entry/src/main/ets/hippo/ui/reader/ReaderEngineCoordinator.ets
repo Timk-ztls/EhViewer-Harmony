@@ -421,3 +421,98 @@ export function resolveZoomedEdgeTurn(
   }
   return 'none';
 }
+
+/**
+ * 网络切换 / VPN 恢复后，阅读器当前页自动重试防抖与次数上限守卫（避免无网/509/GP 不足时死循环）。
+ */
+export class ReaderNetworkRecoveryGuard {
+  static readonly MAX_AUTO_RETRIES_PER_PAGE: number = 3;
+  static readonly PENDING_FAILURE_WINDOW_MS: number = 3000;
+
+  private lastHandledEpoch: number = -1;
+  private pendingLoadingEpoch: number = -1;
+  private pendingLoadingPage: number = -1;
+  private pendingLoadingSetAtMs: number = 0;
+  private readonly pageRetryCounts: Map<number, number> = new Map<number, number>();
+
+  static isNonRecoverableError(errorMessage: string): boolean {
+    if (errorMessage.length === 0) {
+      return false;
+    }
+    return errorMessage.indexOf('509') >= 0
+      || errorMessage.indexOf('Insufficient GP') >= 0
+      || errorMessage.indexOf('GP不足') >= 0;
+  }
+
+  canRetryInit(epoch: number): boolean {
+    if (epoch <= 0 || epoch === this.lastHandledEpoch) {
+      return false;
+    }
+    this.lastHandledEpoch = epoch;
+    return true;
+  }
+
+  canRetryErrorPage(epoch: number, page: number, errorMessage: string): boolean {
+    if (epoch <= 0 || epoch === this.lastHandledEpoch || page < 0) {
+      return false;
+    }
+    if (ReaderNetworkRecoveryGuard.isNonRecoverableError(errorMessage)) {
+      return false;
+    }
+    const count: number = this.pageRetryCounts.get(page) ?? 0;
+    if (count >= ReaderNetworkRecoveryGuard.MAX_AUTO_RETRIES_PER_PAGE) {
+      return false;
+    }
+    this.lastHandledEpoch = epoch;
+    this.pageRetryCounts.set(page, count + 1);
+    this.pendingLoadingEpoch = -1;
+    this.pendingLoadingPage = -1;
+    this.pendingLoadingSetAtMs = 0;
+    return true;
+  }
+
+  armPendingForLoading(epoch: number, page: number, nowMs: number = Date.now()): void {
+    if (epoch <= 0 || epoch === this.lastHandledEpoch || page < 0) {
+      return;
+    }
+    this.pendingLoadingEpoch = epoch;
+    this.pendingLoadingPage = page;
+    this.pendingLoadingSetAtMs = nowMs;
+  }
+
+  consumePendingRetryOnFailure(page: number, errorMessage: string, nowMs: number = Date.now()): boolean {
+    if (this.pendingLoadingEpoch <= 0 || this.pendingLoadingPage !== page) {
+      return false;
+    }
+    const epoch: number = this.pendingLoadingEpoch;
+    const elapsed: number = nowMs - this.pendingLoadingSetAtMs;
+    this.pendingLoadingEpoch = -1;
+    this.pendingLoadingPage = -1;
+    this.pendingLoadingSetAtMs = 0;
+    if (elapsed > ReaderNetworkRecoveryGuard.PENDING_FAILURE_WINDOW_MS) {
+      return false;
+    }
+    return this.canRetryErrorPage(epoch, page, errorMessage);
+  }
+
+  onPageReady(page: number): void {
+    this.pageRetryCounts.delete(page);
+    if (this.pendingLoadingPage === page) {
+      this.pendingLoadingEpoch = -1;
+      this.pendingLoadingPage = -1;
+      this.pendingLoadingSetAtMs = 0;
+    }
+  }
+
+  getPageRetryCount(page: number): number {
+    return this.pageRetryCounts.get(page) ?? 0;
+  }
+
+  reset(): void {
+    this.lastHandledEpoch = -1;
+    this.pendingLoadingEpoch = -1;
+    this.pendingLoadingPage = -1;
+    this.pendingLoadingSetAtMs = 0;
+    this.pageRetryCounts.clear();
+  }
+}

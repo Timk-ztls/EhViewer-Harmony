@@ -54,6 +54,29 @@ export class PageImageDownloaderImpl implements PageImageDownloader {
   /** 普通客户端超时（上游 `getOkHttpClient()` = 10s）。 */
   static readonly TIMEOUT_SECONDS: number = 10;
 
+  private static readonly sActiveCalls: Set<Call> = new Set<Call>();
+
+  static cancelAllActiveCalls(): number {
+    if (PageImageDownloaderImpl.sActiveCalls.size === 0) {
+      return 0;
+    }
+    const snapshot: Call[] = [];
+    PageImageDownloaderImpl.sActiveCalls.forEach((call: Call): void => {
+      snapshot.push(call);
+    });
+    PageImageDownloaderImpl.sActiveCalls.clear();
+    let count: number = 0;
+    for (let i = 0; i < snapshot.length; i++) {
+      try {
+        snapshot[i].cancel();
+        count++;
+      } catch (_e) {
+        // Ignore already finished calls.
+      }
+    }
+    return count;
+  }
+
   private readonly _client: OkHttpClient;
   private readonly _timeoutMs: number;
 
@@ -119,7 +142,12 @@ export class PageImageDownloaderImpl implements PageImageDownloader {
           .build();
       }
       const call: Call = execClient.newCall(request, onProgress);
-      response = await call.execute();
+      PageImageDownloaderImpl.sActiveCalls.add(call);
+      try {
+        response = await call.execute();
+      } finally {
+        PageImageDownloaderImpl.sActiveCalls.delete(call);
+      }
     } catch (e) {
       return new DownloadResult(false, -1, 0, (e as Error).message);
     }

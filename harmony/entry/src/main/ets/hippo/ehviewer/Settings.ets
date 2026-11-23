@@ -2059,6 +2059,22 @@ export class Settings {
     Settings.putBoolean(Settings.KEY_THEME_AUTO_SWITCH, value);
   }
 
+  static readonly KEY_THEME_DARK_VARIANT: string = 'theme_dark_variant';
+  static readonly DEFAULT_THEME_DARK_VARIANT: number = Settings.THEME_DARK;
+
+  static getThemeDarkVariant(): number {
+    const raw: number = Settings.getIntFromStr(
+      Settings.KEY_THEME_DARK_VARIANT,
+      Settings.DEFAULT_THEME_DARK_VARIANT
+    );
+    return raw === Settings.THEME_BLACK ? Settings.THEME_BLACK : Settings.THEME_DARK;
+  }
+
+  static putThemeDarkVariant(theme: number): void {
+    const normalized: number = theme === Settings.THEME_BLACK ? Settings.THEME_BLACK : Settings.THEME_DARK;
+    Settings.putIntToStr(Settings.KEY_THEME_DARK_VARIANT, normalized);
+  }
+
   static readonly KEY_APPLY_NAV_BAR_THEME_COLOR: string = 'apply_nav_bar_theme_color';
   static readonly DEFAULT_APPLY_NAV_BAR_THEME_COLOR: boolean = false;
 

@@ -23,6 +23,8 @@ import {
 import { AppConfig } from '../hippo/ehviewer/AppConfig';
 import { EhApplication } from '../hippo/ehviewer/EhApplication';
 import { GetText } from '../hippo/ehviewer/GetText';
+import { NetworkRecoveryListener, OhosNetworkMonitor } from '../hippo/ehviewer/OhosNetworkMonitor';
+import { ReadProgressCache } from '../hippo/ehviewer/ReadProgressCache';
 import { Settings } from '../hippo/ehviewer/Settings';
 import { PrivacySettingsRules } from '../hippo/ehviewer/ui/fragment/PrivacySettingsRules';
 import { applyWindowPrivacyToWindow } from '../hippo/ui/ThemeSystemBar';
@@ -67,6 +69,7 @@ import {
   FallbackReason,
   ProgressThrottle,
   ReaderEngineCoordinator,
+  ReaderNetworkRecoveryGuard,
   ReaderRouteRequest,
   RenderEngineMode,
   ZoomedEdgeTurn,
@@ -831,6 +834,10 @@ struct GalleryReaderPage {
   private readonly previewSetCache: Map<number, PreviewSet> = new Map<number, PreviewSet>();
   private readonly inFlightPreviewPages: Map<number, Promise<void>> = new Map<number, Promise<void>>();
   private readonly inFlightPages: Map<number, Promise<void>> = new Map<number, Promise<void>>();
+  private readonly networkRecoveryGuard: ReaderNetworkRecoveryGuard = new ReaderNetworkRecoveryGuard();
+  private readonly networkRecoveryListener: NetworkRecoveryListener = (epoch: number): void => {
+    this.handleNetworkRecovery(epoch);
+  };
 
   private palette(): ThemePalette {
     return ThemeTokens.of(this.themeId);
@@ -924,6 +931,7 @@ struct GalleryReaderPage {
 
   aboutToAppear(): void {
     this.destroyed = false;
+    OhosNetworkMonitor.addNetworkRecoveryListener(this.networkRecoveryListener);
     this.updateDensityRatio();
     this.syncReaderSettingsFromPrefs();
     this.refreshClockFormat();
@@ -977,6 +985,8 @@ struct GalleryReaderPage {
 
   aboutToDisappear(): void {
     this.destroyed = true;
+    OhosNetworkMonitor.removeNetworkRecoveryListener(this.networkRecoveryListener);
+    this.networkRecoveryGuard.reset();
     this.lastSwiperSwipeMs = 0;
     this.stopAutoTransfer();
     this.flushStartPageNow();
@@ -1772,6 +1782,37 @@ struct GalleryReaderPage {
     this.startWatchdog();
   }
 
+  private handleNetworkRecovery(epoch: number): void {
+    if (this.destroyed || this.providerKind !== ProviderKind.EH) {
+      return;
+    }
+    if (this.initError.length > 0) {
+      if (this.networkRecoveryGuard.canRetryInit(epoch)) {
+        hilog.info(DOMAIN, TAG, '[ArkUIReader] network recovery retryCurrentInit gid=%{public}d epoch=%{public}d',
+          this.gid, epoch);
+        this.retryCurrentInit();
+      }
+      return;
+    }
+    if (!this.isArkUiMode() || this.spiderQueen === null || !this.spiderReady) {
+      return;
+    }
+    const idx: number = this.currentPage;
+    const ps: ReaderPageState | null = this.dataSource.getPageState(idx);
+    if (ps === null) {
+      return;
+    }
+    if (ps.status === PageLoadStatus.ERROR) {
+      if (this.networkRecoveryGuard.canRetryErrorPage(epoch, idx, ps.errorMessage)) {
+        hilog.info(DOMAIN, TAG, '[ArkUIReader] network recovery retry failed page gid=%{public}d page=%{public}d epoch=%{public}d',
+          this.gid, idx, epoch);
+        this.requestSpiderPage(idx, true);
+      }
+    } else if (ps.status === PageLoadStatus.LOADING) {
+      this.networkRecoveryGuard.armPendingForLoading(epoch, idx);
+    }
+  }
+
   private bootstrapEhArkUi(req: ReaderRouteRequest): void {
     if (req.gid <= 0 || req.token.length === 0) {
       this.initializing = false;
@@ -1834,6 +1875,7 @@ struct GalleryReaderPage {
         }
         const uri: string | null = queen.getPageFileUri(index);
         if (uri !== null && uri.length > 0) {
+          this.networkRecoveryGuard.onPageReady(index);
           ps.localPath = uri;
           ps.errorMessage = '';
           ps.progress = 100;
@@ -1858,6 +1900,15 @@ struct GalleryReaderPage {
         if (ps !== null) {
           ps.errorMessage = error;
           ps.status = PageLoadStatus.ERROR;
+        }
+        if (index === this.currentPage && this.networkRecoveryGuard.consumePendingRetryOnFailure(index, error)) {
+          Promise.resolve().then((): void => {
+            if (!this.destroyed && this.spiderQueen === queen && index === this.currentPage) {
+              hilog.info(DOMAIN, TAG, '[ArkUIReader] network recovery deferred retry page gid=%{public}d page=%{public}d',
+                this.gid, index);
+              this.requestSpiderPage(index, true);
+            }
+          });
         }
       },
       (_finished: number, _downloaded: number, _total: number): void => {
@@ -1976,6 +2027,9 @@ struct GalleryReaderPage {
 
   private scheduleSaveStartPage(page: number): void {
     this.pendingStartPage = page;
+    if (this.gid > 0 && page >= 0) {
+      ReadProgressCache.update(this.gid, page);
+    }
     if (this.startPageSaveTimer >= 0) {
       clearTimeout(this.startPageSaveTimer);
     }
@@ -2004,6 +2058,9 @@ struct GalleryReaderPage {
     const queen: SpiderQueen | null = this.spiderQueen;
     const pageToWrite: number = this.pendingStartPage >= 0 ? this.pendingStartPage : this.currentPage;
     this.pendingStartPage = -1;
+    if (this.gid > 0 && pageToWrite >= 0) {
+      ReadProgressCache.update(this.gid, pageToWrite);
+    }
     if (queen !== null && pageToWrite >= 0) {
       try {
         queen.putStartPage(pageToWrite);

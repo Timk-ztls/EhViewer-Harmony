@@ -1,7 +1,8 @@
-import { common } from '@kit.AbilityKit';
+import { common, ConfigurationConstant } from '@kit.AbilityKit';
 import { pasteboard } from '@kit.BasicServicesKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { GetText } from '../hippo/ehviewer/GetText';
+import { CellularNetworkWarningGuard } from '../hippo/ehviewer/OhosNetworkMonitor';
 import { Settings } from '../hippo/ehviewer/Settings';
 import { EhApplication } from '../hippo/ehviewer/EhApplication';
 import { EhDB } from '../hippo/ehviewer/EhDB';
@@ -29,15 +30,22 @@ import { AppWiring } from '../hippo/AppWiring';
 import { ArkWebProxyManager } from '../hippo/ui/ArkWebProxyManager';
 import { PageRoutes, RouteActionKind, RouteNavigationPlan } from '../hippo/ui/PageRoutes';
 import { UConfigPageCoordinator } from '../hippo/ui/p3/P3PageAdapters';
+import { SYSTEM_COLOR_MODE_NOT_SET, ThemeAutoSwitchHelper } from '../hippo/ui/ThemeAutoSwitchHelper';
 import {
+  APP_SYSTEM_COLOR_MODE_STORAGE_KEY,
   APP_THEME_STORAGE_KEY,
   applySystemBarTheme,
+  resolveActiveThemeId,
+  syncAppShowGalleryPagesStorage,
   syncAppShowJpnTitleStorage,
-  syncAppThemeStorage
+  syncAppShowReadProgressStorage,
+  syncAppThemeStorage,
+  syncSystemColorModeStorage
 } from '../hippo/ui/ThemeSystemBar';
 import {
   ThemeDimens,
   ThemeElevation,
+  ThemeMode,
   ThemePalette,
   ThemeRadius,
   ThemeTokens,
@@ -136,15 +144,20 @@ struct SettingsPage {
   @State launchPage: number = 0;
   @State historyInfoSize: number = 100;
   @State fixThumbUrl: boolean = false;
-  @State theme: number = 0;
+  @StorageLink(APP_THEME_STORAGE_KEY) theme: number = ThemeMode.LIGHT;
+  @StorageLink(APP_SYSTEM_COLOR_MODE_STORAGE_KEY) systemColorMode: number = SYSTEM_COLOR_MODE_NOT_SET;
+  @State themeAutoSwitch: boolean = false;
   @State listMode: number = 0;
+  @State showReadProgress: boolean = true;
   @State detailSize: number = 0;
   @State thumbSize: number = 1;
   @State thumbResolution: number = 0;
   @State showJpnTitle: boolean = false;
   @State showGalleryPages: boolean = false;
   @State showGalleryRating: boolean = true;
+  @State showEhEvents: boolean = true;
   @State showEhLimits: boolean = true;
+  @State cellularNetworkWarning: boolean = false;
   @State showGalleryComment: boolean = true;
   @State needSignIn: boolean = true;
   @State excludedLanguages: string = '';
@@ -193,15 +206,20 @@ struct SettingsPage {
     this.launchPage = Settings.getLaunchPage();
     this.historyInfoSize = Settings.getHistoryInfoSize();
     this.fixThumbUrl = Settings.getFixThumbUrl();
-    this.theme = Settings.getTheme();
+    this.themeAutoSwitch = Settings.isThemeAutoSwitchAvailable();
+    this.systemColorMode = ThemeAutoSwitchHelper.getSystemColorMode();
+    this.theme = resolveActiveThemeId();
     this.listMode = Settings.getListMode();
+    this.showReadProgress = Settings.getShowReadProgress();
     this.detailSize = Settings.getDetailSize();
     this.thumbSize = Settings.getThumbSize();
     this.thumbResolution = Settings.getThumbResolution();
     this.showJpnTitle = Settings.getShowJpnTitle();
     this.showGalleryPages = Settings.getShowGalleryPages();
     this.showGalleryRating = Settings.getShowGalleryRating();
+    this.showEhEvents = Settings.getBoolean(Settings.KEY_SHOW_EH_EVENTS, Settings.IS_SHOW_EH_EVENTS);
     this.showEhLimits = Settings.getBoolean(Settings.KEY_SHOW_EH_LIMITS, Settings.IS_SHOW_EH_LIMITS);
+    this.cellularNetworkWarning = Settings.getCellularNetworkWarning();
     this.showGalleryComment = Settings.getShowGalleryComment();
     this.needSignIn = Settings.getNeedSignIn();
     const rawExcluded: string | null = Settings.getExcludedLanguages();
@@ -407,6 +425,14 @@ struct SettingsPage {
 
   private palette(): ThemePalette {
     return ThemeTokens.of(this.theme);
+  }
+
+  private systemThemeSummary(): string {
+    const key: string = ThemeAutoSwitchHelper.resolveSystemThemeStringKey(this.systemColorMode);
+    if (key.length > 0) {
+      return this.str(key);
+    }
+    return '—';
   }
 
   @Builder
@@ -740,12 +766,73 @@ struct SettingsPage {
               onChanged: (value: string) => {
                 const nextTheme: number = Number(value);
                 if (!Number.isNaN(nextTheme)) {
+                  if (nextTheme === ThemeMode.DARK || nextTheme === ThemeMode.BLACK) {
+                    Settings.putThemeDarkVariant(nextTheme);
+                  }
+                  if (ThemeAutoSwitchHelper.shouldDisableAutoSwitchOnManualTheme(
+                    nextTheme, this.themeAutoSwitch, this.systemColorMode
+                  )) {
+                    this.themeAutoSwitch = false;
+                    Settings.putThemeAutoSwitchAvailable(false);
+                  }
                   Settings.putTheme(nextTheme);
                   syncAppThemeStorage(nextTheme);
-                  applySystemBarTheme(this.getUIContext().getHostContext(), nextTheme);
+                  applySystemBarTheme(
+                    this.getUIContext().getHostContext(),
+                    nextTheme,
+                    true,
+                    this.themeAutoSwitch,
+                    true
+                  );
                   this.theme = nextTheme;
                   this.sectionRefreshSeq += 1;
                 }
+              }
+            })
+
+            SwitchPreference({
+              title: this.str('settings_eh_theme_auto_switch'),
+              checked: this.themeAutoSwitch,
+              themeId: this.theme,
+              onChanged: (checked: boolean) => {
+                this.themeAutoSwitch = checked;
+                Settings.putThemeAutoSwitchAvailable(checked);
+                const ctx: common.Context | undefined = this.getUIContext().getHostContext();
+                if (checked) {
+                  if (Settings.getTheme() === ThemeMode.BLACK) {
+                    Settings.putThemeDarkVariant(ThemeMode.BLACK);
+                  }
+                  if (ctx !== undefined) {
+                    try {
+                      ctx.getApplicationContext().setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET);
+                    } catch (e) {
+                      hilog.warn(LOG_DOMAIN, LOG_TAG, 'setColorMode(NOT_SET) failed: %{public}s',
+                        e instanceof Error ? e.message : String(e));
+                    }
+                    if (ThemeAutoSwitchHelper.getSystemColorMode() === SYSTEM_COLOR_MODE_NOT_SET) {
+                      const abilityCtx: common.UIAbilityContext = ctx as common.UIAbilityContext;
+                      const cfgMode: number | undefined = abilityCtx.config ? abilityCtx.config.colorMode : undefined;
+                      const detected: number = ThemeAutoSwitchHelper.setSystemColorMode(cfgMode);
+                      syncSystemColorModeStorage(detected);
+                    }
+                  }
+                  const nextTheme: number = resolveActiveThemeId();
+                  Settings.putTheme(nextTheme);
+                  syncAppThemeStorage(nextTheme);
+                  applySystemBarTheme(ctx, nextTheme, true, true, true);
+                  this.theme = nextTheme;
+                  this.sectionRefreshSeq += 1;
+                } else {
+                  applySystemBarTheme(ctx, this.theme, true, false, true);
+                }
+              }
+            })
+
+            SettingsItem({
+              title: this.str('settings_eh_system_theme'),
+              summary: this.systemThemeSummary(),
+              themeId: this.theme,
+              onItemClick: () => {
               }
             })
 
@@ -762,6 +849,18 @@ struct SettingsPage {
                   Settings.putListMode(mode);
                   this.listMode = mode;
                 }
+              }
+            })
+
+            SwitchPreference({
+              title: this.str('settings_eh_list_show_read_progress'),
+              summary: this.str('settings_eh_list_show_read_progress_summary'),
+              checked: this.showReadProgress,
+              themeId: this.theme,
+              onChanged: (checked: boolean) => {
+                this.showReadProgress = checked;
+                Settings.setShowReadProgress(checked);
+                syncAppShowReadProgressStorage(checked);
               }
             })
 
@@ -846,6 +945,7 @@ struct SettingsPage {
               onChanged: (checked: boolean) => {
                 this.showGalleryPages = checked;
                 Settings.putShowGalleryPages(checked);
+                syncAppShowGalleryPagesStorage(checked);
               }
             })
 
@@ -860,12 +960,35 @@ struct SettingsPage {
             })
 
             SwitchPreference({
+              title: this.str('settings_eh_show_eh_event'),
+              checked: this.showEhEvents,
+              themeId: this.theme,
+              onChanged: (checked: boolean) => {
+                this.showEhEvents = checked;
+                Settings.setKeyShowEhEvents(checked);
+              }
+            })
+
+            SwitchPreference({
               title: this.str('settings_eh_show_eh_limits'),
               checked: this.showEhLimits,
               themeId: this.theme,
               onChanged: (checked: boolean) => {
                 this.showEhLimits = checked;
                 Settings.setKeyShowEhLimits(checked);
+              }
+            })
+
+            SwitchPreference({
+              title: this.str('settings_eh_cellular_network_warning'),
+              checked: this.cellularNetworkWarning,
+              themeId: this.theme,
+              onChanged: (checked: boolean) => {
+                this.cellularNetworkWarning = checked;
+                Settings.putCellularNetworkWarning(checked);
+                if (checked) {
+                  CellularNetworkWarningGuard.checkAndNotify();
+                }
               }
             })
 

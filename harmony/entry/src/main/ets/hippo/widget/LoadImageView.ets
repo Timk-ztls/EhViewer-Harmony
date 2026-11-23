@@ -169,6 +169,9 @@ export class LoadImageController implements PreviewTarget {
   private pendingSrc: string | null = null;
   private pendingSource: number = ImageSource.MEMORY;
   private delivered: boolean = false;
+  private recoveryKey: string | null = null;
+  private recoveryUrl: string | null = null;
+  private lastAutoRetryEpoch: number = -1;
 
   static setDefaultRequestHost(requestHost: ImageRequestHost | null): void {
     LoadImageController.sDefaultRequestHost = requestHost;
@@ -233,9 +236,19 @@ export class LoadImageController implements PreviewTarget {
     this.loadWith(key, url, true, true, listIndex);
   }
 
-  loadWith(key: string, url: string, useNetwork: boolean, hardware: boolean, listIndex: number = -1): void {
+  loadWith(
+    key: string,
+    url: string,
+    useNetwork: boolean,
+    hardware: boolean,
+    listIndex: number = -1,
+    preserveAutoRetryEpoch: boolean = false
+  ): void {
     if (url.length === 0 || key.length === 0) {
       return;
+    }
+    if (!preserveAutoRetryEpoch && this.recoveryUrl !== url) {
+      this.lastAutoRetryEpoch = -1;
     }
     this.loadFromDrawable = false;
     this.failed = false;
@@ -245,6 +258,8 @@ export class LoadImageController implements PreviewTarget {
     this.clearRetry();
     this.key = key;
     this.url = url;
+    this.recoveryKey = key;
+    this.recoveryUrl = url;
     this.useNetwork = useNetwork;
     this.hardware = hardware;
     this.listIndex = listIndex;
@@ -268,6 +283,9 @@ export class LoadImageController implements PreviewTarget {
     }
     this.key = null;
     this.url = null;
+    this.recoveryKey = null;
+    this.recoveryUrl = null;
+    this.lastAutoRetryEpoch = -1;
     this.dataContainerId = '';
     this.listIndex = -1;
     this.failed = false;
@@ -287,7 +305,7 @@ export class LoadImageController implements PreviewTarget {
       this.onFailure();
     } else if (this.taskId === INVALID_TASK_ID && !this.delivered) {
       if (this.key !== null && this.url !== null) {
-        this.loadWith(this.key, this.url, this.useNetwork, this.hardware);
+        this.loadWith(this.key, this.url, this.useNetwork, this.hardware, this.listIndex);
       }
     }
   }
@@ -296,6 +314,9 @@ export class LoadImageController implements PreviewTarget {
   onDetached(): void {
     this.attached = false;
     this.failed = false;
+    this.recoveryKey = null;
+    this.recoveryUrl = null;
+    this.lastAutoRetryEpoch = -1;
     if (this.loadFromDrawable) {
       return;
     }
@@ -320,7 +341,27 @@ export class LoadImageController implements PreviewTarget {
     if (k === null || u === null) {
       return false;
     }
-    this.loadWith(k, u, this.useNetwork, this.hardware);
+    this.loadWith(k, u, this.useNetwork, this.hardware, this.listIndex);
+    return true;
+  }
+
+  /**
+   * 网络切换 / VPN 恢复时针对仍挂载在屏幕上且失败的目标执行单次静默重试（同一恢复 epoch 至多 1 次）。
+   */
+  retryForNetworkRecovery(epoch: number): boolean {
+    if (!this.attached || this.host === null || !this.failed || this.loadFromDrawable || !this.useNetwork) {
+      return false;
+    }
+    if (this.lastAutoRetryEpoch === epoch) {
+      return false;
+    }
+    const k: string | null = this.key !== null ? this.key : this.recoveryKey;
+    const u: string | null = this.url !== null ? this.url : this.recoveryUrl;
+    if (k === null || u === null || k.length === 0 || u.length === 0) {
+      return false;
+    }
+    this.lastAutoRetryEpoch = epoch;
+    this.loadWith(k, u, this.useNetwork, this.hardware, this.listIndex, true);
     return true;
   }
 
@@ -352,6 +393,8 @@ export class LoadImageController implements PreviewTarget {
 
   /** 上游 onGetValue：mOffsetX != MIN_VALUE 且未预裁切时套 PreciselyClipDrawable；DISK/NETWORK 且可见时 300ms 淡入 */
   onGetValue(src: string, source: number): void {
+    this.failed = false;
+    this.lastAutoRetryEpoch = -1;
     this.delivered = true;
     if (this.host !== null) {
       this.pendingSrc = null;

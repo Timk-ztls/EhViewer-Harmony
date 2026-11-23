@@ -203,9 +203,29 @@ export class GalleryArrayDataSource implements IDataSource {
     }
   }
 
-  getItemKey(item: GalleryInfo, idx: number, themeId: number): string {
+  /** 仅通知指定 GID 对应的列表项局部刷新（供异步阅读进度回填使用，避免整表重载）。 */
+  notifyDataChangeByGids(gids: number[]): void {
+    if (gids.length === 0 || this.items.length === 0) {
+      return;
+    }
+    const gidSet: Set<number> = new Set<number>();
+    for (let i = 0; i < gids.length; i++) {
+      gidSet.add(gids[i]);
+    }
+    for (let idx = 0; idx < this.items.length; idx++) {
+      const itemGid: number = Number(this.items[idx].gid);
+      if (gidSet.has(itemGid)) {
+        for (let j = 0; j < this.listeners.length; j++) {
+          this.listeners[j].onDataChange(idx);
+        }
+      }
+    }
+  }
+
+  getItemKey(item: GalleryInfo, idx: number, themeId: number, pagesTag: string = ''): string {
     const gid: number = Number(item.gid);
-    return `${idx}_${Number.isFinite(gid) ? gid : 0}_${themeId}_${this.reloadVersion}`;
+    const base: string = `${idx}_${Number.isFinite(gid) ? gid : 0}_${themeId}_${this.reloadVersion}`;
+    return pagesTag.length > 0 ? `${base}_${pagesTag}` : base;
   }
 
   totalCount(): number {

@@ -77,7 +77,9 @@ import { EhClientFavoritesAdapter } from './ehviewer/ui/scene/gallery/list/Favor
 import { DaoMaster } from './ehviewer/dao/DaoMaster';
 import { SpiderQueen, EhEngineLike, SpiderInfoCacheProvider, GalleryDetailFetcher, PreviewSetFetcher } from './ehviewer/spider/SpiderQueen';
 import { PageImageDownloaderImpl } from './okhttp/PageImageDownloaderImpl';
-import { EhEngine, EngineTask, HttpCaller, EhEngineConfig } from './ehviewer/client/EhEngine';
+import { EhEngine, EngineTask, EventPaneHook, HttpCaller, EhEngineConfig } from './ehviewer/client/EhEngine';
+import { EhEventPaneBus } from './ehviewer/EhEventPaneBus';
+import { ReadProgressCache } from './ehviewer/ReadProgressCache';
 import { GalleryPageParserResult } from './ehviewer/client/parser/GalleryPageParser';
 import { GalleryPageApiParserResult } from './ehviewer/client/parser/GalleryPageApiParser';
 import { Crash } from './ehviewer/Crash';
@@ -189,7 +191,7 @@ import { createNativeLibImageBridge } from '../native/NativeImage';
 import { GalleryLayoutFactory } from './lib/glgallery/GalleryLayoutFactory';
 import { GalleryView } from './lib/glgallery/GalleryView';
 import { Network } from './network/Network';
-import { OhosNetworkBackend, OhosNetworkMonitor } from './ehviewer/OhosNetworkMonitor';
+import { CellularNetworkWarningGuard, OhosNetworkBackend, OhosNetworkMonitor } from './ehviewer/OhosNetworkMonitor';
 import { ArkWebProxyManager } from './ui/ArkWebProxyManager';
 import { PagerLayoutManager } from './lib/glgallery/PagerLayoutManager';
 import { DrawingOffscreenCanvas, DrawingTextPaintFactory } from './lib/glview/glrenderer/DrawingText';
@@ -208,6 +210,42 @@ class SettingsSearchHistoryKvStore implements SearchHistoryKvStore {
 
   putString(key: string, value: string): void {
     Settings.putString(key, value);
+  }
+}
+
+class AppEventPaneHook implements EventPaneHook {
+  showEventPane(html: string): void {
+    EhEventPaneBus.getInstance().publishHtml(html);
+  }
+}
+
+async function readSpiderInfoStartPageAsync(cache: SimpleDiskCache | null, gid: number): Promise<number> {
+  if (cache === null || gid <= 0) {
+    return 0;
+  }
+  const cachePath: string | null = cache.getCacheFilePath(`${gid}`);
+  if (cachePath === null || cachePath.length === 0) {
+    return 0;
+  }
+  let opened: fs.File | null = null;
+  try {
+    opened = await fs.open(cachePath, fs.OpenMode.READ_ONLY);
+    const buf: ArrayBuffer = new ArrayBuffer(128);
+    const bytesRead: number = await fs.read(opened.fd, buf);
+    if (bytesRead <= 0) {
+      return 0;
+    }
+    return ReadProgressCache.parseStartPageFromHeaderBytes(new Uint8Array(buf, 0, bytesRead));
+  } catch (_e) {
+    return 0;
+  } finally {
+    if (opened !== null) {
+      try {
+        await fs.close(opened);
+      } catch (_closeErr) {
+        // Ignore read-only file close errors on background probe.
+      }
+    }
   }
 }
 
@@ -350,6 +388,8 @@ export class AppWiring {
     ArkWebProxyManager.syncFromSettings().catch((e: Error): void => {
       hilog.warn(DOMAIN, TAG, 'refreshNetworkStateOnChange ArkWeb proxy sync failed: %{public}s', e.message);
     });
+    CellularNetworkWarningGuard.checkAndNotify();
+    OhosNetworkMonitor.checkAndScheduleRecovery();
     hilog.info(DOMAIN, TAG, 'network state refreshed: reason=%{public}s vpnActive=%{public}s vpnChanged=%{public}s',
       reason, String(OhosNetworkMonitor.isVpnActive()), String(vpnChanged));
   }
@@ -503,6 +543,17 @@ export class AppWiring {
     OhosNetworkMonitor.start((): void => {
       AppWiring.refreshNetworkStateOnChange('net_change');
     });
+    OhosNetworkMonitor.addNetworkRecoveryListener((epoch: number): void => {
+      EhApplication.resetOkHttpClients();
+      const cancelledReaderCalls: number = PageImageDownloaderImpl.cancelAllActiveCalls();
+      const reqHost = LoadImageController.getDefaultRequestHost();
+      const recoveredThumbs: number = reqHost instanceof DefaultImageRequestHost
+        ? reqHost.recoverOnNetworkChange(epoch)
+        : 0;
+      hilog.info(DOMAIN, TAG,
+        'network recovery dispatched: epoch=%{public}d cancelledReaderCalls=%{public}d recoveredThumbs=%{public}d',
+        epoch, cancelledReaderCalls, recoveredThumbs);
+    });
     hilog.info(DOMAIN, TAG,
       'wired: 3c/7 NetworkDeps builtInHosts=%{public}s builtExHosts=%{public}s doh=%{public}s df=%{public}s vpn=%{public}s proxyType=%{public}d',
       String(Settings.getBuiltInHosts()), String(Settings.getBuiltEXHosts()),
@@ -520,6 +571,8 @@ export class AppWiring {
     // ③c 注入 Client/Parser/UI 静态设置与默认图片请求宿主（必须在 getOkHttpClient 前完成）
     EhUrl.setSiteConfig(new SettingsEhUrlSiteConfig());
     EhEngine.setConfig(new SettingsEhEngineConfig(context));
+    EhEngine.setEventPaneHook(new AppEventPaneHook());
+    hilog.info(DOMAIN, TAG, 'wired: 3d/7 EhEngine.setEventPaneHook');
     EhRequest.setConfig(new SettingsEhRequestConfig());
     EhUtils.setConfig(new SettingsEhUtilsConfig(cookieStore));
     FavoritesParser.setConfig(new SettingsFavoritesParserConfig(context));
@@ -534,7 +587,11 @@ export class AppWiring {
       return Image.decodeStream(opened as fs.File, hardware) as Object as DecodedImage | null;
     });
     EhApplication.getConaco(context);
-    EhApplication.getSpiderInfoCache(context);
+    const spiderInfoCache: SimpleDiskCache | null = EhApplication.getSpiderInfoCache(context);
+    ReadProgressCache.setAsyncLoader((gid: number): Promise<number> => {
+      return readSpiderInfoStartPageAsync(spiderInfoCache, gid);
+    });
+    hilog.info(DOMAIN, TAG, 'wired: 3e/7 ReadProgressCache async loader');
 
     const imageCacheDir: string = (cacheDir !== undefined && cacheDir !== null && cacheDir.length > 0)
       ? (cacheDir + '/image')

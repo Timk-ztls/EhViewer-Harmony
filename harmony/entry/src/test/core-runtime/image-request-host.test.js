@@ -181,6 +181,101 @@ function makeReq(key, url, listIndex) {
 
       host.resetVisibleRange();
     }
+
+    // 4) 网络切换 / VPN 恢复：中断旧网挂起请求并仅对当前挂载失败项单次静默重试
+    {
+      let useNewNetwork = false;
+      let forceFailNext = false;
+      let oldCancelled = 0;
+      let newAttemptUrls = [];
+      const rejectOldList = [];
+
+      const fakeClient = {
+        newCall(req) {
+          const u = req.url().toString();
+          const onNewNet = useNewNetwork;
+          return {
+            execute() {
+              if (!onNewNet) {
+                return new Promise((_resolve, reject) => {
+                  rejectOldList.push(() => reject(new Error('old hung')));
+                });
+              }
+              newAttemptUrls.push(u);
+              if (forceFailNext) {
+                return Promise.resolve(new Response(req, Protocol.HTTP_1_1, 502, 'Bad Gateway',
+                  new Headers([], []), new ResponseBody(null, new ArrayBuffer(0)), null, Date.now()));
+              }
+              return Promise.resolve(new Response(req, Protocol.HTTP_1_1, 200, 'OK',
+                new Headers([], []), new ResponseBody(null, pngBuf), null, Date.now()));
+            },
+            cancel() {
+              if (!onNewNet) oldCancelled++;
+            }
+          };
+        }
+      };
+
+      const host = new DefaultImageRequestHost(() => fakeClient, () => tmpDir);
+      host.updateVisibleRange(0, 5);
+
+      // A) 挂起在旧网络的可见图 vs 预取图
+      const visActive = makeTarget(host);
+      const prefActive = makeTarget(host);
+      host.request(visActive.ctrl, makeReq('kva', 'https://ehgt.org/rec_vis_active.jpg', 1));
+      host.request(prefActive.ctrl, makeReq('kpa', 'https://ehgt.org/rec_pref_active.jpg', 20));
+      await tick();
+
+      // B) 之前失败但仍挂载的目标（点击重试型 + 无按钮宫格型）vs 已回收解绑的失败目标
+      useNewNetwork = true;
+      forceFailNext = true;
+      const failedClickTarget = makeTarget(host);
+      failedClickTarget.ctrl.setRetryType(LoadImageController.RETRY_TYPE_CLICK);
+      failedClickTarget.ctrl.load('kfc', 'https://ehgt.org/rec_failed_click.jpg', 2);
+
+      const failedNoneTarget = makeTarget(host);
+      failedNoneTarget.ctrl.setRetryType(LoadImageController.RETRY_TYPE_NONE);
+      failedNoneTarget.ctrl.load('kfn', 'https://ehgt.org/rec_failed_none.jpg', 3);
+
+      const detachedFailedTarget = makeTarget(host);
+      detachedFailedTarget.ctrl.load('kfd', 'https://ehgt.org/rec_detached.jpg', 4);
+      for (let i = 0; i < 6; i++) await tick();
+
+      eq([failedClickTarget.getFailures(), failedNoneTarget.getFailures(), detachedFailedTarget.getFailures()],
+        [1, 1, 1], '三个目标先进入失败态');
+      detachedFailedTarget.ctrl.unload();
+      detachedFailedTarget.ctrl.onDetached();
+      eq(host.getTrackedFailedCount(), 2, 'unload/onDetached 后立即从 failedTargets 清理，避免内存泄漏');
+
+      // 切换到恢复后的新网络并触发 epoch=1
+      forceFailNext = false;
+      newAttemptUrls = [];
+      const recoveredCount = host.recoverOnNetworkChange(1);
+      // 模拟旧网络被 cancel 后迟到的 Promise reject
+      for (const rej of rejectOldList) rej();
+      for (let i = 0; i < 10; i++) await tick();
+
+      eq(oldCancelled, 2, '网络切换立即取消所有旧网络挂起 HTTP 调用');
+      eq(recoveredCount, 4, '可见活跃/预取活跃 + 两个挂载失败目标全部进入恢复重试');
+      eq(visActive.applied.length > 0 && prefActive.applied.length > 0, true,
+        '挂起中的图片在新网络下自动恢复并完成加载');
+      eq(failedClickTarget.applied.length > 0 && failedNoneTarget.applied.length > 0, true,
+        '列表中与网格中仍挂载的失败缩略图均静默恢复成功');
+      eq(newAttemptUrls.indexOf('https://ehgt.org/rec_detached.jpg'), -1,
+        '已划出屏幕回收的目标绝不被恢复重试');
+
+      // C) 验证同 epoch 下若仍失败，绝不会无限循环重试
+      forceFailNext = true;
+      const loopGuardTarget = makeTarget(host);
+      loopGuardTarget.ctrl.load('klg', 'https://ehgt.org/rec_loop_guard.jpg', 1);
+      for (let i = 0; i < 6; i++) await tick();
+      eq(loopGuardTarget.ctrl.retryForNetworkRecovery(1), true, 'epoch=1 允许自动重试 1 次');
+      for (let i = 0; i < 6; i++) await tick();
+      eq(loopGuardTarget.ctrl.retryForNetworkRecovery(1), false, '同一 epoch 下失败不再二次重试（防无网死循环）');
+      eq(loopGuardTarget.ctrl.retryForNetworkRecovery(2), true, '新的网络恢复 epoch=2 允许再次重试 1 次');
+
+      host.resetVisibleRange();
+    }
   } finally {
     if (ohosFs.__reset) ohosFs.__reset();
   }
