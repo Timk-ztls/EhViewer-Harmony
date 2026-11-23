@@ -1,5 +1,7 @@
 # 签名、改包名与真机安装指南
 
+**简体中文** | [English](./SIGNING.en.md) | [日本語](./SIGNING.ja.md)
+
 > [!IMPORTANT]
 > **为什么 GitHub Releases 里的未签名 HAP 不能直接拿来用个人证书重签安装？**
 > - HAP 包内的 `module.json`、`pack.info` 和桌面快捷方式在编译期就已经写死了 `bundleName`（本项目默认为 `com.ehviewer.next`）。

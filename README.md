@@ -2,16 +2,20 @@
 
 [![CI](https://github.com/Timk-ztls/EhViewer-Harmony/actions/workflows/ci.yml/badge.svg)](https://github.com/Timk-ztls/EhViewer-Harmony/actions/workflows/ci.yml)
 
+**简体中文** | [English](./README.en.md) | [日本語](./README.ja.md)
+
 基于上游 **EhViewer**（[xiaojieonly/Ehviewer_CN_SXJ](https://github.com/xiaojieonly/Ehviewer_CN_SXJ) / [seven332/EhViewer](https://github.com/seven332/EhViewer)）移植实现的 **HarmonyOS NEXT / OpenHarmony（API 20）** 原生客户端，使用 ArkTS + ArkUI 与 C++ NAPI 原生层开发。
 
 ## 主要特性
 
-- **画廊浏览与筛选**：首页列表、热门、订阅（Subscription）、Toplist、快速搜索、收藏夹与本地标签筛选。
+- **画廊浏览与筛选**：首页列表、热门、订阅（Subscription）、Toplist、快速搜索、收藏夹与本地标签筛选；搜索、切栏与跳页后自动回到列表顶部并保留详情返回位置。
+- **首屏优先缩略图调度**：快滑时基于可视窗口优先出图，复用卡片自动清理过期请求并避开双重写盘缓存。
 - **搜索与标签系统**：高级搜索、图片以图搜图、EhTagDatabase 标签翻译自动更新与本地缓存。
-- **画廊详情与评论**：完整详情展示、预览图、多标签组、评分/收藏操作、评论列表与发表。
-- **原生阅读器**：
+- **画廊详情与站内浏览闭环**：完整详情展示、预览图、多标签组（标签百科自动剥离 `namespace:` 前缀）、评分/收藏、评论发表、内置轻量浏览器与 `.torrent` 种子应用内下载保存/分享。
+- **原生阅读器与网络适配**：
   - 支持从左到右 / 从右到左（日漫）分页及纵向长图模式，1:1 跟手滑动与左/右点击翻页并存，双指/双击缩放与音量键翻页。
-  - 支持单页下载环形进度与百分比显示，自动适配无 `Content-Length` 分块响应。
+  - 统一走 `@ohos.net.http` 栈保留单页下载环形进度与劫持检测；支持原图 `/fullimg` 302 直链下载（GP 不足立即提示）。
+  - 支持应用内代理统一接管 ArkWeb（登录 / UConfig / 我的标签 / 内置浏览器），并在系统 VPN 活跃且代理设为系统/直连时自动旁路内置 Hosts / Domain Fronting / DoH 以遵循 VPN 分流。
   - 支持阅读进度记忆与列表/详情页联动同步。
 - **下载管理与本地归档阅读**：
   - 后台下载调度、下载标签管理、Wi-Fi 局域网传输。
@@ -110,7 +114,9 @@ pwsh -File scripts/check_resource_keys.ps1 -Gate
 │   ├── ISSUE_TEMPLATE/       # Bug 反馈与功能建议模板
 │   └── workflows/ci.yml      # GitHub Actions 自动化门禁与单测流水线（windows-latest）
 ├── docs/
-│   └── SIGNING.md            # 包名修改、AGC/自动签名申请与装机排查指南
+│   ├── SIGNING.md            # 包名修改、AGC/自动签名申请与装机排查指南（简体中文）
+│   ├── SIGNING.en.md         # Signing & bundle-renaming guide (English)
+│   └── SIGNING.ja.md         # パッケージ名変更・署名・インストールガイド（日本語）
 ├── harmony/                  # DevEco Studio / Hvigor 主工程（AppScope + entry 模块）
 │   ├── AppScope/             # 全局 app.json5（默认包名 com.ehviewer.next）及应用图标/名称
 │   └── entry/
@@ -123,7 +129,9 @@ pwsh -File scripts/check_resource_keys.ps1 -Gate
 ├── CONTRIBUTING.md           # 开源贡献与开发自检规范
 ├── DEVIATIONS.md             # 相对上游 Android 实现的平台差异适配说明与已知能力边界
 ├── LICENSE                   # GNU General Public License v3.0
-└── README.md
+├── README.md                 # 项目说明（简体中文）
+├── README.en.md              # Project README (English)
+└── README.ja.md              # プロジェクト説明書（日本語）
 ```
 
 ## 致谢
