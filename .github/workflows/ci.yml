@@ -90,9 +90,16 @@ jobs:
       - name: Unit tests (unified assertion check)
         run: |
           $logFile = Join-Path $env:TEMP 'ci-unit-tests.log'
-          pwsh -File scripts/run_all_tests.ps1 -Summary 2>&1 | Tee-Object -FilePath $logFile
+          pwsh -File scripts/run_all_tests.ps1 2>&1 | Tee-Object -FilePath $logFile
           $ec = $LASTEXITCODE
-          if ($ec -ne 0) { throw "run_all_tests.ps1 exited with $ec" }
+          if ($ec -ne 0) {
+            $runLog = Get-ChildItem 'artifacts\run-all-tests-*.log' -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+            if ($runLog) {
+              Write-Host "=== Last 120 lines of $($runLog.Name) ==="
+              Get-Content $runLog.FullName -Tail 120 | ForEach-Object { Write-Host $_ }
+            }
+            throw "run_all_tests.ps1 exited with $ec"
+          }
           $outText = Get-Content $logFile -Raw
           if ($outText -match 'assertions-n/a') {
             throw 'Detected uncounted assertions (assertions-n/a) in unit test summary.'

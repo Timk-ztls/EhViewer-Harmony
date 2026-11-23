@@ -15,7 +15,7 @@ $utf8NoBom = [System.Text.UTF8Encoding]::new($false)
 New-Item -ItemType Directory -Force -Path $WorkDir | Out-Null
 $pkgPath = Join-Path $WorkDir 'package.json'
 if ($Force -or -not (Test-Path $pkgPath)) {
-  [IO.File]::WriteAllText($pkgPath, "{`n  `"private`": true,`n  `"dependencies`": {`n    `"typescript`": `"^5.4.5`"`n  }`n}`n", $utf8NoBom)
+  [IO.File]::WriteAllText($pkgPath, "{`n  `"private`": true,`n  `"dependencies`": {`n    `"typescript`": `"5.4.5`"`n  }`n}`n", $utf8NoBom)
 }
 
 $tscJs = Join-Path $WorkDir 'node_modules\typescript\lib\tsc.js'
