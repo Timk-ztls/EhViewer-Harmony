@@ -188,6 +188,9 @@ import { Image1 } from './lib/image/Image1';
 import { createNativeLibImageBridge } from '../native/NativeImage';
 import { GalleryLayoutFactory } from './lib/glgallery/GalleryLayoutFactory';
 import { GalleryView } from './lib/glgallery/GalleryView';
+import { Network } from './network/Network';
+import { OhosNetworkBackend, OhosNetworkMonitor } from './ehviewer/OhosNetworkMonitor';
+import { ArkWebProxyManager } from './ui/ArkWebProxyManager';
 import { PagerLayoutManager } from './lib/glgallery/PagerLayoutManager';
 import { DrawingOffscreenCanvas, DrawingTextPaintFactory } from './lib/glview/glrenderer/DrawingText';
 import { RequestBuilder } from './okhttp/Request';
@@ -337,6 +340,20 @@ export class AppWiring {
     return AppWiring.sWired;
   }
 
+  /** 网络状态变化或应用回到前台时，刷新 VPN/代理状态、重置 OkHttp 连接池并同步 ArkWeb 代理。 */
+  static refreshNetworkStateOnChange(reason: string): void {
+    const vpnChanged: boolean = OhosNetworkMonitor.refreshNow();
+    if (EhApplication.getEhProxySelector(null) !== null) {
+      EhApplication.getEhProxySelector(null).updateProxy();
+    }
+    EhApplication.resetOkHttpClients();
+    ArkWebProxyManager.syncFromSettings().catch((e: Error): void => {
+      hilog.warn(DOMAIN, TAG, 'refreshNetworkStateOnChange ArkWeb proxy sync failed: %{public}s', e.message);
+    });
+    hilog.info(DOMAIN, TAG, 'network state refreshed: reason=%{public}s vpnActive=%{public}s vpnChanged=%{public}s',
+      reason, String(OhosNetworkMonitor.isVpnActive()), String(vpnChanged));
+  }
+
   /**
    * 完成全部启动接线。幂等。
    *
@@ -482,10 +499,15 @@ export class AppWiring {
       ? new Cache(cacheDir + '/' + EhApplication.OKHTTP_CACHE_DIR_NAME, EhApplication.OKHTTP_CACHE_MAX_SIZE)
       : null;
     EhApplication.setNetworkDeps(cookieStore, hosts, ehHosts, proxySelector, httpCache);
+    Network.setBackend(new OhosNetworkBackend());
+    OhosNetworkMonitor.start((): void => {
+      AppWiring.refreshNetworkStateOnChange('net_change');
+    });
     hilog.info(DOMAIN, TAG,
-      'wired: 3c/7 NetworkDeps builtInHosts=%{public}s builtExHosts=%{public}s doh=%{public}s df=%{public}s proxyType=%{public}d',
+      'wired: 3c/7 NetworkDeps builtInHosts=%{public}s builtExHosts=%{public}s doh=%{public}s df=%{public}s vpn=%{public}s proxyType=%{public}d',
       String(Settings.getBuiltInHosts()), String(Settings.getBuiltEXHosts()),
-      String(Settings.getDoH()), String(Settings.getDF()), Settings.getProxyType());
+      String(Settings.getDoH()), String(Settings.getDF()),
+      String(OhosNetworkMonitor.isVpnActive()), Settings.getProxyType());
 
     if (isLogin !== undefined && isLogin !== null) {
       Settings.setLoginProvider(isLogin);
@@ -1018,6 +1040,7 @@ export class OkHttpCallerAdapter implements HttpCaller {
 class DynamicPageImageDownloader implements PageImageDownloader {
   private readonly _context: common.Context;
   private _lastClient: OkHttpClient | null = null;
+  private _lastTimeoutMs: number = -1;
   private _impl: PageImageDownloaderImpl | null = null;
 
   constructor(context: common.Context) {
@@ -1026,9 +1049,11 @@ class DynamicPageImageDownloader implements PageImageDownloader {
 
   private current(): PageImageDownloaderImpl {
     const client: OkHttpClient = EhApplication.getOkHttpClient(this._context);
-    if (this._impl === null || this._lastClient !== client) {
+    const timeoutMs: number = Settings.isAttached() ? Settings.getDownloadTimeout() * 1000 : 0;
+    if (this._impl === null || this._lastClient !== client || this._lastTimeoutMs !== timeoutMs) {
       this._lastClient = client;
-      this._impl = new PageImageDownloaderImpl(client);
+      this._lastTimeoutMs = timeoutMs;
+      this._impl = new PageImageDownloaderImpl(client, timeoutMs);
     }
     return this._impl;
   }
@@ -1040,6 +1065,10 @@ class DynamicPageImageDownloader implements PageImageDownloader {
   downloadWithStatus(url: string, sink: ByteSink, referer?: string,
     onProgress?: PageDownloadProgressCallback): Promise<DownloadResult> {
     return this.current().downloadWithStatus(url, sink, referer, onProgress);
+  }
+
+  resolveRedirectUrl(url: string, referer?: string): Promise<string | null> {
+    return this.current().resolveRedirectUrl(url, referer);
   }
 }
 
@@ -1315,15 +1344,15 @@ class HostsAsyncAdapter implements AsyncHostsProvider {
 
 class SettingsEhHostsConfig extends EhHostsConfig {
   getBuiltInHosts(): boolean {
-    return Settings.getBuiltInHosts();
+    return !OhosNetworkMonitor.shouldBypassBuiltInRouting() && Settings.getBuiltInHosts();
   }
 
   getBuiltEXHosts(): boolean {
-    return Settings.getBuiltEXHosts();
+    return !OhosNetworkMonitor.shouldBypassBuiltInRouting() && Settings.getBuiltEXHosts();
   }
 
   getDoH(): boolean {
-    return Settings.getDoH();
+    return !OhosNetworkMonitor.shouldBypassBuiltInRouting() && Settings.getDoH();
   }
 }
 
@@ -1986,6 +2015,15 @@ class RealGalleryInfoSceneHost implements GalleryInfoSceneHost {
 
   openUrlExternally(url: string): void {
     if (url.length === 0) {
+      return;
+    }
+    const target: OpenTarget | null = EhUrlOpener.parseUrl(url);
+    const s: BaseScene | null = this.ref.scene;
+    if (target !== null && target.kind === 'detail' && target.gid > 0 && target.token.length > 0 && s !== null) {
+      const args: SceneArgs = new Map<string, Object>();
+      args.set('gid', target.gid);
+      args.set('api_url', EhUrl.getGalleryDetailUrl(target.gid, target.token, 0, false));
+      s.startScene(new Announcer('GalleryDetailScene').setArgs(args));
       return;
     }
     const want: Want = {

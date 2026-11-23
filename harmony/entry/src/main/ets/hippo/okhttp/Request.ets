@@ -40,14 +40,16 @@ export class Request {
   private readonly _headers: Headers;
   private readonly _body: RequestBody | null;
   private readonly _tag: string | null;
+  private readonly _disallowRedirectFollow: boolean;
 
   constructor(url: HttpUrl, method: string, headers: Headers, body: RequestBody | null,
-    tag: string | null = null) {
+    tag: string | null = null, disallowRedirectFollow: boolean = false) {
     this._url = url;
     this._method = method;
     this._headers = headers;
     this._body = body;
     this._tag = tag;
+    this._disallowRedirectFollow = disallowRedirectFollow;
   }
 
   url(): HttpUrl {
@@ -83,6 +85,11 @@ export class Request {
     return this._tag;
   }
 
+  /** 本地标记：不改变传输引擎选路，仅要求 RedirectInterceptor 与反劫持逻辑拒绝 3xx 跳转。 */
+  disallowRedirectFollow(): boolean {
+    return this._disallowRedirectFollow;
+  }
+
   newBuilder(): RequestBuilder {
     const b: RequestBuilder = new RequestBuilder();
     b.url(this._url);
@@ -94,6 +101,9 @@ export class Request {
     }
     if (this._tag !== null) {
       b.tag(this._tag);
+    }
+    if (this._disallowRedirectFollow) {
+      b.disallowRedirectFollow(true);
     }
     return b;
   }
@@ -110,6 +120,7 @@ export class RequestBuilder {
   private _headers: HeadersBuilder = new HeadersBuilder();
   private _body: RequestBody | null = null;
   private _tag: string | null = null;
+  private _disallowRedirectFollow: boolean = false;
 
   /** 对齐 url(String)。上游 ChromeRequestBuilder 用 `url.split("/")[2]` 取 host，故这里必须能接受字符串。 */
   url(url: string | HttpUrl): RequestBuilder {
@@ -194,6 +205,12 @@ export class RequestBuilder {
     return this;
   }
 
+  /** 标记该请求不允许 RedirectInterceptor 跟随 3xx（不影响底层是否走 SystemHttpTransport）。 */
+  disallowRedirectFollow(value: boolean = true): RequestBuilder {
+    this._disallowRedirectFollow = value;
+    return this;
+  }
+
   build(): Request {
     if (this._url === null) {
       throw new Error('url == null');
@@ -212,7 +229,8 @@ export class RequestBuilder {
         headers = headers.newBuilder().add('Content-Length', `${len}`).build();
       }
     }
-    return new Request(this._url, this._method, headers, this._body, this._tag);
+    return new Request(this._url, this._method, headers, this._body, this._tag,
+      this._disallowRedirectFollow);
   }
 
   private static contentTypeOf(body: RequestBody): string | null {

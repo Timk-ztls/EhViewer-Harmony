@@ -13,21 +13,21 @@ import { RequestBody } from '../../../okhttp/RequestBody';
 import { Protocol, Response, ResponseBuilder } from '../../../okhttp/Response';
 import { ResponseBody } from '../../../okhttp/ResponseBody';
 import { Cache, CacheInterceptor } from '../../../okhttp/Cache';
-import { RedirectInterceptor } from '../../../okhttp/InternalInterceptors';
+import { ConnectInterceptor, RedirectInterceptor } from '../../../okhttp/InternalInterceptors';
 import {
   CallAbortController, Chain, Interceptor, InterceptorEntry, LambdaInterceptor, RealInterceptorChain
 } from '../../../okhttp/Interceptor';
 import { Http1SocketTransport } from '../../../okhttp/Http1SocketTransport';
 import { SystemHttpTransport, TransportExecuteOptions } from '../../../okhttp/SystemHttpTransport';
 import { CloseableSocket, ConnectionPool } from '../../../okhttp/ConnectionPool';
-import { Proxy, ProxySelector, ProxyType } from '../../../okhttp/ProxySelector';
+import { Proxy, ProxySelector, ProxyType, SystemProxyHelper } from '../../../okhttp/ProxySelector';
 import { Dns, InetAddress, OverrideAwareDns, describeNetworkError, toNetworkError } from '../../../okhttp/Dns';
 import { OkHttpClient, OkHttpClientBuilder, TimeUnit } from '../../../okhttp/OkHttpClient';
 import { PageImageDownloaderImpl } from '../../../okhttp/PageImageDownloaderImpl';
 import { CookieRepository } from '../../../network/CookieRepository';
 import { InMemoryCookieStore } from '../../../network/CookieDatabase';
 import { ByteSink } from '../../../streampipe/OutputStreamPipe';
-import { OkHttpEhHosts, EhHostsConfig } from '../EhHosts';
+import { AsyncHostsProvider, EhHostsConfig, HttpDohResolver, OkHttpEhHosts } from '../EhHosts';
 
 declare function require(name: string): any;
 declare const process: { exitCode: number };
@@ -871,6 +871,255 @@ async function testClientRoutingAndDownloader(): Promise<void> {
   }
 }
 
+async function testWave1NetworkAndReaderCases(): Promise<void> {
+  const httpMod = require('@ohos.net.http').default;
+  const socketMod = require('@ohos.net.socket').default;
+  const origCreateHttp = httpMod.createHttp;
+  const origConstructTls = socketMod.constructTLSSocketInstance;
+  const origConstructTcp = socketMod.constructTCPSocketInstance;
+
+  class StaticSelector extends ProxySelector {
+    private readonly _proxies: Proxy[];
+    constructor(proxies: Proxy[]) {
+      super();
+      this._proxies = proxies;
+    }
+    select(_url: HttpUrl): Proxy[] {
+      return this._proxies;
+    }
+  }
+
+  class MemorySink implements ByteSink {
+    chunks: number[] = [];
+    closed: boolean = false;
+    write(buf: ArrayBuffer): number {
+      const u8 = new Uint8Array(buf);
+      for (let i = 0; i < u8.length; i++) {
+        this.chunks.push(u8[i]);
+      }
+      return u8.length;
+    }
+    close(): void {
+      this.closed = true;
+    }
+  }
+
+  try {
+    // 1) SystemHttpTransport: headersReceive Location 捕获 + redirectTiming 检测 + dataReceiveProgress 进度透传
+    let capturedOpts: Record<string, Object> | null = null;
+    httpMod.createHttp = () => {
+      const cbs: Record<string, Function> = {};
+      return {
+        on(ev: string, cb: Function) { cbs[ev] = cb; },
+        off(_ev: string) {},
+        destroy() {},
+        async request(_url: string, opts: Record<string, Object>) {
+          capturedOpts = opts;
+          if (cbs['headersReceive']) {
+            cbs['headersReceive']({ Location: 'https://hijack.invalid/redir.jpg' });
+            cbs['headersReceive']({ 'Content-Length': '100' });
+          }
+          if (cbs['dataReceiveProgress']) {
+            cbs['dataReceiveProgress']({ totalSize: 100, receiveSize: 50 });
+            cbs['dataReceiveProgress']({ totalSize: 100, receiveSize: 100 });
+          }
+          return {
+            responseCode: 200,
+            header: { 'Content-Type': 'image/jpeg' },
+            resultType: 2,
+            result: new Uint8Array([0xff, 0xd8, 0xff, 0xe0]).buffer,
+            performanceTiming: { redirectTiming: 14 }
+          };
+        }
+      };
+    };
+
+    const progressLog: number[][] = [];
+    const sysResp = await new SystemHttpTransport().execute(
+      new RequestBuilder().url('https://hath.network/h/page.jpg').build(),
+      5000,
+      5000,
+      {
+        proxy: Proxy.system(),
+        onProgress: (cl: number, recv: number, delta: number) => {
+          progressLog.push([cl, recv, delta]);
+        }
+      }
+    );
+    ok('SystemHttpTransport 保留 Proxy.system -> usingProxy=true',
+      capturedOpts !== null && capturedOpts['usingProxy'] === true);
+    eq('SystemHttpTransport 检测 headersReceive + redirectTiming 发生重定向', sysResp.wasRedirected(), true);
+    eq('SystemHttpTransport 记录首次跳转 Location', sysResp.redirectLocation(), 'https://hijack.invalid/redir.jpg');
+    eq('SystemHttpTransport 连续回调 dataReceiveProgress 增量字节',
+      progressLog, [[100, 50, 50], [100, 100, 50]]);
+
+    // 2) PageImageDownloaderImpl 走 followRedirects(true) 客户端：正常走 SystemHttpTransport 且触发劫持拦截
+    const followClient = new OkHttpClientBuilder()
+      .followRedirects(true)
+      .proxySelector(new StaticSelector([Proxy.system()]))
+      .build();
+    const dlHijack = new PageImageDownloaderImpl(followClient);
+    const hijackRes = await dlHijack.downloadWithStatus('https://hath.network/h/img1.jpg', new MemorySink());
+    eq('PageImageDownloaderImpl 捕获 SystemHttpTransport 30x 劫持', hijackRes.ok, false);
+    eq('PageImageDownloaderImpl 劫持标记 hijacked=true', hijackRes.hijacked, true);
+
+    httpMod.createHttp = () => {
+      const cbs: Record<string, Function> = {};
+      return {
+        on(ev: string, cb: Function) { cbs[ev] = cb; },
+        off(_ev: string) {},
+        destroy() {},
+        async request(_url: string, opts: Record<string, Object>) {
+          capturedOpts = opts;
+          if (cbs['headersReceive']) {
+            cbs['headersReceive']({ 'Content-Length': '4' });
+          }
+          if (cbs['dataReceiveProgress']) {
+            cbs['dataReceiveProgress']({ totalSize: 4, receiveSize: 4 });
+          }
+          return {
+            responseCode: 200,
+            header: { 'Content-Type': 'image/png', 'Content-Length': '4' },
+            resultType: 2,
+            result: new Uint8Array([0x89, 0x50, 0x4e, 0x47]).buffer,
+            performanceTiming: { redirectTiming: 0 }
+          };
+        }
+      };
+    };
+    const okSink = new MemorySink();
+    const okProg: number[][] = [];
+    capturedOpts = null;
+    const okRes = await dlHijack.downloadWithStatus(
+      'https://hath.network/h/ok.png',
+      okSink,
+      'https://e-hentai.org/s/abc/1-1',
+      (cl: number, recv: number, delta: number) => okProg.push([cl, recv, delta])
+    );
+    eq('PageImageDownloaderImpl 正常图片下载成功', okRes.ok, true);
+    eq('PageImageDownloaderImpl 正常图片写入 4 字节', okRes.received, 4);
+    ok('PageImageDownloaderImpl 通过 followRedirects(true) 走 SystemHttpTransport', capturedOpts !== null);
+    ok('PageImageDownloaderImpl 保留 dataReceiveProgress 进度回调', okProg.length >= 1 && okProg[0][0] === 4);
+
+    // 3) resolveRedirectUrl 使用 followRedirects(false) 探测 302 Location vs 200 HTML (GP 不足)
+    const enc = new (require('util').TextEncoder)();
+    const toBuf = (s: string): ArrayBuffer => {
+      const u = enc.encode(s);
+      return u.buffer.slice(u.byteOffset, u.byteOffset + u.byteLength);
+    };
+    let nextSocketReply = 'HTTP/1.1 302 Found\r\nLocation: https://origin-cdn.invalid/raw.png\r\nContent-Length: 0\r\n\r\n';
+    socketMod.constructTLSSocketInstance = () => {
+      let tlsMsgCb: ((v: { message: ArrayBuffer }) => void) | null = null;
+      return {
+        async connect(_opts: any) {},
+        async send(_data: any) {
+          if (tlsMsgCb !== null) {
+            tlsMsgCb({ message: toBuf(nextSocketReply) });
+          }
+        },
+        async close() {},
+        on(ev: string, cb: any) { if (ev === 'message') { tlsMsgCb = cb; } },
+        off(_ev: string) {}
+      };
+    };
+    const resolvedOrigin = await dlHijack.resolveRedirectUrl(
+      'https://e-hentai.org/fullimg/1/0/raw.png',
+      'https://e-hentai.org/s/abc/1-1'
+    );
+    eq('resolveRedirectUrl 探测 302 返回绝对原图地址', resolvedOrigin, 'https://origin-cdn.invalid/raw.png');
+
+    nextSocketReply = 'HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length: 9\r\n\r\nNo GP!!!!';
+    const insufficientGp = await dlHijack.resolveRedirectUrl(
+      'https://e-hentai.org/fullimg/1/0/raw.png',
+      'https://e-hentai.org/s/abc/1-1'
+    );
+    eq('resolveRedirectUrl 探测 200 HTML 返回 null 触发 GP 不足', insufficientGp, null);
+
+    // 4) SystemProxyHelper 排除列表匹配与 resolveHttpProxy + ConnectInterceptor 验证
+    eq('SystemProxyHelper *.ehgt.org 命中子域', SystemProxyHelper.isHostExcluded('a.ehgt.org', ['*.ehgt.org']), true);
+    eq('SystemProxyHelper .ehgt.org 命中裸域', SystemProxyHelper.isHostExcluded('ehgt.org', ['.ehgt.org']), true);
+    eq('SystemProxyHelper *.ehgt.org 不误杀 exhentai.org', SystemProxyHelper.isHostExcluded('exhentai.org', ['*.ehgt.org']), false);
+    eq('SystemProxyHelper 通配符 * 全排除', SystemProxyHelper.isHostExcluded('e-hentai.org', ['*']), true);
+
+    SystemProxyHelper.setResolver(async (_host: string) => new Proxy(ProxyType.HTTP, '127.0.0.1', 7890));
+    const resolvedSysProxy = await SystemProxyHelper.resolveHttpProxy('exhentai.org');
+    eq('SystemProxyHelper.resolveHttpProxy 返回 HTTP 127.0.0.1:7890',
+      resolvedSysProxy !== null ? `${resolvedSysProxy.type()}:${resolvedSysProxy.address()}:${resolvedSysProxy.port()}` : '',
+      'HTTP:127.0.0.1:7890');
+
+    // ConnectInterceptor 在 Socket 模式下将 Proxy.system() 替换为 SystemProxyHelper 解析出的 HTTP 代理
+    let connectLineSeen = '';
+    let innerSocketTls = false;
+    let fakeTcpCb: ((v: { message: ArrayBuffer }) => void) | null = null;
+    socketMod.constructTCPSocketInstance = () => ({
+      async connect(_opts: any) {},
+      async send(opts: any) {
+        connectLineSeen = bytesToStr(opts.data);
+        if (fakeTcpCb !== null) {
+          fakeTcpCb({ message: toBuf('HTTP/1.1 200 Connection Established\r\n\r\n') });
+        }
+      },
+      async close() {},
+      on(ev: string, cb: any) { if (ev === 'message') { fakeTcpCb = cb; } },
+      off(_ev: string) {}
+    });
+    socketMod.constructTLSSocketInstance = (tcp: any) => {
+      innerSocketTls = tcp !== undefined;
+      let cb: ((v: { message: ArrayBuffer }) => void) | null = null;
+      return {
+        async connect(_opts: any) {},
+        async send(_data: any) {
+          if (cb !== null) {
+            cb({ message: toBuf('HTTP/1.1 200 OK\r\nContent-Length: 2\r\n\r\nok') });
+          }
+        },
+        async close() {},
+        on(ev: string, fn: any) { if (ev === 'message') { cb = fn; } },
+        off(_ev: string) {}
+      };
+    };
+    const noFollowSysClient = new OkHttpClientBuilder()
+      .followRedirects(false)
+      .proxySelector(new StaticSelector([Proxy.system()]))
+      .build();
+    const sysSocketResp = await noFollowSysClient.newCall(new RequestBuilder().url('https://exhentai.org/').build()).execute();
+    eq('ConnectInterceptor 解析系统 HTTP 代理并建立 CONNECT 隧道', sysSocketResp.code(), 200);
+    ok('ConnectInterceptor CONNECT 请求指向 exhentai.org:443',
+      innerSocketTls && connectLineSeen.indexOf('CONNECT exhentai.org:443') >= 0);
+
+    // 5) OkHttpEhHosts IPv4 优先 + HttpDohResolver usingProxy=true
+    const mixedProvider: AsyncHostsProvider = {
+      async getList(_host: string): Promise<string[] | null> {
+        return ['2a00:7c80::1', '185.132.132.79', '2a00:7c80::2', '62.112.8.152'];
+      }
+    };
+    const ehHosts = new OkHttpEhHosts(new EhHostsConfig(), null, mixedProvider, null);
+    const addrs = await ehHosts.lookup('ehgt.org');
+    eq('OkHttpEhHosts 返回 4 条地址', addrs.length, 4);
+    ok('OkHttpEhHosts 将 IPv4 排在 IPv6 之前',
+      !addrs[0].isIpv6() && !addrs[1].isIpv6() && addrs[2].isIpv6() && addrs[3].isIpv6());
+
+    let dohOpts: Record<string, Object> | null = null;
+    httpMod.createHttp = () => ({
+      on(_ev: string, _cb: Function) {},
+      off(_ev: string) {},
+      destroy() {},
+      async request(_url: string, opts: Record<string, Object>) {
+        dohOpts = opts;
+        return { responseCode: 200, header: {}, resultType: 2, result: new ArrayBuffer(0) };
+      }
+    });
+    await new HttpDohResolver().lookupAsync('exhentai.org');
+    ok('HttpDohResolver POST 请求开启 usingProxy: true',
+      dohOpts !== null && dohOpts['usingProxy'] === true);
+  } finally {
+    SystemProxyHelper.setResolver(null);
+    httpMod.createHttp = origCreateHttp;
+    socketMod.constructTLSSocketInstance = origConstructTls;
+    socketMod.constructTCPSocketInstance = origConstructTcp;
+  }
+}
+
 async function main(): Promise<void> {
   testCookieParsing();
   testHttpBasics();
@@ -878,6 +1127,7 @@ async function main(): Promise<void> {
   await testCacheInterceptor();
   await testSocketTransportAndPool();
   await testClientRoutingAndDownloader();
+  await testWave1NetworkAndReaderCases();
 
   console.log(`\n=== 结果：${pass} passed, ${fail} failed ===`);
   if (fail > 0) {

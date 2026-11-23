@@ -222,9 +222,15 @@ export class Hosts {
   }
 
   private store: HostsStoreLike;
+  private readonly hostCache: Map<string, string[]> = new Map<string, string[]>();
 
   constructor(store: HostsStoreLike) {
     this.store = store;
+  }
+
+  /** 清空内存热缓存。 */
+  clearCache(): void {
+    this.hostCache.clear();
   }
 
   /** 对应上游 `get(host)`：无效 host 或未配置 → null；否则返回首个可解析的 IP 字节 */
@@ -232,7 +238,11 @@ export class Hosts {
     if (!Hosts.isValidHost(host)) {
       return null;
     }
-    const ips: string[] = await this.store.queryIps(host);
+    let ips: string[] | undefined = this.hostCache.get(host);
+    if (ips === undefined) {
+      ips = await this.store.queryIps(host);
+      this.hostCache.set(host, ips.slice());
+    }
     if (ips.length === 0) {
       return null;
     }
@@ -244,7 +254,11 @@ export class Hosts {
     if (!Hosts.isValidHost(host)) {
       return null;
     }
-    const ips: string[] = await this.store.queryIps(host);
+    let ips: string[] | undefined = this.hostCache.get(host);
+    if (ips === undefined) {
+      ips = await this.store.queryIps(host);
+      this.hostCache.set(host, ips.slice());
+    }
     const list: Uint8Array[] = [];
     for (let i = 0; i < ips.length; i++) {
       const addr: Uint8Array | null = Hosts.toInetAddress(host, ips[i]);
@@ -261,12 +275,14 @@ export class Hosts {
       return false;
     }
     await this.store.upsert(host, ip);
+    this.hostCache.delete(host);
     return true;
   }
 
   /** 对应上游 `delete(host)` */
   async delete(host: string): Promise<void> {
     await this.store.deleteByHost(host);
+    this.hostCache.delete(host);
   }
 
   /** 对应上游 `getAll()`：**跳过 IP 无法解析的行**（上游 `continue`） */

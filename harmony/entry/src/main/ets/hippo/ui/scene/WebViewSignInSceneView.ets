@@ -36,6 +36,7 @@ import {
   RawWebCookieBackend,
   WebViewSignInCoordinator
 } from './AuthSecurityAdapters';
+import { ArkWebProxyManager } from '../ArkWebProxyManager';
 
 const DOMAIN: number = 0x0000;
 const TAG: string = 'WebViewSignInSceneView';
@@ -75,6 +76,7 @@ class ArkWebCookieBackend implements RawWebCookieBackend {
 export struct WebViewSignInSceneView {
   scene: WebViewSignInScene | null = null;
 
+  @State proxyReady: boolean = false;
   @State cookiesPrepared: boolean = false;
   @State initFailed: boolean = false;
   @State loadProgress: number = 0;
@@ -86,6 +88,18 @@ export struct WebViewSignInSceneView {
   private coordinator: WebViewSignInCoordinator | null = null;
 
   aboutToAppear(): void {
+    this.prepareSceneWithProxy().catch((e: Error): void => {
+      const msg: string = e.message !== undefined ? e.message : String(e);
+      hilog.warn(DOMAIN, TAG, 'prepareSceneWithProxy failed: %{public}s', msg);
+      this.proxyReady = true;
+      this.setupScene();
+    });
+  }
+
+  private async prepareSceneWithProxy(): Promise<void> {
+    this.proxyReady = false;
+    await ArkWebProxyManager.syncFromSettings();
+    this.proxyReady = true;
     this.setupScene();
   }
 
@@ -190,7 +204,7 @@ export struct WebViewSignInSceneView {
         .padding(24)
         .justifyContent(FlexAlign.Center)
         .alignItems(HorizontalAlign.Center)
-      } else if (this.cookiesPrepared) {
+      } else if (this.proxyReady && this.cookiesPrepared) {
         if (this.loadProgress > 0 && this.loadProgress < 100) {
           Progress({ value: this.loadProgress, total: 100, type: ProgressType.Linear })
             .width('100%')

@@ -3487,6 +3487,54 @@
     {
       "name": "reset_limit_failed",
       "value": "重置图片配额失败"
+    },
+    {
+      "name": "settings_download_export_items",
+      "value": "导出下载列表"
+    },
+    {
+      "name": "settings_download_export_items_summary",
+      "value": "将当前下载记录导出到下载目录"
+    },
+    {
+      "name": "torrent_download_complete",
+      "value": "种子已下载完成"
+    },
+    {
+      "name": "torrent_action_save_to_files",
+      "value": "保存到文件"
+    },
+    {
+      "name": "torrent_action_open_bt_app",
+      "value": "用 BT / 其他应用打开"
+    },
+    {
+      "name": "torrent_saved_success",
+      "value": "种子文件已保存"
+    },
+    {
+      "name": "torrent_no_bt_app",
+      "value": "未找到可打开 .torrent 文件的应用"
+    },
+    {
+      "name": "in_app_browser_open_external",
+      "value": "浏览器打开"
+    },
+    {
+      "name": "downloads_page_prev",
+      "value": "上一页"
+    },
+    {
+      "name": "downloads_page_next",
+      "value": "下一页"
+    },
+    {
+      "name": "downloads_page_indicator",
+      "value": "第 %1$d / %2$d 页（共 %3$d 项）"
+    },
+    {
+      "name": "settings_advanced_app_language_applied",
+      "value": "已切换应用语言"
     }
   ]
 }

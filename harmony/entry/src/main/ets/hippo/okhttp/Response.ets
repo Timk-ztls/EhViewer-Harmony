@@ -51,10 +51,13 @@ export class Response {
   private readonly _receivedResponseAtMillis: number;
   /** 命中本地缓存时的原始响应（OkHttp 的 cacheResponse() 语义）。 */
   private readonly _cacheResponse: Response | null;
+  private readonly _wasRedirected: boolean;
+  private readonly _redirectLocation: string | null;
 
   constructor(request: Request, protocol: Protocol, code: number, message: string, headers: Headers,
     body: ResponseBody | null, cacheResponse: Response | null = null,
-    receivedResponseAtMillis: number = Date.now()) {
+    receivedResponseAtMillis: number = Date.now(),
+    wasRedirected: boolean = false, redirectLocation: string | null = null) {
     this._request = request;
     this._protocol = protocol;
     this._code = code;
@@ -63,6 +66,8 @@ export class Response {
     this._body = body;
     this._cacheResponse = cacheResponse;
     this._receivedResponseAtMillis = receivedResponseAtMillis;
+    this._wasRedirected = wasRedirected;
+    this._redirectLocation = redirectLocation;
   }
 
   request(): Request {
@@ -112,6 +117,18 @@ export class Response {
     return this._receivedResponseAtMillis;
   }
 
+  /** 是否在传输层经历了 HTTP 3xx 重定向（例如 @ohos.net.http 内部自动跟随）。 */
+  wasRedirected(): boolean {
+    return this._wasRedirected || this.isRedirect();
+  }
+
+  /** 若经历过重定向，返回捕获到的首个 Location（如果有）。 */
+  redirectLocation(): string | null {
+    return this._redirectLocation !== null
+      ? this._redirectLocation
+      : (this.isRedirect() ? this._headers.get('Location') : null);
+  }
+
   close(): void {
     if (this._body !== null) {
       this._body.close();
@@ -129,6 +146,7 @@ export class Response {
     b.body(this._body);
     b.cacheResponse(this._cacheResponse);
     b.receivedResponseAtMillis(this._receivedResponseAtMillis);
+    b.redirected(this._wasRedirected, this._redirectLocation);
     return b;
   }
 
@@ -148,6 +166,8 @@ export class ResponseBuilder {
   private _body: ResponseBody | null = null;
   private _cacheResponse: Response | null = null;
   private _receivedResponseAtMillis: number = -1;
+  private _wasRedirected: boolean = false;
+  private _redirectLocation: string | null = null;
 
   request(request: Request): ResponseBuilder {
     this._request = request;
@@ -204,6 +224,12 @@ export class ResponseBuilder {
     return this;
   }
 
+  redirected(wasRedirected: boolean, redirectLocation: string | null = null): ResponseBuilder {
+    this._wasRedirected = wasRedirected;
+    this._redirectLocation = redirectLocation;
+    return this;
+  }
+
   build(): Response {
     if (this._request === null) {
       throw new Error('request == null');
@@ -214,6 +240,7 @@ export class ResponseBuilder {
     const receivedAt: number = this._receivedResponseAtMillis >= 0
       ? this._receivedResponseAtMillis : Date.now();
     return new Response(this._request, this._protocol, this._code, this._message,
-      this._headers, this._body, this._cacheResponse, receivedAt);
+      this._headers, this._body, this._cacheResponse, receivedAt,
+      this._wasRedirected, this._redirectLocation);
   }
 }

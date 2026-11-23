@@ -67,6 +67,8 @@ export class ImageRequest {
   hardware: boolean = false;
   /** 上游 DataContainer 的等价物：不透明句柄，由 storage-db 侧解释 */
   dataContainerId: string = '';
+  /** 列表/网格中项索引（用于可见窗口优先调度，-1 表示未知） */
+  listIndex: number = -1;
 }
 
 /** 请求宿主：由 core-runtime 的 conaco 实现；未落地前可用内存实现兜底 */
@@ -145,6 +147,7 @@ export class LoadImageController implements PreviewTarget {
   useNetwork: boolean = true;
   hardware: boolean = false;
   dataContainerId: string = '';
+  listIndex: number = -1;
   offsetX: number = Number.MIN_VALUE;
   offsetY: number = Number.MIN_VALUE;
   clipWidth: number = Number.MIN_VALUE;
@@ -226,11 +229,11 @@ export class LoadImageController implements PreviewTarget {
   }
 
   /** 第一参数 = 缓存键，第二 = URL（与上游 view.load(key, url) 同序） */
-  load(key: string, url: string): void {
-    this.loadWith(key, url, true, true);
+  load(key: string, url: string, listIndex: number = -1): void {
+    this.loadWith(key, url, true, true, listIndex);
   }
 
-  loadWith(key: string, url: string, useNetwork: boolean, hardware: boolean): void {
+  loadWith(key: string, url: string, useNetwork: boolean, hardware: boolean, listIndex: number = -1): void {
     if (url.length === 0 || key.length === 0) {
       return;
     }
@@ -244,6 +247,7 @@ export class LoadImageController implements PreviewTarget {
     this.url = url;
     this.useNetwork = useNetwork;
     this.hardware = hardware;
+    this.listIndex = listIndex;
     const rh: ImageRequestHost | null = this.resolveRequestHost();
     if (rh !== null) {
       const req: ImageRequest = new ImageRequest();
@@ -252,6 +256,7 @@ export class LoadImageController implements PreviewTarget {
       req.useNetwork = useNetwork;
       req.hardware = hardware;
       req.dataContainerId = this.dataContainerId;
+      req.listIndex = listIndex;
       rh.request(this, req);
     }
   }
@@ -264,6 +269,8 @@ export class LoadImageController implements PreviewTarget {
     this.key = null;
     this.url = null;
     this.dataContainerId = '';
+    this.listIndex = -1;
+    this.failed = false;
     this.preCropped = false;
     this.pendingSrc = null;
     this.delivered = false;
@@ -288,6 +295,7 @@ export class LoadImageController implements PreviewTarget {
   /** 上游 onDetachedFromWindow */
   onDetached(): void {
     this.attached = false;
+    this.failed = false;
     if (this.loadFromDrawable) {
       return;
     }

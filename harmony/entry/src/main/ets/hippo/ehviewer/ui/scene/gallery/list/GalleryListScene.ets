@@ -77,6 +77,7 @@ export abstract class GalleryListScene extends SceneFragment {
   protected action: string = GalleryListAction.HOMEPAGE;
   protected listUrlBuilder: string = '';
   protected hasFirstRefresh: boolean = false;
+  protected listResetSeq: number = 0;
   protected state: number = GalleryListState.NORMAL;
   /** 上游 showReadProgress（读图进度，来自 Settings） */
   protected showReadProgress: boolean = false;
@@ -286,10 +287,15 @@ export abstract class GalleryListScene extends SceneFragment {
     return this.action;
   }
 
+  getListResetSeq(): number {
+    return this.listResetSeq;
+  }
+
   /** Switch drawer list action cleanly (resets category/page and refreshes). */
   switchToAction(action: string, url?: string): void {
     this.action = action;
     this.searchCategory = CategoryFlags.NONE;
+    this.loading = false;
     this.pageIndex = 0;
     this.reachEnd = false;
     this.state = GalleryListState.NORMAL;
@@ -333,7 +339,7 @@ export abstract class GalleryListScene extends SceneFragment {
     this.pageIndex = 0;
     this.reachEnd = false;
     this.state = GalleryListState.NORMAL;
-    this.refreshGalleryList();
+    this.refreshGalleryList(true);
   }
 
   getSearchCategory(): number {
@@ -358,8 +364,8 @@ export abstract class GalleryListScene extends SceneFragment {
   }
 
   /** 上游 refresh：重置页码并整段替换 */
-  refreshGalleryList(): void {
-    if (this.loading) {
+  refreshGalleryList(force: boolean = false): void {
+    if (this.loading && !force) {
       return;
     }
     this.loading = true;
@@ -380,7 +386,7 @@ export abstract class GalleryListScene extends SceneFragment {
     builder.setMode(ListUrlBuilder.MODE_NORMAL);
     this.listUrl = builder.build();
     this.loading = false;
-    this.refreshGalleryList();
+    this.refreshGalleryList(true);
   }
 
   /** 切换到热门（What's hot）并刷新。 */
@@ -393,7 +399,7 @@ export abstract class GalleryListScene extends SceneFragment {
     builder.setMode(ListUrlBuilder.MODE_WHATS_HOT);
     this.listUrl = builder.build();
     this.loading = false;
-    this.refreshGalleryList();
+    this.refreshGalleryList(true);
   }
 
   /** 按关键词与分类掩码构建列表 URL 并从第 0 页刷新。 */
@@ -409,7 +415,7 @@ export abstract class GalleryListScene extends SceneFragment {
     builder.setCategory(category);
     this.listUrl = builder.build();
     this.loading = false;
-    this.refreshGalleryList();
+    this.refreshGalleryList(true);
   }
 
   /** 打开画廊详情场景。 */
@@ -481,6 +487,7 @@ export abstract class GalleryListScene extends SceneFragment {
     this.loading = false;
     this.lastError = '';
     if (refresh) {
+      this.listResetSeq = this.listResetSeq + 1;
       this.setGalleryList(list);
     } else {
       this.appendGalleryList(list);
@@ -563,12 +570,12 @@ export abstract class GalleryListScene extends SceneFragment {
 
   /** 上游 filterTag 变化 → 重新按新条件请求第一页 */
   protected onFilterChanged(): void {
-    this.refreshGalleryList();
+    this.refreshGalleryList(true);
   }
 
   /** 上游跳页：跳到指定页码（1-based，上游 jumpTo 语义），从该页整段替换 */
   jumpToPage(page: number): void {
-    if (page < 1 || this.loading) {
+    if (page < 1) {
       return;
     }
     this.loading = true;

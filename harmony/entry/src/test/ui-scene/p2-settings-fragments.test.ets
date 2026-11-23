@@ -26,6 +26,9 @@ import { LicenseActivity } from '../../main/ets/hippo/ehviewer/ui/LicenseActivit
 import { DownloadFragment, NoMediaAction } from '../../main/ets/hippo/ehviewer/ui/fragment/DownloadFragment';
 import { ReadSettingsRules } from '../../main/ets/hippo/ehviewer/ui/fragment/ReadSettingsRules';
 import { PrivacySettingsRules, AnalyticsTogglePlan } from '../../main/ets/hippo/ehviewer/ui/fragment/PrivacySettingsRules';
+import { ArkWebProxyManager, WebProxyBackend } from '../../main/ets/hippo/ui/ArkWebProxyManager';
+import { EhProxySelector } from '../../main/ets/hippo/ehviewer/EhProxySelector';
+import { common } from '@kit.AbilityKit';
 import {
   AdvancedFragment,
   InMemoryLoadingStatusStore
@@ -691,6 +694,87 @@ async function testAboutSettings(): Promise<void> {
     'Saved 5 items to /tmp/a.csv');
 }
 
+async function testArkWebProxyAndLanguage(): Promise<void> {
+  eq('buildProxyRule DIRECT -> DIRECT',
+    ArkWebProxyManager.buildProxyRule(EhProxySelector.TYPE_DIRECT, '1.2.3.4', 8080), 'DIRECT');
+  eq('buildProxyRule SYSTEM -> null',
+    ArkWebProxyManager.buildProxyRule(EhProxySelector.TYPE_SYSTEM, '1.2.3.4', 8080), null);
+  eq('buildProxyRule HTTP -> http://host:port',
+    ArkWebProxyManager.buildProxyRule(EhProxySelector.TYPE_HTTP, '127.0.0.1', 7890), 'http://127.0.0.1:7890');
+  eq('buildProxyRule HTTP IPv6 -> bracketed',
+    ArkWebProxyManager.buildProxyRule(EhProxySelector.TYPE_HTTP, '::1', 7890), 'http://[::1]:7890');
+  eq('buildProxyRule SOCKS -> socks://host:port',
+    ArkWebProxyManager.buildProxyRule(EhProxySelector.TYPE_SOCKS, '127.0.0.1', 1080), 'socks://127.0.0.1:1080');
+  eq('buildProxyRule invalid port -> null',
+    ArkWebProxyManager.buildProxyRule(EhProxySelector.TYPE_HTTP, '127.0.0.1', -1), null);
+
+  const savedType: number = Settings.getProxyType();
+  const savedIp: string | null = Settings.getProxyIp();
+  const savedPort: number = Settings.getProxyPort();
+  const applyCalls: Array<[number, string | null]> = [];
+  let removeCount: number = 0;
+  const mockBackend: WebProxyBackend = {
+    initializeWebEngine: (): void => {},
+    applyProxyOverride: async (type: number, proxyRule: string | null): Promise<void> => {
+      applyCalls.push([type, proxyRule]);
+    },
+    removeProxyOverride: async (): Promise<void> => {
+      removeCount++;
+    }
+  };
+
+  ArkWebProxyManager.setBackendForTest(mockBackend);
+  try {
+    Settings.putProxyType(EhProxySelector.TYPE_HTTP);
+    Settings.putProxyIp('127.0.0.1');
+    Settings.putProxyPort(7890);
+    await ArkWebProxyManager.syncFromSettings();
+    eq('syncFromSettings HTTP calls applyProxyOverride', applyCalls, [[EhProxySelector.TYPE_HTTP, 'http://127.0.0.1:7890']]);
+
+    Settings.putProxyType(EhProxySelector.TYPE_DIRECT);
+    await ArkWebProxyManager.syncFromSettings();
+    eq('syncFromSettings DIRECT calls applyProxyOverride DIRECT',
+      applyCalls[applyCalls.length - 1], [EhProxySelector.TYPE_DIRECT, 'DIRECT']);
+
+    Settings.putProxyType(EhProxySelector.TYPE_SYSTEM);
+    await ArkWebProxyManager.syncFromSettings();
+    eq('syncFromSettings SYSTEM calls removeProxyOverride', removeCount, 1);
+  } finally {
+    ArkWebProxyManager.setBackendForTest(null);
+    Settings.putProxyType(savedType);
+    Settings.putProxyIp(savedIp);
+    Settings.putProxyPort(savedPort);
+  }
+
+  eq('resolvePreferredLanguageTag system -> default',
+    AdvancedSettingsHelpers.resolvePreferredLanguageTag('system'), 'default');
+  eq('resolvePreferredLanguageTag zh-CN -> zh-Hans',
+    AdvancedSettingsHelpers.resolvePreferredLanguageTag('zh-CN'), 'zh-Hans');
+  eq('resolvePreferredLanguageTag zh-TW -> zh-Hant-TW',
+    AdvancedSettingsHelpers.resolvePreferredLanguageTag('zh-TW'), 'zh-Hant-TW');
+  eq('resolvePreferredLanguageTag zh-HK -> zh-Hant-HK',
+    AdvancedSettingsHelpers.resolvePreferredLanguageTag('zh-HK'), 'zh-Hant-HK');
+  ok('resolveRuntimeLanguageTag system -> non-empty language tag',
+    AdvancedSettingsHelpers.resolveRuntimeLanguageTag('system').length > 0);
+  eq('resolveRuntimeLanguageTag zh-CN -> zh-Hans',
+    AdvancedSettingsHelpers.resolveRuntimeLanguageTag('zh-CN'), 'zh-Hans');
+  eq('resolveRuntimeLanguageTag en -> en-US',
+    AdvancedSettingsHelpers.resolveRuntimeLanguageTag('en'), 'en-US');
+
+  let appliedRuntimeLang: string = '';
+  const fakeAppCtx: Object = {
+    setLanguage: (lang: string): void => {
+      appliedRuntimeLang = lang;
+    }
+  };
+  const fakeUiCtx: Object = {
+    getApplicationContext: (): Object => fakeAppCtx
+  };
+  const appliedOk: boolean = AdvancedSettingsHelpers.applyAppLanguage(fakeUiCtx as common.Context, 'zh-CN');
+  ok('applyAppLanguage returns true with ApplicationContext mock', appliedOk);
+  eq('applyAppLanguage forwards runtime tag to ApplicationContext.setLanguage', appliedRuntimeLang, 'zh-Hans');
+}
+
 async function main(): Promise<void> {
   await testDirPicker();
   testLicenseContract();
@@ -699,6 +783,7 @@ async function main(): Promise<void> {
   testPrivacySettings();
   await testAdvancedSettings();
   await testAboutSettings();
+  await testArkWebProxyAndLanguage();
 
   if (fails.length > 0) {
     console.error(`\n✗ ${fails.length} failed / ${pass + fails.length} assertions`);

@@ -21,7 +21,7 @@ import { CookieJar } from './CookieJar';
 import { Dns, InetAddress, OverrideAwareDns, SYSTEM_DNS, toNetworkError } from './Dns';
 import { Headers } from './Headers';
 import { HttpUrl } from './HttpUrl';
-import { Proxy, ProxySelector, ProxyType } from './ProxySelector';
+import { Proxy, ProxySelector, ProxyType, SystemProxyHelper } from './ProxySelector';
 import { Request } from './Request';
 import { Response } from './Response';
 import { RequestBody } from './RequestBody';
@@ -81,7 +81,7 @@ export class RedirectInterceptor implements Interceptor {
       code !== 307 && code !== 308) {
       return null;
     }
-    if (!this._followRedirects) {
+    if (!this._followRedirects || request.disallowRedirectFollow()) {
       return null;
     }
     const method: string = request.method();
@@ -288,7 +288,11 @@ export class ConnectInterceptor implements Interceptor {
           throw new Error('Canceled');
         }
         const proxy: Proxy = proxies[pIdx];
-        const useCustomDns: boolean = proxy.type() === ProxyType.DIRECT && this._dns !== SYSTEM_DNS;
+        const sysProxy: Proxy | null = (proxy.type() === ProxyType.DIRECT && !proxy.isNoProxy())
+          ? await SystemProxyHelper.resolveHttpProxy(host)
+          : null;
+        const useCustomDns: boolean =
+          proxy.type() === ProxyType.DIRECT && sysProxy === null && this._dns !== SYSTEM_DNS;
         let resolvedList: InetAddress[] = [];
         let hasDnsOverride: boolean = false;
 
@@ -313,13 +317,15 @@ export class ConnectInterceptor implements Interceptor {
           proxy.type() === ProxyType.SOCKS ||
           hasDnsOverride;
 
+        const effectiveProxy: Proxy = (useSocket && sysProxy !== null) ? sysProxy : proxy;
         const transport: Transport = useSocket ? this._socketTransport : this._httpTransport;
         hilog.info(0x0000, 'ConnectInterceptor',
           'route host=%{public}s proxy=%{public}s dnsCount=%{public}d override=%{public}s transport=%{public}s df=%{public}s',
-          host, proxy.toString(), resolvedList.length, String(hasDnsOverride), transport.name,
+          host, effectiveProxy.toString(), resolvedList.length, String(hasDnsOverride), transport.name,
           String(this._sslSocketFactoryInstalled));
-        const candidates: Array<InetAddress | null> = (useSocket && hasDnsOverride && resolvedList.length > 0)
-          ? resolvedList : [null];
+        const candidates: Array<InetAddress | null> =
+          ConnectInterceptor.buildCandidates(useSocket, effectiveProxy, resolvedList, hasDnsOverride,
+            this._retryOnConnectionFailure);
         const maxAddrTries: number = this._retryOnConnectionFailure ? candidates.length : 1;
 
         for (let aIdx = 0; aIdx < maxAddrTries; aIdx++) {
@@ -333,7 +339,7 @@ export class ConnectInterceptor implements Interceptor {
             writeTimeoutMs: this._writeTimeoutMs,
             callTimeoutMs: this._callTimeoutMs,
             abort: this._abort,
-            proxy: proxy,
+            proxy: effectiveProxy,
             resolvedAddress: addr,
             skipRemoteValidation: skipValidation,
             onProgress: this._onProgress
@@ -361,6 +367,31 @@ export class ConnectInterceptor implements Interceptor {
     } finally {
       this._pool.release(host);
     }
+  }
+
+  private static buildCandidates(useSocket: boolean, proxy: Proxy, resolvedList: InetAddress[],
+    hasDnsOverride: boolean, retryOnFailure: boolean): Array<InetAddress | null> {
+    if (!useSocket || proxy.type() !== ProxyType.DIRECT || resolvedList.length === 0) {
+      return [null];
+    }
+    const out: Array<InetAddress | null> = [];
+    if (hasDnsOverride) {
+      for (let i = 0; i < resolvedList.length; i++) {
+        out.push(resolvedList[i]);
+      }
+      if (retryOnFailure) {
+        out.push(null);
+      }
+      return out;
+    }
+    // 非覆写路径优先按域名直连以保留 TLS SAN 校验，失败时回落到系统解析 IP
+    out.push(null);
+    if (retryOnFailure) {
+      for (let i = 0; i < resolvedList.length; i++) {
+        out.push(resolvedList[i]);
+      }
+    }
+    return out;
   }
 }
 

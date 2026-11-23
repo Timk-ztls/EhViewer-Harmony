@@ -3,6 +3,8 @@ import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
 import { AppWiring } from '../hippo/AppWiring';
 import { EhApplication } from '../hippo/ehviewer/EhApplication';
+import { OhosNetworkMonitor } from '../hippo/ehviewer/OhosNetworkMonitor';
+import { AdvancedSettingsHelpers } from '../hippo/ui/settings/SettingsSectionHelpers';
 import { installCrashHandler } from '../hippo/ehviewer/CrashObserver';
 import { ArchiverDownloadCompleter } from '../hippo/ehviewer/download/ArchiverDownloadCompleter';
 import { ArchiverDownloadService } from '../hippo/ehviewer/download/ArchiverDownloadService';
@@ -132,6 +134,7 @@ export default class EntryAbility extends UIAbility {
 
   onDestroy(): void {
     hilog.info(DOMAIN, TAG, 'onDestroy');
+    OhosNetworkMonitor.stop();
     const app: EhApplication | null = EhApplication.getInstance();
     if (app !== null) {
       app.unregisterAbility(this.context);
@@ -168,6 +171,7 @@ export default class EntryAbility extends UIAbility {
         applyWindowPrivacyMode(this.context, initialPrivacy, false);
       }
       AppWiring.whenReady().then((): void => {
+        AdvancedSettingsHelpers.applyAppLanguage(this.context, Settings.getAppLanguage());
         const wiredThemeId: number = syncAppThemeStorage();
         applySystemBarTheme(this.context, wiredThemeId, true);
         const wiredPrivacy: boolean = Settings.getEnabledSecurity();
@@ -187,6 +191,9 @@ export default class EntryAbility extends UIAbility {
 
   onForeground(): void {
     hilog.info(DOMAIN, TAG, 'onForeground');
+    if (AppWiring.isWired()) {
+      AppWiring.refreshNetworkStateOnChange('foreground');
+    }
     const privacyEnabled: boolean = Settings.isAttached()
       ? Settings.getEnabledSecurity()
       : readCachedPrivacyMode(this.context, false);

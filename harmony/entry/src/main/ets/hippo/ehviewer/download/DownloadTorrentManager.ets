@@ -53,11 +53,12 @@ import { hilog } from '@kit.PerformanceAnalysisKit';
 
 import { EhApplication } from '../EhApplication';
 import { AppConfig } from '../AppConfig';
+import { EhRequestBuilder } from '../client/EhRequestBuilder';
 import { TorrentDownloadMessage } from '../client/data/TorrentDownloadMessage';
 import { FileUtils as YorozuyaFileUtils } from '../../lib/yorozuya/FileUtils';
 import { Call, Callback } from '../../okhttp/Call';
 import { OkHttpClient } from '../../okhttp/OkHttpClient';
-import { Request, RequestBuilder } from '../../okhttp/Request';
+import { Request } from '../../okhttp/Request';
 import { Response } from '../../okhttp/Response';
 import { ResponseBody } from '../../okhttp/ResponseBody';
 
@@ -79,17 +80,20 @@ export class DownloadTorrentManager {
   private static instance: DownloadTorrentManager | null = null;
 
   private okHttpClient: OkHttpClient | null = null;
+  private readonly usesAppClient: boolean;
   private handler: TorrentDownloadHandler | null = null;
 
-  private constructor(okHttpClient: OkHttpClient) {
+  private constructor(okHttpClient: OkHttpClient | null, usesAppClient: boolean) {
     this.okHttpClient = okHttpClient;
+    this.usesAppClient = usesAppClient;
   }
 
   /** 对应上游 `companion object { fun get(okHttpClient) }`（单例）。 */
   public static get(okHttpClient: OkHttpClient | null): DownloadTorrentManager {
     if (DownloadTorrentManager.instance === null) {
+      const usesApp: boolean = okHttpClient === null;
       DownloadTorrentManager.instance = new DownloadTorrentManager(
-        okHttpClient === null ? EhApplication.getOkHttpClient(null) : okHttpClient);
+        usesApp ? EhApplication.getOkHttpClient(null) : okHttpClient, usesApp);
     }
     return DownloadTorrentManager.instance;
   }
@@ -104,7 +108,7 @@ export class DownloadTorrentManager {
    */
   public download(url: string, saveDir: string, name: string, handler: TorrentDownloadHandler | null): void {
     this.handler = handler;
-    const request: Request = new RequestBuilder().url(url).build();
+    const request: Request = EhRequestBuilder.of(url).build();
 
     let savePath: string | null = null;
     try {
@@ -124,7 +128,9 @@ export class DownloadTorrentManager {
     // 上游这里传的是 saveDir（不是 savePath），保留
     this.sendMessage(targetPath, saveDir, name, 0, false);
 
-    const client: OkHttpClient | null = this.okHttpClient;
+    const client: OkHttpClient | null = this.usesAppClient
+      ? EhApplication.getOkHttpClient(null)
+      : this.okHttpClient;
     if (client === null) {
       EhApplication.removeDownloadTorrent(url);
       this.sendMessage(url, dir, name, -1, true);
@@ -184,6 +190,11 @@ export class DownloadTorrentManager {
     try {
       const total: number = body.contentLength();
       const bytes: ArrayBuffer = body.bytes();
+      if (bytes.byteLength <= 0) {
+        EhApplication.removeDownloadTorrent(url);
+        this.sendMessage(targetPath, dir, name, -1, true);
+        return;
+      }
       // API 20 起 fs.openSync 返回 File 对象（fd 在 .fd 上）
       const opened: fs.File = fs.openSync(targetPath,
         fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE | fs.OpenMode.TRUNC);
@@ -350,6 +361,13 @@ class TorrentCallback implements Callback {
   }
 
   public onResponse(call: Call, response: Response): void {
+    const code: number = response.code();
+    if (code < 200 || code >= 300) {
+      hilog.error(DOMAIN, TAG, 'torrent HTTP error: code=%{public}d url=%{public}s', code, this.url);
+      response.close();
+      this.manager.onFailure(this.url, this.dir, this.name);
+      return;
+    }
     const body: ResponseBody | null = response.body();
     if (body === null) {
       this.manager.onFailure(this.url, this.dir, this.name);

@@ -3835,6 +3835,54 @@
     {
       "name": "reset_limit_failed",
       "value": "Failed to reset image limits"
+    },
+    {
+      "name": "settings_download_export_items",
+      "value": "Export download items"
+    },
+    {
+      "name": "settings_download_export_items_summary",
+      "value": "Export download records to the download folder"
+    },
+    {
+      "name": "torrent_download_complete",
+      "value": "Torrent downloaded"
+    },
+    {
+      "name": "torrent_action_save_to_files",
+      "value": "Save to files"
+    },
+    {
+      "name": "torrent_action_open_bt_app",
+      "value": "Open in BT / other app"
+    },
+    {
+      "name": "torrent_saved_success",
+      "value": "Torrent file saved"
+    },
+    {
+      "name": "torrent_no_bt_app",
+      "value": "No app found to open this torrent file"
+    },
+    {
+      "name": "in_app_browser_open_external",
+      "value": "Browser"
+    },
+    {
+      "name": "downloads_page_prev",
+      "value": "Prev"
+    },
+    {
+      "name": "downloads_page_next",
+      "value": "Next"
+    },
+    {
+      "name": "downloads_page_indicator",
+      "value": "Page %1$d / %2$d (%3$d)"
+    },
+    {
+      "name": "settings_advanced_app_language_applied",
+      "value": "App language updated"
     }
   ]
 }

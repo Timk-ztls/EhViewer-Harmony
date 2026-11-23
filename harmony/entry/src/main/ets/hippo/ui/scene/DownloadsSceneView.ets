@@ -32,6 +32,11 @@ import { UniFile } from '../../unifile/UniFile';
 import { Settings } from '../../ehviewer/Settings';
 import { GetText } from '../../ehviewer/GetText';
 import { DownloadsSceneShell } from '../../ehviewer/ui/scene/download/DownloadsSceneShell';
+import {
+  DownloadPaginationController,
+  PaginationHostLike,
+  PaginationIndicatorLike
+} from '../../ehviewer/ui/scene/download/part/DownloadPaginationController';
 import { GalleryReaderRouteParams } from '../../ehviewer/ui/scene/gallery/detail/GalleryDetailScene';
 import { FileUtils } from '../../lib/yorozuya/FileUtils';
 import { Announcer } from '../../scene/Announcer';
@@ -56,6 +61,48 @@ import { pushGalleryReaderPage } from './GalleryDetailSceneView';
 
 const DOMAIN: number = 0x0000;
 const TAG: string = 'DownloadsSceneView';
+
+class DownloadsPaginationHost implements PaginationHostLike {
+  private readonly getSizeFn: () => number;
+  private readonly onNotifyFn: () => void;
+  private readonly onScrollFn: (pos: number) => void;
+
+  constructor(getSizeFn: () => number, onNotifyFn: () => void, onScrollFn: (pos: number) => void) {
+    this.getSizeFn = getSizeFn;
+    this.onNotifyFn = onNotifyFn;
+    this.onScrollFn = onScrollFn;
+  }
+
+  getListSize(): number {
+    return this.getSizeFn();
+  }
+
+  notifyAdapter(): void {
+    this.onNotifyFn();
+  }
+
+  scrollToPosition(position: number): void {
+    this.onScrollFn(position);
+  }
+}
+
+class DownloadsPaginationIndicator implements PaginationIndicatorLike {
+  private readonly onTotalFn: (total: number) => void;
+  private readonly onPageFn: (page: number) => void;
+
+  constructor(onTotalFn: (total: number) => void, onPageFn: (page: number) => void) {
+    this.onTotalFn = onTotalFn;
+    this.onPageFn = onPageFn;
+  }
+
+  setTotalPages(total: number): void {
+    this.onTotalFn(total);
+  }
+
+  setCurrentPage(page: number): void {
+    this.onPageFn(page);
+  }
+}
 
 class LabelDrawerRow {
   label: string | null = null;
@@ -588,8 +635,13 @@ export struct DownloadsSceneView {
   @State showBatchMoveDialog: boolean = false;
   @State pendingBatchMoveItems: DownloadInfo[] = [];
   @State rev: number = 0;
+  @State paginationActive: boolean = false;
+  @State paginationCurrentPage: number = 1;
+  @State paginationTotalPages: number = 1;
 
   private readonly fabState: FabBehaviorState = new FabBehaviorState();
+  private readonly listScroller: ListScroller = new ListScroller();
+  private paginationController: DownloadPaginationController | null = null;
   private archiverRowMap: Map<string, ArchiverRowModel> = new Map<string, ArchiverRowModel>();
   private downloadRowMap: Map<number, DownloadRowModel> = new Map<number, DownloadRowModel>();
   private hostContext: common.Context | undefined = undefined;
@@ -728,6 +780,36 @@ export struct DownloadsSceneView {
       GetText.initialize(ctx);
     }
 
+    const pCtrl: DownloadPaginationController = new DownloadPaginationController(
+      new DownloadsPaginationHost(
+        (): number => this.items.length,
+        (): void => {
+          this.syncDownloadRows();
+        },
+        (pos: number): void => {
+          try {
+            this.listScroller.scrollToIndex(pos >= 0 ? 0 : 0);
+          } catch (scrollErr) {
+            hilog.debug(DOMAIN, TAG, 'scrollToIndex skipped: %{public}s',
+              scrollErr instanceof Error ? scrollErr.message : String(scrollErr));
+          }
+        }
+      )
+    );
+    pCtrl.indicator = new DownloadsPaginationIndicator(
+      (total: number): void => {
+        this.paginationTotalPages = Math.max(1, total);
+      },
+      (page: number): void => {
+        this.paginationCurrentPage = Math.max(1, page);
+      }
+    );
+    pCtrl.pageSize = 100;
+    pCtrl.isCanPagination = Settings.isAttached()
+      ? Settings.getDownloadPagination()
+      : Settings.IS_DOWNLOAD_LIST_PAGINATION;
+    this.paginationController = pCtrl;
+
     // autoCancel=false 避免多选展开 6 个次级 FAB 时全屏遮罩拦截列表点击
     this.fabState.setAutoCancel(false);
     this.fabState.setExpanded(false, false);
@@ -851,7 +933,25 @@ export struct DownloadsSceneView {
   }
 
   private syncDownloadRows(): void {
-    const list: DownloadInfo[] = this.items;
+    const pCtrl: DownloadPaginationController | null = this.paginationController;
+    let list: DownloadInfo[] = this.items;
+    if (pCtrl !== null) {
+      pCtrl.isCanPagination = Settings.isAttached()
+        ? Settings.getDownloadPagination()
+        : Settings.IS_DOWNLOAD_LIST_PAGINATION;
+      pCtrl.refreshTotal();
+      this.paginationActive = pCtrl.shouldPagination();
+      this.paginationCurrentPage = Math.max(1, pCtrl.indexPage);
+      this.paginationTotalPages = Math.max(1, pCtrl.getTotalPages());
+      if (this.paginationActive) {
+        const startIdx: number = (this.paginationCurrentPage - 1) * pCtrl.pageSize;
+        list = this.items.slice(startIdx, startIdx + pCtrl.pageSize);
+      }
+    } else {
+      this.paginationActive = false;
+      this.paginationCurrentPage = 1;
+      this.paginationTotalPages = 1;
+    }
     const nextRows: DownloadRowModel[] = [];
     const aliveGids: Set<number> = new Set<number>();
     let sameOrder: boolean = list.length === this.downloadRows.length;
@@ -1810,7 +1910,7 @@ export struct DownloadsSceneView {
           .justifyContent(FlexAlign.Center)
           .alignItems(HorizontalAlign.Center)
         } else {
-          List({ space: 0 }) {
+          List({ space: 0, scroller: this.listScroller }) {
             ForEach(this.archiverRows, (row: ArchiverRowModel) => {
               ListItem() {
                 ArchiverRowCard({
@@ -1860,14 +1960,59 @@ export struct DownloadsSceneView {
           }
           .width('100%')
           .layoutWeight(1)
-          .cachedCount(6)
+          .cachedCount(2)
           .edgeEffect(EdgeEffect.Spring)
           .padding({
             left: ThemeDimens.GALLERY_LIST_MARGIN_H,
             right: ThemeDimens.GALLERY_LIST_MARGIN_H,
             top: ThemeDimens.GALLERY_LIST_MARGIN_V,
-            bottom: ThemeDimens.GALLERY_PADDING_BOTTOM_FAB
+            bottom: this.paginationActive ? 8 : ThemeDimens.GALLERY_PADDING_BOTTOM_FAB
           })
+
+          if (this.paginationActive) {
+            Row({ space: 12 }) {
+              Button($r('app.string.downloads_page_prev'), { type: ButtonType.Normal })
+                .height(34)
+                .borderRadius(ThemeRadius.BUTTON)
+                .backgroundColor(this.palette().cardBackground)
+                .fontColor(this.paginationCurrentPage > 1
+                  ? this.palette().colorPrimary
+                  : this.palette().textSecondary)
+                .fontSize(ThemeTypography.TEXT_SMALL)
+                .enabled(this.paginationCurrentPage > 1)
+                .onClick((): void => {
+                  if (this.paginationController !== null && this.paginationCurrentPage > 1) {
+                    this.paginationController.onPageSelected(this.paginationCurrentPage - 1);
+                  }
+                })
+
+              Text($r('app.string.downloads_page_indicator',
+                this.paginationCurrentPage, this.paginationTotalPages, this.items.length))
+                .fontSize(ThemeTypography.TEXT_SMALL)
+                .fontColor(this.palette().textPrimary)
+                .layoutWeight(1)
+                .textAlign(TextAlign.Center)
+
+              Button($r('app.string.downloads_page_next'), { type: ButtonType.Normal })
+                .height(34)
+                .borderRadius(ThemeRadius.BUTTON)
+                .backgroundColor(this.palette().cardBackground)
+                .fontColor(this.paginationCurrentPage < this.paginationTotalPages
+                  ? this.palette().colorPrimary
+                  : this.palette().textSecondary)
+                .fontSize(ThemeTypography.TEXT_SMALL)
+                .enabled(this.paginationCurrentPage < this.paginationTotalPages)
+                .onClick((): void => {
+                  if (this.paginationController !== null &&
+                    this.paginationCurrentPage < this.paginationTotalPages) {
+                    this.paginationController.onPageSelected(this.paginationCurrentPage + 1);
+                  }
+                })
+            }
+            .width('100%')
+            .padding({ left: 16, right: 16, top: 8, bottom: 12 })
+            .backgroundColor(this.palette().windowBackground)
+          }
         }
       }
       .width('100%')

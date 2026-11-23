@@ -66,6 +66,16 @@ const MAX_RESPONSE_LIMIT: number = 100 * 1024 * 1024;
  *   2) 不支持 SOCKS5、HTTP CONNECT 隧道与自定义 DNS IP 直连；
  *   3) 无法读取流式响应（result 一次性返回），大文件下载要靠 Range 分片。
  */
+export class RedirectDetection {
+  readonly wasRedirected: boolean;
+  readonly location: string | null;
+
+  constructor(wasRedirected: boolean, location: string | null) {
+    this.wasRedirected = wasRedirected;
+    this.location = location;
+  }
+}
+
 export class SystemHttpTransport implements Transport {
   readonly name: string = 'ohos.net.http';
 
@@ -115,6 +125,29 @@ export class SystemHttpTransport implements Transport {
     }
 
     let settled: boolean = false;
+    let pendingRedirectLoc: string | null = null;
+    let capturedRedirected: boolean = false;
+    let capturedLocation: string | null = null;
+    let headersHandler: ((raw: Object) => void) | null = (raw: Object): void => {
+      if (settled) {
+        return;
+      }
+      if (pendingRedirectLoc !== null) {
+        capturedRedirected = true;
+        if (capturedLocation === null) {
+          capturedLocation = pendingRedirectLoc;
+        }
+      }
+      pendingRedirectLoc = SystemHttpTransport.extractLocationHeader(raw);
+    };
+    try {
+      req.on('headersReceive', headersHandler);
+    } catch (e) {
+      hilog.debug(0x0000, 'SystemHttpTransport', 'on headersReceive unavailable: %{public}s',
+        describeNetworkError(e as Object));
+      headersHandler = null;
+    }
+
     let timer: number = -1;
     let unsub: () => void = (): void => {};
     const onProgress: TransportProgressCallback | undefined =
@@ -197,14 +230,31 @@ export class SystemHttpTransport implements Transport {
       const body: ArrayBuffer = SystemHttpTransport.resultOf(resp.result);
       const ctValue: string | null = outHeaders.get('Content-Type');
       const ct: MediaType | null = ctValue === null ? null : MediaType.parse(ctValue);
-      return new Response(request, Protocol.HTTP_1_1, resp.responseCode as number,
-        SystemHttpTransport.reasonOf(resp.responseCode as number), outHeaders,
-        new ResponseBody(ct, body));
+      const code: number = resp.responseCode as number;
+      const timingRedirected: boolean = resp.performanceTiming !== undefined &&
+        resp.performanceTiming !== null &&
+        typeof resp.performanceTiming.redirectTiming === 'number' &&
+        resp.performanceTiming.redirectTiming > 0;
+      const redir: RedirectDetection = SystemHttpTransport.detectRedirect(
+        code, outHeaders, capturedRedirected, capturedLocation, timingRedirected
+      );
+      return new Response(request, Protocol.HTTP_1_1, code,
+        SystemHttpTransport.reasonOf(code), outHeaders,
+        new ResponseBody(ct, body), null, Date.now(), redir.wasRedirected, redir.location);
     } finally {
       if (timer !== -1) {
         clearTimeout(timer);
       }
       unsub();
+      if (headersHandler !== null) {
+        try {
+          req.off('headersReceive', headersHandler);
+        } catch (e) {
+          hilog.debug(0x0000, 'SystemHttpTransport', 'off headersReceive failed: %{public}s',
+            describeNetworkError(e as Object));
+        }
+        headersHandler = null;
+      }
       if (progressHandler !== null) {
         try {
           req.off('dataReceiveProgress', progressHandler);
@@ -295,7 +345,40 @@ export class SystemHttpTransport implements Transport {
     return body.bytes();
   }
 
-  /** @ohos.net.http 的响应头是 Object（值为 string | string[]），统一展开成多值 Headers。 */
+  static extractLocationHeader(raw: Object | null | undefined): string | null {
+    if (raw === null || raw === undefined || typeof raw !== 'object') {
+      return null;
+    }
+    const record: Record<string, Object> = raw as Record<string, Object>;
+    const keys: string[] = Object.keys(record);
+    for (let i = 0; i < keys.length; i++) {
+      const k: string = keys[i];
+      if (k.toLowerCase() !== 'location') {
+        continue;
+      }
+      const v: Object = record[k];
+      if (v instanceof Array) {
+        const arr: string[] = v as string[];
+        if (arr.length > 0 && typeof arr[0] === 'string' && arr[0].trim().length > 0) {
+          return arr[0].trim();
+        }
+      } else if (typeof v === 'string' && (v as string).trim().length > 0) {
+        return (v as string).trim();
+      }
+    }
+    return null;
+  }
+
+  static detectRedirect(code: number, outHeaders: Headers, capturedRedirected: boolean,
+    capturedLocation: string | null, timingRedirected: boolean): RedirectDetection {
+    const isCodeRedirect: boolean = code >= 300 && code <= 399;
+    const wasRedirected: boolean = isCodeRedirect || capturedRedirected || timingRedirected;
+    const headerLoc: string | null = isCodeRedirect ? outHeaders.get('Location') : null;
+    const loc: string | null = capturedLocation !== null ? capturedLocation : headerLoc;
+    return new RedirectDetection(wasRedirected, loc);
+  }
+
+  /** `@ohos.net.http` 的响应头是 Object（值为 string | string[]），统一展开成多值 Headers。 */
   private static headersOf(raw: Object): Headers {
     const names: string[] = [];
     const values: string[] = [];

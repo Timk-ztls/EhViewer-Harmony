@@ -110,6 +110,9 @@ export struct FavoritesSceneView {
   private hostContext: common.Context | undefined = undefined;
   private dataListener: FavoritesDataListener | null = null;
   private slotRadioGroup: string = 'fav_default_slot_group';
+  private readonly listScroller: ListScroller = new ListScroller();
+  private lastListResetSeq: number = 0;
+  private scrollTopTimerId: number = -1;
 
   private palette(): ThemePalette {
     return this.themeId >= 0 ? ThemeTokens.of(this.themeId) : ThemeTokens.current();
@@ -228,6 +231,7 @@ export struct FavoritesSceneView {
     if (s === null) {
       return;
     }
+    this.lastListResetSeq = s.getListResetSeq();
     s.setFavMeta(this.favCats, this.favCounts);
     s.setOnMetaUpdatedListener((cats: string[], counts: number[]): void => {
       Settings.putFavCat(cats);
@@ -248,6 +252,10 @@ export struct FavoritesSceneView {
   }
 
   aboutToDisappear(): void {
+    if (this.scrollTopTimerId !== -1) {
+      clearTimeout(this.scrollTopTimerId);
+      this.scrollTopTimerId = -1;
+    }
     const s: FavoritesScene | null = this.scene;
     if (s !== null) {
       s.setOnStateChangedListener(null);
@@ -257,6 +265,29 @@ export struct FavoritesSceneView {
       }
     }
     this.dataListener = null;
+  }
+
+  private scrollToTopAfterReload(hasItems: boolean): void {
+    if (this.scrollTopTimerId !== -1) {
+      clearTimeout(this.scrollTopTimerId);
+      this.scrollTopTimerId = -1;
+    }
+    if (!hasItems) {
+      return;
+    }
+    const doScroll = (): void => {
+      try {
+        this.listScroller.scrollEdge(Edge.Top);
+      } catch (e) {
+        hilog.debug(DOMAIN, TAG, 'favorites scrollEdge(Edge.Top) skipped: %{public}s',
+          e instanceof Error ? e.message : String(e));
+      }
+    };
+    doScroll();
+    this.scrollTopTimerId = setTimeout((): void => {
+      this.scrollTopTimerId = -1;
+      doScroll();
+    }, 0) as number;
   }
 
   private syncFromScene(): void {
@@ -288,6 +319,11 @@ export struct FavoritesSceneView {
       }
     }
     this.items = list;
+    const nextResetSeq: number = s.getListResetSeq();
+    if (nextResetSeq !== this.lastListResetSeq) {
+      this.lastListResetSeq = nextResetSeq;
+      this.scrollToTopAfterReload(list.length > 0);
+    }
   }
 
   private getSlotDisplayName(cat: number): string {
@@ -609,7 +645,7 @@ export struct FavoritesSceneView {
           .padding({ left: 24, right: 24, top: ThemeDimens.GALLERY_PADDING_TOP_SEARCH_BAR })
           .justifyContent(FlexAlign.Center)
         } else {
-          List({ space: 0 }) {
+          List({ space: 0, scroller: this.listScroller }) {
             ForEach(this.items, (item: GalleryInfo) => {
               ListItem() {
                 GalleryListItemLayout({

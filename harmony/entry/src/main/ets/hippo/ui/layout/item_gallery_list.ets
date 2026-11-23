@@ -44,6 +44,7 @@ export struct GalleryListItemLayout {
   @Prop @Watch('onThumbChanged') thumbUrl: string = '';
   @Prop @Watch('onThumbChanged') thumbKey: string = '';
   @Prop showRating: boolean = true;
+  @Prop itemIndex: number = -1;
   @Prop activated: boolean = false;
   @Prop themeId: number = -1;
   /** 卡片底色：上游 CardView.Reactive → ?attr/contentColorReactive */
@@ -64,13 +65,12 @@ export struct GalleryListItemLayout {
   }
 
   aboutToReuse(_params: Record<string, Object>): void {
-    this.thumbController.onAttached();
     this.loadThumb();
   }
 
   aboutToRecycle(): void {
     this.loadedSig = '';
-    this.thumbController.onDetached();
+    this.thumbController.unload();
   }
 
   aboutToDisappear(): void {
@@ -91,7 +91,7 @@ export struct GalleryListItemLayout {
       }
       this.loadedSig = sig;
       this.thumbController.resetClip();
-      this.thumbController.load(key, this.thumbUrl);
+      this.thumbController.load(key, this.thumbUrl, this.itemIndex);
     } else {
       this.loadedSig = '';
       this.thumbController.unload();

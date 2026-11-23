@@ -604,8 +604,8 @@ export struct DownloadSettingsSection {
       })
 
       SettingsItem({
-        title: this.str('settings_advanced_export_data'),
-        summary: this.str('settings_download_download_location'),
+        title: this.str('settings_download_export_items'),
+        summary: this.str('settings_download_export_items_summary'),
         themeId: this.themeId,
         onItemClick: () => {
           this.handleExportDownloadItems();

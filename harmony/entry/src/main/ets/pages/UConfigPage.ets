@@ -35,6 +35,7 @@ import { syncAppShowJpnTitleStorage } from '../hippo/ui/ThemeSystemBar';
 import { VArrowLeftDarkX24 } from '../hippo/ui/drawable/v_arrow_left_dark_x24';
 import { VCheckDarkX24 } from '../hippo/ui/drawable/v_check_dark_x24';
 import { VRefreshDarkX24 } from '../hippo/ui/drawable/v_refresh_dark_x24';
+import { ArkWebProxyManager } from '../hippo/ui/ArkWebProxyManager';
 import {
   UConfigBackAction,
   UConfigCookieSyncResult,
@@ -191,6 +192,7 @@ struct UConfigPage {
 
   private async initializePage(): Promise<void> {
     await AppWiring.whenReady();
+    await ArkWebProxyManager.syncFromSettings();
     const store: EhCookieStore | null = AppWiring.getCookieStore();
     const listener: UConfigPageListener = new UConfigPageListenerImpl(
       (url: string): void => {

@@ -19,7 +19,7 @@ import { image } from '@kit.ImageKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { Call } from '../../okhttp/Call';
 import { HttpUrl } from '../../okhttp/HttpUrl';
-import { OkHttpClient } from '../../okhttp/OkHttpClient';
+import { OkHttpClient, TimeUnit } from '../../okhttp/OkHttpClient';
 import { Request } from '../../okhttp/Request';
 import { Response } from '../../okhttp/Response';
 import { ResponseBody } from '../../okhttp/ResponseBody';
@@ -98,7 +98,8 @@ export class DefaultImageRequestHost implements ImageRequestHost {
   private static readonly DOMAIN: number = 0x0001;
   private static readonly TAG: string = 'DefaultImageRequestHost';
   private static readonly CACHE_SUBDIR: string = 'img_cache';
-  private static readonly MAX_CONCURRENT_DOWNLOADS: number = 4;
+  private static readonly MAX_CONCURRENT_DOWNLOADS: number = 6;
+  private static readonly THUMB_TIMEOUT_MS: number = 15000;
   private static readonly MAX_MEMORY_CACHE: number = 256;
 
   private nextTaskId: number = 1;
@@ -106,11 +107,16 @@ export class DefaultImageRequestHost implements ImageRequestHost {
   private cachedCacheDir: string | null = null;
   private ensureDirPromise: Promise<string | null> | null = null;
   private activeDownloadCount: number = 0;
+  private cachedThumbBaseClient: OkHttpClient | null = null;
+  private cachedThumbClient: OkHttpClient | null = null;
+  private visibleStart: number = -1;
+  private visibleEnd: number = -1;
 
   private readonly targetLatestTask: Map<LoadImageController, number> = new Map<LoadImageController, number>();
   private readonly targetUrls: Map<LoadImageController, string> = new Map<LoadImageController, string>();
   private readonly urlWaiters: Map<string, Set<LoadImageController>> = new Map<string, Set<LoadImageController>>();
-  private readonly downloadQueue: QueuedDownloadJob[] = [];
+  private readonly visibleQueue: QueuedDownloadJob[] = [];
+  private readonly prefetchQueue: QueuedDownloadJob[] = [];
   private readonly queuedJobsByUrl: Map<string, QueuedDownloadJob> = new Map<string, QueuedDownloadJob>();
   private readonly activeCallsByUrl: Map<string, Call> = new Map<string, Call>();
   private readonly memoryCache: Map<string, string> = new Map<string, string>();
@@ -133,7 +139,11 @@ export class DefaultImageRequestHost implements ImageRequestHost {
 
   request(target: LoadImageController, req: ImageRequest): void {
     const taskId: number = this.nextTaskId++;
-    this.detachWaiter(target);
+    target.listIndex = req.listIndex;
+    const orphanedUrl: string | null = this.detachWaiter(target);
+    if (orphanedUrl !== null && orphanedUrl !== req.url) {
+      this.cancelOrphanedUrl(orphanedUrl);
+    }
     this.targetLatestTask.set(target, taskId);
     target.taskId = taskId;
 
@@ -155,6 +165,14 @@ export class DefaultImageRequestHost implements ImageRequestHost {
         return;
       }
       this.attachWaiter(target, req.url);
+      const existingQueued: QueuedDownloadJob | undefined = this.queuedJobsByUrl.get(req.url);
+      if (existingQueued !== undefined && this.isUrlVisible(req.url)) {
+        const pIdx: number = this.prefetchQueue.indexOf(existingQueued);
+        if (pIdx >= 0) {
+          this.prefetchQueue.splice(pIdx, 1);
+          this.visibleQueue.push(existingQueued);
+        }
+      }
     }
 
     this.runTask(target, taskId, req, clip).catch((err: Object): void => {
@@ -210,9 +228,13 @@ export class DefaultImageRequestHost implements ImageRequestHost {
     if (queued !== undefined) {
       queued.cancelled = true;
       this.queuedJobsByUrl.delete(url);
-      const idx: number = this.downloadQueue.indexOf(queued);
-      if (idx >= 0) {
-        this.downloadQueue.splice(idx, 1);
+      const vIdx: number = this.visibleQueue.indexOf(queued);
+      if (vIdx >= 0) {
+        this.visibleQueue.splice(vIdx, 1);
+      }
+      const pIdx: number = this.prefetchQueue.indexOf(queued);
+      if (pIdx >= 0) {
+        this.prefetchQueue.splice(pIdx, 1);
       }
       queued.resolveAll(false);
     }
@@ -225,6 +247,48 @@ export class DefaultImageRequestHost implements ImageRequestHost {
         // ignore cancel error
       }
     }
+  }
+
+  updateVisibleRange(start: number, end: number): void {
+    this.visibleStart = start;
+    this.visibleEnd = end >= start ? end : start;
+    for (let i = this.prefetchQueue.length - 1; i >= 0; i--) {
+      const job: QueuedDownloadJob = this.prefetchQueue[i];
+      if (this.isUrlVisible(job.url)) {
+        this.prefetchQueue.splice(i, 1);
+        this.visibleQueue.push(job);
+      }
+    }
+    for (let i = this.visibleQueue.length - 1; i >= 0; i--) {
+      const job: QueuedDownloadJob = this.visibleQueue[i];
+      if (!this.isUrlVisible(job.url)) {
+        this.visibleQueue.splice(i, 1);
+        this.prefetchQueue.push(job);
+      }
+    }
+    this.pumpDownloadQueue();
+  }
+
+  resetVisibleRange(): void {
+    this.visibleStart = -1;
+    this.visibleEnd = -1;
+  }
+
+  private isUrlVisible(url: string): boolean {
+    if (this.visibleStart < 0 || this.visibleEnd < 0) {
+      return true;
+    }
+    const set: Set<LoadImageController> | undefined = this.urlWaiters.get(url);
+    if (set === undefined || set.size === 0) {
+      return false;
+    }
+    let matched: boolean = false;
+    set.forEach((ctrl: LoadImageController): void => {
+      if (ctrl.listIndex < 0 || (ctrl.listIndex >= this.visibleStart && ctrl.listIndex <= this.visibleEnd)) {
+        matched = true;
+      }
+    });
+    return matched;
   }
 
   private getMemoryCache(key: string): string | null {
@@ -404,7 +468,11 @@ export class DefaultImageRequestHost implements ImageRequestHost {
     }
     const job: QueuedDownloadJob = new QueuedDownloadJob(url, rawPath);
     this.queuedJobsByUrl.set(url, job);
-    this.downloadQueue.push(job);
+    if (this.isUrlVisible(url)) {
+      this.visibleQueue.push(job);
+    } else {
+      this.prefetchQueue.push(job);
+    }
     return await new Promise<boolean>((resolve: (ok: boolean) => void): void => {
       job.addWaiter(resolve);
     });
@@ -428,8 +496,10 @@ export class DefaultImageRequestHost implements ImageRequestHost {
 
   private pumpDownloadQueue(): void {
     while (this.activeDownloadCount < DefaultImageRequestHost.MAX_CONCURRENT_DOWNLOADS &&
-      this.downloadQueue.length > 0) {
-      const job: QueuedDownloadJob | undefined = this.downloadQueue.pop();
+      (this.visibleQueue.length > 0 || this.prefetchQueue.length > 0)) {
+      const job: QueuedDownloadJob | undefined = this.visibleQueue.length > 0
+        ? this.visibleQueue.pop()
+        : this.prefetchQueue.pop();
       if (job === undefined) {
         break;
       }
@@ -454,21 +524,41 @@ export class DefaultImageRequestHost implements ImageRequestHost {
     }
   }
 
+  private getThumbClient(): OkHttpClient {
+    const baseClient: OkHttpClient = this.clientProvider !== null
+      ? this.clientProvider()
+      : EhApplication.getOkHttpClient(null);
+    if (this.cachedThumbClient === null || this.cachedThumbBaseClient !== baseClient) {
+      this.cachedThumbBaseClient = baseClient;
+      this.cachedThumbClient = (baseClient instanceof OkHttpClient)
+        ? baseClient.newBuilder()
+          .connectTimeout(DefaultImageRequestHost.THUMB_TIMEOUT_MS, TimeUnit.MILLISECONDS)
+          .readTimeout(DefaultImageRequestHost.THUMB_TIMEOUT_MS, TimeUnit.MILLISECONDS)
+          .writeTimeout(DefaultImageRequestHost.THUMB_TIMEOUT_MS, TimeUnit.MILLISECONDS)
+          .build()
+        : baseClient;
+    }
+    return this.cachedThumbClient;
+  }
+
   private async downloadToFile(url: string, rawPath: string): Promise<boolean> {
     if (await DefaultImageRequestHost.hasNonEmptyFileAsync(rawPath)) {
       return true;
+    }
+    if (!this.urlWaiters.has(url)) {
+      return false;
     }
     const parsed: HttpUrl | null = HttpUrl.parse(url);
     if (parsed === null) {
       return false;
     }
-    const client: OkHttpClient = this.clientProvider !== null
-      ? this.clientProvider()
-      : EhApplication.getOkHttpClient(null);
+    const client: OkHttpClient = this.getThumbClient();
     let response: Response | null = null;
     let body: ResponseBody | null = null;
     try {
-      const request: Request = EhRequestBuilder.of(parsed.toString()).build();
+      const request: Request = EhRequestBuilder.of(parsed.toString())
+        .header('Cache-Control', 'no-store')
+        .build();
       const call: Call = client.newCall(request);
       this.activeCallsByUrl.set(url, call);
       response = await call.execute();

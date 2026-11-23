@@ -15,7 +15,10 @@
  * limitations under the License.
  */
 
+import connection from '@ohos.net.connection';
+import { hilog } from '@kit.PerformanceAnalysisKit';
 import { HttpUrl } from './HttpUrl';
+import { describeNetworkError } from './Dns';
 
 /** 代理类型，对应 java.net.Proxy.Type。 */
 export enum ProxyType {
@@ -99,5 +102,64 @@ export abstract class ProxySelector {
 export class DefaultProxySelector extends ProxySelector {
   select(url: HttpUrl): Proxy[] {
     return [Proxy.system()];
+  }
+}
+
+export type SystemProxyResolverFn = (host: string) => Promise<Proxy | null>;
+
+/** 解析系统 HTTP 代理并支持测试桩注入，供 ConnectInterceptor 与 Http1SocketTransport 复用。 */
+export class SystemProxyHelper {
+  private static _overrideResolver: SystemProxyResolverFn | null = null;
+
+  static setResolver(resolver: SystemProxyResolverFn | null): void {
+    SystemProxyHelper._overrideResolver = resolver;
+  }
+
+  static async resolveHttpProxy(host: string): Promise<Proxy | null> {
+    if (SystemProxyHelper._overrideResolver !== null) {
+      return SystemProxyHelper._overrideResolver(host);
+    }
+    try {
+      const sysProxy: connection.HttpProxy = await connection.getDefaultHttpProxy();
+      const proxyHost: string = sysProxy !== undefined && sysProxy !== null && typeof sysProxy.host === 'string'
+        ? sysProxy.host.trim() : '';
+      const proxyPort: number = sysProxy !== undefined && sysProxy !== null && typeof sysProxy.port === 'number'
+        ? sysProxy.port : 0;
+      if (proxyHost.length === 0 || proxyPort <= 0) {
+        return null;
+      }
+      const exclusions: string[] = Array.isArray(sysProxy.exclusionList) ? sysProxy.exclusionList : [];
+      if (SystemProxyHelper.isHostExcluded(host, exclusions)) {
+        return null;
+      }
+      return new Proxy(ProxyType.HTTP, proxyHost, proxyPort);
+    } catch (e) {
+      hilog.debug(0x0000, 'SystemProxyHelper',
+        'getDefaultHttpProxy unavailable for %{public}s: %{public}s',
+        host, describeNetworkError(e as Object));
+      return null;
+    }
+  }
+
+  static isHostExcluded(host: string, exclusionList: string[]): boolean {
+    const lower: string = host.trim().toLowerCase();
+    for (let i = 0; i < exclusionList.length; i++) {
+      const raw: string = exclusionList[i].trim().toLowerCase();
+      if (raw.length === 0) {
+        continue;
+      }
+      if (raw === '*') {
+        return true;
+      }
+      const pat: string = raw.startsWith('*.') ? raw.substring(1) : raw;
+      if (pat.startsWith('.')) {
+        if (lower.endsWith(pat) || lower === pat.substring(1)) {
+          return true;
+        }
+      } else if (lower === pat) {
+        return true;
+      }
+    }
+    return false;
   }
 }

@@ -90,8 +90,21 @@ function renameSync(a, b) {
   throw new Error('ENOENT: ' + a);
 }
 function copyFileSync(a, b) { a = norm(a); b = norm(b); if (!files.has(a)) throw new Error('ENOENT: ' + a); files.set(b, files.get(a)); }
+const access = async (p) => accessSync(p);
+const stat = async (p) => statSync(p);
+const mkdir = async (p, r) => mkdirSync(p, r);
+const open = async (p, m) => openSync(p, m);
+const write = async (fd, buf, opts) => writeSync(fd, buf, opts);
+const close = async (f) => closeSync(f);
+const unlink = async (p) => unlinkSync(p);
+const rename = async (a, b) => renameSync(a, b);
+const listFile = async (p) => listFileSync(p);
 const OpenMode = { READ_ONLY: 0, WRITE_ONLY: 1, READ_WRITE: 2, CREATE: 64, TRUNC: 512, APPEND: 1024 };
-const fs = { accessSync, statSync, mkdirSync, openSync, readTextSync, writeSync, closeSync, unlinkSync, rmdirSync, listFileSync, renameSync, copyFileSync, OpenMode };
+const fs = {
+  accessSync, statSync, mkdirSync, openSync, readTextSync, writeSync, closeSync, unlinkSync, rmdirSync, listFileSync, renameSync, copyFileSync,
+  access, stat, mkdir, open, write, close, unlink, rename, listFile,
+  OpenMode
+};
 module.exports = fs;
 module.exports.default = fs;
 module.exports.__reset = function () { files.clear(); dirs.clear(); dirs.add('/'); };
@@ -110,14 +123,17 @@ module.exports = { errorManager: { on: (type, obs) => { calls.push([type, obs]);
   '@ohos.data.preferences' = "class P { getSync(k,d){ return d; } putSync(){} deleteSync(){} getAll(){ return Promise.resolve({}); } flush(){ return Promise.resolve(); } }`nmodule.exports = { default: { getPreferences: () => Promise.resolve(new P()) }, getPreferences: () => Promise.resolve(new P()) };`n"
   '@ohos.data.relationalStore' = "module.exports = { default: { getRdbStore: async () => null } };`n"
   '@ohos.file.environment' = "module.exports = { default: { getUserDownloadDir: () => '/data/dl' }, getUserDownloadDir: () => '/data/dl' };`n"
-  '@ohos.file.fileuri' = "class FileUri { constructor(p){ this.p = p; } getUri(){ return this.p; } static createFileUri(p){ return new FileUri(p); } }`nmodule.exports = { default: { FileUri, createFileUri: (p) => new FileUri(p) }, FileUri, createFileUri: (p) => new FileUri(p) };`n"
+  '@ohos.file.fileuri' = "class FileUri { constructor(p){ this.p = p; } getUri(){ return this.p; } static createFileUri(p){ return new FileUri(p); } }`nconst getUriFromPath = (p) => 'file://' + p;`nmodule.exports = { default: { FileUri, createFileUri: (p) => new FileUri(p), getUriFromPath }, FileUri, createFileUri: (p) => new FileUri(p), getUriFromPath };`n"
   '@ohos.file.fs' = $fsStub
   '@ohos.file.picker' = "module.exports = { default: {}, DocumentViewPicker: class {}, PhotoViewPicker: class {} };`n"
   '@ohos.hilog' = "function noop(){}`nmodule.exports = { error: noop, info: noop, debug: noop, warn: noop, isLoggable: () => false };`nmodule.exports.default = module.exports;`n"
-  '@ohos.i18n' = "const sys = { getSystemLanguage: () => 'zh', getSystemLocale: () => 'zh-CN', getSystemLocaleInstance: () => ({ toString: () => 'zh-CN' }) };`nmodule.exports = { default: { System: sys }, System: sys };`n"
+  '@ohos.i18n' = "const sys = { getSystemLanguage: () => 'zh-Hans', getSystemLocale: () => 'zh-CN', getSystemLocaleInstance: () => ({ toString: () => 'zh-CN' }), setAppPreferredLanguage: () => {}, getAppPreferredLanguage: () => 'default' };`nmodule.exports = { default: { System: sys }, System: sys };`n"
   '@ohos.multimedia.image' = "module.exports = { default: { createImageSource: () => ({ createPixelMap: async () => ({}), release: () => {} }) } };`n"
-  '@ohos.net.connection' = "module.exports = { default: { getDefaultNetSync: () => ({ netId: 0 }), getConnectionPropertiesSync: () => ({ linkAddresses: [] }) }, getDefaultNetSync: () => ({ netId: 0 }), getConnectionPropertiesSync: () => ({ linkAddresses: [] }) };`n"
-  '@ohos.net.http' = "module.exports = { default: { createHttp: () => ({ request: () => Promise.resolve({ responseCode: 200, result: '' }), destroy: () => {} }) }, createHttp: () => ({ request: () => Promise.resolve({ responseCode: 200, result: '' }), destroy: () => {} }) };`n"
+  '@kit.ImageKit' = "const image = { createImageSource: () => ({ createPixelMap: async () => ({}), createPixelMapSync: () => ({}), getImageInfoSync: () => ({ size: { width: 100, height: 100 } }), release: () => {} }), createImagePacker: () => ({ packing: async () => new ArrayBuffer(0), release: () => {} }) };`nmodule.exports = { default: { image }, image };`n"
+  '@kit.LocalizationKit' = "const sys = { getSystemLanguage: () => 'zh-Hans', getSystemLocale: () => 'zh-CN', getSystemLocaleInstance: () => ({ toString: () => 'zh-CN' }), setAppPreferredLanguage: () => {}, getAppPreferredLanguage: () => 'default' };`nconst i18n = { System: sys };`nmodule.exports = { default: { i18n }, i18n };`n"
+  '@ohos.net.connection' = "const NetBearType = { BEARER_CELLULAR: 0, BEARER_WIFI: 1, BEARER_BLUETOOTH: 2, BEARER_ETHERNET: 3, BEARER_VPN: 4 };`nconst connMod = { NetBearType, getAddressesByName: async () => [], getAddressesByNameSync: () => [], getDefaultHttpProxy: async () => ({ host: '', port: 0, exclusionList: [] }), getDefaultNetSync: () => ({ netId: 0 }), getAllNetsSync: () => [], getNetCapabilitiesSync: () => ({ bearerTypes: [] }), getConnectionPropertiesSync: () => ({ linkAddresses: [] }), createNetConnection: () => ({ on(){}, register(cb){ if (cb) cb(null); }, unregister(cb){ if (cb) cb(null); } }) };`nmodule.exports = { default: connMod, ...connMod };`n"
+  '@kit.ArkWeb' = "const ProxySchemeFilter = { MATCH_ALL_SCHEMES: 0, MATCH_HTTP: 1, MATCH_HTTPS: 2 };`nclass ProxyConfig { insertDirectRule(){} insertProxyRule(){} insertBypassRule(){} }`nconst ProxyController = { applyProxyOverride(_cfg, cb){ if (cb) cb(); }, removeProxyOverride(cb){ if (cb) cb(); } };`nconst WebviewController = { initializeWebEngine(){} };`nconst WebCookieManager = { saveCookieSync(){}, clearAllCookiesSync(){}, clearSessionCookieSync(){}, putAcceptCookieEnabled(){}, putAcceptThirdPartyCookieEnabled(){}, fetchCookieSync(){ return ''; }, configCookieSync(){}, saveCookieAsync(cb){ if (cb) cb(null); } };`nconst webview = { ProxySchemeFilter, ProxyConfig, ProxyController, WebviewController, WebCookieManager };`nmodule.exports = { default: { webview }, webview };`n"
+  '@ohos.net.http' = "const createHttp = () => ({ on(){}, off(){}, request: () => Promise.resolve({ responseCode: 200, header: {}, resultType: 0, result: '' }), destroy: () => {} });`nmodule.exports = { default: { createHttp }, createHttp };`n"
   '@ohos.net.socket' = "class TCPSocket { constructor(){} bind(){} connect(){ return Promise.resolve(); } send(){ return Promise.resolve(); } close(){} on(){} off(){} }`nmodule.exports = { default: { TCPSocket, TLSSocket: TCPSocket, constructTCPSocketInstance: () => new TCPSocket() }, TCPSocket, TLSSocket: TCPSocket, constructTCPSocketInstance: () => new TCPSocket() };`n"
   '@ohos.resourceManager' = "module.exports = { default: { ResourceManager: class {} } };`n"
   '@ohos.util' = @'

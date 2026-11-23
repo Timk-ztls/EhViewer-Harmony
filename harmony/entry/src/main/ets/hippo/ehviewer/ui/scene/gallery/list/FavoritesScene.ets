@@ -103,6 +103,7 @@ export abstract class FavoritesScene extends SceneFragment {
   protected favCats: string[] = [];
   protected favCounts: number[] = [];
   private localSeq: number = 0;
+  private listResetSeq: number = 0;
   private onlineCallbacksWired: boolean = false;
   private onStateChangedListener: (() => void) | null = null;
   private onMetaUpdatedListener: ((cats: string[], counts: number[]) => void) | null = null;
@@ -155,6 +156,10 @@ export abstract class FavoritesScene extends SceneFragment {
     return this.keyword;
   }
 
+  getListResetSeq(): number {
+    return this.listResetSeq;
+  }
+
   hasMore(): boolean {
     if (this.isLocalCategory()) {
       return false;
@@ -177,6 +182,7 @@ export abstract class FavoritesScene extends SceneFragment {
         if (append) {
           this.dataSource.addAll(res.items);
         } else {
+          this.listResetSeq = this.listResetSeq + 1;
           this.dataSource.setAll(res.items);
         }
         if (res.catArray.length === 10 && res.countArray.length === 10) {
@@ -281,6 +287,7 @@ export abstract class FavoritesScene extends SceneFragment {
       }
       this.loading = false;
       this.loadedOnce = true;
+      this.listResetSeq = this.listResetSeq + 1;
       const kw: string = this.keyword.trim().toLowerCase();
       if (kw.length === 0) {
         this.dataSource.setAll(list);

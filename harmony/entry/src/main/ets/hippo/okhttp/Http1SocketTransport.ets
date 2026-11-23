@@ -21,7 +21,7 @@ import { InetAddress, describeNetworkError, toNetworkError } from './Dns';
 import { Headers } from './Headers';
 import { CallAbortController } from './Interceptor';
 import { MediaType } from './MediaType';
-import { Proxy, ProxyType } from './ProxySelector';
+import { Proxy, ProxyType, SystemProxyHelper } from './ProxySelector';
 import { Protocol, Response } from './Response';
 import { ResponseBody } from './ResponseBody';
 import { Request } from './Request';
@@ -175,8 +175,15 @@ export class Http1SocketTransport implements Transport {
       options !== undefined && options.writeTimeoutMs !== undefined ? options.writeTimeoutMs : 10000;
     const callTimeoutMs: number =
       options !== undefined && options.callTimeoutMs !== undefined ? options.callTimeoutMs : 0;
-    const proxy: Proxy | null =
+    let proxy: Proxy | null =
       options !== undefined && options.proxy !== undefined ? options.proxy : null;
+    const urlHost: string = request.url().host();
+    if (proxy !== null && proxy.type() === ProxyType.DIRECT && !proxy.isNoProxy()) {
+      const sysProxy: Proxy | null = await SystemProxyHelper.resolveHttpProxy(urlHost);
+      if (sysProxy !== null) {
+        proxy = sysProxy;
+      }
+    }
     const resolvedAddress: InetAddress | null =
       options !== undefined && options.resolvedAddress !== undefined ? options.resolvedAddress : null;
     const skipValidation: boolean =
@@ -184,7 +191,6 @@ export class Http1SocketTransport implements Transport {
     const onProgress: TransportProgressCallback | undefined =
       options !== undefined ? options.onProgress : undefined;
 
-    const urlHost: string = request.url().host();
     const port: number = request.url().port();
     const isTls: boolean = request.url().isHttps();
     const isHttpProxyPlain: boolean =

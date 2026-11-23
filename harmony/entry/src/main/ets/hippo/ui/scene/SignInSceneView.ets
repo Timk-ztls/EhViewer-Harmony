@@ -17,6 +17,7 @@ import {
   ThemeTypography
 } from '../../../common/theme/ThemeTokens';
 import { EhUrl } from '../../ehviewer/client/EhUrl';
+import { PageRoutes } from '../PageRoutes';
 import { SignInScene } from '../../ehviewer/ui/scene/sign/SignInScene';
 
 const DOMAIN: number = 0x0000;
@@ -149,11 +150,31 @@ export struct SignInSceneView {
     this.bump('register');
     this.message = '';
     try {
+      this.getUIContext().getRouter().pushUrl({
+        url: PageRoutes.IN_APP_BROWSER,
+        params: {
+          url: EhUrl.URL_REGISTER,
+          title: 'E-Hentai Forums'
+        }
+      }).catch((pushErr: Error): void => {
+        const msg: string = pushErr.message !== undefined ? pushErr.message : String(pushErr);
+        hilog.warn(DOMAIN, TAG, 'pushUrl InAppBrowser for register failed: %{public}s', msg);
+        this.openRegisterExternally();
+      });
+    } catch (e) {
+      const msg: string = e instanceof Error ? e.message : String(e);
+      hilog.warn(DOMAIN, TAG, 'doRegister router threw: %{public}s', msg);
+      this.openRegisterExternally();
+    }
+  }
+
+  private openRegisterExternally(): void {
+    try {
       const ctx: common.UIAbilityContext | undefined =
         this.getUIContext().getHostContext() as common.UIAbilityContext | undefined;
       if (ctx === undefined) {
         this.message = '本版本暂不支持在应用内注册';
-        hilog.warn(DOMAIN, TAG, 'doRegister: hostContext unavailable');
+        hilog.warn(DOMAIN, TAG, 'openRegisterExternally: hostContext unavailable');
         return;
       }
       const want: Want = {
@@ -169,7 +190,7 @@ export struct SignInSceneView {
     } catch (e) {
       const msg: string = e instanceof Error ? e.message : String(e);
       this.message = '本版本暂不支持在应用内注册';
-      hilog.warn(DOMAIN, TAG, 'doRegister failed: %{public}s', msg);
+      hilog.warn(DOMAIN, TAG, 'openRegisterExternally failed: %{public}s', msg);
     }
   }
 

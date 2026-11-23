@@ -310,6 +310,9 @@ class LocalizedHomeDetailConfig extends HomeDetailConfig {
   private fetchHomeLimits(force: boolean): void {
     try {
       if (!Settings.isAttached() || !Settings.isLogin() || !Settings.getShowEhLimits()) {
+        this.limitsHasData = false;
+        this.limitsText = '—';
+        this.limitsResetCost = 0;
         return;
       }
     } catch (e) {
@@ -475,7 +478,7 @@ class LocalizedHomeDetailConfig extends HomeDetailConfig {
     if (this.sceneName === 'GalleryListScene' && this.currentScene instanceof GalleryListSceneConcrete) {
       const listScene: GalleryListSceneConcrete = this.currentScene as GalleryListSceneConcrete;
       listScene.switchToAction(action, url);
-      listScene.refreshGalleryList();
+      listScene.refreshGalleryList(true);
       return;
     }
     const args: SceneArgs = new Map<string, Object>();

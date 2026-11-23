@@ -7,10 +7,13 @@
  *   onDialogClosed(positiveResult)：**true 时**执行登出（清 cookie + 重启），false 无动作
  * ⇒ 组合 `MessagePreference` + 动作注入。
  */
+import { webview } from '@kit.ArkWeb';
+import { hilog } from '@kit.PerformanceAnalysisKit';
 import { MessagePreference } from '../../preference/MessagePreference';
 import { AppWiring } from '../../AppWiring';
 import { Settings } from '../Settings';
 import { EhCookieStore } from '../client/EhCookieStore';
+import { EhUtils } from '../client/EhUtils';
 
 export interface SignOutCookieStoreLike {
   signOut(): void;
@@ -84,6 +87,20 @@ export struct SignOutPreference {
         SignOutHelper.performSignOut(adapted, (v: boolean) => {
           Settings.setLoginState(v);
         });
+        EhUtils.signOut();
+        Settings.putDisplayName(null);
+        Settings.putAvatar(null);
+        Settings.putNeedSignIn(true);
+        void Settings.flush();
+        try {
+          webview.WebCookieManager.clearAllCookiesSync();
+          webview.WebCookieManager.saveCookieAsync((_err: Object): void => {
+            // Best-effort async cookie flush on sign out
+          });
+        } catch (e) {
+          hilog.debug(0x0000, 'SignOutPreference', 'clear ArkWeb cookies skipped: %{public}s',
+            e instanceof Error ? e.message : String(e));
+        }
         this.onSignOut();
       },
       onCancel: () => {

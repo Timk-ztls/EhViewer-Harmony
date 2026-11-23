@@ -129,12 +129,13 @@ function ok(name: string, cond: boolean): void {
 }
 
 function main(): void {
-  // 1. PageRoutes：已激活 14 页（P0 4 页 + Phase B P1~P4 10 页，0 预留）
-  eq('注册页面严格对齐 main_pages.json 14 页', PageRoutes.getRegisteredUrls(), [
+  // 1. PageRoutes：已激活 15 页（P0 5 页 + Phase B P1~P4 10 页，0 预留）
+  eq('注册页面严格对齐 main_pages.json 15 页', PageRoutes.getRegisteredUrls(), [
     'pages/Index',
     'pages/SettingsPage',
     'pages/HostsPage',
     'pages/GalleryReaderPage',
+    'pages/InAppBrowserPage',
     'pages/SetSecurityPage',
     'pages/DirPickerPage',
     'pages/LicensePage',
@@ -146,10 +147,13 @@ function main(): void {
     'pages/WiFiServerPage',
     'pages/WiFiClientPage',
   ]);
-  eq('总路由槽位数 = 14 已激活 + 0 预留', PageRoutes.getAllRoutes().length, 14);
+  eq('总路由槽位数 = 15 已激活 + 0 预留', PageRoutes.getAllRoutes().length, 15);
   eq('Phase B 预留槽位已全部激活（0 条）', PageRoutes.RESERVED_PHASE_B_PAGES.length, 0);
   ok('SettingsPage 已注册', PageRoutes.isRegistered(PageRoutes.SETTINGS));
   ok('HostsPage 已注册', PageRoutes.isRegistered(PageRoutes.HOSTS));
+  ok('InAppBrowserPage 已注册', PageRoutes.isRegistered(PageRoutes.IN_APP_BROWSER));
+  eq('InAppBrowserPage 未登录可直接 PUSH',
+    PageRoutes.resolveNavigation(PageRoutes.IN_APP_BROWSER, false).kind, RouteActionKind.PUSH);
   ok('SetSecurityPage 已注册（Track P1）', PageRoutes.isRegistered(PageRoutes.SET_SECURITY));
   ok('DirPickerPage 已注册（Track P2）', PageRoutes.isRegistered(PageRoutes.DIR_PICKER));
   ok('LicensePage 已注册（Track P2）', PageRoutes.isRegistered(PageRoutes.LICENSE));

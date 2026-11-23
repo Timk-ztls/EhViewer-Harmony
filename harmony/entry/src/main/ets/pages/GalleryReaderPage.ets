@@ -2040,8 +2040,10 @@ struct GalleryReaderPage {
 
   private getImageDownloader(): PageImageDownloaderImpl {
     const ctx: common.Context | undefined = this.getUIContext().getHostContext();
+    const timeoutMs: number = Settings.isAttached() ? Settings.getDownloadTimeout() * 1000 : 0;
     return new PageImageDownloaderImpl(
-      EhApplication.getImageOkHttpClient(ctx === undefined ? null : ctx)
+      EhApplication.getOkHttpClient(ctx === undefined ? null : ctx),
+      timeoutMs
     );
   }
 
@@ -2386,6 +2388,7 @@ struct GalleryReaderPage {
           return;
         }
         let imageUrl: string = '';
+        let originUrl: string = '';
 
         if (attempt === 0 && !forceReload && this.showKey.length > 0 && pToken.length > 0) {
           try {
@@ -2393,6 +2396,7 @@ struct GalleryReaderPage {
               null, caller, this.gid, index, pToken, this.showKey, prevPToken
             );
             imageUrl = apiRes.imageUrl.length > 0 ? apiRes.imageUrl : apiRes.otherImageUrl;
+            originUrl = apiRes.originImageUrl;
             skipHathKey = apiRes.skipHathKey;
           } catch (apiErr) {
             hilog.warn(DOMAIN, TAG, 'getGalleryPageApi fallback to HTML for page %{public}d: %{public}s',
@@ -2419,12 +2423,24 @@ struct GalleryReaderPage {
             skipHathKey = htmlRes.skipHathKey;
           }
           imageUrl = htmlRes.imageUrl;
+          originUrl = htmlRes.originImageUrl;
           if (imageUrl.length === 0 && this.showKey.length > 0 && pToken.length > 0) {
             const apiFallback: GalleryPageApiParserResult = await EhEngine.getGalleryPageApi(
               null, caller, this.gid, index, pToken, this.showKey, prevPToken
             );
             imageUrl = apiFallback.imageUrl.length > 0 ? apiFallback.imageUrl : apiFallback.otherImageUrl;
+            if (originUrl.length === 0) {
+              originUrl = apiFallback.originImageUrl;
+            }
           }
+        }
+
+        if (Settings.isAttached() && Settings.getDownloadOriginImage() && originUrl.length > 0) {
+          const resolvedOrigin: string | null = await downloader.resolveRedirectUrl(originUrl, requestPageUrl);
+          if (resolvedOrigin === null) {
+            throw new Error('GP不足 / Insufficient GP');
+          }
+          imageUrl = resolvedOrigin;
         }
 
         if (imageUrl.length === 0) {

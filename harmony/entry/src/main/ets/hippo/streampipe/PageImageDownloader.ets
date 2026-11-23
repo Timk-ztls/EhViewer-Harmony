@@ -45,4 +45,9 @@ export interface PageImageDownloader {
    */
   downloadWithStatus(url: string, sink: ByteSink, referer?: string,
     onProgress?: PageDownloadProgressCallback): Promise<DownloadResult>;
+
+  /**
+   * 探测重定向目标 URL（不跟随重定向、不拉取响应体），用于 `/fullimg` 原图跳转或配额检测。
+   */
+  resolveRedirectUrl?(url: string, referer?: string): Promise<string | null>;
 }

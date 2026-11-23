@@ -54,7 +54,7 @@ export class RouteNavigationPlan {
 }
 
 /**
- * 二级页面路由表：已激活 14 页（P0 4 页 + Phase B P1~P4 10 页）。
+ * 二级页面路由表：已激活 15 页（P0 5 页 + Phase B P1~P4 10 页）。
  */
 export class PageRoutes {
   // P0 已激活（同步 main_pages.json）
@@ -62,6 +62,7 @@ export class PageRoutes {
   static readonly SETTINGS: string = 'pages/SettingsPage';
   static readonly HOSTS: string = 'pages/HostsPage';
   static readonly GALLERY_READER: string = 'pages/GalleryReaderPage';
+  static readonly IN_APP_BROWSER: string = 'pages/InAppBrowserPage';
 
   // Phase B Track P1 已激活（同步 main_pages.json）
   static readonly SET_SECURITY: string = 'pages/SetSecurityPage';
@@ -86,6 +87,7 @@ export class PageRoutes {
     new PageRouteEntry(PageRoutes.SETTINGS, 'SettingsActivity', 'P0', true, false),
     new PageRouteEntry(PageRoutes.HOSTS, 'HostsActivity', 'P0', true, false),
     new PageRouteEntry(PageRoutes.GALLERY_READER, 'GalleryActivity', 'P0', true, false),
+    new PageRouteEntry(PageRoutes.IN_APP_BROWSER, 'InAppBrowserActivity', 'P0', true, false),
     new PageRouteEntry(PageRoutes.SET_SECURITY, 'SetSecurityActivity', 'P1', true, false),
     new PageRouteEntry(PageRoutes.DIR_PICKER, 'DirPickerActivity', 'P2', true, false),
     new PageRouteEntry(PageRoutes.LICENSE, 'LicenseActivity', 'P2', true, false),

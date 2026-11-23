@@ -20,6 +20,8 @@ import { CategoryFlags } from '../../ehviewer/client/data/Flags';
 import { EhUrl } from '../../ehviewer/client/EhUrl';
 import { EhUtils } from '../../ehviewer/client/EhUtils';
 import { EhCacheKeyFactory } from '../../ehviewer/client/EhCacheKeyFactory';
+import { DefaultImageRequestHost } from '../../ehviewer/image/DefaultImageRequestHost';
+import { LoadImageController } from '../../widget/LoadImageView';
 import { GalleryDetailUrlParser, DetailUrlResult } from '../../ehviewer/client/parser/GalleryDetailUrlParser';
 import { EhDB } from '../../ehviewer/EhDB';
 import { EhApplication } from '../../ehviewer/EhApplication';
@@ -162,6 +164,8 @@ export struct GalleryListSceneView {
   private dataSource: GalleryArrayDataSource = new GalleryArrayDataSource([]);
   private readonly listScroller: ListScroller = new ListScroller();
   private readonly flowScroller: Scroller = new Scroller();
+  private lastListResetSeq: number = 0;
+  private scrollTopTimerId: number = -1;
   private readonly searchBarMover: SearchBarMoverState = new SearchBarMoverState();
   private readonly searchBarState: SearchBarState = new SearchBarState();
   private readonly searchLayoutState: SearchLayoutState = new SearchLayoutState();
@@ -185,6 +189,7 @@ export struct GalleryListSceneView {
 
   @State listMode: number = Settings.getListMode();
   @State showRating: boolean = Settings.getShowGalleryRating();
+  @State showGalleryPages: boolean = Settings.getShowGalleryPages();
   @StorageLink(APP_SHOW_JPN_TITLE_STORAGE_KEY) @Watch('onShowJpnTitleChanged') showJpnTitlePref: boolean =
     Settings.getShowJpnTitle();
   @State listLanes: number = 1;
@@ -400,7 +405,7 @@ export struct GalleryListSceneView {
     this.resetSearchBarPosition();
     s.switchToAction(GalleryListAction.LIST_URL_BUILDER, url);
     this.searchKeyword = s.getSearchKey();
-    this.requestRefresh();
+    this.requestRefresh(true);
   }
 
   private applySubscriptionTag(tag: UserTag): void {
@@ -417,7 +422,7 @@ export struct GalleryListSceneView {
     this.resetSearchBarPosition();
     s.switchToAction(GalleryListAction.LIST_URL_BUILDER, url);
     this.searchKeyword = s.getSearchKey();
-    this.requestRefresh();
+    this.requestRefresh(true);
   }
 
   private openAddQuickSearchDialog(): void {
@@ -544,6 +549,7 @@ export struct GalleryListSceneView {
       hilog.warn(DOMAIN, TAG, '%{public}s', this.renderLog);
       return;
     }
+    this.lastListResetSeq = s.getListResetSeq();
     s.setOnDataChangedListener((): void => {
       this.syncFromScene();
     });
@@ -589,8 +595,16 @@ export struct GalleryListSceneView {
   }
 
   aboutToDisappear(): void {
+    if (this.scrollTopTimerId !== -1) {
+      clearTimeout(this.scrollTopTimerId);
+      this.scrollTopTimerId = -1;
+    }
     EhTagDatabaseUpdater.removeUpdateListener(this.onTagDbUpdated);
     TagSelectorResultBus.setListener(null);
+    const reqHost = LoadImageController.getDefaultRequestHost();
+    if (reqHost instanceof DefaultImageRequestHost) {
+      reqHost.resetVisibleRange();
+    }
     if (this.scene !== null) {
       this.scene.setOnDataChangedListener(null);
     }
@@ -599,6 +613,7 @@ export struct GalleryListSceneView {
   private syncDisplaySettings(): void {
     this.listMode = Settings.getListMode();
     this.showRating = Settings.getShowGalleryRating();
+    this.showGalleryPages = Settings.getShowGalleryPages();
     this.updateGridMetrics();
   }
 
@@ -712,6 +727,11 @@ export struct GalleryListSceneView {
       }
       this.dataSource.syncItems(list);
       this.itemCount = list.length;
+      const nextResetSeq: number = s.getListResetSeq();
+      if (nextResetSeq !== this.lastListResetSeq) {
+        this.lastListResetSeq = nextResetSeq;
+        this.scrollToTopAfterReload(list.length > 0);
+      }
       this.state = s.getListState();
       this.loading = s.isLoadingList();
       if (!this.loading) {
@@ -745,13 +765,46 @@ export struct GalleryListSceneView {
     }
   }
 
-  private requestRefresh(): void {
+  private scrollToTopAfterReload(hasItems: boolean): void {
+    this.atListTop = true;
+    this.resetSearchBarPosition();
+    const reqHost = LoadImageController.getDefaultRequestHost();
+    if (reqHost instanceof DefaultImageRequestHost) {
+      reqHost.updateVisibleRange(0, 12);
+    }
+    if (this.scrollTopTimerId !== -1) {
+      clearTimeout(this.scrollTopTimerId);
+      this.scrollTopTimerId = -1;
+    }
+    if (!hasItems) {
+      return;
+    }
+    const doScroll = (): void => {
+      try {
+        if (this.listMode === 0) {
+          this.listScroller.scrollEdge(Edge.Top);
+        } else {
+          this.flowScroller.scrollEdge(Edge.Top);
+        }
+      } catch (e) {
+        hilog.debug(DOMAIN, TAG, 'scrollEdge(Edge.Top) skipped: %{public}s',
+          e instanceof Error ? e.message : String(e));
+      }
+    };
+    doScroll();
+    this.scrollTopTimerId = setTimeout((): void => {
+      this.scrollTopTimerId = -1;
+      doScroll();
+    }, 0) as number;
+  }
+
+  private requestRefresh(force: boolean = false): void {
     const s: GalleryListScene | null = this.scene;
     if (s === null) {
       return;
     }
     try {
-      s.refreshGalleryList();
+      s.refreshGalleryList(force);
     } catch (e) {
       this.errorMessage = (e as Error).message;
       hilog.error(DOMAIN, TAG, 'refreshGalleryList threw: %{public}s', this.errorMessage);
@@ -920,7 +973,7 @@ export struct GalleryListSceneView {
       this.exitSearchState();
       this.resetSearchBarPosition();
       s.switchToAction(GalleryListAction.LIST_URL_BUILDER, ub.build());
-      this.requestRefresh();
+      this.requestRefresh(true);
       return;
     }
 
@@ -969,7 +1022,7 @@ export struct GalleryListSceneView {
     this.exitSearchState();
     this.resetSearchBarPosition();
     s.switchToAction(GalleryListAction.LIST_URL_BUILDER, ub.build());
-    this.requestRefresh();
+    this.requestRefresh(true);
   }
 
   private pickImageForSearch(): void {
@@ -1057,7 +1110,7 @@ export struct GalleryListSceneView {
         break;
       }
       case 2:
-        this.requestRefresh();
+        this.requestRefresh(true);
         break;
       case 3: {
         const count: number = s.getItemCount();
@@ -1173,7 +1226,12 @@ export struct GalleryListSceneView {
     }
   }
 
-  private handleScrollIndex(start: number): void {
+  private handleScrollIndex(start: number, end?: number): void {
+    const reqHost = LoadImageController.getDefaultRequestHost();
+    if (reqHost instanceof DefaultImageRequestHost) {
+      const visibleEnd: number = end !== undefined && end >= start ? end : start + 12;
+      reqHost.updateVisibleRange(start, visibleEnd);
+    }
     const nextTop: boolean = start === 0;
     if (this.atListTop !== nextTop) {
       this.atListTop = nextTop;
@@ -1682,10 +1740,11 @@ export struct GalleryListSceneView {
             category: GalleryListClient.formatCategoryLabel(item.category),
             categoryBgColor: GalleryListClient.formatCategoryColor(item.category),
             posted: item.posted,
-            pages: item.pages > 0 ? (item.pages.toString() + 'P') : '',
+            pages: (this.showGalleryPages && item.pages > 0) ? (item.pages.toString() + 'P') : '',
             simpleLanguage: item.simpleLanguage ?? '',
             rating: item.rating,
             showRating: this.showRating,
+            itemIndex: index,
             thumbUrl: item.thumb,
             thumbKey: EhCacheKeyFactory.getThumbKey(item.gid),
             downloaded: this.isDownloaded(item.gid),
@@ -1725,7 +1784,7 @@ export struct GalleryListSceneView {
       }
     }
     .lanes(this.listLanes)
-    .cachedCount(6)
+    .cachedCount(2)
     .edgeEffect(EdgeEffect.Spring)
     .width('100%')
     .height('100%')
@@ -1745,8 +1804,8 @@ export struct GalleryListSceneView {
     .onScrollStop((): void => {
       this.handleScrollStop();
     })
-    .onScrollIndex((start: number): void => {
-      this.handleScrollIndex(start);
+    .onScrollIndex((start: number, end: number): void => {
+      this.handleScrollIndex(start, end);
     })
     .onReachEnd((): void => {
       this.onReachEnd();
@@ -1772,6 +1831,7 @@ export struct GalleryListSceneView {
             categoryColor: GalleryListClient.formatCategoryColor(item.category),
             simpleLanguage: item.simpleLanguage ?? '',
             themeId: this.themeId,
+            itemIndex: index,
             cardColor: this.palette().cardBackground
           })
             .reuseId('gallery_grid_item')
@@ -1797,7 +1857,7 @@ export struct GalleryListSceneView {
       }, (item: GalleryInfo, idx: number) => this.dataSource.getItemKey(item, idx, this.themeId))
     }
     .columnsTemplate(this.gridColumnsTemplate)
-    .cachedCount(6)
+    .cachedCount(2)
     .edgeEffect(EdgeEffect.Spring)
     .columnsGap(0)
     .rowsGap(0)
@@ -1819,8 +1879,8 @@ export struct GalleryListSceneView {
     .onScrollStop((): void => {
       this.handleScrollStop();
     })
-    .onScrollIndex((start: number): void => {
-      this.handleScrollIndex(start);
+    .onScrollIndex((start: number, end: number): void => {
+      this.handleScrollIndex(start, end);
     })
     .onReachEnd((): void => {
       this.onReachEnd();

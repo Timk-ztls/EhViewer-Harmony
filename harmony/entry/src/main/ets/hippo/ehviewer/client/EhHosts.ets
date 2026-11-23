@@ -192,6 +192,7 @@ export class HttpDohResolver implements AsyncDohResolver {
         extraData: query,
         expectDataType: http.HttpDataType.ARRAY_BUFFER,
         usingCache: false,
+        usingProxy: true,
         connectTimeout: this._timeoutMs,
         readTimeout: this._timeoutMs
       };
@@ -391,10 +392,17 @@ export class OkHttpEhHosts implements OverrideAwareDns {
 
   private toOverrideAddresses(hostname: string, ips: string[]): InetAddress[] {
     const shuffled: string[] = EhHosts.shuffleArray(ips, this._rand);
-    const out: InetAddress[] = [];
+    // IPv4 优先、IPv6 兜底，避免无 IPv6 环境下 ehgt.org 等内置项先命中 IPv6 导致超时
+    const v4: InetAddress[] = [];
+    const v6: InetAddress[] = [];
     for (let i = 0; i < shuffled.length; i++) {
-      out.push(new InetAddress(hostname, shuffled[i], true));
+      const addr: InetAddress = new InetAddress(hostname, shuffled[i], true);
+      if (addr.isIpv6()) {
+        v6.push(addr);
+      } else {
+        v4.push(addr);
+      }
     }
-    return out;
+    return v4.concat(v6);
   }
 }

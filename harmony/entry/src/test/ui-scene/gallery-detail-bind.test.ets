@@ -12,7 +12,7 @@
 
 import {
   GalleryDetailBind, KeyValueField, TagGroupView, TagChip, MoreState,
-  MAX_SHOW_COMMENTS
+  MAX_SHOW_COMMENTS, stripTagNamespace
 } from '../../main/ets/hippo/ehviewer/ui/scene/gallery/detail/GalleryDetailBind';
 import { GalleryTagGroup } from '../../main/ets/hippo/ehviewer/client/data/GalleryTagGroup';
 
@@ -131,6 +131,11 @@ function testMoreState(): void {
   eq('显示条数 min(2,5)', GalleryDetailBind.shownCount(5, 2), 2);
   eq('显示条数 min(2,1)', GalleryDetailBind.shownCount(1, 2), 1);
   eq('MAX_SHOW_COMMENTS 是 2', MAX_SHOW_COMMENTS, 2);
+
+  eq('stripTagNamespace 剥离 female:sole female', stripTagNamespace('female:sole female'), 'sole female');
+  eq('stripTagNamespace 剥离 reclass:manga', stripTagNamespace('reclass:manga'), 'manga');
+  eq('stripTagNamespace 无前缀原样返回', stripTagNamespace('plain_tag'), 'plain_tag');
+  eq('stripTagNamespace 保留第二个冒号后的内容', stripTagNamespace('foo:bar:baz'), 'bar:baz');
 }
 
 function main(): void {

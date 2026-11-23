@@ -2,6 +2,26 @@
 
 All notable changes to **EhViewer for HarmonyOS** are documented in this file.
 
+## [2.0.2.7.3] - 2026-11-23
+
+### Added & Improved
+- **In-app ArkWeb proxy, lightweight browser & `.torrent` workflow (`1A` + `1C`)**:
+  - Added `ArkWebProxyManager` syncing in-app proxy settings to `@kit.ArkWeb` `webview.ProxyController` (`applyProxyOverride` / `removeProxyOverride`) across `WebViewSignInSceneView`, `GetProfileSceneView`, `UConfigPage`, `MyTagsPage`, `InAppBrowserPage`, and `SettingsPage` proxy changes.
+  - Added `InAppBrowserPage` for in-app account registration (`SignInSceneView`) and Tag Wiki (`GalleryDetailSceneView` with `stripTagNamespace` in `GalleryDetailBind` to strip `namespace:` prefixes), keeping an "Open in system browser" overflow action. Restored in-app `GalleryDetailScene` navigation for parent gallery links and completed in-app `.torrent` download (`DownloadTorrentManager`) with `DocumentViewPicker.save` and system share/open handoff.
+- **Reader `@ohos.net.http` unification, system VPN bypass & proxy hot-refresh (`2ABC`)**:
+  - Switched normal reader page downloads in `PageImageDownloaderImpl` / `GalleryReaderPage` to `followRedirects(true)` so traffic routes via `SystemHttpTransport` (`@ohos.net.http`) while preserving circular byte progress (`dataReceiveProgress`) and 30x hijack detection (`headersReceive` + `redirectTiming`); added `resolveRedirectUrl()` using `followRedirects(false)` for `/fullimg` probing.
+  - Added `OhosNetworkMonitor` (`@ohos.net.connection`) to automatically bypass built-in hosts, Domain Fronting, and DoH when system VPN (`BEARER_VPN`) is active under `SYSTEM` / `DIRECT` proxy mode, and to reset HTTP pools & re-sync ArkWeb proxy on foreground/network transitions.
+  - Added `SystemProxyHelper` fallback in `ConnectInterceptor` / `Http1SocketTransport`, prioritized IPv4 before IPv6 in `OkHttpEhHosts`, enabled `usingProxy: true` in `HttpDohResolver`, and added per-host in-memory caching with write/delete invalidation in `Hosts`.
+- **Settings restoration, sign-out cleanup & real switch wiring (`3AB`)**:
+  - Restored `identity_cookie` dialog/copy, `launch_page`, `history_info_size` (`EhDB.MAX_HISTORY_COUNT`), `fix_thumb_url`, `show_gallery_rating`, and `show_eh_limits` in `SettingsPage`; cleared display name, avatar, limits, and cookies cleanly on `sign_out`; fixed `show_gallery_pages` visibility in gallery lists and `export_download_items` UI copy.
+  - Wired `download_origin_image` (supporting `/fullimg` 302 resolution and immediate `GP不足 / Insufficient GP` failure without bogus retries in `SpiderQueen` / `GalleryReaderPage`), `download_timeout`, `download_list_pagination` (`DownloadsSceneView` pagination bar), and `app_language` (`AdvancedSettingsHelpers.applyAppLanguage`).
+- **Home thumbnail fast-scroll scheduler (`4ABC`)**:
+  - Updated `DefaultImageRequestHost`, `LoadImageView`, `item_gallery_list`, `item_gallery_grid`, and `GalleryListSceneView` to prioritize the active visible viewport (`visibleQueue` LIFO over `prefetchQueue` driven by `onScrollIndex`, `.cachedCount(2)`), cancel orphaned URLs when targets reuse/switch URLs, bypass `http_cache` (`Cache-Control: no-store`), and tighten concurrency (`6`) / thumbnail timeout (`15s`).
+- **Scroll-to-top after search & full list reload**:
+  - Added `listResetSeq` and preemption in `GalleryListScene` / `FavoritesScene` (`MainPageHostView`, `GalleryListSceneView`, `FavoritesSceneView`) so searching, switching drawer sections, jumping pages, or filtering scrolls cleanly back to the top (preserving the 64vp search bar offset) while keeping existing scroll position when returning from gallery details.
+- **Version metadata**:
+  - Bumped `AppScope/app.json5` to `versionName: "2.0.2.7.3"` (`versionCode: 115`) and synced `oh-package.json5` / `entry/oh-package.json5` to `"2.0.2-7.3"`.
+
 ## [2.0.2.7.2] - 2026-11-23
 
 ### Fixed & Changed

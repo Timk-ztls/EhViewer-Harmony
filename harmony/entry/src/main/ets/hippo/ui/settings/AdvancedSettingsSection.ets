@@ -501,6 +501,9 @@ export struct AdvancedSettingsSection {
         onChanged: (value: string) => {
           Settings.putAppLanguage(value);
           this.appLanguage = value;
+          const ctx: common.Context | undefined = this.getUIContext().getHostContext();
+          AdvancedSettingsHelpers.applyAppLanguage(ctx, value);
+          this.onShowToast($r('app.string.settings_advanced_app_language_applied'));
           if (this.fragment !== null) {
             this.fragment.onPreferenceClick(AdvancedFragment.KEY_APP_LANGUAGE);
           }

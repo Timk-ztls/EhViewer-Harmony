@@ -242,3 +242,9 @@ export class GalleryDetailBind {
     return !GalleryDetailBind.tagsVisible(tagGroups);
   }
 }
+
+/** 剥离 `namespace:tag` 中的前缀，仅保留纯标签名供 EHWiki 查询。 */
+export function stripTagNamespace(rawTag: string): string {
+  const colonIdx: number = rawTag.indexOf(':');
+  return colonIdx >= 0 ? rawTag.substring(colonIdx + 1) : rawTag;
+}

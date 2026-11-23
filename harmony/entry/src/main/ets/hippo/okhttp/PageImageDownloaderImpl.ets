@@ -55,9 +55,11 @@ export class PageImageDownloaderImpl implements PageImageDownloader {
   static readonly TIMEOUT_SECONDS: number = 10;
 
   private readonly _client: OkHttpClient;
+  private readonly _timeoutMs: number;
 
-  constructor(client?: OkHttpClient) {
+  constructor(client?: OkHttpClient, timeoutMs: number = 0) {
     this._client = client === undefined || client === null ? PageImageDownloaderImpl.createClient() : client;
+    this._timeoutMs = timeoutMs > 0 ? timeoutMs : 0;
   }
 
   /** 普通客户端配置：跟随重定向 + 10s 三路超时。 */
@@ -103,11 +105,19 @@ export class PageImageDownloaderImpl implements PageImageDownloader {
       // C-18：空串/undefined/null 均不设 Referer；使用 EhRequestBuilder 保留 Chrome UA/Accept/Host 头
       const refArg: string | null = (referer !== undefined && referer !== null && referer.length > 0)
         ? referer : null;
-      const request: Request = EhRequestBuilder.ofReferer(targetUrl, refArg).build();
-      // 禁用 @ohos.net.http 的隐式自动重定向，确保 30x 能暴露给反劫持校验
-      const execClient: OkHttpClient = (this._client instanceof OkHttpClient && this._client.followRedirects())
-        ? this._client.newBuilder().followRedirects(false).build()
-        : this._client;
+      // 仅对常规阅读请求加本地 disallowRedirectFollow 标记：保持走 SystemHttpTransport（兼容系统 VPN / 代理），
+      // 同时若落回 Socket 链路也能在 RedirectInterceptor 首跳拦截 30x 劫持。
+      const request: Request = EhRequestBuilder.ofReferer(targetUrl, refArg)
+        .disallowRedirectFollow(true)
+        .build();
+      let execClient: OkHttpClient = this._client;
+      if (this._timeoutMs > 0 && this._client instanceof OkHttpClient) {
+        execClient = this._client.newBuilder()
+          .connectTimeout(this._timeoutMs, TimeUnit.MILLISECONDS)
+          .readTimeout(this._timeoutMs, TimeUnit.MILLISECONDS)
+          .writeTimeout(this._timeoutMs, TimeUnit.MILLISECONDS)
+          .build();
+      }
       const call: Call = execClient.newCall(request, onProgress);
       response = await call.execute();
     } catch (e) {
@@ -116,13 +126,14 @@ export class PageImageDownloaderImpl implements PageImageDownloader {
 
     // 反劫持校验（上游 SpiderQueen.java:1427-1433）：最终 URL 必须与目标一致。
     // 1) 若拦截器链已跟随重定向，则 response.request().url() 不同于 targetUrl；
-    // 2) 若因 followRedirects=false 直接收到带 Location 的 30x 响应，同样视为被重定向劫持。
+    // 2) 若 Socket 返回带 Location 的 30x 响应，或 SystemHttpTransport 在内部自动跟随了 30x 重定向，同样视为劫持。
     const responseUrl: string = response.request().url().toString();
-    const redirectLocation: string | null = response.isRedirect() ? response.headers().get('Location') : null;
+    const redirectLocation: string | null = response.redirectLocation();
     const redirectedTarget: HttpUrl | null = (redirectLocation !== null && parsed !== null)
       ? parsed.resolve(redirectLocation) : null;
-    const wasRedirected: boolean = responseUrl !== targetUrl ||
-      (redirectedTarget !== null && redirectedTarget.toString() !== targetUrl);
+    const wasRedirected: boolean = redirectedTarget !== null
+      ? (redirectedTarget.toString() !== targetUrl || responseUrl !== targetUrl)
+      : (response.wasRedirected() || responseUrl !== targetUrl);
     if (wasRedirected) {
       const hijacked: ResponseBody | null = response.body();
       if (hijacked !== null) {
@@ -170,6 +181,51 @@ export class PageImageDownloaderImpl implements PageImageDownloader {
       return new DownloadResult(false, code, received, (e as Error).message);
     } finally {
       body.close();
+    }
+  }
+
+  /**
+   * 探测 `/fullimg` 原图跳转 URL（不跟随重定向、不拉取响应体）。
+   * 若服务端返回 30x + 合法 Location（非 509），返回解析后的绝对 URL；否则（如 GP 不足返回 200 HTML）返回 null。
+   */
+  async resolveRedirectUrl(url: string, referer?: string): Promise<string | null> {
+    const parsed: HttpUrl | null = HttpUrl.parse(url);
+    if (parsed === null) {
+      return null;
+    }
+    const targetUrl: string = parsed.toString();
+    const refArg: string | null = (referer !== undefined && referer !== null && referer.length > 0)
+      ? referer : null;
+    const request: Request = EhRequestBuilder.ofReferer(targetUrl, refArg)
+      .disallowRedirectFollow(true)
+      .build();
+    let probeClient: OkHttpClient = this._client;
+    if (this._client instanceof OkHttpClient) {
+      const b: OkHttpClientBuilder = this._client.newBuilder().followRedirects(false);
+      if (this._timeoutMs > 0) {
+        b.connectTimeout(this._timeoutMs, TimeUnit.MILLISECONDS)
+          .readTimeout(this._timeoutMs, TimeUnit.MILLISECONDS)
+          .writeTimeout(this._timeoutMs, TimeUnit.MILLISECONDS);
+      }
+      probeClient = b.build();
+    }
+    const response: Response = await probeClient.newCall(request).execute();
+    try {
+      const loc: string | null = response.redirectLocation();
+      if (loc === null || loc.length === 0) {
+        return null;
+      }
+      const resolved: HttpUrl | null = parsed.resolve(loc);
+      if (resolved === null) {
+        return null;
+      }
+      const finalUrl: string = resolved.toString();
+      if (finalUrl.endsWith('509.gif') || finalUrl.indexOf('/509.gif') >= 0) {
+        throw new Error('HTTP 509: Image quota exceeded');
+      }
+      return finalUrl;
+    } finally {
+      response.close();
     }
   }
 }

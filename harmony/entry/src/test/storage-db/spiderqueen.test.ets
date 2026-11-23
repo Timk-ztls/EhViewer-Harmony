@@ -555,6 +555,7 @@ class FakeEngine implements EhEngineLike {
   throwOnApi: boolean = false;
   htmlImageUrl: string = '';
   imageUrl: string = 'https://example.invalid/i.jpg';
+  originImageUrl: string = '';
 
   getGalleryPage(task: Object | null, caller: Object | null, url: string,
     gid: number, token: string): Promise<GalleryPageParserResult> {
@@ -565,6 +566,7 @@ class FakeEngine implements EhEngineLike {
     const r: GalleryPageParserResult = new GalleryPageParserResult();
     // 默认 HTML 路径**不给** imageUrl，让用例走到 API 路径（复现上游『只有 imageUrl 为空才打 API』）
     r.imageUrl = this.htmlImageUrl;
+    r.originImageUrl = this.originImageUrl;
     return Promise.resolve(r);
   }
 
@@ -576,12 +578,17 @@ class FakeEngine implements EhEngineLike {
     }
     const r: GalleryPageApiParserResult = new GalleryPageApiParserResult();
     r.imageUrl = this.imageUrl;
+    r.originImageUrl = this.originImageUrl;
     return Promise.resolve(r);
   }
 }
 
 class FakeDownloader implements PageImageDownloader {
   calls: number = 0;
+  resolveRedirectCalls: number = 0;
+  lastResolveUrl: string = '';
+  resolveRedirectResult: string | null | undefined = undefined;
+  lastUrl: string = '';
   succeed: boolean = true;
   statusCode: number = 200;
   lastReferer: string | undefined = undefined;
@@ -594,9 +601,19 @@ class FakeDownloader implements PageImageDownloader {
     return this.downloadWithStatus(url, sink, referer).then((r: DownloadResult): boolean => r.ok);
   }
 
+  resolveRedirectUrl(url: string, _referer?: string): Promise<string | null> {
+    this.resolveRedirectCalls++;
+    this.lastResolveUrl = url;
+    if (this.resolveRedirectResult !== undefined) {
+      return Promise.resolve(this.resolveRedirectResult);
+    }
+    return Promise.resolve(null);
+  }
+
   downloadWithStatus(url: string, sink: ByteSink, referer?: string,
     onProgress?: PageDownloadProgressCallback): Promise<DownloadResult> {
     this.calls++;
+    this.lastUrl = url;
     this.lastReferer = referer;
     this.referers.push(referer);
     if (this.throwErr) {
@@ -1037,10 +1054,123 @@ async function m42RegressionCases(): Promise<void> {
   SpiderQueen.resetForTest();
 }
 
+async function originImageCases(): Promise<void> {
+  SpiderDen.resetCache();
+  SpiderDen.initialize('/tmp/origin_img_cache', 10);
+  SpiderDen.setSyncDownloadSettingProvider({ getSyncDownloadWhileReading: (): boolean => false });
+  const savedOrigin: boolean = Settings.isAttached() ? Settings.getDownloadOriginImage() : false;
+
+  // 1) download_origin_image = true + resolveRedirectUrl 返回原图地址 → 使用解析后的原图 URL 下载
+  {
+    Settings.putDownloadOriginImage(true);
+    const eng: FakeEngine = new FakeEngine();
+    eng.imageUrl = 'https://hath.network/sample.jpg';
+    eng.originImageUrl = 'https://e-hentai.org/fullimg/32001/0/tok/raw.png';
+    const dl: FakeDownloader = new FakeDownloader();
+    dl.resolveRedirectResult = 'https://origin-cdn.invalid/original.png';
+    dl.payload = new Uint8Array([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]).buffer;
+    SpiderQueen.setEhEngine(eng);
+    SpiderQueen.setPageImageDownloader(dl);
+    SpiderQueen.resetForTest();
+
+    const q: SpiderQueen = SpiderQueen.obtainSpiderQueen(makeInfo(32001, 'tok'), MODE_READ);
+    const info: SpiderInfo = new SpiderInfo();
+    info.gid = 32001;
+    info.token = 'tok';
+    info.pages = 1;
+    info.pTokenMap = new Map<number, string>([[0, 'p0orig1234']]);
+    q.applySpiderInfo(info);
+    q.request(0);
+    for (let t = 0; t < 8; t++) {
+      await tick();
+    }
+    eq('原图开关开 + 302 跳转解析成功 → page 0 FINISHED', q.getPageState(0), STATE_FINISHED);
+    eq('原图开关开 → resolveRedirectUrl 收到 fullimg 地址',
+      dl.lastResolveUrl, 'https://e-hentai.org/fullimg/32001/0/tok/raw.png');
+    eq('原图开关开 → 实际下载使用 302 解析后的原图 URL',
+      dl.lastUrl, 'https://origin-cdn.invalid/original.png');
+    SpiderQueen.releaseSpiderQueen(q, MODE_READ);
+    SpiderQueen.resetForTest();
+  }
+
+  // 2) download_origin_image = true + resolveRedirectUrl 返回 null → 第 1 次即中止，报 GP 不足
+  {
+    Settings.putDownloadOriginImage(true);
+    const eng: FakeEngine = new FakeEngine();
+    eng.imageUrl = 'https://hath.network/sample.jpg';
+    eng.originImageUrl = 'https://e-hentai.org/fullimg/32002/0/tok/raw.png';
+    const dl: FakeDownloader = new FakeDownloader();
+    dl.resolveRedirectResult = null;
+    SpiderQueen.setEhEngine(eng);
+    SpiderQueen.setPageImageDownloader(dl);
+    SpiderQueen.resetForTest();
+
+    const q: SpiderQueen = SpiderQueen.obtainSpiderQueen(makeInfo(32002, 'tok'), MODE_READ);
+    const info: SpiderInfo = new SpiderInfo();
+    info.gid = 32002;
+    info.token = 'tok';
+    info.pages = 1;
+    info.pTokenMap = new Map<number, string>([[0, 'p0nogp1234']]);
+    q.applySpiderInfo(info);
+    const rec: WorkerRec = new WorkerRec();
+    q.addOnSpiderListener(rec);
+    q.request(0);
+    for (let t = 0; t < 8; t++) {
+      await tick();
+    }
+    eq('GP 不足(resolveRedirectUrl=null) → 第 1 次尝试即终止(不重试)', dl.resolveRedirectCalls, 1);
+    eq('GP 不足 → 不调用图片字节下载', dl.calls, 0);
+    eq('GP 不足 → page 0 FAILED', q.getPageState(0), STATE_FAILED);
+    ok('GP 不足 → 错误文案包含 GP不足 / Insufficient GP',
+      rec.failedErrors.some((e: string): boolean => e.indexOf('GP不足 / Insufficient GP') >= 0));
+    SpiderQueen.releaseSpiderQueen(q, MODE_READ);
+    SpiderQueen.resetForTest();
+  }
+
+  // 3) download_origin_image = false → 不调用 resolveRedirectUrl，直接走常规 imageUrl
+  {
+    Settings.putDownloadOriginImage(false);
+    const eng: FakeEngine = new FakeEngine();
+    eng.imageUrl = 'https://hath.network/regular.jpg';
+    eng.originImageUrl = 'https://e-hentai.org/fullimg/32003/0/tok/raw.png';
+    const dl: FakeDownloader = new FakeDownloader();
+    dl.payload = new Uint8Array([0xff, 0xd8, 0xff, 0xe0, 0x00, 0x10]).buffer;
+    SpiderQueen.setEhEngine(eng);
+    SpiderQueen.setPageImageDownloader(dl);
+    SpiderQueen.resetForTest();
+
+    const q: SpiderQueen = SpiderQueen.obtainSpiderQueen(makeInfo(32003, 'tok'), MODE_READ);
+    const info: SpiderInfo = new SpiderInfo();
+    info.gid = 32003;
+    info.token = 'tok';
+    info.pages = 1;
+    info.pTokenMap = new Map<number, string>([[0, 'p0reg12345']]);
+    q.applySpiderInfo(info);
+    q.request(0);
+    for (let t = 0; t < 8; t++) {
+      await tick();
+    }
+    eq('原图开关关 → 不探测 resolveRedirectUrl', dl.resolveRedirectCalls, 0);
+    eq('原图开关关 → 使用常规 imageUrl 下载', dl.lastUrl, 'https://hath.network/regular.jpg');
+    eq('原图开关关 → page 0 FINISHED', q.getPageState(0), STATE_FINISHED);
+    SpiderQueen.releaseSpiderQueen(q, MODE_READ);
+    SpiderQueen.resetForTest();
+  }
+
+  Settings.putDownloadOriginImage(savedOrigin);
+  SpiderDen.setSyncDownloadSettingProvider(null);
+  SpiderDen.resetCache();
+  SpiderQueen.setEhEngine(null);
+  SpiderQueen.setPageImageDownloader(null);
+  SpiderQueen.resetForTest();
+}
+
 asyncCases().then(() => {
   return workerCases();
 }).then(() => {
   return m42RegressionCases();
+}).then(() => {
+  return originImageCases();
 }).then(() => {
   report();
 }).catch((e: Error) => {

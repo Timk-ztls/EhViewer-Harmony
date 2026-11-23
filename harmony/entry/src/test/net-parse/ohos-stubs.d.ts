@@ -86,11 +86,19 @@ declare module '@ohos.net.http' {
       maxLimit?: number;
       remoteValidation?: RemoteValidation;
     }
+    interface PerformanceTiming {
+      redirectTiming?: number;
+      dnsTiming?: number;
+      tcpTiming?: number;
+      tlsTiming?: number;
+      totalFinishTiming?: number;
+    }
     interface HttpResponse {
       result: string | ArrayBuffer | Object;
       responseCode: number;
       header: Record<string, string> | Object;
       resultType: HttpDataType | number;
+      performanceTiming?: PerformanceTiming;
     }
     interface DataReceiveProgressInfo {
       receiveSize: number;
@@ -100,8 +108,10 @@ declare module '@ohos.net.http' {
       request(url: string, options?: HttpRequestOptions): Promise<HttpResponse>;
       destroy(): void;
       on(type: 'dataReceiveProgress', cb: (info: DataReceiveProgressInfo) => void): void;
+      on(type: 'headersReceive', cb: (data: Object) => void): void;
       on(type: string, cb: Function): void;
       off(type: 'dataReceiveProgress', cb?: (info: DataReceiveProgressInfo) => void): void;
+      off(type: 'headersReceive', cb?: (data: Object) => void): void;
       off(type: string, cb?: Function): void;
     }
     enum HttpDataType { STRING = 0, OBJECT = 1, ARRAY_BUFFER = 2 }
@@ -185,10 +195,50 @@ declare module '@ohos.net.connection' {
       family?: number;
       port?: number;
     }
+    interface HttpProxy {
+      host: string;
+      port: number;
+      username?: string;
+      password?: string;
+      exclusionList: Array<string>;
+    }
+    enum NetBearType {
+      BEARER_CELLULAR = 0,
+      BEARER_WIFI = 1,
+      BEARER_BLUETOOTH = 2,
+      BEARER_ETHERNET = 3,
+      BEARER_VPN = 4
+    }
+    interface NetHandle {
+      netId: number;
+    }
+    interface NetCapabilities {
+      bearerTypes: Array<NetBearType>;
+    }
+    interface NetCapabilityInfo {
+      netHandle: NetHandle;
+      netCap: NetCapabilities;
+    }
+    interface NetConnectionPropertyInfo {
+      netHandle: NetHandle;
+      connectionProperties: Object;
+    }
+    interface NetConnection {
+      on(type: 'netAvailable', cb: (handle: NetHandle) => void): void;
+      on(type: 'netCapabilitiesChange', cb: (info: NetCapabilityInfo) => void): void;
+      on(type: 'netConnectionPropertiesChange', cb: (info: NetConnectionPropertyInfo) => void): void;
+      on(type: 'netLost', cb: (handle: NetHandle) => void): void;
+      register(cb: (err: Object) => void): void;
+      unregister(cb: (err: Object) => void): void;
+    }
     function getAddressesByName(host: string): Promise<NetAddress[]>;
     function getAddressesByNameSync(host: string): NetAddress[];
+    function getDefaultHttpProxy(): Promise<HttpProxy>;
+    function getDefaultNetSync(): NetHandle;
+    function getAllNetsSync(): Array<NetHandle>;
+    function getNetCapabilitiesSync(handle: NetHandle): NetCapabilities;
+    function createNetConnection(): NetConnection;
   }
-  const connection: any;
   export default connection;
 }
 

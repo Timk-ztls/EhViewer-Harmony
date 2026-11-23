@@ -189,7 +189,11 @@ declare module '@kit.AbilityKit' {
     parameters?: Record<string, Object>;
   }
   export namespace common {
-    interface Context { filesDir: string; cacheDir: string }
+    interface Context {
+      filesDir: string;
+      cacheDir: string;
+      getApplicationContext(): { setLanguage(language: string): void };
+    }
     interface UIAbilityContext extends Context {}
   }
 }
@@ -294,9 +298,33 @@ declare module '@ohos.i18n' {
   namespace i18n {
     namespace System {
       function getSystemLocaleInstance(): { toString(): string };
+      function getSystemLanguage(): string;
+      function setAppPreferredLanguage(language: string): void;
+      function getAppPreferredLanguage(): string;
     }
   }
   export default i18n;
+}
+
+declare module '@kit.ArkWeb' {
+  export namespace webview {
+    enum ProxySchemeFilter { MATCH_ALL_SCHEMES = 0, MATCH_HTTP = 1, MATCH_HTTPS = 2 }
+    class ProxyConfig {
+      insertDirectRule(schemeFilter?: ProxySchemeFilter): void;
+      insertProxyRule(proxyRule: string, schemeFilter?: ProxySchemeFilter): void;
+    }
+    class ProxyController {
+      static applyProxyOverride(proxyConfig: ProxyConfig, callback: () => void): void;
+      static removeProxyOverride(callback: () => void): void;
+    }
+    class WebviewController {
+      static initializeWebEngine(): void;
+    }
+    class WebCookieManager {
+      static clearAllCookiesSync(): void;
+      static saveCookieAsync(callback: (err: Object) => void): void;
+    }
+  }
 }
 
 declare module '@kit.ArkUI' {
@@ -512,7 +540,8 @@ exports.default = exports;
   New-StubModule '@ohos.file.fileuri' $fileUriStubJs
   New-StubModule '@ohos.hilog' 'exports.debug = () => {}; exports.info = () => {}; exports.warn = () => {}; exports.error = () => {}; exports.default = exports;'
   New-StubModule '@ohos.util' 'exports.TextEncoder = class { encodeInto(s, dest) { const b = Buffer.from(s === undefined ? "" : s); if (dest) { const n = Math.min(b.length, dest.length); for (let i = 0; i < n; i++) { dest[i] = b[i]; } return { read: String(s || "").length, written: n }; } return new Uint8Array(b.buffer, b.byteOffset, b.byteLength); } encode(s) { return this.encodeInto(s); } }; exports.TextDecoder = class { decodeToString(buf) { if (!buf) { return ""; } const v = buf instanceof Uint8Array ? buf : new Uint8Array(buf); return Buffer.from(v).toString("utf8"); } decode(buf) { return this.decodeToString(buf); } }; exports.default = exports;'
-  New-StubModule '@ohos.i18n' 'exports.System = { getSystemLocaleInstance: () => ({ toString: () => "zh-CN" }) }; exports.default = exports;'
+  New-StubModule '@ohos.i18n' 'exports.System = { getSystemLocaleInstance: () => ({ toString: () => "zh-CN" }), getSystemLanguage: () => "zh-Hans", setAppPreferredLanguage: () => {}, getAppPreferredLanguage: () => "default" }; exports.default = exports;'
+  New-StubModule '@kit.ArkWeb' 'const ProxySchemeFilter = { MATCH_ALL_SCHEMES: 0, MATCH_HTTP: 1, MATCH_HTTPS: 2 }; class ProxyConfig { insertDirectRule(){} insertProxyRule(){} } const ProxyController = { applyProxyOverride(_c, cb){ if (cb) cb(); }, removeProxyOverride(cb){ if (cb) cb(); } }; const WebviewController = { initializeWebEngine(){} }; const WebCookieManager = { clearAllCookiesSync(){}, saveCookieAsync(cb){ if (cb) cb(null); } }; exports.webview = { ProxySchemeFilter, ProxyConfig, ProxyController, WebviewController, WebCookieManager };'
   New-StubModule '@ohos.app.ability.common' 'exports.default = {};'
   New-StubModule '@ohos.data.relationalStore' 'exports.SecurityLevel = { S1: 1, S2: 2 }; exports.ConflictResolution = { ON_CONFLICT_NONE: 0, ON_CONFLICT_REPLACE: 5 }; exports.RdbPredicates = class { constructor(n) {} }; exports.default = exports;'
   New-StubModule '@ohos.data.preferences' 'exports.getPreferences = async () => ({ get: async () => undefined, put: async () => {}, flush: async () => {}, getAll: async () => ({}), delete: async () => {} }); exports.default = exports;'

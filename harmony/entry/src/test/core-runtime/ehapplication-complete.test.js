@@ -5,6 +5,9 @@ const OUT = process.argv[2] || path.join(process.env.TEMP, 'tscheck', 'out11');
 const { EhApplication } = require(path.join(OUT, 'ehviewer', 'EhApplication.js'));
 const { Settings } = require(path.join(OUT, 'ehviewer', 'Settings.js'));
 const { AppConfig } = require(path.join(OUT, 'ehviewer', 'AppConfig.js'));
+const { OhosNetworkMonitor, OhosNetworkBackend } = require(path.join(OUT, 'ehviewer', 'OhosNetworkMonitor.js'));
+const { Network } = require(path.join(OUT, 'network', 'Network.js'));
+const { EhProxySelector } = require(path.join(OUT, 'ehviewer', 'EhProxySelector.js'));
 
 let fail = 0;
 const eq = (a, b, label) => {
@@ -83,6 +86,28 @@ const eq = (a, b, label) => {
   Settings.setKeyShowEhEvents(true);
   eq(Settings.getShowEhEvents(() => false), false, '开关开 + 未登录 → false');
   eq(Settings.getShowEhEvents(() => true), true, '开关开 + 已登录 → true');
+
+  // ── OhosNetworkMonitor VPN 自动避让 + OhosNetworkBackend ──
+  const savedProxyType = Settings.isAttached() ? Settings.getProxyType() : Settings.DEFAULT_PROXY_TYPE;
+  try {
+    OhosNetworkMonitor.setVpnActiveOverrideForTest(true);
+    Settings.putProxyType(EhProxySelector.TYPE_SYSTEM);
+    eq(OhosNetworkMonitor.shouldBypassBuiltInRouting(), true, 'VPN 活跃 + TYPE_SYSTEM → 旁路内置 Hosts/DF/DoH');
+    Settings.putProxyType(EhProxySelector.TYPE_DIRECT);
+    eq(OhosNetworkMonitor.shouldBypassBuiltInRouting(), true, 'VPN 活跃 + TYPE_DIRECT → 旁路内置 Hosts/DF/DoH');
+    Settings.putProxyType(EhProxySelector.TYPE_HTTP);
+    eq(OhosNetworkMonitor.shouldBypassBuiltInRouting(), false, 'VPN 活跃 + TYPE_HTTP → 不旁路（遵循手动 HTTP 代理）');
+    Settings.putProxyType(EhProxySelector.TYPE_SOCKS);
+    eq(OhosNetworkMonitor.shouldBypassBuiltInRouting(), false, 'VPN 活跃 + TYPE_SOCKS → 不旁路（遵循手动 SOCKS 代理）');
+    eq(new OhosNetworkBackend().getActiveNetworkType(), Network.TYPE_VPN, 'VPN 活跃 → NetworkBackend 返回 TYPE_VPN');
+
+    OhosNetworkMonitor.setVpnActiveOverrideForTest(false);
+    Settings.putProxyType(EhProxySelector.TYPE_SYSTEM);
+    eq(OhosNetworkMonitor.shouldBypassBuiltInRouting(), false, '无 VPN + TYPE_SYSTEM → 不旁路内置 Hosts/DF/DoH');
+  } finally {
+    OhosNetworkMonitor.setVpnActiveOverrideForTest(null);
+    Settings.putProxyType(savedProxyType);
+  }
 
   console.log('\n' + (fail === 0 ? 'ALL PASS' : fail + ' FAILED'));
   process.exit(fail === 0 ? 0 : 1);

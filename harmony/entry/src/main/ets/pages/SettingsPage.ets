@@ -1,12 +1,19 @@
 import { common } from '@kit.AbilityKit';
+import { pasteboard } from '@kit.BasicServicesKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { GetText } from '../hippo/ehviewer/GetText';
 import { Settings } from '../hippo/ehviewer/Settings';
 import { EhApplication } from '../hippo/ehviewer/EhApplication';
+import { EhDB } from '../hippo/ehviewer/EhDB';
+import { EhUrl } from '../hippo/ehviewer/client/EhUrl';
+import { EhCookieStore } from '../hippo/ehviewer/client/EhCookieStore';
+import { Cookie } from '../hippo/okhttp/Cookie';
+import { HttpUrl } from '../hippo/okhttp/HttpUrl';
 import { EhConfig } from '../hippo/ehviewer/client/EhConfig';
 import { ProxyPreference, ProxyValue } from '../hippo/ehviewer/preference/ProxyPreference';
 import { DefaultCategoryPreference } from '../hippo/ehviewer/preference/DefaultCategoryPreference';
 import { ExcludedTagNamespacesPreference } from '../hippo/ehviewer/preference/ExcludedTagNamespacesPreference';
+import { CookieLike, IdentityCookieInfo, IdentityCookiePreference } from '../hippo/ehviewer/preference/IdentityCookiePreference';
 import { SignOutPreference } from '../hippo/ehviewer/preference/SignOutPreference';
 import { ListPreference } from '../hippo/preference/ListPreference';
 import { SwitchPreference } from '../hippo/preference/SwitchPreference';
@@ -19,6 +26,7 @@ import { AboutSettingsSection } from '../hippo/ui/settings/AboutSettingsSection'
 import { ExcludedLanguagesActivity } from '../hippo/ehviewer/ui/ExcludedLanguagesActivity';
 import { AdvancedFragment } from '../hippo/ehviewer/ui/fragment/AdvancedFragment';
 import { AppWiring } from '../hippo/AppWiring';
+import { ArkWebProxyManager } from '../hippo/ui/ArkWebProxyManager';
 import { PageRoutes, RouteActionKind, RouteNavigationPlan } from '../hippo/ui/PageRoutes';
 import { UConfigPageCoordinator } from '../hippo/ui/p3/P3PageAdapters';
 import {
@@ -47,7 +55,19 @@ import { EhTagDatabaseUpdater } from '../hippo/ehviewer/client/EhTagDatabaseUpda
 const LOG_DOMAIN: number = 0x0000;
 const LOG_TAG: string = 'SettingsPage';
 
+class IdentityCookieEntry implements CookieLike {
+  readonly name: string;
+  readonly value: string;
+
+  constructor(name: string, value: string) {
+    this.name = name;
+    this.value = value;
+  }
+}
+
 const GALLERY_SITE_VALUES: string[] = ['0', '1'];
+const LAUNCH_PAGE_VALUES: string[] = ['0', '1', '2'];
+const HISTORY_INFO_SIZE_VALUES: string[] = ['100', '500', '1000', '5000', '10000', '20000'];
 const THEME_VALUES: string[] = ['0', '1', '2'];
 const LIST_MODE_VALUES: string[] = ['0', '1'];
 const DETAIL_SIZE_VALUES: string[] = ['0', '1'];
@@ -109,7 +129,13 @@ struct SettingsPage {
   @State dohEnabled: boolean = false;
 
   // E-Hentai states
+  @State signedIn: boolean = false;
+  @State identityDialogOpen: boolean = false;
+  @State identityPlainText: string = '';
   @State gallerySite: number = 0;
+  @State launchPage: number = 0;
+  @State historyInfoSize: number = 100;
+  @State fixThumbUrl: boolean = false;
   @State theme: number = 0;
   @State listMode: number = 0;
   @State detailSize: number = 0;
@@ -117,6 +143,8 @@ struct SettingsPage {
   @State thumbResolution: number = 0;
   @State showJpnTitle: boolean = false;
   @State showGalleryPages: boolean = false;
+  @State showGalleryRating: boolean = true;
+  @State showEhLimits: boolean = true;
   @State showGalleryComment: boolean = true;
   @State needSignIn: boolean = true;
   @State excludedLanguages: string = '';
@@ -160,7 +188,11 @@ struct SettingsPage {
     this.builtExHosts = Settings.getBuiltEXHosts();
     this.dohEnabled = Settings.getDoH();
 
+    this.signedIn = Settings.isLogin();
     this.gallerySite = Settings.getGallerySite();
+    this.launchPage = Settings.getLaunchPage();
+    this.historyInfoSize = Settings.getHistoryInfoSize();
+    this.fixThumbUrl = Settings.getFixThumbUrl();
     this.theme = Settings.getTheme();
     this.listMode = Settings.getListMode();
     this.detailSize = Settings.getDetailSize();
@@ -168,6 +200,8 @@ struct SettingsPage {
     this.thumbResolution = Settings.getThumbResolution();
     this.showJpnTitle = Settings.getShowJpnTitle();
     this.showGalleryPages = Settings.getShowGalleryPages();
+    this.showGalleryRating = Settings.getShowGalleryRating();
+    this.showEhLimits = Settings.getBoolean(Settings.KEY_SHOW_EH_LIMITS, Settings.IS_SHOW_EH_LIMITS);
     this.showGalleryComment = Settings.getShowGalleryComment();
     this.needSignIn = Settings.getNeedSignIn();
     const rawExcluded: string | null = Settings.getExcludedLanguages();
@@ -510,6 +544,7 @@ struct SettingsPage {
               onChanged: (value: ProxyValue) => {
                 EhApplication.getEhProxySelector(null).updateProxy();
                 EhApplication.resetOkHttpClients();
+                void ArkWebProxyManager.syncFromSettings();
                 this.showToast($r('app.string.proxy_saved'));
               }
             })
@@ -534,6 +569,7 @@ struct SettingsPage {
               onChanged: (checked: boolean) => {
                 this.builtInHosts = checked;
                 AdvancedFragment.applyNetworkSwitch(AdvancedFragment.KEY_BUILT_IN_HOSTS, checked);
+                EhApplication.resetOkHttpClients();
               }
             })
 
@@ -545,6 +581,7 @@ struct SettingsPage {
               onChanged: (checked: boolean) => {
                 this.builtExHosts = checked;
                 AdvancedFragment.applyNetworkSwitch(AdvancedFragment.KEY_BUILT_EX_HOSTS, checked);
+                EhApplication.resetOkHttpClients();
               }
             })
 
@@ -556,6 +593,7 @@ struct SettingsPage {
               onChanged: (checked: boolean) => {
                 this.dohEnabled = checked;
                 AdvancedFragment.applyNetworkSwitch(AdvancedFragment.KEY_DOH, checked);
+                EhApplication.resetOkHttpClients();
               }
             })
 
@@ -573,6 +611,17 @@ struct SettingsPage {
               Column() {
                 this.sectionHeader($r('app.string.settings_eh'))
 
+            if (this.signedIn) {
+              SettingsItem({
+                title: this.str('settings_eh_identity_cookies'),
+                summary: this.str('settings_eh_identity_cookies_summary'),
+                themeId: this.theme,
+                onItemClick: () => {
+                  this.openIdentityCookiesDialog();
+                }
+              })
+            }
+
             ListPreference({
               title: this.str('settings_eh_gallery_site'),
               dialogTitle: this.str('settings_eh_gallery_site'),
@@ -585,6 +634,39 @@ struct SettingsPage {
                 if (!Number.isNaN(site)) {
                   Settings.putGallerySite(site);
                   this.gallerySite = site;
+                }
+              }
+            })
+
+            ListPreference({
+              title: this.str('settings_eh_launch_page'),
+              dialogTitle: this.str('settings_eh_launch_page'),
+              entries: this.strs(['homepage', 'subscription', 'whats_hot']),
+              entryValues: LAUNCH_PAGE_VALUES,
+              value: `${this.launchPage}`,
+              themeId: this.theme,
+              onChanged: (value: string) => {
+                const page: number = Number(value);
+                if (!Number.isNaN(page)) {
+                  Settings.putLaunchPage(page);
+                  this.launchPage = page;
+                }
+              }
+            })
+
+            ListPreference({
+              title: this.str('settings_eh_history_size'),
+              dialogTitle: this.str('settings_eh_history_size'),
+              entries: HISTORY_INFO_SIZE_VALUES,
+              entryValues: HISTORY_INFO_SIZE_VALUES,
+              value: `${this.historyInfoSize}`,
+              themeId: this.theme,
+              onChanged: (value: string) => {
+                const size: number = Number(value);
+                if (!Number.isNaN(size) && size > 0) {
+                  Settings.setHistoryInfoSize(size);
+                  EhDB.MAX_HISTORY_COUNT = size;
+                  this.historyInfoSize = size;
                 }
               }
             })
@@ -733,6 +815,16 @@ struct SettingsPage {
             })
 
             SwitchPreference({
+              title: this.str('settings_eh_fix_thumb_url'),
+              checked: this.fixThumbUrl,
+              themeId: this.theme,
+              onChanged: (checked: boolean) => {
+                this.fixThumbUrl = checked;
+                Settings.putFixThumbUrl(checked);
+              }
+            })
+
+            SwitchPreference({
               title: this.str('settings_eh_show_jpn_title'),
               summary: this.str('settings_eh_show_jpn_title_summary'),
               checked: this.showJpnTitle,
@@ -754,6 +846,26 @@ struct SettingsPage {
               onChanged: (checked: boolean) => {
                 this.showGalleryPages = checked;
                 Settings.putShowGalleryPages(checked);
+              }
+            })
+
+            SwitchPreference({
+              title: this.str('settings_eh_show_gallery_rating'),
+              checked: this.showGalleryRating,
+              themeId: this.theme,
+              onChanged: (checked: boolean) => {
+                this.showGalleryRating = checked;
+                Settings.setShowGalleryRating(checked);
+              }
+            })
+
+            SwitchPreference({
+              title: this.str('settings_eh_show_eh_limits'),
+              checked: this.showEhLimits,
+              themeId: this.theme,
+              onChanged: (checked: boolean) => {
+                this.showEhLimits = checked;
+                Settings.setKeyShowEhLimits(checked);
               }
             })
 
@@ -783,7 +895,19 @@ struct SettingsPage {
               summary: this.str('settings_eh_sign_out_summary'),
               themeId: this.theme,
               onSignOut: () => {
+                this.signedIn = false;
                 this.showToast($r('app.string.settings_eh_sign_out_tip'));
+                try {
+                  const router = this.getUIContext().getRouter();
+                  router.clear();
+                  router.replaceUrl({ url: PageRoutes.INDEX }).catch((err: Error): void => {
+                    hilog.warn(LOG_DOMAIN, LOG_TAG, 'replaceUrl Index after sign out failed: %{public}s',
+                      err.message);
+                  });
+                } catch (e) {
+                  hilog.warn(LOG_DOMAIN, LOG_TAG, 'sign out navigation failed: %{public}s',
+                    e instanceof Error ? e.message : String(e));
+                }
               }
             })
 
@@ -889,5 +1013,126 @@ struct SettingsPage {
         this.excludedLangSheetOpen = false;
       }
     })
+    .bindContentCover($$this.identityDialogOpen, this.identityCookiesOverlay(), {
+      modalTransition: ModalTransition.NONE,
+      backgroundColor: Color.Transparent,
+      onDisappear: () => {
+        this.identityDialogOpen = false;
+      }
+    })
+  }
+
+  private openIdentityCookiesDialog(): void {
+    const store: EhCookieStore | null = AppWiring.getCookieStore();
+    if (store === null) {
+      this.identityPlainText = this.str('settings_eh_identity_cookies_tourist');
+      this.identityDialogOpen = true;
+      return;
+    }
+    const merged: CookieLike[] = [];
+    const hosts: string[] = [EhUrl.HOST_E, EhUrl.HOST_EX];
+    for (let h = 0; h < hosts.length; h++) {
+      const parsed: HttpUrl | null = HttpUrl.parse(hosts[h]);
+      if (parsed === null) {
+        continue;
+      }
+      const list: Cookie[] = store.getCookies(parsed);
+      for (let i = 0; i < list.length; i++) {
+        merged.push(new IdentityCookieEntry(list[i].name(), list[i].value()));
+      }
+    }
+    const info: IdentityCookieInfo = IdentityCookiePreference.build(merged);
+    if (!info.hasIdentity()) {
+      this.identityPlainText = this.str('settings_eh_identity_cookies_tourist');
+    } else {
+      const lines: string[] = [
+        IdentityCookiePreference.KEY_IPD_MEMBER_ID + ': ' + IdentityCookiePreference.text(info.ipbMemberId),
+        IdentityCookiePreference.KEY_IPD_PASS_HASH + ': ' + IdentityCookiePreference.text(info.ipbPassHash),
+        IdentityCookiePreference.KEY_IGNEOUS + ': ' + IdentityCookiePreference.text(info.igneous)
+      ];
+      this.identityPlainText = lines.join('\n');
+    }
+    this.identityDialogOpen = true;
+  }
+
+  private copyIdentityCookies(): void {
+    try {
+      const board: pasteboard.SystemPasteboard = pasteboard.getSystemPasteboard();
+      const data: pasteboard.PasteData = pasteboard.createData(
+        pasteboard.MIMETYPE_TEXT_PLAIN,
+        this.identityPlainText
+      );
+      board.setDataSync(data);
+      this.showToast($r('app.string.copied_to_clipboard'));
+    } catch (e) {
+      hilog.warn(LOG_DOMAIN, LOG_TAG, 'copy identity cookies failed: %{public}s',
+        e instanceof Error ? e.message : String(e));
+    }
+  }
+
+  @Builder
+  identityCookiesOverlay() {
+    Stack({ alignContent: Alignment.Center }) {
+      Column()
+        .width('100%')
+        .height('100%')
+        .backgroundColor(this.palette().dialogScrim)
+        .onClick(() => {
+          this.identityDialogOpen = false;
+        })
+
+      Column() {
+        Text($r('app.string.settings_eh_identity_cookies'))
+          .fontSize(ThemeTypography.DIALOG_TITLE)
+          .fontWeight(FontWeight.Medium)
+          .fontColor(this.palette().textPrimary)
+          .width('100%')
+          .padding({ left: 24, right: 24, top: 20, bottom: 12 })
+
+        Text(this.identityPlainText)
+          .fontSize(ThemeTypography.TEXT_SMALL)
+          .fontColor(this.palette().textSecondary)
+          .width('100%')
+          .padding({ left: 24, right: 24, bottom: 16 })
+
+        Row({ space: 8 }) {
+          Button($r('app.string.settings_eh_identity_cookies_copy'), { type: ButtonType.Normal })
+            .borderRadius(ThemeRadius.BUTTON)
+            .constraintSize({ minWidth: 64, minHeight: 36 })
+            .backgroundColor(Color.Transparent)
+            .fontColor(this.palette().colorPrimary)
+            .fontSize(ThemeTypography.BUTTON)
+            .fontWeight(FontWeight.Medium)
+            .onClick(() => {
+              this.copyIdentityCookies();
+              this.identityDialogOpen = false;
+            })
+
+          Button($r('app.string.cancel'), { type: ButtonType.Normal })
+            .borderRadius(ThemeRadius.BUTTON)
+            .constraintSize({ minWidth: 64, minHeight: 36 })
+            .backgroundColor(Color.Transparent)
+            .fontColor(this.palette().textSecondary)
+            .fontSize(ThemeTypography.BUTTON)
+            .fontWeight(FontWeight.Medium)
+            .onClick(() => {
+              this.identityDialogOpen = false;
+            })
+        }
+        .width('100%')
+        .justifyContent(FlexAlign.End)
+        .padding({ left: 16, right: 16, top: 4, bottom: 12 })
+      }
+      .width('88%')
+      .constraintSize({ maxWidth: 400 })
+      .backgroundColor(this.palette().popupBackground)
+      .borderRadius(ThemeRadius.DIALOG)
+      .shadow(ThemeElevation.dialog())
+      .onClick(() => {
+        // Consume clicks inside dialog card
+      })
+    }
+    .width('100%')
+    .height('100%')
   }
 }

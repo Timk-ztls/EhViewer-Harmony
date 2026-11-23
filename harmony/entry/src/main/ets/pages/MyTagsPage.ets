@@ -31,6 +31,7 @@ import { EhCookieStore } from '../hippo/ehviewer/client/EhCookieStore';
 import { WebViewUnavailableSpec } from '../hippo/ehviewer/ui/MyTagsActivity';
 import { VArrowLeftDarkX24 } from '../hippo/ui/drawable/v_arrow_left_dark_x24';
 import { VRefreshDarkX24 } from '../hippo/ui/drawable/v_refresh_dark_x24';
+import { ArkWebProxyManager } from '../hippo/ui/ArkWebProxyManager';
 import {
   MyTagsPageCoordinator,
   MyTagsPageListener,
@@ -158,6 +159,7 @@ struct MyTagsPage {
 
   private async initializePage(): Promise<void> {
     await AppWiring.whenReady();
+    await ArkWebProxyManager.syncFromSettings();
     const store: EhCookieStore | null = AppWiring.getCookieStore();
     const listener: MyTagsPageListener = new MyTagsPageListenerImpl(
       (url: string): void => {

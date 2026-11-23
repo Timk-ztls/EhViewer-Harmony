@@ -28,7 +28,10 @@ import {
   GalleryRateOutcome
 } from '../../main/ets/hippo/ehviewer/ui/scene/gallery/detail/GalleryDetailScene';
 import { GalleryDetailSceneConcrete } from '../../main/ets/hippo/ehviewer/ui/scene/gallery/detail/GalleryDetailSceneConcrete';
-import { GalleryListAction } from '../../main/ets/hippo/ehviewer/ui/scene/gallery/list/GalleryListScene';
+import {
+  EhClientLike,
+  GalleryListAction
+} from '../../main/ets/hippo/ehviewer/ui/scene/gallery/list/GalleryListScene';
 import { GalleryListSceneConcrete } from '../../main/ets/hippo/ehviewer/ui/scene/gallery/list/GalleryListSceneConcrete';
 import { GalleryCommentsSceneConcrete } from '../../main/ets/hippo/ehviewer/ui/scene/GalleryCommentsSceneConcrete';
 
@@ -396,10 +399,151 @@ function testListActionAndCommentsInitialArgs(): void {
   eq('comments hasMore = true', commentsScene.isHasMore(), true);
 }
 
+class DeferredGalleryRequest {
+  url: string;
+  page: number;
+  resolveFn: (res: GalleryInfo[] | null) => void;
+  rejectFn: (err: Error) => void;
+
+  constructor(url: string, page: number,
+    resolveFn: (res: GalleryInfo[] | null) => void,
+    rejectFn: (err: Error) => void) {
+    this.url = url;
+    this.page = page;
+    this.resolveFn = resolveFn;
+    this.rejectFn = rejectFn;
+  }
+}
+
+class QueuedGalleryListClient implements EhClientLike {
+  requests: DeferredGalleryRequest[] = [];
+
+  getGalleryList(url: string, page: number): Promise<GalleryInfo[] | null> {
+    return new Promise<GalleryInfo[] | null>((resolve, reject) => {
+      this.requests.push(new DeferredGalleryRequest(url, page, resolve, reject));
+    });
+  }
+}
+
+class RejectOnceFavoritesClient implements FavoritesClientLike {
+  rejectNext: boolean = false;
+  resToReturn: FavoritesPageResult = new FavoritesPageResult();
+
+  getFavorites(_url: string, _force: boolean): Promise<FavoritesPageResult> {
+    if (this.rejectNext) {
+      this.rejectNext = false;
+      return Promise.reject(new Error('network error'));
+    }
+    return Promise.resolve(this.resToReturn);
+  }
+}
+
+function makePage(startGid: number, count: number): GalleryInfo[] {
+  const out: GalleryInfo[] = [];
+  for (let i = 0; i < count; i++) {
+    out.push(makeGalleryInfo(startGid + i, `tok${startGid + i}ab`, `Title ${startGid + i}`, 'u'));
+  }
+  return out;
+}
+
+async function testListResetSeqAndPreemption(): Promise<void> {
+  // 1) GalleryListSceneConcrete listResetSeq + preemption
+  const gl: GalleryListSceneConcrete = new GalleryListSceneConcrete();
+  const glClient: QueuedGalleryListClient = new QueuedGalleryListClient();
+  gl.setGalleryListClient(glClient);
+  eq('initial GalleryListScene listResetSeq = 0', gl.getListResetSeq(), 0);
+
+  // 搜索刷新(满 25 条保证未触底) -> seq 递增
+  gl.applySearchAndCategory('remilia', 0);
+  eq('applySearchAndCategory issued req 0 (page 0)', glClient.requests[0].page, 0);
+  glClient.requests[0].resolveFn(makePage(1001, 25));
+  await flushMicrotasks();
+  eq('refresh load increments listResetSeq -> 1', gl.getListResetSeq(), 1);
+  eq('search item 0 gid = 1001', gl.getItem(0)?.gid ?? -1, 1001);
+
+  // 滑到底部加载下一页 (append) -> seq 不变，且可被新搜索抢占
+  gl.onReachEndList();
+  eq('onReachEndList issued req 1 (page 1)', glClient.requests[1].page, 1);
+  eq('while loading next page, isLoadingList = true', gl.isLoadingList(), true);
+
+  // 在第 2 页尚未返回时切动作并强制刷新 -> 抢占成功且丢弃迟到的第 2 页响应
+  gl.switchToAction(GalleryListAction.SUBSCRIPTION);
+  gl.refreshGalleryList(true);
+  eq('switchToAction + refreshGalleryList(true) preempted -> req 2', glClient.requests.length, 3);
+  eq('preempted req 2 is page 0', glClient.requests[2].page, 0);
+
+  glClient.requests[1].resolveFn(makePage(9900, 5));
+  await flushMicrotasks();
+  eq('stale page 1 response discarded -> listResetSeq stays 1', gl.getListResetSeq(), 1);
+
+  glClient.requests[2].resolveFn(makePage(2001, 25));
+  await flushMicrotasks();
+  eq('preempting refresh increments listResetSeq -> 2', gl.getListResetSeq(), 2);
+  eq('list replaced with Hot 0', gl.getItem(0)?.gid ?? -1, 2001);
+
+  // 正常 append 不递增 listResetSeq
+  gl.onReachEndList();
+  eq('append req 3 issued (page 1)', glClient.requests[3].page, 1);
+  glClient.requests[3].resolveFn([makeGalleryInfo(2099, 'tok2099abc', 'Hot 1', 'u2')]);
+  await flushMicrotasks();
+  eq('append does NOT increment listResetSeq (still 2)', gl.getListResetSeq(), 2);
+  eq('append total items = 26', gl.getItemCount(), 26);
+
+  // 请求失败不递增 listResetSeq
+  gl.refreshGalleryList(true);
+  glClient.requests[4].rejectFn(new Error('timeout'));
+  await flushMicrotasks();
+  eq('refresh failure does NOT increment listResetSeq (still 2)', gl.getListResetSeq(), 2);
+
+  // jumpToPage 在 loading 时仍能抢占并递增 listResetSeq
+  gl.refreshGalleryList(true);
+  gl.jumpToPage(3);
+  eq('jumpToPage preempted req 5 -> issued req 6 (page 2)', glClient.requests[6].page, 2);
+  glClient.requests[6].resolveFn([makeGalleryInfo(3001, 'tok3001abc', 'Page 3', 'u3')]);
+  await flushMicrotasks();
+  eq('jumpToPage increments listResetSeq -> 3', gl.getListResetSeq(), 3);
+
+  // 2) FavoritesSceneConcrete listResetSeq
+  const fav: FavoritesSceneConcrete = new FavoritesSceneConcrete();
+  fav.setLocalFavoritesRepo(new FakeLocalRepo([
+    makeGalleryInfo(4001, 'tok4001abc', 'Fav A', 'ua'),
+    makeGalleryInfo(4002, 'tok4002abc', 'Fav B', 'ub')
+  ]));
+  eq('initial FavoritesScene listResetSeq = 0', fav.getListResetSeq(), 0);
+  fav.ensureLoaded();
+  await flushMicrotasks();
+  eq('Favorites local load increments listResetSeq -> 1', fav.getListResetSeq(), 1);
+  fav.applySearch('fav b');
+  await flushMicrotasks();
+  eq('Favorites local search increments listResetSeq -> 2', fav.getListResetSeq(), 2);
+
+  const cloudFavClient: RejectOnceFavoritesClient = new RejectOnceFavoritesClient();
+  cloudFavClient.resToReturn.current = 1;
+  cloudFavClient.resToReturn.limit = 3;
+  cloudFavClient.resToReturn.items = [makeGalleryInfo(5001, 'tok5001abc', 'Cloud 0', 'uc')];
+  fav.setClient(cloudFavClient);
+
+  fav.setCategory(1);
+  await flushMicrotasks();
+  eq('Favorites cloud refresh (!append) increments listResetSeq -> 3', fav.getListResetSeq(), 3);
+
+  cloudFavClient.resToReturn.current = 2;
+  cloudFavClient.resToReturn.items = [makeGalleryInfo(5002, 'tok5002abc', 'Cloud 1', 'uc')];
+  fav.loadMore();
+  await flushMicrotasks();
+  eq('Favorites cloud loadMore (append=true) does NOT increment listResetSeq (still 3)', fav.getListResetSeq(), 3);
+
+  cloudFavClient.rejectNext = true;
+  fav.applySearch('fail');
+  await flushMicrotasks();
+  eq('Favorites cloud error does NOT increment listResetSeq (still 3)', fav.getListResetSeq(), 3);
+}
+
 async function main(): Promise<void> {
   await testFavoritesLocalAndCloud();
   await testGalleryDetailActionsAndNavigation();
   testListActionAndCommentsInitialArgs();
+  await testListResetSeqAndPreemption();
 
   if (fails.length > 0) {
     console.error(`\n✗ ${fails.length} 条失败 / ${pass + fails.length} 条断言`);

@@ -32,6 +32,7 @@ export struct ItemGalleryGridLayout {
   @Prop thumbWidth: number = 0;
   @Prop thumbHeight: number = 0;
   @Prop themeId: number = -1;
+  @Prop itemIndex: number = -1;
   @Prop cardColor: ResourceColor = ThemeTokens.current().cardBackground;
   @Prop activated: boolean = false;
 
@@ -50,13 +51,12 @@ export struct ItemGalleryGridLayout {
   }
 
   aboutToReuse(_params: Record<string, Object>): void {
-    this.thumbController.onAttached();
     this.loadThumb();
   }
 
   aboutToRecycle(): void {
     this.loadedSig = '';
-    this.thumbController.onDetached();
+    this.thumbController.unload();
   }
 
   aboutToDisappear(): void {
@@ -77,7 +77,7 @@ export struct ItemGalleryGridLayout {
       }
       this.loadedSig = sig;
       this.thumbController.resetClip();
-      this.thumbController.load(key, this.thumbUrl);
+      this.thumbController.load(key, this.thumbUrl, this.itemIndex);
     } else {
       this.loadedSig = '';
       this.thumbController.unload();

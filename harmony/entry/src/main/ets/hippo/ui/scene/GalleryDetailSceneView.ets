@@ -4,7 +4,8 @@
  */
 import { UIContext } from '@kit.ArkUI';
 import { pasteboard } from '@kit.BasicServicesKit';
-import { common, Want } from '@kit.AbilityKit';
+import { fileIo as fs, fileUri, picker } from '@kit.CoreFileKit';
+import { common, Want, wantConstant } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import {
   CategoryColors,
@@ -30,6 +31,13 @@ import { GetText } from '../../ehviewer/GetText';
 import { DownloadInfo } from '../../ehviewer/dao/DownloadInfo';
 import { Filter } from '../../ehviewer/dao/Filter';
 import { DownloadManager } from '../../ehviewer/download/DownloadManager';
+import { AppConfig } from '../../ehviewer/AppConfig';
+import { TorrentDownloadMessage } from '../../ehviewer/client/data/TorrentDownloadMessage';
+import {
+  DownloadTorrentManager,
+  TorrentDownloadHandler
+} from '../../ehviewer/download/DownloadTorrentManager';
+import { PageRoutes } from '../PageRoutes';
 import {
   ArchiverDownloader,
   ArchiverDownloaderListener,
@@ -63,7 +71,8 @@ import {
   GalleryDetailBind,
   MAX_SHOW_COMMENTS,
   MoreState,
-  TagGroupView
+  TagGroupView,
+  stripTagNamespace
 } from '../../ehviewer/ui/scene/gallery/detail/GalleryDetailBind';
 import { Announcer } from '../../scene/Announcer';
 import { SceneArgs } from '../../scene/SceneTypes';
@@ -97,6 +106,20 @@ class PreviewTileRow {
   constructor(rowIndex: number, tiles: PreviewTileItem[]) {
     this.rowIndex = rowIndex;
     this.tiles = tiles;
+  }
+}
+
+export { stripTagNamespace } from '../../ehviewer/ui/scene/gallery/detail/GalleryDetailBind';
+
+class DetailTorrentDownloadHandler implements TorrentDownloadHandler {
+  private readonly callback: (message: TorrentDownloadMessage) => void;
+
+  constructor(callback: (message: TorrentDownloadMessage) => void) {
+    this.callback = callback;
+  }
+
+  onMessage(message: TorrentDownloadMessage): void {
+    this.callback(message);
   }
 }
 
@@ -302,6 +325,9 @@ export struct GalleryDetailSceneView {
   @State torrentLoading: boolean = false;
   @State torrentList: TorrentInfo[] = [];
   @State torrentError: string = '';
+  @State showTorrentActionDialog: boolean = false;
+  @State downloadedTorrentPath: string = '';
+  @State downloadedTorrentName: string = '';
 
   @State showArchiveDialog: boolean = false;
   @State archiveLoading: boolean = false;
@@ -846,6 +872,145 @@ export struct GalleryDetailSceneView {
     (ctx as common.UIAbilityContext).startAbility(want).catch((e: Error): void => {
       hilog.warn(DOMAIN, TAG, 'openUrlInBrowser failed: %{public}s', e.message);
     });
+  }
+
+  private openUrlInInAppBrowser(url: string, title: string = ''): void {
+    if (url.length === 0) {
+      return;
+    }
+    try {
+      this.getUIContext().getRouter().pushUrl({
+        url: PageRoutes.IN_APP_BROWSER,
+        params: {
+          url: url,
+          title: title
+        }
+      }).catch((e: Error): void => {
+        hilog.warn(DOMAIN, TAG, 'pushUrl InAppBrowser failed: %{public}s', e.message);
+        this.openUrlInBrowser(url);
+      });
+    } catch (e) {
+      hilog.warn(DOMAIN, TAG, 'openUrlInInAppBrowser threw: %{public}s',
+        e instanceof Error ? e.message : String(e));
+      this.openUrlInBrowser(url);
+    }
+  }
+
+  private startTorrentDownload(item: TorrentInfo): void {
+    if (item.url.length === 0) {
+      return;
+    }
+    const ctx: common.Context | undefined = this.getUIContext().getHostContext();
+    let saveDir: string | null = AppConfig.getExternalTempDir() ?? AppConfig.getTempDir();
+    if ((saveDir === null || saveDir.length === 0) && ctx !== undefined && ctx.cacheDir.length > 0) {
+      saveDir = `${ctx.cacheDir}/torrent`;
+    }
+    if (saveDir === null || saveDir.length === 0) {
+      this.openUrlInBrowser(item.url);
+      return;
+    }
+    const d: GalleryDetail | null = this.scene !== null ? this.scene.getDetail() : null;
+    const displayName: string = d !== null && d.title.length > 0 ? d.title : item.name;
+    const fileName: string = DownloadTorrentManager.createTorrentFileName(displayName, item.url);
+    this.showActionToast($r('app.string.download_state_downloading'));
+    const handler: TorrentDownloadHandler = new DetailTorrentDownloadHandler((msg: TorrentDownloadMessage): void => {
+      if (msg.failed) {
+        this.showActionToast($r('app.string.download_state_failed'));
+        return;
+      }
+      if (msg.progress >= 100 && msg.path.length > 0) {
+        this.downloadedTorrentPath = msg.path;
+        this.downloadedTorrentName = msg.name.length > 0 ? msg.name : fileName;
+        this.showTorrentActionDialog = true;
+      }
+    });
+    DownloadTorrentManager.get(null).download(item.url, saveDir, fileName, handler);
+  }
+
+  private async saveTorrentToFiles(): Promise<void> {
+    const localPath: string = this.downloadedTorrentPath;
+    const fileName: string = this.downloadedTorrentName.length > 0 ? this.downloadedTorrentName : 'gallery.torrent';
+    if (localPath.length === 0) {
+      return;
+    }
+    const ctx: common.Context | undefined = this.getUIContext().getHostContext();
+    if (ctx === undefined) {
+      return;
+    }
+    let srcFile: fs.File | null = null;
+    let dstFile: fs.File | null = null;
+    try {
+      const saveOptions: picker.DocumentSaveOptions = new picker.DocumentSaveOptions();
+      saveOptions.newFileNames = [fileName];
+      saveOptions.fileSuffixChoices = ['.torrent'];
+      const docPicker: picker.DocumentViewPicker = new picker.DocumentViewPicker(ctx);
+      const uris: Array<string> = await docPicker.save(saveOptions);
+      if (uris.length === 0 || uris[0].length === 0) {
+        return;
+      }
+      const stat: fs.Stat = fs.statSync(localPath);
+      const buf: ArrayBuffer = new ArrayBuffer(Math.max(1, stat.size));
+      srcFile = fs.openSync(localPath, fs.OpenMode.READ_ONLY);
+      const readLen: number = stat.size > 0 ? fs.readSync(srcFile.fd, buf, { offset: 0, length: stat.size }) : 0;
+      dstFile = fs.openSync(uris[0], fs.OpenMode.READ_WRITE | fs.OpenMode.TRUNC);
+      if (readLen > 0) {
+        fs.writeSync(dstFile.fd, buf.slice(0, readLen));
+      }
+      this.showTorrentActionDialog = false;
+      this.showActionToast($r('app.string.torrent_saved_success'));
+    } catch (e) {
+      const msg: string = e instanceof Error ? e.message : String(e);
+      hilog.warn(DOMAIN, TAG, 'saveTorrentToFiles failed: %{public}s', msg);
+      this.showActionToastText(msg);
+    } finally {
+      if (srcFile !== null) {
+        try {
+          fs.closeSync(srcFile);
+        } catch (e) {
+          hilog.debug(DOMAIN, TAG, 'close torrent src failed: %{public}s',
+            e instanceof Error ? e.message : String(e));
+        }
+      }
+      if (dstFile !== null) {
+        try {
+          fs.closeSync(dstFile);
+        } catch (e) {
+          hilog.debug(DOMAIN, TAG, 'close torrent dst failed: %{public}s',
+            e instanceof Error ? e.message : String(e));
+        }
+      }
+    }
+  }
+
+  private openTorrentWithExternalApp(): void {
+    const localPath: string = this.downloadedTorrentPath;
+    if (localPath.length === 0) {
+      return;
+    }
+    const ctx: common.UIAbilityContext | undefined =
+      this.getUIContext().getHostContext() as common.UIAbilityContext | undefined;
+    if (ctx === undefined) {
+      return;
+    }
+    try {
+      const uri: string = fileUri.getUriFromPath(localPath);
+      const want: Want = {
+        action: 'ohos.want.action.viewData',
+        uri: uri,
+        type: 'application/x-bittorrent',
+        flags: wantConstant.Flags.FLAG_AUTH_READ_URI_PERMISSION
+      };
+      ctx.startAbility(want).then((): void => {
+        this.showTorrentActionDialog = false;
+      }).catch((e: Error): void => {
+        hilog.warn(DOMAIN, TAG, 'openTorrentWithExternalApp failed: %{public}s', e.message);
+        this.showActionToast($r('app.string.torrent_no_bt_app'));
+      });
+    } catch (e) {
+      hilog.warn(DOMAIN, TAG, 'openTorrentWithExternalApp threw: %{public}s',
+        e instanceof Error ? e.message : String(e));
+      this.showActionToast($r('app.string.torrent_no_bt_app'));
+    }
   }
 
   private startListSearch(ub: ListUrlBuilder): void {
@@ -1983,7 +2148,8 @@ export struct GalleryDetailSceneView {
           .onClick((): void => {
             const tagText: string = this.selectedTagForDialog;
             this.selectedTagForDialog = '';
-            this.openUrlInBrowser(EhUrl.getTagDefinitionUrl(tagText));
+            const tagName: string = stripTagNamespace(tagText).trim().replace(/ /g, '_');
+            this.openUrlInInAppBrowser('https://ehwiki.org/wiki/' + encodeURIComponent(tagName), tagName);
           })
       }
       .width('84%')
@@ -2061,7 +2227,7 @@ export struct GalleryDetailSceneView {
                 .padding({ left: 24, right: 24, top: 10, bottom: 10 })
                 .onClick((): void => {
                   this.showTorrentDialog = false;
-                  this.openUrlInBrowser(item.url);
+                  this.startTorrentDownload(item);
                 })
               }
             }, (item: TorrentInfo, idx: number) => `${idx}_${item.url}`)
@@ -2104,6 +2270,89 @@ export struct GalleryDetailSceneView {
     .width('100%')
     .height('100%')
     .zIndex(11)
+  }
+
+  @Builder
+  torrentActionDialogOverlay() {
+    Stack({ alignContent: Alignment.Center }) {
+      Column()
+        .width('100%')
+        .height('100%')
+        .backgroundColor('#73000000')
+        .onClick((): void => {
+          this.showTorrentActionDialog = false;
+        })
+
+      Column() {
+        Text($r('app.string.torrent_download_complete'))
+          .fontSize(ThemeTypography.DIALOG_TITLE)
+          .fontWeight(FontWeight.Medium)
+          .fontColor(this.palette().textPrimary)
+          .width('100%')
+          .padding({ left: 24, right: 24, top: 20, bottom: 8 })
+
+        Text(this.downloadedTorrentName)
+          .fontSize(ThemeTypography.TEXT_SMALL)
+          .fontColor(this.palette().textSecondary)
+          .width('100%')
+          .padding({ left: 24, right: 24, bottom: 12 })
+          .maxLines(2)
+          .textOverflow({ overflow: TextOverflow.Ellipsis })
+
+        Button($r('app.string.torrent_action_save_to_files'), { type: ButtonType.Normal })
+          .width('100%')
+          .height(48)
+          .padding({ left: 24, right: 24 })
+          .borderRadius(ThemeRadius.NONE)
+          .backgroundColor(this.palette().transparent)
+          .fontColor(this.palette().textPrimary)
+          .fontSize(ThemeTypography.TEXT_LITTLE_SMALL)
+          .align(Alignment.Start)
+          .onClick((): void => {
+            void this.saveTorrentToFiles();
+          })
+
+        Button($r('app.string.torrent_action_open_bt_app'), { type: ButtonType.Normal })
+          .width('100%')
+          .height(48)
+          .padding({ left: 24, right: 24 })
+          .borderRadius(ThemeRadius.NONE)
+          .backgroundColor(this.palette().transparent)
+          .fontColor(this.palette().textPrimary)
+          .fontSize(ThemeTypography.TEXT_LITTLE_SMALL)
+          .align(Alignment.Start)
+          .onClick((): void => {
+            this.openTorrentWithExternalApp();
+          })
+
+        Row() {
+          Button($r('app.string.cancel'), { type: ButtonType.Normal })
+            .borderRadius(ThemeRadius.BUTTON)
+            .constraintSize({ minWidth: 64, minHeight: 36 })
+            .backgroundColor(this.palette().transparent)
+            .fontColor(this.palette().colorPrimary)
+            .fontSize(ThemeTypography.BUTTON)
+            .fontWeight(FontWeight.Medium)
+            .onClick((): void => {
+              this.showTorrentActionDialog = false;
+            })
+        }
+        .width('100%')
+        .justifyContent(FlexAlign.End)
+        .padding({ left: 16, right: 16, top: 8, bottom: 12 })
+      }
+      .width('84%')
+      .constraintSize({ maxWidth: 360 })
+      .backgroundColor(this.palette().popupBackground)
+      .borderRadius(ThemeRadius.DIALOG)
+      .shadow(ThemeElevation.dialog())
+      .onClick((): void => {
+        // Consume clicks inside torrent action card
+      })
+    }
+    .width('100%')
+    .height('100%')
+    .zIndex(12)
   }
 
   @Builder
@@ -2438,6 +2687,10 @@ export struct GalleryDetailSceneView {
 
       if (this.showTorrentDialog) {
         this.torrentDialogOverlay()
+      }
+
+      if (this.showTorrentActionDialog) {
+        this.torrentActionDialogOverlay()
       }
 
       if (this.showArchiveDialog) {

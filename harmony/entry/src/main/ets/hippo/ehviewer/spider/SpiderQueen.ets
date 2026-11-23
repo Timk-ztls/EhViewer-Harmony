@@ -137,6 +137,13 @@ class Image509Error extends Error {
   }
 }
 
+class OriginImageQuotaError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'OriginImageQuotaError';
+  }
+}
+
 /**
  * 下载 worker 需要的 `EhEngine` 子集（契约先行；参数类型归消费方，C-18）。
  *
@@ -1086,6 +1093,7 @@ export class SpiderQueen implements SpiderQueenLike {
         // 不重置的话：第 1 轮取到 URL 但下载失败 → 第 2 轮因 `imageUrl.length > 0` 跳过 API 调用
         // → **5 次重试全打同一个（可能已失效的）URL**。
         imageUrl = '';
+        let originImageUrl: string = '';
         try {
           // a) 没有 showKey（或本页强制 HTML）→ 走 HTML 路径
           if (localShowKey.length === 0 || forceHtml) {
@@ -1096,6 +1104,7 @@ export class SpiderQueen implements SpiderQueenLike {
             skipHathKey = htmlResult.skipHathKey.length > 0 ? htmlResult.skipHathKey : null;
             this.mShowKey = htmlResult.showKey;
             localShowKey = this.mShowKey;
+            originImageUrl = htmlResult.originImageUrl;
             // ⚠ 上游会用 HTML 结果里的 imageUrl（SpiderQueen.java:1279-1305）：
             //   `imageUrl = result.imageUrl;` 然后 **只有 imageUrl == null 才打 API**。
             // 我们的 GalleryPageParser 也产出 imageUrl（GalleryPageParser.ets:46-49），所以直接复用，
@@ -1114,9 +1123,25 @@ export class SpiderQueen implements SpiderQueenLike {
               // c) 旁路：换 H@H 节点时 imageUrl 为空，用 otherImageUrl
               imageUrl = api.otherImageUrl;
             }
+            if (originImageUrl.length === 0) {
+              originImageUrl = api.originImageUrl;
+            }
           }
           if (imageUrl.length === 0) {
             throw new Error('empty imageUrl（imageUrl 与 otherImageUrl 都为空）');
+          }
+
+          // ③a 原图直链解析（开启 download_origin_image 且拿到 `/fullimg` 地址时解析 302；GP 不足立即报错）
+          if (Settings.getDownloadOriginImage() &&
+            originImageUrl.length > 0 && downloader.resolveRedirectUrl !== undefined) {
+            const originReferer: string = pageUrl !== null
+              ? pageUrl
+              : EhUrl.getPageUrl(this.mGalleryInfo.gid, index, pToken);
+            const resolvedOrigin: string | null = await downloader.resolveRedirectUrl(originImageUrl, originReferer);
+            if (resolvedOrigin === null) {
+              throw new OriginImageQuotaError('GP不足 / Insufficient GP');
+            }
+            imageUrl = resolvedOrigin;
           }
 
           // ③b 509 限流检测（上游 SpiderQueen.java:1242 / :1254，写盘前判）
@@ -1145,7 +1170,7 @@ export class SpiderQueen implements SpiderQueenLike {
           break;
         } catch (e) {
           Utils.throwIfFatal(e);
-          if (e instanceof Image509Error) {
+          if (e instanceof Image509Error || e instanceof OriginImageQuotaError) {
             throw e as Error;
           }
           const msg: string = SpiderQueen.errorMessage(e) !== null ? (SpiderQueen.errorMessage(e) as string) : '';

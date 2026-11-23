@@ -7,7 +7,9 @@
  */
 
 import fs from '@ohos.file.fs';
+import i18n from '@ohos.i18n';
 import util from '@ohos.util';
+import { common } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { Settings } from '../../ehviewer/Settings';
 import { AppConfig } from '../../ehviewer/AppConfig';
@@ -1035,6 +1037,78 @@ export class AdvancedSettingsHelpers {
     'zh-HK',
     'zh-TW'
   ];
+
+  static resolvePreferredLanguageTag(value: string): string {
+    const clean: string = value.trim();
+    switch (clean) {
+      case '':
+      case 'system':
+      case 'default':
+        return 'default';
+      case 'de':
+        return 'de-DE';
+      case 'en':
+        return 'en-US';
+      case 'es':
+        return 'es-ES';
+      case 'fr':
+        return 'fr-FR';
+      case 'ja':
+        return 'ja-JP';
+      case 'ko':
+        return 'ko-KR';
+      case 'th':
+        return 'th-TH';
+      case 'zh-CN':
+        return 'zh-Hans';
+      case 'zh-HK':
+        return 'zh-Hant-HK';
+      case 'zh-TW':
+        return 'zh-Hant-TW';
+      default:
+        return clean;
+    }
+  }
+
+  static resolveRuntimeLanguageTag(value: string): string {
+    const preferred: string = AdvancedSettingsHelpers.resolvePreferredLanguageTag(value);
+    if (preferred === 'default') {
+      try {
+        const sysLang: string = i18n.System.getSystemLanguage();
+        if (sysLang !== undefined && sysLang !== null && sysLang.trim().length > 0) {
+          return sysLang.trim();
+        }
+      } catch (e) {
+        hilog.warn(0x0000, 'SettingsSectionHelpers', 'getSystemLanguage failed: %{public}s',
+          e instanceof Error ? e.message : String(e));
+      }
+      return 'zh-Hans';
+    }
+    return preferred;
+  }
+
+  static applyAppLanguage(context: common.Context | null | undefined, value: string): boolean {
+    const preferredTag: string = AdvancedSettingsHelpers.resolvePreferredLanguageTag(value);
+    let applied: boolean = false;
+    try {
+      i18n.System.setAppPreferredLanguage(preferredTag);
+      applied = true;
+    } catch (e) {
+      hilog.warn(0x0000, 'SettingsSectionHelpers', 'setAppPreferredLanguage(%{public}s) failed: %{public}s',
+        preferredTag, e instanceof Error ? e.message : String(e));
+    }
+    if (context !== undefined && context !== null) {
+      const runtimeTag: string = AdvancedSettingsHelpers.resolveRuntimeLanguageTag(value);
+      try {
+        context.getApplicationContext().setLanguage(runtimeTag);
+        applied = true;
+      } catch (e) {
+        hilog.warn(0x0000, 'SettingsSectionHelpers', 'ApplicationContext.setLanguage(%{public}s) failed: %{public}s',
+          runtimeTag, e instanceof Error ? e.message : String(e));
+      }
+    }
+    return applied;
+  }
 
   /**
    * Produces a non-sensitive diagnostic snapshot (never includes cookies or security patterns).

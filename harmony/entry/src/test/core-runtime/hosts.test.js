@@ -184,6 +184,43 @@ const arr = (u8) => (u8 === null ? null : Array.from(u8));
   await rdbHosts.delete('exhentai.org');
   eq(await rdbStore.contains('exhentai.org'), false, 'RdbHostsStore deleteByHost 删除成功');
 
+  // === 4) 内存热缓存命中 + put/delete/clearCache 失效 ===
+  let queryCount = 0;
+  const cachedMap = new Map([['ehgt.org', ['185.132.132.79']]]);
+  const countingStore = {
+    async queryIps(host) {
+      queryCount++;
+      const arr = cachedMap.get(host);
+      return arr ? arr.slice() : [];
+    },
+    async queryAll() { return []; },
+    async contains(host) { return cachedMap.has(host); },
+    async upsert(host, ip) { cachedMap.set(host, [ip]); },
+    async deleteByHost(host) { cachedMap.delete(host); }
+  };
+  const cachedHosts = new Hosts(countingStore);
+  const firstList = await cachedHosts.getList('ehgt.org');
+  const secondList = await cachedHosts.getList('ehgt.org');
+  const thirdSingle = await cachedHosts.get('ehgt.org');
+  eq(queryCount, 1, 'Hosts.getList/get 命中内存缓存仅查库一次');
+  eq(firstList.length, 1, '首次 getList 返回 1 条地址');
+  eq(secondList.length, 1, '第二次 getList 命中缓存仍返回 1 条地址');
+  eq(thirdSingle !== null, true, 'Hosts.get 复用同一主机缓存');
+
+  await cachedHosts.put('ehgt.org', '62.112.8.152');
+  eq(queryCount, 1, 'put 仅写库并清缓存（不立即查库）');
+  await cachedHosts.getList('ehgt.org');
+  eq(queryCount, 2, 'put 使热缓存失效后再次查询才查库');
+
+  await cachedHosts.delete('ehgt.org');
+  const afterDel = await cachedHosts.getList('ehgt.org');
+  eq(queryCount, 3, 'delete 使热缓存失效后再次查询');
+  eq(afterDel.length, 0, 'delete 后查得空列表');
+
+  cachedHosts.clearCache();
+  await cachedHosts.getList('ehgt.org');
+  eq(queryCount, 4, 'clearCache 清空后再次查询');
+
   console.log('\n' + (fail === 0 ? 'ALL PASS' : fail + ' FAILED'));
   process.exit(fail === 0 ? 0 : 1);
 })();

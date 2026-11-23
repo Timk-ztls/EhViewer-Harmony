@@ -36,6 +36,7 @@ import {
   ProfileResult
 } from '../../ehviewer/ui/scene/sign/GetProfileScene';
 import { GetProfileSceneShell } from '../../ehviewer/ui/scene/sign/GetProfileSceneShell';
+import { ArkWebProxyManager } from '../ArkWebProxyManager';
 
 const DOMAIN: number = 0x0000;
 const TAG: string = 'GetProfileSceneView';
@@ -55,10 +56,16 @@ export struct GetProfileSceneView {
   private webController: webview.WebviewController = new webview.WebviewController();
 
   aboutToAppear(): void {
-    this.prepareWebView();
+    this.prepareWebView().catch((e: Error): void => {
+      const msg: string = e.message !== undefined ? e.message : String(e);
+      this.initFailed = true;
+      this.loading = false;
+      this.errorMessage = msg;
+      hilog.error(DOMAIN, TAG, 'prepareWebView async failed: %{public}s', msg);
+    });
   }
 
-  private prepareWebView(): void {
+  private async prepareWebView(): Promise<void> {
     this.webReady = false;
     this.initFailed = false;
     this.loading = true;
@@ -66,6 +73,7 @@ export struct GetProfileSceneView {
     this.errorMessage = '';
     this.parseFailedTip = false;
 
+    await ArkWebProxyManager.syncFromSettings();
     try {
       webview.WebCookieManager.putAcceptCookieEnabled(true);
       webview.WebCookieManager.putAcceptThirdPartyCookieEnabled(true);

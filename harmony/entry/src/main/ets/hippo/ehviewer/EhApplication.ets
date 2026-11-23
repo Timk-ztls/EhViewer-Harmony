@@ -38,6 +38,7 @@
 import common from '@ohos.app.ability.common';
 import image from '@ohos.multimedia.image';
 import fs from '@ohos.file.fs';
+import { hilog } from '@kit.PerformanceAnalysisKit';
 import { IntIdGenerator } from '../lib/yorozuya/IntIdGenerator';
 import { Settings } from './Settings';
 import { AppConfig } from './AppConfig';
@@ -52,6 +53,7 @@ import { EhCookieStore } from './client/EhCookieStore';
 import { EhHostsConfig, OkHttpEhHosts } from './client/EhHosts';
 import { EhProxySelector, OkHttpEhProxySelector } from './EhProxySelector';
 import { Hosts } from './Hosts';
+import { OhosNetworkMonitor } from './OhosNetworkMonitor';
 import { SimpleDiskCache } from '../beerbelly/SimpleDiskCache';
 import { Conaco, ConacoBuilder } from '../conaco/Conaco';
 import { ValueHelper } from '../conaco/ValueHelper';
@@ -427,6 +429,13 @@ export class EhApplication {
   private static sOkHttpCache: Cache | null = null;
   private static sOkHttpClient: OkHttpClient | null = null;
   private static sImageOkHttpClient: OkHttpClient | null = null;
+  private static sClientResetListeners: Array<() => void> = [];
+
+  static addClientResetListener(cb: () => void): void {
+    if (EhApplication.sClientResetListeners.indexOf(cb) < 0) {
+      EhApplication.sClientResetListeners.push(cb);
+    }
+  }
 
   /** 由 AppWiring 注入持久化的 CookieStore / Hosts / ProxySelector / OkHttp Cache 并重建客户端。 */
   static setNetworkDeps(
@@ -444,10 +453,36 @@ export class EhApplication {
     EhApplication.resetOkHttpClients();
   }
 
-  /** 清空已缓存的 OkHttpClient 单例，使后续调用使用最新网络依赖重建。 */
+  /** 清空已缓存的 OkHttpClient 单例并释放连接池，使后续调用使用最新网络依赖重建。 */
   static resetOkHttpClients(): void {
+    const prevNormal: OkHttpClient | null = EhApplication.sOkHttpClient;
+    const prevImage: OkHttpClient | null = EhApplication.sImageOkHttpClient;
     EhApplication.sOkHttpClient = null;
     EhApplication.sImageOkHttpClient = null;
+    if (prevNormal !== null) {
+      try {
+        prevNormal.close();
+      } catch (e) {
+        hilog.debug(0x0000, 'EhApplication', 'close prev sOkHttpClient failed: %{public}s',
+          e instanceof Error ? e.message : String(e));
+      }
+    }
+    if (prevImage !== null) {
+      try {
+        prevImage.close();
+      } catch (e) {
+        hilog.debug(0x0000, 'EhApplication', 'close prev sImageOkHttpClient failed: %{public}s',
+          e instanceof Error ? e.message : String(e));
+      }
+    }
+    for (let i = 0; i < EhApplication.sClientResetListeners.length; i++) {
+      try {
+        EhApplication.sClientResetListeners[i]();
+      } catch (e) {
+        hilog.debug(0x0000, 'EhApplication', 'client reset listener failed: %{public}s',
+          e instanceof Error ? e.message : String(e));
+      }
+    }
   }
 
   static getEhCookieStore(_context?: common.Context | null): EhCookieStore {
@@ -544,7 +579,7 @@ export class EhApplication {
     if (cache !== null) {
       builder.cache(cache);
     }
-    builder.sslSocketFactory(Settings.getDF());
+    builder.sslSocketFactory(Settings.getDF() && !OhosNetworkMonitor.shouldBypassBuiltInRouting());
   }
 
   /**
