@@ -237,23 +237,26 @@ class HarmonyShakeSensorPort implements ShakeSensorPort {
 
   start(onData: (x: number, y: number, z: number) => void): boolean {
     this.stop();
-    try {
-      const cb: (data: sensor.AccelerometerResponse) => void =
-        (data: sensor.AccelerometerResponse): void => {
-          onData(data.x, data.y, data.z);
-        };
-      const opts: sensor.Options = { interval: ACCELEROMETER_INTERVAL_UI_NS };
-      sensor.on(sensor.SensorId.ACCELEROMETER, cb, opts);
-      this.callback = cb;
-      this.subscribed = true;
-      return true;
-    } catch (e) {
-      const msg: string = e instanceof Error ? e.message : String(e);
-      hilog.warn(DOMAIN, TAG, 'accelerometer sensor.on failed: %{public}s', msg);
-      this.subscribed = false;
-      this.callback = null;
-      return false;
+    if (canIUse('SystemCapability.Sensors.Sensor')) {
+      try {
+        const cb: (data: sensor.AccelerometerResponse) => void =
+          (data: sensor.AccelerometerResponse): void => {
+            onData(data.x, data.y, data.z);
+          };
+        const opts: sensor.Options = { interval: ACCELEROMETER_INTERVAL_UI_NS };
+        sensor.on(sensor.SensorId.ACCELEROMETER, cb, opts);
+        this.callback = cb;
+        this.subscribed = true;
+        return true;
+      } catch (e) {
+        const msg: string = e instanceof Error ? e.message : String(e);
+        hilog.warn(DOMAIN, TAG, 'accelerometer sensor.on failed: %{public}s', msg);
+        this.subscribed = false;
+        this.callback = null;
+        return false;
+      }
     }
+    return false;
   }
 
   stop(): void {
@@ -263,15 +266,17 @@ class HarmonyShakeSensorPort implements ShakeSensorPort {
     const cb: ((data: sensor.AccelerometerResponse) => void) | null = this.callback;
     this.subscribed = false;
     this.callback = null;
-    try {
-      if (cb !== null) {
-        sensor.off(sensor.SensorId.ACCELEROMETER, cb);
-      } else {
-        sensor.off(sensor.SensorId.ACCELEROMETER);
+    if (canIUse('SystemCapability.Sensors.Sensor')) {
+      try {
+        if (cb !== null) {
+          sensor.off(sensor.SensorId.ACCELEROMETER, cb);
+        } else {
+          sensor.off(sensor.SensorId.ACCELEROMETER);
+        }
+      } catch (e) {
+        const msg: string = e instanceof Error ? e.message : String(e);
+        hilog.warn(DOMAIN, TAG, 'accelerometer sensor.off failed: %{public}s', msg);
       }
-    } catch (e) {
-      const msg: string = e instanceof Error ? e.message : String(e);
-      hilog.warn(DOMAIN, TAG, 'accelerometer sensor.off failed: %{public}s', msg);
     }
   }
 }

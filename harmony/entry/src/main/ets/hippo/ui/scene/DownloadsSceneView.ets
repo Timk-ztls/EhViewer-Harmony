@@ -632,7 +632,7 @@ export struct DownloadsSceneView {
       this.labelDrawerClosing = false;
       this.onRightDrawerStateChange(true);
       this.refreshLabels();
-      animateTo({ duration: 180, curve: Curve.FastOutSlowIn }, (): void => {
+      this.getUIContext().animateTo({ duration: 180, curve: Curve.FastOutSlowIn }, (): void => {
         this.labelDrawerOffsetX = 0;
         this.labelDrawerScrimOpacity = 1;
       });
@@ -651,7 +651,7 @@ export struct DownloadsSceneView {
       this.labelDrawerScrimOpacity = 0;
       this.labelDrawerOpen = true;
       this.onRightDrawerStateChange(true);
-      animateTo({ duration: 220, curve: Curve.FastOutSlowIn }, (): void => {
+      this.getUIContext().animateTo({ duration: 220, curve: Curve.FastOutSlowIn }, (): void => {
         this.labelDrawerOffsetX = 0;
         this.labelDrawerScrimOpacity = 1;
       });
@@ -662,7 +662,7 @@ export struct DownloadsSceneView {
     }
     this.labelDrawerClosing = true;
     this.onRightDrawerStateChange(false);
-    animateTo({
+    this.getUIContext().animateTo({
       duration: 180,
       curve: Curve.FastOutLinearIn,
       onFinish: (): void => {
@@ -1991,7 +1991,7 @@ export struct DownloadsSceneView {
               if (event.offsetX >= ThemeDimens.DRAWER_MAX_WIDTH * 0.35 || event.velocityX > 350) {
                 this.setLabelDrawerOpen(false);
               } else {
-                animateTo({ duration: 160, curve: Curve.FastOutSlowIn }, (): void => {
+                this.getUIContext().animateTo({ duration: 160, curve: Curve.FastOutSlowIn }, (): void => {
                   this.labelDrawerOffsetX = 0;
                   this.labelDrawerScrimOpacity = 1;
                 });
@@ -2001,7 +2001,7 @@ export struct DownloadsSceneView {
               if (this.labelDrawerOffsetX >= ThemeDimens.DRAWER_MAX_WIDTH * 0.35) {
                 this.setLabelDrawerOpen(false);
               } else {
-                animateTo({ duration: 160, curve: Curve.FastOutSlowIn }, (): void => {
+                this.getUIContext().animateTo({ duration: 160, curve: Curve.FastOutSlowIn }, (): void => {
                   this.labelDrawerOffsetX = 0;
                   this.labelDrawerScrimOpacity = 1;
                 });

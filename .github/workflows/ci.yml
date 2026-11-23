@@ -1,0 +1,100 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    name: Static Gates & Unit Tests
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Bootstrap TypeScript & Harmony stubs
+        run: |
+          Write-Host "TEMP=$($env:TEMP)"
+          pwsh -File scripts/setup_tscheck.ps1
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Static quality gates
+        run: |
+          $checks = @(
+            @('scripts/check_line_endings.ps1', @('-Gate')),
+            @('scripts/check_contrast.ps1', @('-Gate')),
+            @('scripts/check_contrast.ps1', @('-Path', 'harmony/entry/src/main/ets/hippo/ehviewer/widget', '-Gate')),
+            @('scripts/check_silent_failures.ps1', @('-Gate')),
+            @('scripts/check_resource_keys.ps1', @('-Gate'))
+          )
+          foreach ($c in $checks) {
+            $scriptPath = $c[0]
+            $argList = $c[1]
+            Write-Host "Running $scriptPath $($argList -join ' ')"
+            pwsh -File $scriptPath @argList
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+
+      - name: Hygiene & sensitive-info gate
+        run: |
+          $pBundle = 'com' + '\.xjs\.' + 'ehviewer'
+          $pRemote = 'git\.' + 'kmo\.' + 'ink'
+          $pProbe = '__' + 'probe' + '__'
+          $pPerm = 'ohos\.permission\.' + 'READ_PASTEBOARD'
+
+          $hits = git grep -I -n -E "$pBundle|$pRemote"
+          $grepCode = $LASTEXITCODE
+          if ($grepCode -gt 1) { throw "git grep error: $grepCode" }
+          if ($grepCode -eq 0 -or ($hits | Measure-Object).Count -gt 0) {
+            $hits | ForEach-Object { Write-Host $_ }
+            throw 'Forbidden internal reference detected in tracked files.'
+          }
+
+          $probeHits = git grep -I -n -E "$pProbe" -- harmony
+          $probeCode = $LASTEXITCODE
+          if ($probeCode -gt 1) { throw "git grep harmony error: $probeCode" }
+          if ($probeCode -eq 0 -or ($probeHits | Measure-Object).Count -gt 0) {
+            $probeHits | ForEach-Object { Write-Host $_ }
+            throw 'Forbidden probe reference detected under harmony/.'
+          }
+
+          $tracked = git ls-files
+          $badPaths = $tracked | Where-Object { $_ -match "(^|/)inventory(/|\.csv$)|(^|/)harmony/signing/|$pProbe" }
+          if (($badPaths | Measure-Object).Count -gt 0) {
+            $badPaths | ForEach-Object { Write-Host $_ }
+            throw 'Internal inventory, signing, or probe files must not be tracked.'
+          }
+
+          $modJson = Get-Content 'harmony/entry/src/main/module.json5' -Raw
+          if ($modJson -match $pPerm) {
+            throw 'Restricted pasteboard permission must not be declared in module.json5.'
+          }
+
+          $buildProfile = Get-Content 'harmony/build-profile.json5' -Raw
+          if ($buildProfile -notmatch '"signingConfigs"\s*:\s*\[\s*\]') {
+            throw 'harmony/build-profile.json5 must keep signingConfigs empty.'
+          }
+
+          Write-Host 'OK: hygiene & sensitive-info gate passed'
+
+      - name: Unit tests (unified assertion check)
+        run: |
+          $logFile = Join-Path $env:TEMP 'ci-unit-tests.log'
+          pwsh -File scripts/run_all_tests.ps1 -Summary 2>&1 | Tee-Object -FilePath $logFile
+          $ec = $LASTEXITCODE
+          if ($ec -ne 0) { throw "run_all_tests.ps1 exited with $ec" }
+          $outText = Get-Content $logFile -Raw
+          if ($outText -match 'assertions-n/a') {
+            throw 'Detected uncounted assertions (assertions-n/a) in unit test summary.'
+          }
+          Write-Host 'OK: all unit tests passed with unified assertion counts'

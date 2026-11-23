@@ -40,13 +40,13 @@ export struct SceneWarningLayout {
       VAlertRedX48().padding({ left: $r('app.float.keyline_margin'), right: $r('app.float.keyline_margin'), top: $r('app.float.keyline_margin'), bottom: $r('app.float.keyline_margin') })
       Column() {
         this.slot2Builder()
-      }.id('slot2').layoutWeight(1)
+      }.id('warning_slot2').layoutWeight(1)
       Row() {
-        Button(this.reject).id('reject').layoutWeight(1)
+        Button(this.reject).id('warning_reject').layoutWeight(1)
           .onClick(() => { this.onReject(); })
-        Button(this.accept).id('accept').layoutWeight(1)
+        Button(this.accept).id('warning_accept').layoutWeight(1)
           .onClick(() => { this.onAccept(); })
-      }.id('buttonpanel').width('100%')
+      }.id('warning_buttonpanel').width('100%')
     }.width('100%').height('100%').padding({ left: $r('app.float.keyline_margin'), right: $r('app.float.keyline_margin'), top: $r('app.float.keyline_margin'), bottom: $r('app.float.keyline_margin') })
   }
 }

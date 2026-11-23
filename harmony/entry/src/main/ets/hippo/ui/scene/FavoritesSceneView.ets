@@ -142,7 +142,7 @@ export struct FavoritesSceneView {
     if (this.rightDrawerDragSettleOpen) {
       this.rightDrawerClosing = false;
       this.onRightDrawerStateChange(true);
-      animateTo({ duration: 180, curve: Curve.FastOutSlowIn }, (): void => {
+      this.getUIContext().animateTo({ duration: 180, curve: Curve.FastOutSlowIn }, (): void => {
         this.rightDrawerOffsetX = 0;
         this.rightDrawerScrimOpacity = 1;
       });
@@ -158,7 +158,7 @@ export struct FavoritesSceneView {
       this.rightDrawerScrimOpacity = 0;
       this.rightDrawerOpen = true;
       this.onRightDrawerStateChange(true);
-      animateTo({ duration: 220, curve: Curve.FastOutSlowIn }, (): void => {
+      this.getUIContext().animateTo({ duration: 220, curve: Curve.FastOutSlowIn }, (): void => {
         this.rightDrawerOffsetX = 0;
         this.rightDrawerScrimOpacity = 1;
       });
@@ -169,7 +169,7 @@ export struct FavoritesSceneView {
     }
     this.rightDrawerClosing = true;
     this.onRightDrawerStateChange(false);
-    animateTo({
+    this.getUIContext().animateTo({
       duration: 180,
       curve: Curve.FastOutLinearIn,
       onFinish: (): void => {
@@ -940,7 +940,7 @@ export struct FavoritesSceneView {
               if (event.offsetX >= ThemeDimens.DRAWER_MAX_WIDTH * 0.35 || event.velocityX > 350) {
                 this.setRightDrawerOpen(false);
               } else {
-                animateTo({ duration: 160, curve: Curve.FastOutSlowIn }, (): void => {
+                this.getUIContext().animateTo({ duration: 160, curve: Curve.FastOutSlowIn }, (): void => {
                   this.rightDrawerOffsetX = 0;
                   this.rightDrawerScrimOpacity = 1;
                 });
@@ -950,7 +950,7 @@ export struct FavoritesSceneView {
               if (this.rightDrawerOffsetX >= ThemeDimens.DRAWER_MAX_WIDTH * 0.35) {
                 this.setRightDrawerOpen(false);
               } else {
-                animateTo({ duration: 160, curve: Curve.FastOutSlowIn }, (): void => {
+                this.getUIContext().animateTo({ duration: 160, curve: Curve.FastOutSlowIn }, (): void => {
                   this.rightDrawerOffsetX = 0;
                   this.rightDrawerScrimOpacity = 1;
                 });

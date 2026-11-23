@@ -111,7 +111,7 @@ function probeBiometricEnrolled(): boolean {
 
 @Entry
 @Component
-export struct SetSecurityPage {
+struct SetSecurityPage {
   @StorageLink(APP_THEME_STORAGE_KEY) themeId: number = ThemeMode.LIGHT;
   @State ready: boolean = false;
   @State isLandscape: boolean = false;

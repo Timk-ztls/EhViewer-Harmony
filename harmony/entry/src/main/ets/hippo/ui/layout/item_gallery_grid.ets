@@ -105,7 +105,7 @@ export struct ItemGalleryGridLayout {
         Column() {
           this.thumbBuilder()
         }
-        .id('thumb')
+        .id('grid_thumb')
         .width('100%')
         .backgroundColor(this.palette().thumbPlaceholder)
         .overlay(this.activated ? this.activatedOverlay() : undefined)
@@ -117,7 +117,7 @@ export struct ItemGalleryGridLayout {
           .stroke(Color.Transparent)
           .strokeWidth(0)
           .antiAlias(true)
-          .id('category')
+          .id('grid_category')
 
         if (this.simpleLanguage.length > 0) {
           Text(this.simpleLanguage)

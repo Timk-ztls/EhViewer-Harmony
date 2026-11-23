@@ -244,7 +244,7 @@ export struct GalleryDetailActionsLayout {
             ratingInterval: 2,
             starColor: this.rated ? this.palette().colorAccent : DrawablePalette.YELLOW_800
           })
-            .id('rating')
+            .id('detail_actions_rating')
 
           Text(this.ratingText)
             .id('rating_text')

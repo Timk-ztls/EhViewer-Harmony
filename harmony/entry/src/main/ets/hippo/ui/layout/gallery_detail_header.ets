@@ -162,7 +162,7 @@ export struct GalleryDetailHeaderLayout {
           Stack() {
             this.thumbBuilder()
           }
-          .id('thumb')
+          .id('detail_header_thumb')
           .width(ThemeDimens.GALLERY_DETAIL_THUMB_WIDTH)
           .height(ThemeDimens.GALLERY_DETAIL_THUMB_HEIGHT)
           .margin({
@@ -180,7 +180,7 @@ export struct GalleryDetailHeaderLayout {
 
           Column() {
             Text(this.title)
-              .id('title')
+              .id('detail_header_title')
               .fontSize(ThemeTypography.TEXT_LITTLE_LARGE)
               .fontColor(this.palette().galleryDetailHeaderTitle)
               .maxLines(5)
@@ -191,7 +191,7 @@ export struct GalleryDetailHeaderLayout {
 
             if (this.uploader.length > 0) {
               Text(this.uploader)
-                .id('uploader')
+                .id('detail_header_uploader')
                 .fontSize(ThemeTypography.TEXT_LITTLE_SMALL)
                 .fontColor(this.palette().galleryDetailHeaderTitle)
                 .opacity(0.85)
@@ -211,7 +211,7 @@ export struct GalleryDetailHeaderLayout {
 
             if (this.category.length > 0) {
               Text(this.category.toUpperCase())
-                .id('category')
+                .id('detail_header_category')
                 .fontSize(ThemeTypography.TEXT_SMALL)
                 .fontWeight(FontWeight.Bold)
                 .fontColor(this.palette().white)

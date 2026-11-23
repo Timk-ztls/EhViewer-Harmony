@@ -77,7 +77,7 @@ class BlackListActivityStateBridge implements BlackListStatePort {
 
 @Entry
 @Component
-export struct BlackListPage {
+struct BlackListPage {
   @State ready: boolean = false;
   @State loading: boolean = true;
   @State loadError: string = '';

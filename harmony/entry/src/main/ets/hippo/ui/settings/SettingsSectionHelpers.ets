@@ -110,7 +110,7 @@ export class UniFileTextIo {
     let os: OutputStream | null = null;
     try {
       const encoder: util.TextEncoder = new util.TextEncoder();
-      const encoded: Uint8Array = encoder.encode(text);
+      const encoded: Uint8Array = encoder.encodeInto(text);
       const buf: ArrayBuffer = encoded.buffer.slice(encoded.byteOffset, encoded.byteOffset + encoded.byteLength);
       os = file.openOutputStream();
       os.write(buf);
@@ -157,7 +157,7 @@ export class UniFileTextIo {
         offset += chunks[i].length;
       }
       const decoder: util.TextDecoder = new util.TextDecoder('utf-8');
-      return decoder.decode(merged);
+      return decoder.decodeToString(merged);
     } catch (e) {
       const msg: string = e instanceof Error ? e.message : String(e);
       hilog.warn(LOG_DOMAIN, LOG_TAG, 'readUtf8 failed for %{public}s: %{public}s', file.getUri(), msg);
@@ -933,7 +933,7 @@ export class FsLogCatIo implements LogCatIo {
   async dumpLogs(): Promise<Uint8Array> {
     const text: string = this.snapshotProvider();
     const encoder: util.TextEncoder = new util.TextEncoder();
-    return encoder.encode(text);
+    return encoder.encodeInto(text);
   }
 
   async writeBytes(path: string, bytes: Uint8Array): Promise<void> {

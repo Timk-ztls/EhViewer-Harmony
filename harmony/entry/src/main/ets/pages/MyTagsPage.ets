@@ -107,7 +107,7 @@ class MyTagsPageListenerImpl implements MyTagsPageListener {
 
 @Entry
 @Component
-export struct MyTagsPage {
+struct MyTagsPage {
   @State ready: boolean = false;
   @State targetUrl: string = '';
   @State progressVisible: boolean = false;

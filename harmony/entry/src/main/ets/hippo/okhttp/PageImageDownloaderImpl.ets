@@ -105,7 +105,7 @@ export class PageImageDownloaderImpl implements PageImageDownloader {
         ? referer : null;
       const request: Request = EhRequestBuilder.ofReferer(targetUrl, refArg).build();
       // 禁用 @ohos.net.http 的隐式自动重定向，确保 30x 能暴露给反劫持校验
-      const execClient: OkHttpClient = (this._client.constructor === OkHttpClient && this._client.followRedirects())
+      const execClient: OkHttpClient = (this._client instanceof OkHttpClient && this._client.followRedirects())
         ? this._client.newBuilder().followRedirects(false).build()
         : this._client;
       const call: Call = execClient.newCall(request, onProgress);

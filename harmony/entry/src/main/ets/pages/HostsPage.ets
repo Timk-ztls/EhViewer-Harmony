@@ -151,7 +151,7 @@ class HostsPageHostImpl implements HostsHost {
 
 @Entry
 @Component
-export struct HostsPage {
+struct HostsPage {
   @State entries: HostEntry[] = [];
   @State listVisible: boolean = false;
   @State tipVisible: boolean = true;

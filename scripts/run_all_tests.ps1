@@ -40,6 +40,8 @@ param(
 )
 
 $ErrorActionPreference = 'Continue'
+. (Join-Path $PSScriptRoot 'lib\test_assert.ps1')
+Initialize-Utf8Console
 $root = (git -C $PSScriptRoot rev-parse --show-toplevel) -replace '/', '\'
 $testRoot = Join-Path $root 'harmony\entry\src\test'
 $hippoRoot = Join-Path $root 'harmony\entry\src\main\ets\hippo'
@@ -131,6 +133,9 @@ function StartUnit($unit, $workerTemp) {
     param($path, $tempDir)
     $env:TEMP = $tempDir
     $env:TMP = $tempDir
+    $utf8 = [System.Text.UTF8Encoding]::new($false)
+    try { [Console]::OutputEncoding = $utf8 } catch { }
+    $OutputEncoding = $utf8
     $ErrorActionPreference = 'Continue'
     # **先清掉这个 worker 的产物目录**（out / out5 / out9 / out11 …）。
     # 为什么：历史 runner 里有 42/49 个把 `tsc` 输出 `| Out-Null` 吞了，
@@ -144,6 +149,15 @@ function StartUnit($unit, $workerTemp) {
     $o = & pwsh -NoProfile -File $path 2>&1 | Out-String
     return @{ Out = $o; Code = $LASTEXITCODE }
   } -ArgumentList $unit.Path, $workerTemp
+}
+
+function Get-UnitAssertionCounts([string]$OutText) {
+  if ($OutText -match '(?m)^ASSERT_SUMMARY:\s*PASS=(\d+)\s+FAIL=(\d+)') {
+    return @{ Pass = [int]$Matches[1]; Fail = [int]$Matches[2] }
+  }
+  $p = ([regex]::Matches($OutText, '(?m)^\s*PASS\s')).Count
+  $f = ([regex]::Matches($OutText, '(?m)^\s*FAIL\s')).Count
+  return @{ Pass = $p; Fail = $f }
 }
 
 # $workerIdx 计数器分配 worker 目录是**错的**：unit1 先完成时 worker0 会被立刻分给 unit7，
@@ -187,9 +201,9 @@ while ($queue.Count -gt 0 -or $running.Count -gt 0) {
     $running.Remove($k)
     # 进度可见：长跑不能"闷着"（上一版跑了 25 分钟没有任何输出，看不出是在跑还是卡死）
     if (-not $Quiet -and -not $Summary) {
-      $p0 = ([regex]::Matches("$($res.Out)", '(?m)^\s*PASS\s')).Count
+      $c0 = Get-UnitAssertionCounts -OutText "$($res.Out)"
       Write-Host ("  [{0}/{1}] {2}/{3} exit={4} PASS={5} ({6:N1}s)" -f `
-        ($results.Count), $units.Count, $u.Module, $u.Name, $res.Code, $p0, $el)
+        ($results.Count), $units.Count, $u.Module, $u.Name, $res.Code, $c0.Pass, $el)
     }
   }
 }
@@ -200,11 +214,11 @@ $totalAssert = 0; $totalFail = 0; $failDetails = @(); $assertUncounted = 0
 foreach ($k in $results.Keys) {
   $r = $results[$k]
   $m = $r.Unit.Module
-  $p = ([regex]::Matches($r.Out, '(?m)^\s*PASS\s')).Count
-  $f = ([regex]::Matches($r.Out, '(?m)^\s*FAIL\s')).Count
-  # 各模块的测试格式不同：core-runtime 打 `PASS  ...`；storage-db / ui-scene 打中文「全部通过，N 个断言」
-  # （且它们的输出在跨进程捕获后可能已乱码）。PASS 计到 0 但退出码 0 时，**不能报成"0 个断言"**
-  # —— 那会让人误以为这个单元没断言。改为计一笔 `n/a`，单独在汇总里报数。
+  $c = Get-UnitAssertionCounts -OutText $r.Out
+  $p = $c.Pass
+  $f = $c.Fail
+  # 各模块的测试格式不同：core-runtime 打 `PASS  ...`；多文件模块 runner 末尾输出 `ASSERT_SUMMARY: PASS=N FAIL=M`。
+  # 若仍 0 断言且退出码为 0，单列 `n/a` 以便一眼暴露统计盲区。
   if ($p -eq 0 -and $f -eq 0 -and $r.Code -eq 0) {
     $assertUncounted++
   }

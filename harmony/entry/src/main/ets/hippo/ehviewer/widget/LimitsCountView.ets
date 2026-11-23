@@ -228,7 +228,7 @@ export struct LimitsCountView {
       }
       return;
     }
-    animateTo({ duration: 220, curve: Curve.FastOutSlowIn }, (): void => {
+    this.getUIContext().animateTo({ duration: 220, curve: Curve.FastOutSlowIn }, (): void => {
       this.expanded = !this.expanded;
     });
   }

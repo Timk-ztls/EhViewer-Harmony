@@ -82,7 +82,7 @@ class FilterActivityStateBridge implements FilterStatePort {
 
 @Entry
 @Component
-export struct FilterPage {
+struct FilterPage {
   @State ready: boolean = false;
   @State loading: boolean = true;
   @State loadError: string = '';

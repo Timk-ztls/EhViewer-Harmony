@@ -19,6 +19,8 @@ $ErrorActionPreference = 'Stop'
 
 $testDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $entryDir = Resolve-Path (Join-Path $testDir '..\..\..')
+. (Join-Path (Resolve-Path (Join-Path $entryDir '..\..')).Path 'scripts\lib\test_assert.ps1')
+Initialize-Utf8Console
 $srcDir = Join-Path $entryDir 'src'
 $work = Join-Path ([System.IO.Path]::GetTempPath()) ('download-sync-tests-' + $PID)
 
@@ -290,14 +292,31 @@ declare module '@ohos.util' {
     class TextDecoder {
       constructor(encoding?: string);
       decode(input?: ArrayBuffer | Uint8Array): string;
+      decodeToString(input?: ArrayBuffer | Uint8Array, options?: Object): string;
     }
     class TextEncoder {
       constructor(encoding?: string);
       encode(input?: string): Uint8Array;
+      encodeInto(input?: string): Uint8Array;
       encodeInto(input: string, dest: Uint8Array): { read: number; written: number };
     }
   }
   export default util;
+}
+
+declare module '@ohos.i18n' {
+  namespace i18n {
+    namespace System {
+      function getSystemLocaleInstance(): { toString(): string };
+    }
+  }
+  export default i18n;
+}
+
+declare module '@kit.ArkUI' {
+  export class UIContext {
+    getPromptAction(): { showToast(opts: Object): void };
+  }
 }
 '@
 [System.IO.File]::WriteAllText((Join-Path $work 'shims.d.ts'), $shim, [Text.UTF8Encoding]::new($false))
@@ -324,7 +343,8 @@ try {
   New-StubModule '@kit.CoreFileKit' 'exports.fileIo = require("@ohos.file.fs");'
   New-StubModule '@ohos.file.fileuri' 'exports.getUriFromPath = (p) => "file://" + p; exports.default = exports;'
   New-StubModule '@ohos.hilog' 'exports.debug = () => {}; exports.info = () => {}; exports.warn = () => {}; exports.error = () => {}; exports.default = exports;'
-  New-StubModule '@ohos.util' 'exports.TextEncoder = class { encode(s) { const b = Buffer.from(s === undefined ? "" : s); return new Uint8Array(b.buffer, b.byteOffset, b.byteLength); } }; exports.TextDecoder = class { decode(buf) { if (!buf) { return ""; } const v = buf instanceof Uint8Array ? buf : new Uint8Array(buf); return Buffer.from(v).toString("utf8"); } }; exports.default = exports;'
+  New-StubModule '@ohos.util' 'exports.TextEncoder = class { encodeInto(s, dest) { const b = Buffer.from(s === undefined ? "" : s); if (dest) { const n = Math.min(b.length, dest.length); for (let i = 0; i < n; i++) { dest[i] = b[i]; } return { read: String(s || "").length, written: n }; } return new Uint8Array(b.buffer, b.byteOffset, b.byteLength); } encode(s) { return this.encodeInto(s); } }; exports.TextDecoder = class { decodeToString(buf) { if (!buf) { return ""; } const v = buf instanceof Uint8Array ? buf : new Uint8Array(buf); return Buffer.from(v).toString("utf8"); } decode(buf) { return this.decodeToString(buf); } }; exports.default = exports;'
+  New-StubModule '@ohos.i18n' 'exports.System = { getSystemLocaleInstance: () => ({ toString: () => "zh-CN" }) }; exports.default = exports;'
   New-StubModule '@ohos.app.ability.common' 'exports.default = {};'
   New-StubModule '@ohos.data.relationalStore' 'exports.SecurityLevel = { S1: 1, S2: 2 }; exports.ConflictResolution = { ON_CONFLICT_NONE: 0, ON_CONFLICT_REPLACE: 5 }; exports.RdbPredicates = class { constructor(n) {} }; exports.default = exports;'
   New-StubModule '@ohos.data.preferences' 'exports.getPreferences = async () => ({ get: async () => undefined, put: async () => {}, flush: async () => {}, getAll: async () => ({}), delete: async () => {} }); exports.default = exports;'
@@ -334,7 +354,7 @@ try {
   New-StubModule '@ohos.display' 'exports.getDefaultDisplaySync = () => ({ width: 1080, height: 1920, densityPixels: 3, scaledDensity: 3 }); exports.default = exports;'
   New-StubModule '@ohos.hidebug' 'exports.getNativeHeapSize = () => 0; exports.getAppThreadCpuUsage = () => ({}); exports.getPss = () => 0; exports.getSystemMemInfo = () => ({ totalMem: 0, freeMem: 0, availableMem: 0 }); exports.default = exports;'
   New-StubModule '@kit.PerformanceAnalysisKit' 'exports.hilog = { debug: () => {}, info: () => {}, warn: () => {}, error: () => {}, fatal: () => {}, isLoggable: () => false };'
-  New-StubModule '@kit.ArkUI' 'exports.promptAction = { showToast: () => {}, showDialog: async () => ({}), openCustomDialog: async () => 0 }; exports.router = { pushUrl: () => {}, back: () => {} }; exports.window = {};'
+  New-StubModule '@kit.ArkUI' 'exports.UIContext = class { getPromptAction() { return { showToast: () => {} }; } }; exports.promptAction = { showToast: () => {}, showDialog: async () => ({}), openCustomDialog: async () => 0 }; exports.router = { pushUrl: () => {}, back: () => {} }; exports.window = {};'
   New-StubModule '@kit.AbilityKit' 'exports.wantAgent = { getWantAgent: async () => ({}), OperationType: { START_ABILITY: 1 }, WantAgentFlags: { UPDATE_PRESENT_FLAG: 1 } }; exports.common = {}; exports.UIAbility = class {};'
   New-StubModule '@kit.NetworkKit' 'exports.connection = { createNetConnection: () => ({ on: () => {}, register: () => {}, unregister: () => {} }) }; exports.http = { createHttp: () => ({ on: () => {}, off: () => {}, requestInStream: async () => 200, destroy: () => {} }), RequestMethod: { GET: "GET" }, HttpDataType: { ARRAY_BUFFER: 2 } };'
   New-StubModule '@kit.BackgroundTasksKit' 'exports.backgroundTaskManager = { startBackgroundRunning: async () => {}, stopBackgroundRunning: async () => {}, BackgroundMode: { DATA_TRANSFER: 1 } };'
@@ -344,6 +364,8 @@ try {
   New-StubModule '@ohos.file.picker' 'exports.DocumentViewPicker = class {}; exports.PhotoViewPicker = class {}; exports.default = exports;'
 
   $failed = 0
+  $totalPass = 0
+  $totalFail = 0
   foreach ($t in $tests) {
     $rel = 'test/download-sync/' + ($t.Name -replace '\.ts$', '')
     $out = Join-Path $work ('out/test/download-sync/' + ($t.Name -replace '\.ts$', '.js'))
@@ -367,11 +389,14 @@ try {
       $failed++
       continue
     }
-    node -r ./runtime-shims.js $out
-    if ($LASTEXITCODE -ne 0) { $failed++ }
+    $res = Invoke-NodeTestFile -NodeArgs @('-r', './runtime-shims.js', $out)
+    $totalPass += $res.Pass
+    $totalFail += $res.Fail
+    if ($res.ExitCode -ne 0 -or $res.Fail -gt 0) { $failed++ }
   }
+  Write-Host "ASSERT_SUMMARY: PASS=$totalPass FAIL=$totalFail"
   if ($failed -gt 0) { throw "$failed 个测试文件失败" }
-  Write-Host "`n全部测试通过" -ForegroundColor Green
+  Write-Host "`n全部测试通过（$totalPass 个断言）" -ForegroundColor Green
   exit 0
 } finally {
   Pop-Location

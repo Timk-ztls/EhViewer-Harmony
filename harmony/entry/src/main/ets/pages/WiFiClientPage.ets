@@ -68,7 +68,7 @@ class ClientLogItem {
 
 @Entry
 @Component
-export struct WiFiClientPage {
+struct WiFiClientPage {
   @State ready: boolean = false;
   @State localIp: string = '';
   @State localSsid: string = '';
@@ -483,16 +483,19 @@ export struct WiFiClientPage {
                 })
 
               Row({ space: 10 }) {
-                Button($r('app.string.cookie_login_import_in_clipboard'))
-                  .type(ButtonType.Normal)
+                PasteButton({ text: PasteDescription.PASTE, buttonType: ButtonType.Normal })
                   .fontSize(13)
                   .fontColor($r('app.color.teal_500'))
                   .backgroundColor($r('app.color.content_light'))
                   .borderRadius(6)
                   .padding({ left: 12, right: 12, top: 8, bottom: 8 })
                   .enabled(!this.transferring)
-                  .onClick(() => {
-                    this.pasteFromClipboard();
+                  .onClick((_event: ClickEvent, result: PasteButtonOnClickResult): void => {
+                    if (result === PasteButtonOnClickResult.SUCCESS) {
+                      this.pasteFromClipboard();
+                    } else {
+                      this.showToast($r('app.string.error_invalid_url'));
+                    }
                   })
 
                 Blank()

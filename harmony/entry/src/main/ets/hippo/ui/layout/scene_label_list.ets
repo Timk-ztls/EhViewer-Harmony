@@ -31,12 +31,12 @@ export struct SceneLabelListLayout {
       Stack() {
         Column() {
           this.recyclerViewBuilder()
-        }.id('recyclerView').width('100%').height('100%').padding({ left: $r('app.float.keyline_margin'), right: $r('app.float.keyline_margin'), top: $r('app.float.keyline_margin'), bottom: $r('app.float.keyline_margin') })
+        }.id('label_list_recyclerView').width('100%').height('100%').padding({ left: $r('app.float.keyline_margin'), right: $r('app.float.keyline_margin'), top: $r('app.float.keyline_margin'), bottom: $r('app.float.keyline_margin') })
         Column() {
           this.sceneLabelProgressBuilder()
         }.id('sceneLabelProgress').visibility(this.progressVisibility)
       }.width('100%').height('100%')
-      Text(this.tip).id('tip').width(228).textAlign(TextAlign.Center).align(Alignment.Center)
+      Text(this.tip).id('label_list_tip').width(228).textAlign(TextAlign.Center).align(Alignment.Center)
     }.width('100%').height('100%')
   }
 }

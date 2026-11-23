@@ -1,5 +1,7 @@
 # EhViewer for HarmonyOS
 
+[![CI](https://github.com/Timk-ztls/EhViewer-Harmony/actions/workflows/ci.yml/badge.svg)](https://github.com/Timk-ztls/EhViewer-Harmony/actions/workflows/ci.yml)
+
 基于上游 **EhViewer**（[xiaojieonly/Ehviewer_CN_SXJ](https://github.com/xiaojieonly/Ehviewer_CN_SXJ) / [seven332/EhViewer](https://github.com/seven332/EhViewer)）移植实现的 **HarmonyOS NEXT / OpenHarmony（API 20）** 原生客户端，使用 ArkTS + ArkUI 与 C++ NAPI 原生层开发。
 
 ## 主要特性
@@ -47,9 +49,10 @@
 $env:DEVECO_SDK_HOME = "$env:LOCALAPPDATA\Huawei\Sdk"
 $env:JAVA_HOME = "C:\Program Files\Java\jdk-21"
 
-# 使用 hvigorw 直接构建未签名 debug HAP
+# 使用 hvigorw 直接构建未签名 debug 或 release HAP
 cd harmony
 .\hvigorw.bat assembleHap --mode module -p product=default -p buildMode=debug --no-daemon
+.\hvigorw.bat assembleHap --mode module -p product=default -p buildMode=release --no-daemon
 
 # 或使用封装脚本（若 harmony/signing/ 下未放置签名材料，会自动保留未签名 HAP）
 pwsh -File scripts/build_hap.ps1
@@ -63,11 +66,14 @@ pwsh -File scripts/build_hap.ps1
 ## 单元测试与静态检查
 
 ```powershell
+# 首次运行（或无 DevEco 环境时）先初始化 TypeScript 与 @ohos.* / @kit.* 测试桩
+pwsh -File scripts/setup_tscheck.ps1
+
 # 运行全量单元测试套件
 pwsh -File scripts/run_all_tests.ps1
 
 # 静态门禁检查
-pwsh -File scripts/check_line_endings.ps1
+pwsh -File scripts/check_line_endings.ps1 -Gate
 pwsh -File scripts/check_contrast.ps1 -Gate
 pwsh -File scripts/check_contrast.ps1 -Path harmony/entry/src/main/ets/hippo/ehviewer/widget -Gate
 pwsh -File scripts/check_silent_failures.ps1 -Gate
@@ -78,6 +84,7 @@ pwsh -File scripts/check_resource_keys.ps1 -Gate
 
 ```text
 .
+├── .github/workflows/ci.yml  # GitHub Actions 自动化门禁与单测流水线（windows-latest）
 ├── harmony/                  # DevEco Studio / Hvigor 主工程（AppScope + entry 模块）
 │   ├── AppScope/             # 全局 app.json5（默认包名 com.ehviewer.harmony）及应用图标/名称
 │   └── entry/
@@ -85,7 +92,8 @@ pwsh -File scripts/check_resource_keys.ps1 -Gate
 │       ├── src/main/ets/     # ArkTS 源码（EntryAbility、Index、hippo 核心与 UI 组件）
 │       ├── src/main/resources/
 │       └── src/test/         # 模块化单元测试套件
-├── scripts/                  # 构建、测试与静态质量检查脚本
+├── scripts/                  # 构建、测试（含 setup_tscheck.ps1）与静态质量检查脚本
+├── CHANGELOG.md              # 版本更新日志
 ├── DEVIATIONS.md             # 相对上游 Android 实现的平台差异适配说明与已知能力边界
 ├── LICENSE                   # GNU General Public License v3.0
 └── README.md

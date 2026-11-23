@@ -51,7 +51,6 @@
  *      改为 `promptAction.showToast`（UI 提示语义一致）。
  */
 
-import { promptAction } from '@kit.ArkUI';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { fileIo as fs } from '@kit.CoreFileKit';
 import { http } from '@kit.NetworkKit';
@@ -1102,11 +1101,7 @@ export class ArchiverDownloader {
   }
 
   private toast(message: string): void {
-    try {
-      promptAction.showToast({ message: message, duration: 3000 });
-    } catch (e) {
-      hilog.warn(DOMAIN, TAG, 'showToast failed: %{public}s', this.errorToString(e as Object));
-    }
+    ArchiverDownloadCompleter.showToastSafely(message, 3000);
   }
 
   // -------------------------------------------------------------- 静态工具

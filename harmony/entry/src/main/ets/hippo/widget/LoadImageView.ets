@@ -420,7 +420,7 @@ export struct LoadImageView {
         this.failed = false;
         if (fadeIn) {
           this.imageAlpha = 0.0;
-          animateTo({ duration: 300, curve: Curve.Linear }, () => {
+          this.getUIContext().animateTo({ duration: 300, curve: Curve.Linear }, () => {
             if (this.alive) {
               this.imageAlpha = 1.0;
             }

@@ -19,6 +19,8 @@ $ErrorActionPreference = 'Stop'
 
 $testDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $entryDir = Resolve-Path (Join-Path $testDir '..\..\..')
+. (Join-Path (Resolve-Path (Join-Path $entryDir '..\..')).Path 'scripts\lib\test_assert.ps1')
+Initialize-Utf8Console
 $srcDir = Join-Path $entryDir 'src'
 # 每个进程用自己的临时目录。
 # 为什么：两个 run.ps1 同时跑（例如一个 -Filter 一个全量）时若共用同一目录，会出现
@@ -572,6 +574,8 @@ exports.default = exports;
   New-StubModule '@kit.PerformanceAnalysisKit' 'exports.hilog = { debug(){}, info(){}, warn(){}, error(){} }; exports.hiTraceMeter = { startTrace(){}, finishTrace(){} }; exports.hiAppEvent = { write(){} };'
 
   $failed = 0
+  $totalPass = 0
+  $totalFail = 0
   foreach ($t in $tests) {
     $rel = 'test/storage-db/' + ($t.Name -replace '\.ts$', '')
     $out = Join-Path $work ('out/test/storage-db/' + ($t.Name -replace '\.ts$', '.js'))
@@ -588,10 +592,13 @@ exports.default = exports;
       $mine | ForEach-Object { Write-Host "  tsc: $_" -ForegroundColor Yellow }
       $failed++; continue
     }
-    node --require $decoratorsJs $out
-    if ($LASTEXITCODE -ne 0) { $failed++ }
+    $res = Invoke-NodeTestFile -NodeArgs @('--require', $decoratorsJs, $out)
+    $totalPass += $res.Pass
+    $totalFail += $res.Fail
+    if ($res.ExitCode -ne 0 -or $res.Fail -gt 0) { $failed++ }
   }
+  Write-Host "ASSERT_SUMMARY: PASS=$totalPass FAIL=$totalFail"
   if ($failed -gt 0) { throw "$failed 个测试文件失败" }
-  Write-Host "`n全部测试通过" -ForegroundColor Green
+  Write-Host "`n全部测试通过（$totalPass 个断言）" -ForegroundColor Green
   exit 0
 } finally { Pop-Location }

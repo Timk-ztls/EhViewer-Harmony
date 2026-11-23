@@ -96,7 +96,7 @@ const EXCLUDED_LANGUAGE_PATTERNS: string[] = [
 
 @Entry
 @Component
-export struct SettingsPage {
+struct SettingsPage {
   @State settingsReady: boolean = false;
   @State activeSection: string = '';
   @State excludedLangSheetOpen: boolean = false;

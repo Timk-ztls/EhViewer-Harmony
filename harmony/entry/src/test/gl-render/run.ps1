@@ -16,6 +16,8 @@ $ErrorActionPreference = 'Stop'
 
 $testDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $entryDir = Resolve-Path (Join-Path $testDir '..\..\..')   # harmony/entry
+. (Join-Path (Resolve-Path (Join-Path $entryDir '..\..')).Path 'scripts\lib\test_assert.ps1')
+Initialize-Utf8Console
 $srcDir = Join-Path $entryDir 'src'
 $work = Join-Path ([System.IO.Path]::GetTempPath()) ('gl-render-tests-' + $PID)
 
@@ -162,6 +164,8 @@ try {
   # 返回一个"总内存 8GB"的假值，让 ImageCache 的 clamp(总内存/16, 32MB, 128MB) 得到 128MB
   New-StubModule '@ohos.hidebug' 'exports.default = { getSystemMemInfo: function () { return { totalMem: 8 * 1024 * 1024 * 1024 }; } };'
   $failed = 0
+  $totalPass = 0
+  $totalFail = 0
   foreach ($t in $tests) {
     $rel = 'test/gl-render/' + ($t.Name -replace '\.ts$', '')
     $out = Join-Path $work ('out/test/gl-render/' + ($t.Name -replace '\.ts$', '.js'))
@@ -181,11 +185,14 @@ try {
       $failed++
       continue
     }
-    node $out
-    if ($LASTEXITCODE -ne 0) { $failed++ }
+    $res = Invoke-NodeTestFile -NodeArgs @($out)
+    $totalPass += $res.Pass
+    $totalFail += $res.Fail
+    if ($res.ExitCode -ne 0 -or $res.Fail -gt 0) { $failed++ }
   }
+  Write-Host "ASSERT_SUMMARY: PASS=$totalPass FAIL=$totalFail"
   if (-not $Keep) { }
   if ($failed -gt 0) { throw "$failed 个测试文件失败" }
-  Write-Host "`n全部测试通过" -ForegroundColor Green
+  Write-Host "`n全部测试通过（$totalPass 个断言）" -ForegroundColor Green
   exit 0
 } finally { Pop-Location }

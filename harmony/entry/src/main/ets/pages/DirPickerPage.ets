@@ -21,7 +21,7 @@ const LOG_TAG: string = 'DirPickerPage';
 
 @Entry
 @Component
-export struct DirPickerPage {
+struct DirPickerPage {
   @State ready: boolean = false;
   @State currentPath: string = '';
   @State entries: string[] = [];

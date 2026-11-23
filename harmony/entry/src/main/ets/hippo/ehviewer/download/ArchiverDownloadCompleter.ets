@@ -52,7 +52,7 @@ import { BusinessError } from '@kit.BasicServicesKit';
 import i18n from '@ohos.i18n';
 import { fileIo as fs } from '@kit.CoreFileKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
-import { promptAction } from '@kit.ArkUI';
+import { UIContext } from '@kit.ArkUI';
 import { zlib } from '@kit.BasicServicesKit';
 
 import { AppConfig } from '../AppConfig';
@@ -115,7 +115,7 @@ export function archiverLabelFor(langTag: string): string {
  *
  * 抽成常量是为了可注入：单测能替换成 `() => 'zh-Hant-TW'` 等，从而断言"调用点喂进来的形状"。
  */
-export const SYSTEM_LOCALE_PROVIDER: () => string = (): string => i18n.System.getSystemLocale();
+export const SYSTEM_LOCALE_PROVIDER: () => string = (): string => i18n.System.getSystemLocaleInstance().toString();
 
 /** 当前系统 locale 下的归档标签名（读不到时按英文默认，与上游 `values/` 一致）。 */
 export function archiverLabel(provider: () => string = SYSTEM_LOCALE_PROVIDER): string {
@@ -138,6 +138,25 @@ export interface ImportTarget {
 
 export class ArchiverDownloadCompleter {
   private static sInstance: ArchiverDownloadCompleter | null = null;
+  private static sUiContext: UIContext | null = null;
+
+  public static setUiContext(ctx: UIContext | null): void {
+    ArchiverDownloadCompleter.sUiContext = ctx;
+  }
+
+  public static showToastSafely(message: string | Resource, duration: number = 3000): void {
+    const ctx: UIContext | null = ArchiverDownloadCompleter.sUiContext;
+    if (ctx === null) {
+      hilog.info(DOMAIN, TAG, 'showToast skipped (no UIContext)');
+      return;
+    }
+    try {
+      ctx.getPromptAction().showToast({ message: message, duration: duration });
+    } catch (e) {
+      const msg: string = e instanceof Error ? e.message : String(e);
+      hilog.warn(DOMAIN, TAG, 'showToast failed: %{public}s', msg);
+    }
+  }
 
   /** 正在处理的 taskId 集合（上游 `handlingIds = HashSet<Long>()`）。 */
   private readonly handlingIds: Set<number> = new Set<number>();
@@ -221,11 +240,7 @@ export class ArchiverDownloadCompleter {
     await Settings.deleteArchiverDownloadUrl(taskId);
     await Settings.deleteArchiverDownloadPaused(taskId);
     await Settings.deleteArchiverDownloadTotal(taskId);
-    try {
-      promptAction.showToast({ message: $r('app.string.import_album_failed'), duration: 3000 });
-    } catch (e) {
-      hilog.warn(DOMAIN, TAG, 'showToast failed');
-    }
+    ArchiverDownloadCompleter.showToastSafely($r('app.string.import_album_failed'), 3000);
   }
 
   private async postImportFailed(galleryInfo: GalleryInfo | null, taskId: number): Promise<void> {
@@ -434,11 +449,7 @@ export class ArchiverDownloadCompleter {
     const manager: DownloadManager = await DownloadManager.getInstance();
     await manager.addLabel(archiverLabel());
     await manager.addDownload(galleryInfo, archiverLabel(), DownloadInfo.STATE_FINISH);
-    try {
-      promptAction.showToast({ message: `已成功下载 ${displayName}`, duration: 3000 });
-    } catch (e) {
-      hilog.warn(DOMAIN, TAG, 'showToast failed');
-    }
+    ArchiverDownloadCompleter.showToastSafely(`已成功下载 ${displayName}`, 3000);
     await Settings.deleteArchiverDownloadId(galleryInfo.gid);
     await Settings.deleteArchiverDownload(taskId);
     await Settings.deleteArchiverDownloadUrl(taskId);

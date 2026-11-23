@@ -75,7 +75,7 @@ export struct NavDrawerPanel {
     }
     this.panelTranslateX = -ThemeDimens.DRAWER_MAX_WIDTH;
     this.scrimOpacity = 0;
-    animateTo({ duration: 220, curve: Curve.FastOutSlowIn }, (): void => {
+    this.getUIContext().animateTo({ duration: 220, curve: Curve.FastOutSlowIn }, (): void => {
       this.panelTranslateX = 0;
       this.scrimOpacity = 1;
     });
@@ -98,7 +98,7 @@ export struct NavDrawerPanel {
     this.lastSettledSeq = this.settleSeq;
     if (this.settleOpen) {
       this.closing = false;
-      animateTo({ duration: 180, curve: Curve.FastOutSlowIn }, (): void => {
+      this.getUIContext().animateTo({ duration: 180, curve: Curve.FastOutSlowIn }, (): void => {
         this.panelTranslateX = 0;
         this.scrimOpacity = 1;
       });
@@ -113,7 +113,7 @@ export struct NavDrawerPanel {
     }
     this.limitsCollapseSeq = this.limitsCollapseSeq + 1;
     this.closing = true;
-    animateTo({
+    this.getUIContext().animateTo({
       duration: 180,
       curve: Curve.FastOutLinearIn,
       onFinish: (): void => {
@@ -466,7 +466,7 @@ export struct NavDrawerPanel {
           if (event.offsetX <= -ThemeDimens.DRAWER_MAX_WIDTH * 0.35 || event.velocityX < -350) {
             this.closeAnimated();
           } else {
-            animateTo({ duration: 160, curve: Curve.FastOutSlowIn }, (): void => {
+            this.getUIContext().animateTo({ duration: 160, curve: Curve.FastOutSlowIn }, (): void => {
               this.panelTranslateX = 0;
               this.scrimOpacity = 1;
             });
@@ -476,7 +476,7 @@ export struct NavDrawerPanel {
           if (this.panelTranslateX <= -ThemeDimens.DRAWER_MAX_WIDTH * 0.35) {
             this.closeAnimated();
           } else {
-            animateTo({ duration: 160, curve: Curve.FastOutSlowIn }, (): void => {
+            this.getUIContext().animateTo({ duration: 160, curve: Curve.FastOutSlowIn }, (): void => {
               this.panelTranslateX = 0;
               this.scrimOpacity = 1;
             });

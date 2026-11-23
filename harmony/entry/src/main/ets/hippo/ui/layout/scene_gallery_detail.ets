@@ -71,7 +71,7 @@ export struct SceneGalleryDetailLayout {
             fillColor: this.palette().drawableSecondary
           })
           Text(this.tip)
-            .id('tip')
+            .id('detail_tip')
             .width(228)
             .fontSize(ThemeTypography.TEXT_MEDIUM)
             .fontColor(this.palette().textSecondary)

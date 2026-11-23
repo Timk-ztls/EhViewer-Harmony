@@ -9,7 +9,7 @@ const LOG_TAG: string = 'LicensePage';
 
 @Entry
 @Component
-export struct LicensePage {
+struct LicensePage {
   private webController: webview.WebviewController = new webview.WebviewController();
   @State loading: boolean = true;
 

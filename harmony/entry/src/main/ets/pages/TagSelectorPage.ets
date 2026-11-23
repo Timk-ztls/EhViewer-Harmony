@@ -63,7 +63,7 @@ class TagChipTripleRow {
 
 @Entry
 @Component
-export struct TagSelectorPage {
+struct TagSelectorPage {
   @State ready: boolean = false;
   @State isDarkMode: boolean = false;
   @State isChineseSystem: boolean = true;

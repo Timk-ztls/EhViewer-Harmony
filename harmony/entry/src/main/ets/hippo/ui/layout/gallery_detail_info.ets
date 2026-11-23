@@ -68,7 +68,7 @@ export struct GalleryDetailInfoLayout {
             .textOverflow({ overflow: TextOverflow.Ellipsis })
 
           Text(this.posted)
-            .id('posted')
+            .id('detail_info_posted')
             .layoutWeight(1)
             .fontSize(ThemeTypography.TEXT_SMALL)
             .fontColor(this.palette().textPrimary)

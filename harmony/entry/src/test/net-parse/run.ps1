@@ -30,6 +30,9 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $here = $PSScriptRoot
+$assertHelper = Join-Path (Resolve-Path (Join-Path $here '..\..\..\..\..')).Path 'scripts\lib\test_assert.ps1'
+. $assertHelper
+Initialize-Utf8Console
 $outRoot = Join-Path ([IO.Path]::GetTempPath()) ('net-parse-tests-' + $PID)
 $genRoot = Join-Path $outRoot 'gen'
 $jsRoot = Join-Path $outRoot 'js'
@@ -43,7 +46,8 @@ if (-not (Test-Path $EtsRoot)) { throw "被测树不存在：$EtsRoot" }
 $TscCandidates = @(
   (Join-Path $env:LOCALAPPDATA 'Huawei\Sdk\20\ets\build-tools\ets-loader\node_modules\typescript\lib\tsc.js'),
   (Join-Path $env:LOCALAPPDATA 'Huawei\Sdk\20\ets\build-tools\ets-loader\node_modules\typescript\bin\tsc'),
-  (Join-Path $env:USERPROFILE 'AppData\Local\Huawei\Sdk\20\ets\build-tools\ets-loader\node_modules\typescript\lib\tsc.js')
+  (Join-Path $env:USERPROFILE 'AppData\Local\Huawei\Sdk\20\ets\build-tools\ets-loader\node_modules\typescript\lib\tsc.js'),
+  (Join-Path $env:TEMP 'tscheck\node_modules\typescript\lib\tsc.js')
 )
 $tsc = $null
 foreach ($c in $TscCandidates) { if (Test-Path $c) { $tsc = $c; break } }
@@ -276,17 +280,22 @@ New-Item -ItemType Directory -Force -Path (Join-Path $shimRoot '@ohos.net.connec
 Set-Content -Path (Join-Path $shimRoot '@ohos.net.connection\index.js') -Value $connShim -NoNewline
 # ---- 4) 跑 ----
 $failed = @()
+$totalPass = 0
+$totalFail = 0
 foreach ($t in $tests) {
   $jsFile = Join-Path (Join-Path $jsRoot $TestHome) ($t.BaseName + '.js')
   if (-not (Test-Path $jsFile)) { throw "找不到编译产物：$jsFile" }
   Write-Host "`n▶ node $jsFile" -ForegroundColor Cyan
-  & $node $jsFile
-  if ($LASTEXITCODE -ne 0) { $failed += $t.Name }
+  $res = Invoke-NodeTestFile -NodeExe $node -NodeArgs @($jsFile)
+  $totalPass += $res.Pass
+  $totalFail += $res.Fail
+  if ($res.ExitCode -ne 0 -or $res.Fail -gt 0) { $failed += $t.Name }
 }
 
+Write-Host "ASSERT_SUMMARY: PASS=$totalPass FAIL=$totalFail"
 if ($failed.Count -gt 0) {
   Write-Host "`n✗ 失败：$($failed -join ', ')" -ForegroundColor Red
   exit 1
 }
-Write-Host "`n✓ 全部通过（$($tests.Count) 个测试文件）" -ForegroundColor Green
+Write-Host "`n✓ 全部通过（$($tests.Count) 个测试文件，$totalPass 个断言）" -ForegroundColor Green
 

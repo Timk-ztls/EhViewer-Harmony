@@ -134,7 +134,7 @@ class UConfigPageListenerImpl implements UConfigPageListener {
 
 @Entry
 @Component
-export struct UConfigPage {
+struct UConfigPage {
   @State ready: boolean = false;
   @State targetUrl: string = '';
   @State progressVisible: boolean = false;

@@ -365,7 +365,7 @@ struct ReaderSlideView {
       this.offsetY = 0;
     };
     if (animated) {
-      animateTo({ duration: 180, curve: Curve.FastOutSlowIn }, apply);
+      this.getUIContext().animateTo({ duration: 180, curve: Curve.FastOutSlowIn }, apply);
     } else {
       apply();
     }
@@ -391,7 +391,7 @@ struct ReaderSlideView {
     if (this.scaleValue > 1.05) {
       this.resetTransform(true);
     } else {
-      animateTo({ duration: 180, curve: Curve.FastOutSlowIn }, (): void => {
+      this.getUIContext().animateTo({ duration: 180, curve: Curve.FastOutSlowIn }, (): void => {
         this.scaleValue = 2.0;
         this.offsetX = 0;
         this.offsetY = 0;
@@ -3183,7 +3183,7 @@ struct GalleryReaderPage {
             })
             .onActionEnd((): void => {
               if (this.webtoonScale <= 1.05) {
-                animateTo({ duration: 150, curve: Curve.FastOutSlowIn }, (): void => {
+                this.getUIContext().animateTo({ duration: 150, curve: Curve.FastOutSlowIn }, (): void => {
                   this.webtoonScale = 1.0;
                 });
               }

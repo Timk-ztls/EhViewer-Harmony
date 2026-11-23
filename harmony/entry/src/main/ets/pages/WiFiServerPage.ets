@@ -73,7 +73,7 @@ class ServerLogItem {
 
 @Entry
 @Component
-export struct WiFiServerPage {
+struct WiFiServerPage {
   @State ready: boolean = false;
   @State serverRunning: boolean = false;
   @State starting: boolean = false;

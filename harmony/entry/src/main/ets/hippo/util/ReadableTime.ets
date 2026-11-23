@@ -80,7 +80,7 @@ export class ReadableTime {
       return `${num} ${name}`;
     }
     try {
-      return mgr.getPluralStringByNameSync(name, num);
+      return mgr.getIntPluralStringByNameSync(name, num);
     } catch (e) {
       return `${num} ${name}`;
     }

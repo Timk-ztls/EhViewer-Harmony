@@ -1531,16 +1531,9 @@ class SettingsLegacyCookieAdapter implements LegacyCookieStoreLike {
 
 class SystemPasteboardAdapter implements ClipboardLike {
   getText(): string {
-    try {
-      const board: pasteboard.SystemPasteboard = pasteboard.getSystemPasteboard();
-      const data: pasteboard.PasteData = board.getDataSync();
-      const text: string = data.getPrimaryText();
-      return text !== undefined && text !== null ? text : '';
-    } catch (e) {
-      const msg: string = e instanceof Error ? e.message : String(e);
-      hilog.warn(DOMAIN, TAG, 'SystemPasteboard read skipped: %{public}s', msg);
-      return '';
-    }
+    // HarmonyOS NEXT restricts background/implicit clipboard reads to system_basic permission
+    // `ohos.permission.READ_PASTEBOARD`; normal apps degrade safely and ask user to paste manually.
+    return '';
   }
 }
 

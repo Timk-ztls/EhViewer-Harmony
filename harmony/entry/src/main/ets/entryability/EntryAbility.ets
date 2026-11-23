@@ -4,6 +4,7 @@ import { window } from '@kit.ArkUI';
 import { AppWiring } from '../hippo/AppWiring';
 import { EhApplication } from '../hippo/ehviewer/EhApplication';
 import { installCrashHandler } from '../hippo/ehviewer/CrashObserver';
+import { ArchiverDownloadCompleter } from '../hippo/ehviewer/download/ArchiverDownloadCompleter';
 import { ArchiverDownloadService } from '../hippo/ehviewer/download/ArchiverDownloadService';
 import { DownloadService } from '../hippo/ehviewer/download/DownloadService';
 import { ShortcutsActivity } from '../hippo/ehviewer/shortcuts/ShortcutsActivity';
@@ -154,6 +155,14 @@ export default class EntryAbility extends UIAbility {
         hilog.error(DOMAIN, TAG, 'loadContent failed: %{public}s', JSON.stringify(err));
         return;
       }
+      if (this.mainWindow !== null) {
+        try {
+          ArchiverDownloadCompleter.setUiContext(this.mainWindow.getUIContext());
+        } catch (uiErr) {
+          hilog.warn(DOMAIN, TAG, 'getUIContext failed: %{public}s',
+            uiErr instanceof Error ? uiErr.message : JSON.stringify(uiErr));
+        }
+      }
       applySystemBarTheme(this.context, initialThemeId, false);
       if (this.mainWindow === null) {
         applyWindowPrivacyMode(this.context, initialPrivacy, false);
@@ -172,6 +181,7 @@ export default class EntryAbility extends UIAbility {
 
   onWindowStageDestroy(): void {
     hilog.info(DOMAIN, TAG, 'onWindowStageDestroy');
+    ArchiverDownloadCompleter.setUiContext(null);
     this.mainWindow = null;
   }
 
