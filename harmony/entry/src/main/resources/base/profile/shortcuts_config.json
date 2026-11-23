@@ -6,7 +6,7 @@
       "icon": "$media:ic_shortcut_start",
       "wants": [
         {
-          "bundleName": "com.ehviewer.harmony",
+          "bundleName": "com.ehviewer.next",
           "moduleName": "entry",
           "abilityName": "EntryAbility",
           "parameters": {
@@ -21,7 +21,7 @@
       "icon": "$media:ic_shortcut_stop",
       "wants": [
         {
-          "bundleName": "com.ehviewer.harmony",
+          "bundleName": "com.ehviewer.next",
           "moduleName": "entry",
           "abilityName": "EntryAbility",
           "parameters": {

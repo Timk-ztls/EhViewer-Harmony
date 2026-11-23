@@ -142,10 +142,7 @@ export class SolidScene extends BaseScene {
           }
           break;
         case SolidScene.CHECK_STEP_WARNING:
-          if (this.settings().getAskAnalytics()) {
-            this.startScene(new Announcer(AnalyticsSceneName).setArgs(args));
-            return;
-          }
+          // D-006: 鸿蒙版已作废 AnalyticsScene，接受安全警告后直接进入下一步检查
           break;
         case SolidScene.CHECK_STEP_ANALYTICS:
           if (this.solidSceneNeedSignedIn()) {

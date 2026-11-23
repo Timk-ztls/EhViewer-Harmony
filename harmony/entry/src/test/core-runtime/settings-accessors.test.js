@@ -156,7 +156,9 @@ eq([S.getSecurity(), S.getEnableFingerprint(), S.getEnabledSecurity()], ['1234',
 eq(S.getReadingFullscreen(), true, 'putEnabledSecurity 修复：不再误改 reading_fullscreen');
 
 eq([S.getShowWarning(), S.getAskAnalytics(), S.getNeedSignIn(), S.getSelectSite()],
-  [true, true, true, true], '启动门默认全 true');
+  [true, false, true, true], '启动门默认除 askAnalytics=false 外全 true');
+S.putAskAnalytics(true);
+eq(S.getAskAnalytics(), true, 'putAskAnalytics(true) 写读往返');
 S.putShowWarning(false);
 S.putAskAnalytics(false);
 S.putNeedSignIn(false);

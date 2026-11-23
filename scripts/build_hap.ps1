@@ -15,7 +15,7 @@ param(
   [switch]$Clean,
   [string]$JdkHome = '',
   [string]$SdkHome = '',
-  [string]$KeyAlias = 'ehviewer_app'
+  [string]$KeyAlias = 'ehviewer_next'
 )
 
 $ErrorActionPreference = 'Stop'

@@ -1784,7 +1784,8 @@ export class Settings {
   }
 
   static readonly KEY_ASK_ANALYTICS: string = 'ask_analytics';
-  static readonly DEFAULT_ASK_ANALYTICS: boolean = true;
+  // D-006: 鸿蒙版已永久移除统计 SDK，默认不再询问收集数据
+  static readonly DEFAULT_ASK_ANALYTICS: boolean = false;
 
   static getAskAnalytics(): boolean {
     return Settings.getBoolean(Settings.KEY_ASK_ANALYTICS, Settings.DEFAULT_ASK_ANALYTICS);

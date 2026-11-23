@@ -106,7 +106,7 @@ const ID_509: number = 3;
 const NOTIFICATION_DELAY_MS: number = 1000;
 
 /** 通知渠道（slot）标识。 */
-const SLOT_ID: string = 'com.ehviewer.harmony.download';
+const SLOT_ID: string = 'com.ehviewer.next.download';
 
 /** 节流器动作（对应上游 show / cancel / startForeground(immediate) / startForeground）。 */
 export class NotificationDelayAction {
@@ -1088,7 +1088,7 @@ export class DownloadService implements DownloadListener {
   }
 
   private buildActionWantInfo(action: string, gid: number, requestCodeOverride?: number): wantAgent.WantAgentInfo {
-    const bundleName: string = this.context === null ? 'com.ehviewer.harmony' : this.context.abilityInfo.bundleName;
+    const bundleName: string = this.context === null ? 'com.ehviewer.next' : this.context.abilityInfo.bundleName;
     const abilityName: string = this.context === null ? 'EntryAbility' : this.context.abilityInfo.name;
     const want: Want = {
       bundleName: bundleName,

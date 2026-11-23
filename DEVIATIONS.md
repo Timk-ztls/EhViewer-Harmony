@@ -8,12 +8,12 @@
 
 | # | 上游行为 | 鸿蒙平台限制 | 裁决结果 | 状态 |
 |---|---|---|---|---|
-| **D-001** | 包名由 `applicationId` 决定 | HarmonyOS `app.json5` `bundleName` 配置 | **`bundleName = com.ehviewer.harmony`**（开源分支默认包名，可在 `app.json5` 与签名 profile 保持一致的前提下按需修改） | 已裁决·已落地 |
+| **D-001** | 包名由 `applicationId` 决定 | HarmonyOS `app.json5` `bundleName` 配置（华为 AGC 禁用 `oh`/`ohos`/`harmony`/`harmonyos`/`openharmony`/`system` 独立段） | **`bundleName = com.ehviewer.next`**（开源分支默认包名，开发者自编译前可通过 `scripts/set_bundle_name.ps1` 一键改为自己的包名并与签名 Profile 保持一致） | 已裁决·已落地 |
 | **D-002** | WiFi 直连传书：`WifiServerService` 反射 `WifiManager` 建热点 + `WifiClient` 扫描连接 | 三方应用无热点创建 API（`@ohos.wifiManager` 只暴露状态查询与连接） | **方案 A**：降级为「同一局域网 HTTP 传书」——本机起 HTTP 服务 + 二维码/手填 IP，移除热点创建与自动连接 | 已裁决·待实现 |
 | **D-003** | `AppUpdater.kt` 下载 APK 后 `ACTION_INSTALL_PACKAGE` 安装 | 三方应用不能安装 HAP，必须经系统/应用市场 | **方案 B**：**删除 `updater` 模块**，`VersionPreference` 应用内更新入口一并移除 | 已裁决·已落地 |
 | **D-004** | 7z 归档解压（`a7zip_XJ` 依赖） | 鸿蒙无现成 7z 库 | **方案 A**：NDK 编译 LZMA SDK / 7-Zip C 源 + NAPI 封装，与 `cpp/` 同构建体系 | 已裁决·待实现 |
 | **D-005** | `Conscrypt` 自定义 TLS Provider | 系统网络栈固定，不可替换 Provider | 删除 `conscrypt-android`，TLS 参数走 `@ohos.net.http` 的 `HttpRequestOptions` | 已裁决·无行为影响 |
-| **D-006** | Firebase Crashlytics + Analytics 上报 | 鸿蒙无 GMS | **方案 A**：移除依赖与初始化，崩溃日志落本地文件 | 已裁决·待实现 |
+| **D-006** | Firebase Crashlytics + Analytics 上报 | 鸿蒙无 GMS | **方案 A**：移除依赖与初始化，崩溃日志落本地文件；启动门链永久跳过并作废 `AnalyticsScene` 收集数据询问页 | 已裁决·已落地 |
 | **D-007** | 阅读器自绘 OpenGL 栈（`glview` 67 文件 / 14.8k 行） | 无 `GLSurfaceView`，但有 `XComponent` + native EGL/GLES3 | **方案 A**：`XComponent` + NDK EGL/GLES3 重写，保留 `GLCanvas/GLES20Canvas/Texture` 结构（Stage C P5 已落地 `GalleryReaderPage` 切接 + Watchdog/3 次错误自动回退 ArkUI `Swiper`） | 已裁决·已落地 |
 | **D-008** | 安装包装载于零售机 | 本机 SDK 20 缺 `hms` 组件，`HmosSdkLoader` 报 `SDK component missing` | **方案 A**：`runtimeOS: "OpenHarmony"` + `compileSdkVersion: 20` 编译（已验证 BUILD SUCCESSFUL）；上架前再补 DevEco all-in-one 环境切回 `HarmonyOS` | 已裁决·已落地 |
 | **D-009** | — | HarmonyOS 应用签名机制 | 仓库不提交私钥与 `.p7b` 签名材料；本地调试请使用 DevEco Studio 自动签名或自备签名证书 | 已裁决·已落地 |

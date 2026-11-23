@@ -1,0 +1,54 @@
+name: Bug Report
+description: 反馈编译错误、界面异常、崩溃或与预期不符的行为
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈问题！请尽量提供完整环境与复现信息以便定位。
+  - type: input
+    id: version
+    attributes:
+      label: 应用版本 / Commit
+      description: 例如 v2.0.2.7.2 或具体的 git commit hash
+      placeholder: v2.0.2.7.2
+    validations:
+      required: true
+  - type: input
+    id: os_device
+    attributes:
+      label: 系统版本与设备型号
+      description: 例如 HarmonyOS NEXT x.x / 设备型号
+    validations:
+      required: true
+  - type: dropdown
+    id: build_source
+    attributes:
+      label: 安装包来源 / 构建方式
+      options:
+        - DevEco Studio 自动签名编译安装
+        - scripts/build_hap.ps1 命令行编译 + 手动 AGC 签名
+        - GitHub Releases 下载未签名包自行签名
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      placeholder: |
+        1. 打开页面 ...
+        2. 点击 ...
+        3. 观察到 ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期行为与实际表现
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: 相关日志或截图信息（可选）
+      description: 若涉及 hilog / 构建报错 / 弹窗提示，请粘贴脱敏后的关键信息

@@ -122,8 +122,8 @@ export class UnwiredSolidSceneSettings implements SolidSceneSettings {
   }
 
   getAskAnalytics(): boolean {
-    hilog.warn(DOMAIN, TAG, 'Settings not wired: using DEFAULT_ASK_ANALYTICS=true');
-    return true;
+    hilog.warn(DOMAIN, TAG, 'Settings not wired: using DEFAULT_ASK_ANALYTICS=false');
+    return false;
   }
 
   getSelectSite(): boolean {

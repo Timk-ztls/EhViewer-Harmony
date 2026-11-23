@@ -1,0 +1,20 @@
+name: Feature Request
+description: 建议新特性、上游同步需求或 HarmonyOS 平台体验改进
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: 需求简述
+      description: 希望新增或改进什么功能？
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: 使用场景与上游对应参考（可选）
+      description: 如对应上游 EhViewer / Ehviewer_CN_SXJ 的特定特性，请注明以便对照实现
+  - type: textarea
+    id: details
+    attributes:
+      label: 期望表现与补充说明

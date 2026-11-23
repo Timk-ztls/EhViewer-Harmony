@@ -63,20 +63,27 @@ function testLaunchChain(): void {
   const noWarn: StartupGates = gates(true);
   noWarn.hasSecurity = false;
   noWarn.showWarning = false;
-  eq('再少警告 → Analytics', MainActivity.launchAnnouncerFor(noWarn).sceneName, 'AnalyticsScene');
+  eq('再少警告 → 跳过已作废的 AnalyticsScene 直接进 SignIn',
+    MainActivity.launchAnnouncerFor(noWarn).sceneName, 'SignInScene');
 
   const noAna: StartupGates = gates(true);
   noAna.hasSecurity = false;
   noAna.showWarning = false;
   noAna.askAnalytics = false;
-  eq('再少统计 → SignIn', MainActivity.launchAnnouncerFor(noAna).sceneName, 'SignInScene');
+  eq('askAnalytics=false → SignIn', MainActivity.launchAnnouncerFor(noAna).sceneName, 'SignInScene');
 
   const noSign: StartupGates = gates(true);
   noSign.hasSecurity = false;
   noSign.showWarning = false;
-  noSign.askAnalytics = false;
   noSign.needSignedIn = false;
-  eq('再少登录 → SelectSite', MainActivity.launchAnnouncerFor(noSign).sceneName, 'SelectSiteScene');
+  eq('再少登录（即使 askAnalytics=true）→ SelectSite',
+    MainActivity.launchAnnouncerFor(noSign).sceneName, 'SelectSiteScene');
+
+  const noSiteWithAna: StartupGates = none();
+  noSiteWithAna.askAnalytics = true;
+  noSiteWithAna.launchPageAction = 'action_homepage';
+  eq('全过（即使 askAnalytics=true）→ GalleryListScene',
+    MainActivity.launchAnnouncerFor(noSiteWithAna).sceneName, 'GalleryListScene');
 
   // 全过 → 列表 + launchPage action（**不是写死 homepage**）
   const open: StartupGates = none();
@@ -120,11 +127,14 @@ function testProcessAnnouncer(): void {
   eq('栈空 + 无门 → 原样', MainActivity.processAnnouncer(target, 0, none()).sceneName,
     'GalleryDetailScene');
 
-  // 门的顺序与 launchAnnouncerFor 一致
+  // 门的顺序与 launchAnnouncerFor 一致（且 processAnnouncer 也跳过 AnalyticsScene）
   const g: StartupGates = gates(true);
   g.hasSecurity = false;
   eq('无安全码 → 包成 Warning',
     MainActivity.processAnnouncer(target, 0, g).sceneName, 'WarningScene');
+  g.showWarning = false;
+  eq('无安全码且无警告（即使 askAnalytics=true）→ 包成 SignIn',
+    MainActivity.processAnnouncer(target, 0, g).sceneName, 'SignInScene');
 }
 
 // ---------------------------------------------------------------- ③ handleIntent

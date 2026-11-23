@@ -1,9 +1,9 @@
 {
   "app": {
-    "bundleName": "com.ehviewer.harmony",
+    "bundleName": "com.ehviewer.next",
     "vendor": "harmony",
-    "versionCode": 113,
-    "versionName": "2.0.2.7.1",
+    "versionCode": 114,
+    "versionName": "2.0.2.7.2",
     "icon": "$media:layered_image",
     "label": "$string:app_name"
   }

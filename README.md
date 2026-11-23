@@ -26,47 +26,67 @@
 - **DevEco Studio**（支持 HarmonyOS SDK API 20 / `6.0.0(20)`，已配置 `hvigorw` 与 Command Line Tools）
 - **JDK**（Java 17+，用于 HAP 打包与可选签名）
 - **Node.js**（随 DevEco Studio 或系统安装，用于 TypeScript / 单元测试）
-- **PowerShell 7+** (`pwsh`)，用于运行辅助构建脚本、代码门禁检查及单元测试
+- **PowerShell 7+** (`pwsh`)，用于运行辅助构建脚本、代码门禁检查及单元测试（`scripts/set_bundle_name.ps1` 亦兼容 Windows PowerShell 5.1）
 
-## 构建与签名说明
+## 应用权限说明
 
-本仓库刻意将 `harmony/build-profile.json5` 中的 `signingConfigs` 置空为 `[]`，且不包含任何开发者证书、私钥或 `.p7b` Profile 文件。克隆后可直接完成**未签名构建**：
+本应用当前版本**无需向华为 AGC 申请任何 ACL 受限权限（`0 ACL`）**。[module.json5](./harmony/entry/src/main/module.json5) 声明的 10 项权限全部属于 `availableLevel=normal`：
 
-### 方式一：DevEco Studio（推荐真机运行）
+| 权限名 | 授权方式 | 用途 |
+|---|---|---|
+| `ohos.permission.INTERNET` | `system_grant` | 画廊列表、详情、图片与标签库网络请求 |
+| `ohos.permission.GET_NETWORK_INFO` | `system_grant` | 网络连通性与状态变化检测 |
+| `ohos.permission.PRIVACY_WINDOW` | `system_grant` | 隐私模式防截屏、防录屏与多任务预览隐藏 |
+| `ohos.permission.GET_WIFI_INFO` | `system_grant` | 局域网 Wi-Fi 传书连接状态获取 |
+| `ohos.permission.VIBRATE` | `system_grant` | 图案密码解锁与交互震动反馈 |
+| `ohos.permission.KEEP_BACKGROUND_RUNNING` | `system_grant` | 画廊与归档后台下载长时任务保活 |
+| `ohos.permission.RUNNING_LOCK` | `system_grant` | 后台持续下载唤醒锁保活 |
+| `ohos.permission.ACCESS_BIOMETRIC` | `system_grant` | 应用锁生物识别（指纹 / 人脸）解锁 |
+| `ohos.permission.ACCELEROMETER` | `system_grant` | 安全门页加速度传感器交互 |
+| `ohos.permission.CAMERA` | `user_grant`（按需弹窗） | 个人资料页拍照更换头像 |
 
-1. 使用 DevEco Studio 打开仓库内的 `harmony/` 目录。
-2. 等待 Sync 完成，通过 **File → Project Structure → Signing Configs** 勾选 **Automatically generate signature**（自动生成调试签名）。
-3. （可选）如需修改包名（默认 `com.ehviewer.harmony`），请同步修改以下位置并重新生成签名 Profile：
-   - `harmony/AppScope/app.json5`（`bundleName`）
-   - `harmony/entry/src/main/resources/base/profile/shortcuts_config.json`（两处 `bundleName`）
-   - `harmony/entry/src/main/ets/hippo/ehviewer/download/DownloadService.ets` 与 `ArchiverDownloadService.ets` 中的默认回退 `bundleName`
-4. 点击 **Run** 或 **Build → Build Hap(s)/APP(s) → Build Hap(s)**。
+> 隐私最小化设计：未申请高权限 `ohos.permission.READ_PASTEBOARD`（剪贴板导入通过系统安全控件 `PasteButton` 完成，背景剪贴板读取安全回退为空），亦未申请全局媒体读写权限（本地文件与归档导出导入统一通过沙箱与 `DocumentViewPicker` 完成）。
 
-### 方式二：命令行构建
+## 构建、改包名与签名说明
+
+> [!IMPORTANT]
+> 本仓库刻意将 `harmony/build-profile.json5` 中的 `signingConfigs` 置空为 `[]`，且不包含任何开发者证书、私钥或 `.p7b` Profile。
+> **GitHub Releases 附带的未签名 HAP（包名 `com.ehviewer.next`）已被注册占用，无法直接用其他账号重签安装；开发者真机自用请克隆源码并按下方步骤修改包名后编译安装。**
+> 完整说明与报错排查见 **[签名与安装完整指南（docs/SIGNING.md）](./docs/SIGNING.md)**。
+
+### 快速上手：DevEco Studio 自动签名（推荐）
+
+1. **先改成你自己的唯一包名**（必须避开华为 6 个保留独立段 `oh` / `ohos` / `harmony` / `harmonyos` / `openharmony` / `system`）：
+   ```powershell
+   pwsh -File scripts/set_bundle_name.ps1 -BundleName com.yourname.ehviewer
+   ```
+   （脚本会自动校验命名规范并以 UTF-8 无 BOM + LF 同步写入 `app.json5`、`shortcuts_config.json`、`DownloadService.ets` 与 `ArchiverDownloadService.ets`。）
+2. 使用 DevEco Studio 打开仓库内的 `harmony/` 目录，等待 Sync 完成。
+3. 打开 **File → Project Structure → Signing Configs**，登录华为账号并勾选 **Automatically generate signature**（自动生成调试签名）。
+4. 连接真机，点击 **Run** 或 **Build → Build Hap(s)**。
+
+### 命令行打包与离线签名
 
 ```powershell
 # 设置 SDK 与 JDK 环境变量（未设置时 build_hap.ps1 会尝试自动探测常见路径）
 $env:DEVECO_SDK_HOME = "$env:LOCALAPPDATA\Huawei\Sdk"
 $env:JAVA_HOME = "C:\Program Files\Java\jdk-21"
 
-# 使用 hvigorw 直接构建未签名 debug 或 release HAP
+# 1) 使用 hvigorw 直接构建未签名 debug 或 release HAP
 cd harmony
 .\hvigorw.bat assembleHap --mode module -p product=default -p buildMode=debug --no-daemon
 .\hvigorw.bat assembleHap --mode module -p product=default -p buildMode=release --no-daemon
 
-# 或使用封装脚本（若 harmony/signing/ 下未放置签名材料，会自动保留未签名 HAP）
-pwsh -File scripts/build_hap.ps1
+# 2) 或使用封装脚本（若 harmony/signing/ 下已有自己的 .cer/.p7b/.p12 与口令则自动签名，否则保留未签名 HAP）
+pwsh -File scripts/build_hap.ps1 -KeyAlias <your_alias>
 ```
 
-未签名产物默认位于：
-`harmony/entry/build/default/outputs/default/entry-default-unsigned.hap`
-
-如需通过脚本完成本地离线签名，可在本地自行创建被 `.gitignore` 忽略的 `harmony/signing/` 目录并放入 `.cer`、`.p7b`、`.p12` 及密钥口令（`keystore-password.txt` 或设置环境变量 `HAP_SIGN_PASSWORD`）后运行 `pwsh -File scripts/build_hap.ps1`。
+未签名产物默认位于：`harmony/entry/build/default/outputs/default/entry-default-unsigned.hap`。离线手动向 AGC 申请 `.cer` / `.p7b` 的详细命令见 [docs/SIGNING.md](./docs/SIGNING.md)。
 
 ## 单元测试与静态检查
 
 ```powershell
-# 首次运行（或无 DevEco 环境时）先初始化 TypeScript 与 @ohos.* / @kit.* 测试桩
+# 首次运行（或无 DevEco 环境时）先初始化 TypeScript 5.4.5 与 @ohos.* / @kit.* 测试桩
 pwsh -File scripts/setup_tscheck.ps1
 
 # 运行全量单元测试套件
@@ -80,20 +100,27 @@ pwsh -File scripts/check_silent_failures.ps1 -Gate
 pwsh -File scripts/check_resource_keys.ps1 -Gate
 ```
 
+参与代码贡献与 PR 提交流程请查看 [CONTRIBUTING.md](./CONTRIBUTING.md)。
+
 ## 目录结构
 
 ```text
 .
-├── .github/workflows/ci.yml  # GitHub Actions 自动化门禁与单测流水线（windows-latest）
+├── .github/
+│   ├── ISSUE_TEMPLATE/       # Bug 反馈与功能建议模板
+│   └── workflows/ci.yml      # GitHub Actions 自动化门禁与单测流水线（windows-latest）
+├── docs/
+│   └── SIGNING.md            # 包名修改、AGC/自动签名申请与装机排查指南
 ├── harmony/                  # DevEco Studio / Hvigor 主工程（AppScope + entry 模块）
-│   ├── AppScope/             # 全局 app.json5（默认包名 com.ehviewer.harmony）及应用图标/名称
+│   ├── AppScope/             # 全局 app.json5（默认包名 com.ehviewer.next）及应用图标/名称
 │   └── entry/
 │       ├── src/main/cpp/     # C++ NAPI 原生模块（zlib 归档按页流式解压、图像处理等）
 │       ├── src/main/ets/     # ArkTS 源码（EntryAbility、Index、hippo 核心与 UI 组件）
 │       ├── src/main/resources/
 │       └── src/test/         # 模块化单元测试套件
-├── scripts/                  # 构建、测试（含 setup_tscheck.ps1）与静态质量检查脚本
+├── scripts/                  # 构建、改包名（set_bundle_name.ps1）、测试与静态门禁脚本
 ├── CHANGELOG.md              # 版本更新日志
+├── CONTRIBUTING.md           # 开源贡献与开发自检规范
 ├── DEVIATIONS.md             # 相对上游 Android 实现的平台差异适配说明与已知能力边界
 ├── LICENSE                   # GNU General Public License v3.0
 └── README.md

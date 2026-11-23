@@ -57,7 +57,7 @@ import { ReadableTime } from '../../util/ReadableTime';
 const DOMAIN: number = 0x0D0C;
 const TAG: string = 'ArchiverDownloadService';
 
-const SLOT_ID: string = 'com.ehviewer.harmony.archiver_download';
+const SLOT_ID: string = 'com.ehviewer.next.archiver_download';
 const NOTIFICATION_ID: number = 0x41524348;
 const REQUEST_PAUSE: number = 0x41524349;
 const REQUEST_RESUME: number = 0x4152434A;
@@ -449,7 +449,7 @@ export class ArchiverDownloadService {
    */
   private async serviceActionAgent(action: string, gid: number, token: string,
     requestCode: number): Promise<Object | null> {
-    const bundleName: string = this.context === null ? 'com.ehviewer.harmony' : this.context.abilityInfo.bundleName;
+    const bundleName: string = this.context === null ? 'com.ehviewer.next' : this.context.abilityInfo.bundleName;
     const abilityName: string = this.context === null ? 'EntryAbility' : this.context.abilityInfo.name;
     const clickSeq: number = ArchiverDownloadService.nextClickSeq();
     const ts: number = Date.now();

@@ -99,10 +99,6 @@ export class GalleryActivity extends StageActivity {
     }
     if (this.needSelectSite()) {
       this.startScene(new Announcer('SelectSiteScene'));
-      return;
-    }
-    if (this.needAnalyticsDialog()) {
-      this.startScene(new Announcer('AnalyticsScene'));
     }
   }
 

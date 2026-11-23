@@ -2,6 +2,19 @@
 
 All notable changes to **EhViewer for HarmonyOS** are documented in this file.
 
+## [2.0.2.7.2] - 2026-11-23
+
+### Fixed & Changed
+- **Permanently disabled deprecated `AnalyticsScene` across the startup chain**:
+  - Updated `Settings.DEFAULT_ASK_ANALYTICS` (`false`), `UnwiredSolidSceneSettings.getAskAnalytics()` (`false`), `SettingsSolidSceneAdapter.getAskAnalytics()` (`false`), `SolidScene.startSceneForCheckStep` (`CHECK_STEP_WARNING` falls through directly without starting `AnalyticsScene`), `MainActivity` (`launchAnnouncerFor`, `processAnnouncer`, `buildStartupGates`), and `GalleryActivity.runStartupChecks`. Fresh installs now proceed directly from `WarningScene` to `SignInScene` / `SelectSiteScene` / `GalleryListScene`.
+  - Added fresh-install & `WarningScene.onAccept()` regression assertions in `settings-accessors.test.js`, `main-activity-part3.test.ets`, and `b3-routes-and-security-gate.test.ets`.
+- **Bundle name updated to avoid Huawei AGC reserved segments**:
+  - Updated default `bundleName` across `app.json5`, `shortcuts_config.json`, `DownloadService.ets`, `ArchiverDownloadService.ets`, `scripts/build_hap.ps1` (`-KeyAlias ehviewer_next`), and `DEVIATIONS.md` to `com.ehviewer.next` (`versionName: "2.0.2.7.2"`, `versionCode: 114`).
+  - Added reserved-segment check (`oh`, `ohos`, `harmony`, `harmonyos`, `openharmony`, `system`) and legacy bundle guard to `.github/workflows/ci.yml`.
+- **Developer onboarding, signing docs & community templates**:
+  - Added `scripts/set_bundle_name.ps1` (PS 5.1 & pwsh 7 compatible, UTF-8 without BOM + LF) to rename `bundleName` across all 4 project files with format and reserved-segment validation.
+  - Added `docs/SIGNING.md`, `CONTRIBUTING.md`, `.github/ISSUE_TEMPLATE/{bug_report,feature_request}.yml`, and updated `README.md` with the 10-permission `0 ACL` reference table.
+
 ## [2.0.2.7.1] - 2026-11-23
 
 ### Changed & Fixed

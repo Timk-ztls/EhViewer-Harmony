@@ -1443,7 +1443,8 @@ class SettingsSolidSceneAdapter implements SolidSceneSettings {
   }
 
   getAskAnalytics(): boolean {
-    return Settings.getAskAnalytics();
+    // D-006: 鸿蒙版已作废 AnalyticsScene，始终跳过埋点询问门
+    return false;
   }
 
   getSelectSite(): boolean {

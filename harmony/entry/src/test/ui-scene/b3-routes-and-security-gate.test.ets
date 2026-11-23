@@ -21,10 +21,69 @@ import {
   SecuritySettings,
 } from '../../main/ets/hippo/ehviewer/ui/scene/SecurityScene';
 import { SceneApplication } from '../../main/ets/hippo/scene/SceneApplication';
+import { Announcer } from '../../main/ets/hippo/scene/Announcer';
 import { registerAllScenes } from '../../main/ets/hippo/scene/SceneRegistry';
 import { SceneFragment } from '../../main/ets/hippo/scene/SceneFragment';
+import { SceneHost } from '../../main/ets/hippo/ehviewer/ui/scene/BaseScene';
+import { SolidScene, SolidSceneHooks } from '../../main/ets/hippo/ehviewer/ui/scene/SolidScene';
+import {
+  SolidSceneSettings,
+  SolidSceneSettingsHolder,
+  UnwiredSolidSceneSettings,
+} from '../../main/ets/hippo/ehviewer/ui/scene/SolidSceneSettings';
+import { WarningScene } from '../../main/ets/hippo/ehviewer/ui/scene/WarningScene';
+import { GLView } from '../../main/ets/hippo/lib/glview/view/GLView';
 import { Cell } from '../../main/ets/hippo/widget/lockpattern/LockPatternCell';
 import { LockPatternUtils } from '../../main/ets/hippo/widget/lockpattern/LockPatternUtils';
+
+class NoopSceneHost implements SceneHost {
+  updateProfile(): void {}
+  addAboveSnackView(_view: GLView): void {}
+  removeAboveSnackView(_view: GLView): void {}
+  setDrawerLockMode(_lockMode: number, _edgeGravity: number): void {}
+  openDrawer(_drawerGravity: number): void {}
+  closeDrawer(_drawerGravity: number): void {}
+  toggleDrawer(_drawerGravity: number): void {}
+  setDrawerGestureBlocker(_gestureBlocker: number): void {}
+  isDrawersVisible(): boolean { return false; }
+  setNavCheckedItem(_resId: number): void {}
+  showTipById(_id: number, _length: number): void {}
+  showTip(_message: string, _length: number): void {}
+  hideSoftInput(): void {}
+  showSoftInput(_view: GLView): void {}
+}
+
+class StubSolidSettings implements SolidSceneSettings {
+  showWarning: boolean = true;
+  askAnalytics: boolean = true;
+  selectSite: boolean = true;
+  needSignIn: boolean = true;
+
+  getShowWarning(): boolean { return this.showWarning; }
+  getAskAnalytics(): boolean { return this.askAnalytics; }
+  getSelectSite(): boolean { return this.selectSite; }
+  getNeedSignIn(): boolean { return this.needSignIn; }
+  getLaunchPageGalleryListSceneAction(): string { return 'action_homepage'; }
+  putShowWarning(value: boolean): void { this.showWarning = value; }
+  putAskAnalytics(value: boolean): void { this.askAnalytics = value; }
+  putSelectSite(value: boolean): void { this.selectSite = value; }
+  getGallerySite(): number { return 0; }
+  putGallerySite(_value: number): void {}
+  putEnableAnalytics(_value: boolean): void {}
+}
+
+class SpyWarningScene extends WarningScene {
+  startedScenes: string[] = [];
+  finishCount: number = 0;
+
+  startScene(announcer: Announcer): void {
+    this.startedScenes.push(announcer.sceneName);
+  }
+
+  finish(): void {
+    this.finishCount++;
+  }
+}
 
 class StubSecuritySettings implements SecuritySettings {
   private code: string;
@@ -218,6 +277,46 @@ function main(): void {
   SecurityScene.grantOnPatternSuccess(okPlatform);
   ok('放行后 isUnlocked()=true', okShell.isUnlocked());
   eq('触发了 onUnlockedListener', unlockCount, 1);
+
+  // 5. D-006 回归：全新安装启动门链彻底跳过已作废的 AnalyticsScene
+  const unwiredSolid: UnwiredSolidSceneSettings = new UnwiredSolidSceneSettings();
+  eq('UnwiredSolidSceneSettings.getAskAnalytics() 默认为 false', unwiredSolid.getAskAnalytics(), false);
+
+  const forcedNoAna: StartupGates = MainActivity.buildStartupGates(null, false, false, true, true, true, 'action_homepage');
+  eq('MainActivity.buildStartupGates 强制屏蔽 askAnalytics', forcedNoAna.askAnalytics, false);
+  eq('全新安装（跳过 Warning）直达 SignInScene 而非 AnalyticsScene',
+    MainActivity.launchAnnouncerFor(forcedNoAna).sceneName, 'SignInScene');
+
+  const solidStub: StubSolidSettings = new StubSolidSettings();
+  SolidSceneSettingsHolder.set(solidStub);
+  SolidSceneHooks.canCheckSignIn = (): boolean => true;
+  try {
+    SolidSceneHooks.needSignedIn = (): boolean => true;
+    const warn1: SpyWarningScene = new SpyWarningScene();
+    warn1.bindSceneHost(new NoopSceneHost());
+    warn1.onAccept();
+    eq('WarningScene.onAccept（即使 getAskAnalytics=true）直达 SignInScene', warn1.startedScenes[0] ?? '', 'SignInScene');
+    eq('WarningScene.onAccept 记录不再显示 Warning', solidStub.showWarning, false);
+    eq('WarningScene.onAccept 后关闭自身', warn1.finishCount, 1);
+
+    SolidSceneHooks.needSignedIn = (): boolean => false;
+    solidStub.selectSite = true;
+    const warn2: SpyWarningScene = new SpyWarningScene();
+    warn2.bindSceneHost(new NoopSceneHost());
+    warn2.onAccept();
+    eq('WarningScene.onAccept（已登录）直达 SelectSiteScene 而非 AnalyticsScene',
+      warn2.startedScenes[0] ?? '', 'SelectSiteScene');
+
+    solidStub.selectSite = false;
+    const warn3: SpyWarningScene = new SpyWarningScene();
+    warn3.bindSceneHost(new NoopSceneHost());
+    warn3.onAccept();
+    eq('WarningScene.onAccept（全过）直达 GalleryListScene 而非 AnalyticsScene',
+      warn3.startedScenes[0] ?? '', 'GalleryListScene');
+  } finally {
+    SolidSceneSettingsHolder.reset();
+    SolidSceneHooks.reset();
+  }
 
   if (fails.length > 0) {
     console.error(`\n✗ ${fails.length} 条失败 / ${pass + fails.length} 条断言`);

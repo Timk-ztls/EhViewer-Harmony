@@ -80,6 +80,24 @@ jobs:
             throw 'Restricted pasteboard permission must not be declared in module.json5.'
           }
 
+          $appJson = (Get-Content 'harmony/AppScope/app.json5' -Raw) | ConvertFrom-Json
+          $bundleName = $appJson.app.bundleName
+          $reservedSegs = @('oh', 'ohos', 'harmony', 'harmonyos', 'openharmony', 'system')
+          foreach ($seg in $bundleName.Split('.')) {
+            if ($reservedSegs -contains $seg.ToLowerInvariant()) {
+              throw "bundleName '$bundleName' contains Huawei AGC reserved segment '$seg'."
+            }
+          }
+
+          $pOldBundle = 'com\.ehviewer\.' + 'harmony'
+          $oldBundleHits = git grep -I -n -E $pOldBundle -- harmony
+          $oldBundleCode = $LASTEXITCODE
+          if ($oldBundleCode -gt 1) { throw "git grep legacy bundle error: $oldBundleCode" }
+          if ($oldBundleCode -eq 0 -or ($oldBundleHits | Measure-Object).Count -gt 0) {
+            $oldBundleHits | ForEach-Object { Write-Host $_ }
+            throw 'Legacy reserved bundleName reference detected under harmony/.'
+          }
+
           $buildProfile = Get-Content 'harmony/build-profile.json5' -Raw
           if ($buildProfile -notmatch '"signingConfigs"\s*:\s*\[\s*\]') {
             throw 'harmony/build-profile.json5 must keep signingConfigs empty.'

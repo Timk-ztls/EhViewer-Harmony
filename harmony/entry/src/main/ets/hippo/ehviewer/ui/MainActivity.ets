@@ -204,9 +204,7 @@ export class MainActivity extends StageActivity {
     if (gates.showWarning) {
       return new Announcer('WarningScene');
     }
-    if (gates.askAnalytics) {
-      return new Announcer('AnalyticsScene');
-    }
+    // D-006: 鸿蒙版已永久跳过 AnalyticsScene
     if (gates.needSignedIn) {
       return new Announcer('SignInScene');
     }
@@ -222,7 +220,7 @@ export class MainActivity extends StageActivity {
     securityCode: string | null,
     securityUnlocked: boolean,
     showWarning: boolean,
-    askAnalytics: boolean,
+    _askAnalytics: boolean,
     needSignedIn: boolean,
     selectSite: boolean,
     launchPageAction: string
@@ -231,7 +229,7 @@ export class MainActivity extends StageActivity {
     return new StartupGates(
       hasSecurity,
       showWarning,
-      askAnalytics,
+      false,
       needSignedIn,
       selectSite,
       launchPageAction
@@ -261,9 +259,6 @@ export class MainActivity extends StageActivity {
     }
     if (gates.showWarning) {
       return MainActivity.wrapWithTarget('WarningScene', target, announcer);
-    }
-    if (gates.askAnalytics) {
-      return MainActivity.wrapWithTarget('AnalyticsScene', target, announcer);
     }
     if (gates.needSignedIn) {
       return MainActivity.wrapWithTarget('SignInScene', target, announcer);
