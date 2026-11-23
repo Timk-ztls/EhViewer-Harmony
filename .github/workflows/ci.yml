@@ -104,6 +104,7 @@ jobs:
           }
 
           Write-Host 'OK: hygiene & sensitive-info gate passed'
+          exit 0
 
       - name: Unit tests (unified assertion check)
         run: |
