@@ -40,6 +40,7 @@ export class RestoreItem {
   gid: number;
   token: string | null;
   dirname: string | null;
+  title: string | null = null;
 
   constructor(gid: number, token: string | null, dirname: string | null) {
     this.gid = gid;
@@ -72,11 +73,13 @@ export class RestoreDownloadPreference {
    * 对应上游 `doInBackground` 的**扫描阶段**（不含 fillGalleryListByApi）。
    *
    * @param containsDownload `mManager.containDownloadInfo(gid)`
-   * @param readHeader `SpiderInfo.readHeader(File)`
+   * @param readHeader `SpiderInfo.readHeader(File)`（可内部回退 CBOR）
    * @param spiderInfoFilename `SpiderQueen.SPIDER_INFO_FILENAME`（调用方给，避免硬编常量漂移）
    * @param onProgress 进度回调 `(progress, max)`；切不确定进度时上游传 (-1, -1)，此处原样透传
    * @param isCancelled 取消检查（上游每轮检查 `mCancelled.get()`）
    * @param dirOverride 仅测试注入
+   * @param getDownloadLocation 下载目录获取器
+   * @param readComicInfo 可选 `ComicInfo.xml` 回退读取器（仅在 `.ehviewer` 缺失或解析失败时调用）
    */
   static async scanRestoreItems(containsDownload: (gid: number) => boolean,
     readHeader: (file: UniFile) => SpiderHeader | null,
@@ -84,7 +87,8 @@ export class RestoreDownloadPreference {
     onProgress?: (progress: number, max: number) => void,
     isCancelled?: () => boolean,
     dirOverride?: UniFile | null,
-    getDownloadLocation?: () => UniFile | null): Promise<RestoreScanResult> {
+    getDownloadLocation?: () => UniFile | null,
+    readComicInfo?: (dir: UniFile) => SpiderHeader | null): Promise<RestoreScanResult> {
     const result: RestoreScanResult = new RestoreScanResult();
 
     const dir: UniFile | null = (dirOverride !== undefined)
@@ -112,7 +116,7 @@ export class RestoreDownloadPreference {
       }
       const item: RestoreItem | null =
         await RestoreDownloadPreference.getRestoreItem(files[i], containsDownload, readHeader,
-          spiderInfoFilename);
+          spiderInfoFilename, readComicInfo);
       if (item !== null) {
         result.items.push(item);
       }
@@ -123,36 +127,64 @@ export class RestoreDownloadPreference {
     return result;
   }
 
-  /** 对应上游 `getRestoreItem(file)` */
+  /**
+   * 对应上游 `getRestoreItem(file)`：
+   * 先读 `.ehviewer`（调用方可组合文本 + CBOR），失败或缺失时再读 `ComicInfo.xml`。
+   */
   static async getRestoreItem(file: UniFile | null,
     containsDownload: (gid: number) => boolean,
     readHeader: (file: UniFile) => SpiderHeader | null,
-    spiderInfoFilename: string): Promise<RestoreItem | null> {
+    spiderInfoFilename: string,
+    readComicInfo?: (dir: UniFile) => SpiderHeader | null): Promise<RestoreItem | null> {
     if (file === null || !file.isDirectory()) {
       return null;
     }
+    let gid: number = -1;
+    let token: string | null = null;
     const siFile: UniFile | null = await file.findFile(spiderInfoFilename);
-    if (siFile === null) {
+    if (siFile !== null) {
+      const header: SpiderHeader | null = readHeader(siFile);
+      if (header !== null && header.gid >= 0 && header.token !== null && header.token.length > 0) {
+        gid = header.gid;
+        token = header.token;
+      }
+    }
+    if ((gid < 0 || token === null || token.length === 0) && readComicInfo !== undefined) {
+      const comicHeader: SpiderHeader | null = readComicInfo(file);
+      if (comicHeader !== null && comicHeader.gid >= 0 &&
+        comicHeader.token !== null && comicHeader.token.length > 0) {
+        gid = comicHeader.gid;
+        token = comicHeader.token;
+      }
+    }
+    if (gid < 0 || token === null || token.length === 0) {
       return null;
     }
-    // 上游：只需 gid/token，避免损坏的 pToken 行导致整体失败
-    const header: SpiderHeader | null = readHeader(siFile);
-    if (header === null) {
-      return null;
-    }
-    const gid: number = header.gid;
     if (containsDownload(gid)) {
       return null; // 已在下载列表 → 不需要恢复
     }
     const name: string | undefined = file.getName();
-    return new RestoreItem(gid, header.token, (name === undefined) ? null : name);
+    return new RestoreItem(gid, token, (name === undefined) ? null : name);
+  }
+
+  /**
+   * 对应上游标题兜底：`apiTitle` 非空时优先用它，否则回退 `item.dirname`，再回退 `String(item.gid)`。
+   */
+  static resolveRestoreTitle(item: RestoreItem, apiTitle: string | null | undefined): string {
+    if (apiTitle !== null && apiTitle !== undefined && apiTitle.length > 0) {
+      return apiTitle;
+    }
+    if (item.dirname !== null && item.dirname.length > 0) {
+      return item.dirname;
+    }
+    return `${item.gid}`;
   }
 
   /**
    * 对应上游 `onPostExecute` 的应用阶段：
-   * 对每个 `title != null` 的项 → addDownload + putDownloadDirname，返回成功计数。
+   * 即使线上 gdata 未取到标题，也按 `dirname -> gid` 兜底恢复并计数。
    *
-   * @param titleOf 取 galleryInfo.title（null 表示填充详情失败 → 上游跳过）
+   * @param titleOf 取 galleryInfo.title（null 或空串时自动使用兜底标题）
    */
   static async applyRestore(items: RestoreItem[],
     titleOf: (item: RestoreItem) => string | null,
@@ -161,10 +193,7 @@ export class RestoreDownloadPreference {
     let count: number = 0;
     for (let i = 0; i < items.length; i++) {
       const item: RestoreItem = items[i];
-      // Avoid failed gallery info
-      if (titleOf(item) === null) {
-        continue;
-      }
+      item.title = RestoreDownloadPreference.resolveRestoreTitle(item, titleOf(item));
       addDownload(item);
       const dirname: string | null = item.dirname;
       if (dirname !== null) {

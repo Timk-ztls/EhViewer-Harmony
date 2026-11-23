@@ -12,6 +12,8 @@ import { GetEditCommentParser } from '../parser/GetEditCommentParser';
 import { ForumsParser } from '../parser/ForumsParser';
 import { ProfileParser } from '../parser/ProfileParser';
 import { GalleryApiParser } from '../parser/GalleryApiParser';
+import { ComicInfoParser } from '../parser/ComicInfoParser';
+import { InputStream } from '../../../unifile/Contracts';
 import { GalleryPageApiParser } from '../parser/GalleryPageApiParser';
 import { TorrentParser } from '../parser/TorrentParser';
 import { EhEventParse } from '../parser/EhEventParse';
@@ -240,6 +242,122 @@ function throwsType(name: string, fn: () => void, ctor: Function): void {
   ok('api.postedAt 已刷新（C-7）', list[0].postedAt > 0);
   eq('api.simpleLanguage（含 language:chinese → ZH）', list[0].simpleLanguage, 'ZH');
   eq('api 不新建对象（gid 999 忽略）', list.length, 1);
+
+  // 上游 9cbb77f7：含 error 或 title 为 null 的画廊跳过，不中断同批其余画廊回填
+  const giOk = new GalleryInfo();
+  giOk.gid = 100;
+  const giErr = new GalleryInfo();
+  giErr.gid = 101;
+  const giNullTitle = new GalleryInfo();
+  giNullTitle.gid = 102;
+  const batchBody = JSON.stringify({
+    gmetadata: [
+      { gid: 101, error: 'Key missing' },
+      { gid: 102, title: null },
+      {
+        gid: 100, title: 'Valid After Error', title_jpn: '', category: 'Doujinshi',
+        thumb: 'https://ehgt.org/t/b_250.jpg', uploader: 'up2',
+        posted: 1577934240, rating: 4.0, tags: [], filecount: 10
+      }
+    ]
+  });
+  GalleryApiParser.parse(batchBody, [giErr, giNullTitle, giOk]);
+  eq('api error 项被跳过（保持空 title）', giErr.title, '');
+  eq('api title:null 项被跳过（保持空 title）', giNullTitle.title, '');
+  eq('api 同批后续有效项仍成功回填', giOk.title, 'Valid After Error');
+}
+
+// ---------- ComicInfoParser（上游 9cbb77f7） ----------
+{
+  const makeStream = (bytes: Uint8Array): InputStream => {
+    let pos = 0;
+    return {
+      read(): number {
+        return pos >= bytes.length ? -1 : bytes[pos++];
+      },
+      readBuffer(buffer: ArrayBuffer): number {
+        const view = new Uint8Array(buffer);
+        let n = 0;
+        while (n < view.length && pos < bytes.length) {
+          view[n++] = bytes[pos++];
+        }
+        return n === 0 ? -1 : n;
+      },
+      readBytes(buffer: ArrayBuffer, off: number, len: number): number {
+        const view = new Uint8Array(buffer);
+        let n = 0;
+        while (n < len && pos < bytes.length && off + n < view.length) {
+          view[off + n] = bytes[pos++];
+          n++;
+        }
+        return n === 0 ? -1 : n;
+      },
+      skip(n: number): number {
+        const step = Math.min(n, bytes.length - pos);
+        pos += step;
+        return step;
+      },
+      available(): number {
+        return bytes.length - pos;
+      },
+      close(): void { }
+    };
+  };
+
+  const sampleXml =
+    "<?xml version='1.0' encoding='UTF-8' ?>\n" +
+    '<ComicInfo>\n' +
+    '  <Series>Sanitized Sample Gallery</Series>\n' +
+    '  <Web>https://exhentai.org/g/900000002/0000000000</Web>\n' +
+    '  <PageCount>77</PageCount>\n' +
+    '</ComicInfo>\n';
+
+  const rStr = ComicInfoParser.parse(sampleXml);
+  ok('ComicInfoParser.parse 从 Web 读取成功', rStr !== null);
+  eq('ComicInfoParser.parse gid', rStr !== null ? rStr.gid : -1, 900000002);
+  eq('ComicInfoParser.parse token', rStr !== null ? rStr.token : '', '0000000000');
+
+  const encodeUtf8 = (s: string): Uint8Array => {
+    const out: number[] = [];
+    for (let i = 0; i < s.length; i++) {
+      const c = s.charCodeAt(i);
+      if (c < 0x80) {
+        out.push(c);
+      } else if (c < 0x800) {
+        out.push(0xC0 | (c >> 6), 0x80 | (c & 0x3F));
+      } else if (c >= 0xD800 && c <= 0xDBFF && i + 1 < s.length) {
+        const c2 = s.charCodeAt(i + 1);
+        const cp = 0x10000 + ((c - 0xD800) << 10) + (c2 - 0xDC00);
+        out.push(0xF0 | (cp >> 18), 0x80 | ((cp >> 12) & 0x3F), 0x80 | ((cp >> 6) & 0x3F), 0x80 | (cp & 0x3F));
+        i++;
+      } else {
+        out.push(0xE0 | (c >> 12), 0x80 | ((c >> 6) & 0x3F), 0x80 | (c & 0x3F));
+      }
+    }
+    return new Uint8Array(out);
+  };
+
+  const sampleXmlUtf8 =
+    "<?xml version='1.0' encoding='UTF-8' ?>\n" +
+    '<ComicInfo>\n' +
+    '  <Series>中文标题😀</Series>\n' +
+    '  <Web>https://exhentai.org/g/900000002/0000000000</Web>\n' +
+    '  <PageCount>77</PageCount>\n' +
+    '</ComicInfo>\n';
+  const sampleBytes = encodeUtf8(sampleXmlUtf8);
+  const rStream = ComicInfoParser.parseStream(makeStream(sampleBytes));
+  ok('ComicInfoParser.parseStream 成功', rStream !== null);
+  eq('ComicInfoParser.parseStream gid', rStream !== null ? rStream.gid : -1, 900000002);
+  eq('ComicInfoParser.parseStream token', rStream !== null ? rStream.token : '', '0000000000');
+
+  eq('ComicInfoParser 无 Web → null', ComicInfoParser.parse('<ComicInfo><Series>Only</Series></ComicInfo>'), null);
+  eq('ComicInfoParser 空串 → null', ComicInfoParser.parse(''), null);
+  eq('ComicInfoParser null → null', ComicInfoParser.parse(null), null);
+  eq('ComicInfoParser.parseStream(null) → null', ComicInfoParser.parseStream(null), null);
+
+  const oversized = new Uint8Array(256 * 1024 + 10);
+  oversized.fill(0x20);
+  eq('ComicInfoParser.parseStream 超 256KB → null', ComicInfoParser.parseStream(makeStream(oversized)), null);
 }
 
 // ---------- GalleryPageApiParser ----------

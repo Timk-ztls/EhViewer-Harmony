@@ -47,6 +47,10 @@ export class GalleryApiParser {
       if (gi === null) {
         continue;
       }
+      // 已删除或被接口拒绝的画廊包含 "error" 且无 "title"，跳过避免整批 25 条中断
+      if (g.has('error') || g.isNull('title')) {
+        continue;
+      }
       gi.title = ParserUtils.trim(g.getString('title'));
       gi.titleJpn = ParserUtils.trim(g.getString('title_jpn'));
       gi.category = EhUtils.getCategoryByType(g.getString('category'));

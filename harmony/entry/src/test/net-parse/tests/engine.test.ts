@@ -316,6 +316,48 @@ async function main(): Promise<void> {
     ok('缩略图被 getFixedPreviewThumbUrl 修正',
       list[0].thumb.indexOf('https://ehgt.org/') === 0);
   }
+
+  // ---------- 7. fillGalleryListByApiBestEffort（上游 9cbb77f7） ----------
+  {
+    const list: GalleryInfo[] = [];
+    for (let i = 1; i <= 26; i++) {
+      const gi = new GalleryInfo();
+      gi.gid = i;
+      gi.token = `${i}`.padStart(10, '0');
+      list.push(gi);
+    }
+    let callIdx = 0;
+    const caller = new FakeCaller((_req) => {
+      callIdx++;
+      if (callIdx === 1) {
+        return new Error('simulated network failure on batch 1');
+      }
+      return new FakeResponse(200, new FakeHeaders(), JSON.stringify({
+        gmetadata: [{
+          gid: 26,
+          title: 'Batch 2 Gallery',
+          title_jpn: '',
+          category: 'Doujinshi',
+          thumb: 'https://ehgt.org/t/aa.jpg',
+          uploader: 'u26',
+          posted: '1700000000',
+          rating: '4.5',
+          tags: ['language:chinese'],
+          filecount: '12'
+        }]
+      }));
+    });
+    const out = await EhEngine.fillGalleryListByApiBestEffort(null, caller, list, 'https://e-hentai.org/');
+    eq('bestEffort 返回原列表', out.length, 26);
+    eq('bestEffort 分 2 批发送（25 + 1）', caller.requests.length, 2);
+    eq('bestEffort 第 1 批失败不中断第 2 批回填', list[25].title, 'Batch 2 Gallery');
+    eq('bestEffort 第 1 批失败项保持原空 title', list[0].title, '');
+
+    const fatalCaller = new FakeCaller((_req) => new RangeError('fatal stack overflow'));
+    await rejects('bestEffort 遇到致命错误仍重抛',
+      () => EhEngine.fillGalleryListByApiBestEffort(null, fatalCaller, [list[0]], 'https://e-hentai.org/'),
+      RangeError);
+  }
 }
 
 main().then((): void => {

@@ -389,6 +389,36 @@ async function testDownloadSettings(): Promise<void> {
   );
   eq('clean redundancy removes 7002-new not in download list', redRes.result.count, 1);
   eq('clean redundancy toast key', redRes.toastResKey, 'settings_download_clean_redundancy_done');
+
+  // Best-effort restore: fillTitles failure + ComicInfo.xml fallback still restores with dirname/gid title
+  const fallbackRoot: string = '/tmp/p2/restore_fallback_test';
+  ensureDir(`${fallbackRoot}/7003-comic-only`);
+  ensureDir(`${fallbackRoot}/7004-eh-only`);
+  writeFile(`${fallbackRoot}/7004-eh-only/.ehviewer`, 'hdr');
+  const fallbackDirFile: UniFile = UniFile.fromFile(fallbackRoot) as UniFile;
+  const fallbackAdded: Array<string> = [];
+  const fallbackRes: RestoreRunResult = await DownloadSettingsController.runRestoreDownloads(
+    (_gid: number): boolean => false,
+    (file: UniFile): SpiderHeader | null =>
+      file.getUri().indexOf('7004') >= 0 ? new SpiderHeader(7004, 'tok4') : null,
+    async (_items: RestoreItem[]): Promise<Map<number, string>> => {
+      throw new Error('simulated batch network failure');
+    },
+    (item: RestoreItem, title: string): void => {
+      fallbackAdded.push(`${item.gid}:${title}`);
+    },
+    async (_gid: number, _dirname: string): Promise<void> => {},
+    undefined,
+    fallbackDirFile,
+    (dir: UniFile): SpiderHeader | null =>
+      dir.getUri().indexOf('7003') >= 0 ? new SpiderHeader(7003, 'tok3') : null
+  );
+  eq('best-effort restore recovers both ComicInfo and .ehviewer dirs when fillTitles throws',
+    fallbackRes.restoredCount, 2);
+  eq('best-effort restore uses dirname fallback titles',
+    fallbackAdded.slice().sort(), ['7003:7003-comic-only', '7004:7004-eh-only']);
+  eq('best-effort restore success toast key',
+    fallbackRes.toastResKey, 'settings_download_restore_successfully');
 }
 
 // ── 4. ReadSettingsRules + ReadSettingsHelpers ──────────────────────────────

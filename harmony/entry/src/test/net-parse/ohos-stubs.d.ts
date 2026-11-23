@@ -20,6 +20,7 @@ declare module '@ohos.file.fs' {
       size: number;
       mtime: number;
       isDirectory(): boolean;
+      isFile(): boolean;
     }
     interface OpenModeType {
       READ_ONLY: number;
@@ -27,25 +28,28 @@ declare module '@ohos.file.fs' {
       READ_WRITE: number;
       CREATE: number;
       TRUNC: number;
+      APPEND: number;
     }
     const OpenMode: OpenModeType;
-    function statSync(path: string): Stat;
-    function accessSync(path: string): boolean;
+    const AccessModeType: { READ: number; WRITE: number; EXECUTE: number };
+    enum WhenceType { SEEK_SET = 0, SEEK_CUR = 1, SEEK_END = 2 }
+    function statSync(path: string | number): Stat;
+    function accessSync(path: string, mode?: number): boolean;
     function openSync(path: string, mode: number): File;
-    function closeSync(file: File): void;
+    function closeSync(file: File | number): void;
     function readSync(fd: number, buf: ArrayBuffer, opts?: { offset?: number; length?: number }): number;
-    function writeSync(fd: number, buf: ArrayBuffer, opts?: { offset?: number; length?: number }): number;
+    function writeSync(fd: number, buf: ArrayBuffer | string, opts?: { offset?: number; length?: number }): number;
+    function lseek(fd: number, offset: number, whence?: WhenceType): number;
     function lseekSync(fd: number, offset: number, whence: number): number;
+    function fsyncSync(fd: number): void;
     function unlinkSync(path: string): void;
     function renameSync(oldPath: string, newPath: string): void;
-    function listFileSync(path: string): string[];
+    function listFileSync(path: string, opts?: { recursion?: boolean }): string[];
     function rmdirSync(path: string): void;
     function truncateSync(path: string, len: number): void;
-    function writeSync(fd: number, buf: ArrayBuffer | string, opts?: { offset?: number; length?: number }): number;
     function mkdirSync(path: string, recursion?: boolean): void;
     function readTextSync(path: string, opts?: { offset?: number; length?: number }): string;
     function copyFileSync(src: string, dst: string): void;
-    function rmdirSync(path: string): void;
     function access(path: string): Promise<boolean>;
     function mkdir(path: string, recursion?: boolean): Promise<void>;
     function stat(path: string): Promise<Stat>;
@@ -212,4 +216,21 @@ declare module '@kit.PerformanceAnalysisKit' {
     warn(domain: number, tag: string, format: string, ...args: unknown[]): void;
     error(domain: number, tag: string, format: string, ...args: unknown[]): void;
   };
+}
+
+declare module '@ohos.file.fileuri' {
+  namespace fileUri {
+    function getUriFromPath(path: string): string;
+  }
+  export default fileUri;
+}
+
+declare module '@ohos.hilog' {
+  namespace hilog {
+    function debug(domain: number, tag: string, format: string, ...args: (string | number)[]): void;
+    function info(domain: number, tag: string, format: string, ...args: (string | number)[]): void;
+    function warn(domain: number, tag: string, format: string, ...args: (string | number)[]): void;
+    function error(domain: number, tag: string, format: string, ...args: (string | number)[]): void;
+  }
+  export default hilog;
 }

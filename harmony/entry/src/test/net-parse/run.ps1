@@ -140,11 +140,16 @@ Set-Content -Path (Join-Path $shimRoot '@ohos.util\index.js') -Value $utilShim -
 $fsShim = @"
 const nodeFs = require('fs');
 const filePos = new Map();   // fd → 当前 filePointer（模拟内核语义）
-const OpenMode = { READ_ONLY: 0, WRITE_ONLY: 1, READ_WRITE: 2, CREATE: 64, TRUNC: 512 };
+const OpenMode = { READ_ONLY: 0, WRITE_ONLY: 1, READ_WRITE: 2, CREATE: 64, TRUNC: 512, APPEND: 1024 };
+const AccessModeType = { READ: 4, WRITE: 2, EXECUTE: 1 };
+const WhenceType = { SEEK_SET: 0, SEEK_CUR: 1, SEEK_END: 2 };
 const fsImpl = {
   OpenMode,
-  statSync(p) { const s = nodeFs.statSync(p); return { size: s.size, mtime: Math.floor(s.mtimeMs / 1000), isDirectory() { return s.isDirectory(); } }; },
+  AccessModeType,
+  WhenceType,
+  statSync(p) { const s = (typeof p === 'number') ? nodeFs.fstatSync(p) : nodeFs.statSync(p); return { size: s.size, mtime: Math.floor(s.mtimeMs / 1000), isDirectory() { return s.isDirectory(); }, isFile() { return s.isFile(); } }; },
   accessSync(p) { return nodeFs.existsSync(p); },
+  fsyncSync(fd) { try { nodeFs.fsyncSync(typeof fd === 'number' ? fd : fd.fd); } catch (e) { } },
   mkdirSync(p, recursion) { nodeFs.mkdirSync(p, { recursive: !!recursion }); },
   listFileSync(p) { return nodeFs.readdirSync(p); },
   rmdirSync(p) { nodeFs.rmSync(p, { recursive: true, force: true }); },
@@ -185,6 +190,7 @@ const fsImpl = {
     filePos.set(realFd, base + n);
     return n;
   },
+  lseek(fd, offset, whence) { return fsImpl.lseekSync(fd, offset, whence); },
   lseekSync(fd, offset, whence) {
     const realFd = (typeof fd === 'number') ? fd : fd.fd;
     const base = filePos.has(realFd) ? filePos.get(realFd) : 0;
@@ -192,7 +198,7 @@ const fsImpl = {
     filePos.set(realFd, next);
     return next;
   },
-  closeSync(f) { try { nodeFs.closeSync(f.fd); } catch (e) { } },
+  closeSync(f) { try { nodeFs.closeSync(typeof f === 'number' ? f : f.fd); } catch (e) { } },
   unlinkSync(p) { try { nodeFs.unlinkSync(p); } catch (e) { } },
   renameSync(oldPath, newPath) { nodeFs.renameSync(oldPath, newPath); },
   access(p) { return Promise.resolve(fsImpl.accessSync(p)); },
@@ -220,6 +226,21 @@ module.exports = { hilog: { debug: noop, info: noop, warn: noop, error: noop } }
 "@
 New-Item -ItemType Directory -Force -Path (Join-Path $shimRoot '@kit.PerformanceAnalysisKit') | Out-Null
 Set-Content -Path (Join-Path $shimRoot '@kit.PerformanceAnalysisKit\index.js') -Value $hilogShim -NoNewline
+$ohosHilogShim = @"
+const noop = () => {};
+const impl = { debug: noop, info: noop, warn: noop, error: noop };
+module.exports = impl;
+module.exports.default = impl;
+"@
+New-Item -ItemType Directory -Force -Path (Join-Path $shimRoot '@ohos.hilog') | Out-Null
+Set-Content -Path (Join-Path $shimRoot '@ohos.hilog\index.js') -Value $ohosHilogShim -NoNewline
+$fileUriShim = @"
+const impl = { getUriFromPath(p) { return 'file://' + p; } };
+module.exports = impl;
+module.exports.default = impl;
+"@
+New-Item -ItemType Directory -Force -Path (Join-Path $shimRoot '@ohos.file.fileuri') | Out-Null
+Set-Content -Path (Join-Path $shimRoot '@ohos.file.fileuri\index.js') -Value $fileUriShim -NoNewline
 $httpShim = @"
 const impl = {
   HttpDataType: { STRING: 0, OBJECT: 1, ARRAY_BUFFER: 2 },

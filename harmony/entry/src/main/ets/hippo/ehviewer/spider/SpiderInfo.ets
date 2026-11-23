@@ -35,6 +35,7 @@ import { PreviewSet } from '../client/data/PreviewSet';
 import { GalleryPageUrlParser, PageUrlResult } from '../client/parser/GalleryPageUrlParser';
 import { SimpleDiskCache, CacheOutputStreamPipe } from '../../beerbelly/SimpleDiskCache';
 import { OutputStreamPipe, ByteSink } from '../../streampipe/OutputStreamPipe';
+import { CborSpiderHeader, CborSpiderHeaderFields } from './CborSpiderHeader';
 
 /**
  * 对位 `EhApplication.getSpiderInfoCache()`：返回 spider_info 目录的 SimpleDiskCache。
@@ -219,6 +220,41 @@ export class SpiderInfo {
   /** 对位 `readHeader(InputStream)`。 */
   static readHeaderStream(is: InputStream | null): SpiderInfo | null {
     return SpiderInfo.readStreamInclude(is, false);
+  }
+
+  /**
+   * 对位上游 `readCborHeader(UniFile)`：
+   * 从 CBOR 格式的 `.ehviewer` 读取 gid 和 token，不加载 pTokenMap。
+   */
+  static readCborHeader(file: UniFile | null): SpiderInfo | null {
+    if (file === null) {
+      return null;
+    }
+    let is: InputStream | null = null;
+    try {
+      is = file.openInputStream();
+      return SpiderInfo.readCborHeaderStream(is);
+    } catch (_e) {
+      // 上游明确吞 IOException | OutOfMemoryError 并返回 null
+      return null;
+    } finally {
+      Utils.closeQuietly(is);
+    }
+  }
+
+  /**
+   * 对位上游 `readCborHeader(InputStream)`：
+   * 返回对象只填 gid 与 token 两个字段，不能写回磁盘。
+   */
+  static readCborHeaderStream(is: InputStream | null): SpiderInfo | null {
+    const fields: CborSpiderHeaderFields | null = CborSpiderHeader.read(is);
+    if (fields === null) {
+      return null;
+    }
+    const spiderInfo: SpiderInfo = new SpiderInfo();
+    spiderInfo.gid = fields.gid;
+    spiderInfo.token = fields.token;
+    return spiderInfo;
   }
 
   static readStreamInclude(is: InputStream | null, includePTokens: boolean): SpiderInfo | null {

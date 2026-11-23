@@ -67,16 +67,60 @@ const mkFile = (name) => ({
     undefined, () => true, dir3);
   eq(r3.items.length, 0, 'scanRestoreItems: 取消后不产出恢复项');
 
-  // 9) applyRestore：title 为 null 的跳过；计数正确；putDirname 被调用
+  // 9) applyRestore：无线上标题时回退为 dirname / gid，不跳过
   const items = [new RestoreItem(1, 't1', 'd1'), new RestoreItem(2, 't2', 'd2'), new RestoreItem(3, 't3', null)];
   const added = []; const put = [];
   const count = await RestoreDownloadPreference.applyRestore(items,
-    (it) => (it.gid === 2 ? null : 'title'),       // gid=2 的详情填充失败
-    (it) => added.push(it.gid),
+    (it) => (it.gid === 1 ? 'api-title' : null),       // gid=2/3 详情填充失败，走兜底标题
+    (it) => added.push([it.gid, it.title]),
     async (gid, dirname) => { put.push(gid + ':' + dirname); });
-  eq(count, 2, 'applyRestore: 跳过 title=null 的项，count=2');
-  eq(added, [1, 3], '…只对 title 非 null 的项 addDownload');
-  eq(put, ['1:d1'], '…dirname 为 null 的项不写 DOWNLOAD_DIRNAME（上游 putDownloadDirname 只在有值时调）');
+  eq(count, 3, 'applyRestore: 无线上标题不跳过，count=3');
+  eq(added, [[1, 'api-title'], [2, 'd2'], [3, '3']], '…标题兜底：API → dirname → String(gid)');
+  eq(put, ['1:d1', '2:d2'], '…dirname 为 null 的项不写 DOWNLOAD_DIRNAME（上游 putDownloadDirname 只在有值时调）');
+
+  // 10) 三层回退（.ehviewer → CBOR/readHeader → ComicInfo.xml）及边界校验
+  let comicCalls = 0;
+  const comicOnly = await RestoreDownloadPreference.getRestoreItem(
+    mkDir('dir-comic', false, null),
+    () => false,
+    readHeader,
+    SI,
+    () => { comicCalls++; return new SpiderHeader(456, 'tok_xml'); }
+  );
+  eq(comicCalls, 1, 'getRestoreItem: 缺 .ehviewer 时调用 readComicInfo');
+  eq(comicOnly !== null && comicOnly.gid === 456 && comicOnly.token === 'tok_xml' && comicOnly.dirname === 'dir-comic',
+    true, 'getRestoreItem: ComicInfo.xml 回退成功');
+
+  const corruptFallback = await RestoreDownloadPreference.getRestoreItem(
+    mkDir('dir-corrupt', true, null),
+    () => false,
+    readHeader,
+    SI,
+    () => new SpiderHeader(789, 'tok_c2')
+  );
+  eq(corruptFallback !== null && corruptFallback.gid === 789 && corruptFallback.token === 'tok_c2',
+    true, 'getRestoreItem: .ehviewer 读失败时回退 readComicInfo');
+
+  let comicCallsWhenPrimaryValid = 0;
+  const primaryWins = await RestoreDownloadPreference.getRestoreItem(
+    mkDir('dir-primary', true, new SpiderHeader(0, 'tok_zero')),
+    () => false,
+    readHeader,
+    SI,
+    () => { comicCallsWhenPrimaryValid++; return new SpiderHeader(999, 'other'); }
+  );
+  eq(comicCallsWhenPrimaryValid, 0, 'getRestoreItem: 主读取成功（含 gid=0）时不调 readComicInfo');
+  eq(primaryWins !== null && primaryWins.gid === 0 && primaryWins.token === 'tok_zero',
+    true, 'getRestoreItem: gid=0 且 token 非空有效');
+
+  const emptyTokenRejected = await RestoreDownloadPreference.getRestoreItem(
+    mkDir('dir-empty-tok', true, new SpiderHeader(10, '')),
+    () => false,
+    readHeader,
+    SI,
+    () => new SpiderHeader(10, '')
+  );
+  eq(emptyTokenRejected, null, 'getRestoreItem: 空 token 拒绝恢复');
 
   console.log('\n' + (fail === 0 ? 'ALL PASS' : fail + ' FAILED'));
   process.exit(fail === 0 ? 0 : 1);

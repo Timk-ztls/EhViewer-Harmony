@@ -54,6 +54,7 @@ import { hilog } from '@kit.PerformanceAnalysisKit';
 import { EhApplication } from '../EhApplication';
 import { AppConfig } from '../AppConfig';
 import { TorrentDownloadMessage } from '../client/data/TorrentDownloadMessage';
+import { FileUtils as YorozuyaFileUtils } from '../../lib/yorozuya/FileUtils';
 import { Call, Callback } from '../../okhttp/Call';
 import { OkHttpClient } from '../../okhttp/OkHttpClient';
 import { Request, RequestBuilder } from '../../okhttp/Request';
@@ -257,6 +258,69 @@ export class DownloadTorrentManager {
   public static getSDCardPath(): string {
     const dir: string | null = AppConfig.getArchiverDir();
     return dir === null ? '' : dir;
+  }
+
+  private static readonly TORRENT_SUFFIX: string = '.torrent';
+  // ".torrent" 的 UTF-8 字节长度固定为 8
+  private static readonly MAX_TORRENT_BASENAME_UTF8_BYTES: number = 255 - 8;
+
+  /**
+   * 对应上游 `DownloadTorrentManager.createTorrentFileName(displayName, url)`：
+   * 先去掉非法字符，再保证标题加 `.torrent` 不超过 255 UTF-8 字节（保持代理对完整）并 trim；
+   * 清洗后为空时直接使用下载地址末段（该末段本身已带 `.torrent`，不再追加后缀）。
+   */
+  public static createTorrentFileName(displayName: string | null | undefined, url: string): string {
+    const sanitized: string = YorozuyaFileUtils.sanitizeFilename(
+      displayName !== null && displayName !== undefined ? displayName : ''
+    );
+    const base: string = DownloadTorrentManager.truncateUtf8ToMaxBytes(
+      sanitized,
+      DownloadTorrentManager.MAX_TORRENT_BASENAME_UTF8_BYTES
+    ).trim();
+    if (base.length === 0) {
+      return DownloadTorrentManager.getNameFromUrl(url);
+    }
+    return base + DownloadTorrentManager.TORRENT_SUFFIX;
+  }
+
+  /**
+   * 按 UTF-8 字节截断标题，并保持代理对完整，给 `.torrent` 留出后缀空间。
+   */
+  private static truncateUtf8ToMaxBytes(s: string | null | undefined, maxBytes: number): string {
+    if (s === null || s === undefined || s.length === 0 || maxBytes <= 0) {
+      return '';
+    }
+    let byteCount: number = 0;
+    let cutCharEnd: number = 0;
+    let i: number = 0;
+    while (i < s.length) {
+      const code: number = s.charCodeAt(i);
+      let charUtf8Bytes: number = 3;
+      let charWidth: number = 1;
+      if (code <= 0x7F) {
+        charUtf8Bytes = 1;
+        charWidth = 1;
+      } else if (code <= 0x7FF) {
+        charUtf8Bytes = 2;
+        charWidth = 1;
+      } else if (code >= 0xD800 && code <= 0xDBFF) {
+        charUtf8Bytes = 4;
+        charWidth = 2;
+        if (i + 1 >= s.length) {
+          break;
+        }
+      } else {
+        charUtf8Bytes = 3;
+        charWidth = 1;
+      }
+      if (byteCount + charUtf8Bytes > maxBytes) {
+        break;
+      }
+      byteCount += charUtf8Bytes;
+      i += charWidth;
+      cutCharEnd = i;
+    }
+    return cutCharEnd < s.length ? s.substring(0, cutCharEnd) : s;
   }
 }
 

@@ -6,6 +6,8 @@ import { EhDB } from '../../ehviewer/EhDB';
 import { GetText } from '../../ehviewer/GetText';
 import { Settings } from '../../ehviewer/Settings';
 import { GalleryInfo } from '../../ehviewer/client/data/GalleryInfo';
+import { ComicInfoParser } from '../../ehviewer/client/parser/ComicInfoParser';
+import { DetailUrlResult } from '../../ehviewer/client/parser/GalleryDetailUrlParser';
 import {
   EhEngine,
   EngineCall,
@@ -24,7 +26,9 @@ import { OkHttpClient } from '../../okhttp/OkHttpClient';
 import { Request } from '../../okhttp/Request';
 import { Response as OkResponse } from '../../okhttp/Response';
 import { ResponseBody } from '../../okhttp/ResponseBody';
+import { InputStream } from '../../unifile/Contracts';
 import { UniFile } from '../../unifile/UniFile';
+import { Utils as UniFileUtils } from '../../unifile/Utils';
 import { ThemePalette, ThemeTokens } from '../../../common/theme/ThemeTokens';
 import { PageRoutes } from '../PageRoutes';
 import { SettingsItem } from './SettingsItem';
@@ -215,8 +219,8 @@ export struct DownloadSettingsSection {
     const result: RestoreRunResult = await DownloadSettingsController.runRestoreDownloads(
       (gid: number): boolean => dm.containDownloadInfo(gid),
       (file: UniFile): SpiderHeader | null => {
-        const info: SpiderInfo | null = SpiderInfo.readHeader(file);
-        if (info === null || info.gid <= 0) {
+        const info: SpiderInfo | null = SpiderInfo.readHeader(file) ?? SpiderInfo.readCborHeader(file);
+        if (info === null || info.gid < 0 || info.token === null || info.token.length === 0) {
           return null;
         }
         return new SpiderHeader(info.gid, info.token);
@@ -232,7 +236,7 @@ export struct DownloadSettingsSection {
         const caller: RestoreHttpCaller = new RestoreHttpCaller(
           EhApplication.getOkHttpClient(ctx !== undefined ? ctx : null)
         );
-        await EhEngine.fillGalleryListByApi(null, caller, list, EhUrl.getHost());
+        await EhEngine.fillGalleryListByApiBestEffort(null, caller, list, EhUrl.getReferer());
         const titles: Map<number, string> = new Map<number, string>();
         for (let i = 0; i < list.length; i++) {
           const gi: GalleryInfo = list[i];
@@ -265,6 +269,27 @@ export struct DownloadSettingsSection {
         if (max > 0) {
           this.restoreProgress = progress;
           this.restoreMax = max;
+        }
+      },
+      undefined,
+      (dir: UniFile): SpiderHeader | null => {
+        const comicFile: UniFile | null = dir.findFile(ComicInfoParser.FILENAME);
+        if (comicFile === null) {
+          return null;
+        }
+        let is: InputStream | null = null;
+        try {
+          is = comicFile.openInputStream();
+          const parsed: DetailUrlResult | null = ComicInfoParser.parseStream(is);
+          if (parsed === null || parsed.gid < 0 || parsed.token.length === 0) {
+            return null;
+          }
+          return new SpiderHeader(parsed.gid, parsed.token);
+        } catch (e) {
+          UniFileUtils.throwIfFatal(e);
+          return null;
+        } finally {
+          UniFileUtils.closeQuietly(is);
         }
       }
     );

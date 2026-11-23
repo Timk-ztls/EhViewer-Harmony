@@ -299,6 +299,127 @@ function makeInfo(): SpiderInfo {
   eq('TOKEN_FAILED 常量', SpiderInfo.TOKEN_FAILED, 'failed');
 }
 
+// --- 1.9 CBOR 格式 .ehviewer 头部读取（上游 9cbb77f7）
+{
+  const makeBinaryStream = (bytes: number[]): InputStream => {
+    let pos: number = 0;
+    return {
+      read(): number {
+        return pos >= bytes.length ? -1 : (bytes[pos++] & 0xFF);
+      },
+      readBuffer(buffer: ArrayBuffer): number {
+        const view: Uint8Array = new Uint8Array(buffer);
+        let n: number = 0;
+        while (n < view.length && pos < bytes.length) {
+          view[n++] = bytes[pos++] & 0xFF;
+        }
+        return n === 0 ? -1 : n;
+      },
+      readBytes(buffer: ArrayBuffer, off: number, len: number): number {
+        const view: Uint8Array = new Uint8Array(buffer);
+        let n: number = 0;
+        while (n < len && pos < bytes.length && off + n < view.length) {
+          view[off + n] = bytes[pos++] & 0xFF;
+          n++;
+        }
+        return n === 0 ? -1 : n;
+      },
+      skip(n: number): number {
+        const step: number = Math.min(n, bytes.length - pos);
+        pos += step;
+        return step;
+      },
+      available(): number {
+        return bytes.length - pos;
+      },
+      close(): void {
+      }
+    };
+  };
+
+  // 上游 SpiderInfoTest.readCborHeader_readsGidAndTokenFromIndefiniteMap 原样字节样本
+  const indefiniteBytes: number[] = [
+    0xBF, 0x63, 0x67, 0x69, 0x64, 0x1A, 0x35, 0xA4, 0xE9, 0x02,
+    0x65, 0x74, 0x6F, 0x6B, 0x65, 0x6E, 0x6A, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30,
+    0x30, 0x30, 0x30, 0x30, 0x65, 0x70, 0x61, 0x67, 0x65, 0x73, 0x18, 0x4D, 0x69,
+    0x70, 0x54, 0x6F, 0x6B, 0x65, 0x6E, 0x4D, 0x61, 0x70, 0xBF, 0x00, 0x6A,
+    0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x31, 0xFF, 0x6C,
+    0x70, 0x72, 0x65, 0x76, 0x69, 0x65, 0x77, 0x50, 0x61, 0x67, 0x65, 0x73, 0x02,
+    0x6E, 0x70, 0x72, 0x65, 0x76, 0x69, 0x65, 0x77, 0x50, 0x65, 0x72, 0x50, 0x61,
+    0x67, 0x65, 0x18, 0x28, 0xFF
+  ];
+  const indefInfo: SpiderInfo | null = SpiderInfo.readCborHeaderStream(makeBinaryStream(indefiniteBytes));
+  ok('CBOR 不定长 map 解析成功', indefInfo !== null);
+  if (indefInfo !== null) {
+    eq('CBOR 不定长 gid', indefInfo.gid, 900000002);
+    eq('CBOR 不定长 token', indefInfo.token, '0000000000');
+  }
+  ok('CBOR 字节流不被文本 readHeaderStream 误认',
+    SpiderInfo.readHeaderStream(makeBinaryStream(indefiniteBytes)) === null);
+
+  // 上游 SpiderInfoTest.readCborHeader_readsDefiniteMap 原样字节样本
+  const definiteBytes: number[] = [
+    0xA2, 0x63, 0x67, 0x69, 0x64, 0x1A, 0x35, 0xA4, 0xE9, 0x02,
+    0x65, 0x74, 0x6F, 0x6B, 0x65, 0x6E, 0x6A, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30,
+    0x30, 0x30, 0x30, 0x30
+  ];
+  const defInfo: SpiderInfo | null = SpiderInfo.readCborHeaderStream(makeBinaryStream(definiteBytes));
+  ok('CBOR 定长 map 解析成功', defInfo !== null);
+  if (defInfo !== null) {
+    eq('CBOR 定长 gid', defInfo.gid, 900000002);
+    eq('CBOR 定长 token', defInfo.token, '0000000000');
+  }
+
+  // 上游 SpiderInfoTest.readHeader_rejectsInvalidTextAndCbor
+  const invalidBytes: number[] = [];
+  const invalidText: string = 'INVALID_FORMAT';
+  for (let i = 0; i < invalidText.length; i++) {
+    invalidBytes.push(invalidText.charCodeAt(i));
+  }
+  ok('文本 readHeader 拒绝非法字节', SpiderInfo.readHeaderStream(makeBinaryStream(invalidBytes)) === null);
+  ok('CBOR readCborHeader 拒绝非法字节', SpiderInfo.readCborHeaderStream(makeBinaryStream(invalidBytes)) === null);
+  ok('CBOR readCborHeader(null) → null', SpiderInfo.readCborHeader(null) === null);
+
+  // ArkTS 64-bit 整数无 32 位截断：gid = 0x00000001_00000005 (4294967301 > 2^31)
+  const bigGidBytes: number[] = [
+    0xA2, 0x63, 0x67, 0x69, 0x64, 0x1B, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x05,
+    0x65, 0x74, 0x6F, 0x6B, 0x65, 0x6E, 0x6A, 0x61, 0x62, 0x63, 0x64, 0x65, 0x66, 0x31, 0x32, 0x33, 0x34
+  ];
+  const bigGidInfo: SpiderInfo | null = SpiderInfo.readCborHeaderStream(makeBinaryStream(bigGidBytes));
+  ok('CBOR 64-bit gid > 2^31 解析成功（无 32 位截断）', bigGidInfo !== null);
+  if (bigGidInfo !== null) {
+    eq('CBOR 64-bit gid 精确值', bigGidInfo.gid, 4294967301);
+    eq('CBOR 64-bit token', bigGidInfo.token, 'abcdef1234');
+  }
+
+  // 已读到 gid/token 后即使尾部 pTokenMap 截断损坏仍返回已读到的值
+  const truncatedTailBytes: number[] = indefiniteBytes.slice(0, 48);
+  const partialInfo: SpiderInfo | null = SpiderInfo.readCborHeaderStream(makeBinaryStream(truncatedTailBytes));
+  ok('CBOR 尾部截断仍保留已读到的 gid/token',
+    partialInfo !== null && partialInfo.gid === 900000002 && partialInfo.token === '0000000000');
+
+  // 嵌套超深（> 16 层）放在 gid 之前 → 安全中止返回 null
+  const deepBytes: number[] = [0xA2, 0x64, 0x64, 0x65, 0x65, 0x70];
+  for (let d = 0; d < 20; d++) {
+    deepBytes.push(0x81); // 1-element array x 20
+  }
+  deepBytes.push(0x00, 0x63, 0x67, 0x69, 0x64, 0x01);
+  ok('CBOR 嵌套深度超过 MAX_DEPTH(16) 返回 null',
+    SpiderInfo.readCborHeaderStream(makeBinaryStream(deepBytes)) === null);
+
+  // 通过 UniFile 读取磁盘 CBOR .ehviewer
+  const cborDir: string = '/tmp/m42_cbor_spiderinfo';
+  fs.mkdirSync(cborDir, true);
+  const cborPath: string = `${cborDir}/.ehviewer`;
+  const cborFileHandle: fs.File = fs.openSync(cborPath, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE | fs.OpenMode.TRUNC);
+  fs.writeSync(cborFileHandle.fd, new Uint8Array(definiteBytes).buffer as ArrayBuffer);
+  fs.closeSync(cborFileHandle);
+  const cborUni: UniFile | null = UniFile.fromFile(cborPath);
+  const diskCborInfo: SpiderInfo | null = SpiderInfo.readCborHeader(cborUni);
+  ok('CBOR UniFile 磁盘读取成功',
+    diskCborInfo !== null && diskCborInfo.gid === 900000002 && diskCborInfo.token === '0000000000');
+}
+
 // ================================================================ 2) MSQLiteBuilder
 
 {

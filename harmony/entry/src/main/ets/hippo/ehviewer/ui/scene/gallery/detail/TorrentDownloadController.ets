@@ -10,6 +10,7 @@
  * Part 2 待补：对话框 UI（AlertDialog 列表样式）、下载进度回调的界面更新。
  */
 import { hilog } from '@kit.PerformanceAnalysisKit';
+import { DownloadTorrentManager } from '../../../../download/DownloadTorrentManager';
 
 /** 上游 TorrentInfo 的最小投影（真实模型在 client/data，本类只用这几项） */
 export interface TorrentInfoLike {
@@ -126,5 +127,10 @@ export class TorrentDownloadController {
     if (this.state === TorrentDownloadState.CHOOSING) {
       this.state = TorrentDownloadState.IDLE;
     }
+  }
+
+  /** 对齐上游 `TorrentDownloadController` 使用 `DownloadTorrentManager.createTorrentFileName` 生成安全种子文件名。 */
+  static buildTorrentFileName(info: TorrentInfoLike): string {
+    return DownloadTorrentManager.createTorrentFileName(info.name, info.url);
   }
 }

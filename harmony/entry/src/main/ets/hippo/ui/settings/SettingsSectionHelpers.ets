@@ -645,7 +645,8 @@ export class DownloadSettingsController {
     addDownload: (item: RestoreItem, title: string) => void,
     putDirname: (gid: number, dirname: string) => Promise<void>,
     onProgress?: (progress: number, max: number) => void,
-    dirOverride?: UniFile | null
+    dirOverride?: UniFile | null,
+    readComicInfo?: (dir: UniFile) => SpiderHeader | null
   ): Promise<RestoreRunResult> {
     const scan: RestoreScanResult = await RestoreDownloadPreference.scanRestoreItems(
       containsDownload,
@@ -654,7 +655,8 @@ export class DownloadSettingsController {
       onProgress,
       undefined,
       dirOverride,
-      (): UniFile | null => Settings.getDownloadLocation()
+      (): UniFile | null => Settings.getDownloadLocation(),
+      readComicInfo
     );
     if (scan.noDirectory) {
       return new RestoreRunResult(true, 0, 0, 'settings_download_cant_get_download_location', null);
@@ -670,8 +672,7 @@ export class DownloadSettingsController {
       titleMap = await fillTitles(scan.items);
     } catch (e) {
       const msg: string = e instanceof Error ? e.message : String(e);
-      hilog.warn(LOG_DOMAIN, LOG_TAG, 'restore fillTitles failed: %{public}s', msg);
-      return new RestoreRunResult(false, scan.items.length, 0, 'settings_download_restore_failed', null);
+      hilog.warn(LOG_DOMAIN, LOG_TAG, 'restore fillTitles failed (fallback to dirname/gid): %{public}s', msg);
     }
     const restored: number = await RestoreDownloadPreference.applyRestore(
       scan.items,
@@ -681,7 +682,10 @@ export class DownloadSettingsController {
       },
       (item: RestoreItem): void => {
         const t: string | undefined = titleMap.get(item.gid);
-        addDownload(item, t !== undefined ? t : '');
+        const resolvedTitle: string = item.title !== null && item.title.length > 0
+          ? item.title
+          : RestoreDownloadPreference.resolveRestoreTitle(item, t);
+        addDownload(item, resolvedTitle);
       },
       putDirname
     );

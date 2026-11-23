@@ -25,6 +25,7 @@ import { EhException } from './exception/EhException';
 import { CancelledException } from './exception/MarkerExceptions';
 import { ParseException } from './exception/ParseException';
 import { StatusCodeException } from '../../network/StatusCodeException';
+import { ExceptionUtils } from '../../util/ExceptionUtils';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { EhRequestBuilder } from './EhRequestBuilder';
 import { EhUrl } from './EhUrl';
@@ -473,6 +474,32 @@ export class EhEngine {
       requestItems.push(list[i]);
       if (requestItems.length === MAX_REQUEST_SIZE || i === list.length - 1) {
         await EhEngine.doFillGalleryListByApi(task, caller, requestItems, referer);
+        requestItems = [];
+      }
+    }
+    return list;
+  }
+
+  /**
+   * 对齐上游 `fillGalleryListByApiBestEffort`：
+   * 与 `fillGalleryListByApi` 一样每批最多 25 条，但某批失败只记日志并继续下一批，
+   * 保留已补上的画廊信息，供恢复下载使用。
+   */
+  static async fillGalleryListByApiBestEffort(task: EngineTask | null, caller: HttpCaller,
+    list: GalleryInfo[], referer: string): Promise<GalleryInfo[]> {
+    const MAX_REQUEST_SIZE: number = 25;
+    let requestItems: GalleryInfo[] = [];
+    for (let i = 0; i < list.length; i++) {
+      requestItems.push(list[i]);
+      if (requestItems.length === MAX_REQUEST_SIZE || i === list.length - 1) {
+        try {
+          await EhEngine.doFillGalleryListByApi(task, caller, requestItems, referer);
+        } catch (e) {
+          ExceptionUtils.throwIfFatal(e as Object);
+          const msg: string = e instanceof Error ? e.message : String(e);
+          hilog.error(EhEngine.DIAG_DOMAIN, EhEngine.DIAG_TAG,
+            'gdata batch failed: %{public}s', msg);
+        }
         requestItems = [];
       }
     }
